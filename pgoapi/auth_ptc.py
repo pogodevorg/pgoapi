@@ -94,6 +94,7 @@ class AuthPtc(Auth):
         self.log.info('PTC User Login successful.')
 
         self.get_access_token()
+        return self._login
 
     def set_refresh_token(self, refresh_token):
         self.log.info('PTC Refresh Token provided by user')
