@@ -39,6 +39,8 @@ from pgoapi.auth import Auth
 from pgoapi.utilities import get_time
 from pgoapi.exceptions import AuthException
 
+from requests.exceptions import ConnectionError
+
 class AuthPtc(Auth):
 
     PTC_LOGIN_URL = 'https://sso.pokemon.com/sso/login?service=https%3A%2F%2Fsso.pokemon.com%2Fsso%2Foauth2.0%2FcallbackAuthorize'
@@ -53,6 +55,9 @@ class AuthPtc(Auth):
         self._session = requests.session()
         self._session.verify = True
 
+    def set_proxy(self, proxy_config):
+        self._session.proxies = proxy_config
+
     def user_login(self, username, password):
         self.log.info('PTC User Login for: {}'.format(username))
 
@@ -60,7 +65,11 @@ class AuthPtc(Auth):
             raise AuthException("Username/password not correctly specified")
         
         head = {'User-Agent': 'niantic'}
-        r = self._session.get(self.PTC_LOGIN_URL, headers=head)
+
+        try:
+            r = self._session.get(self.PTC_LOGIN_URL, headers=head)
+        except ConnectionError as e:
+            raise AuthException("Caught ConnectionError: %s", e)
 
         try:
             jdata = json.loads(r.content.decode('utf-8'))

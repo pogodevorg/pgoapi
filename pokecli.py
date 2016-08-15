@@ -62,6 +62,7 @@ def init_config():
     parser.add_argument("-l", "--location", help="Location", required=required("location"))
     parser.add_argument("-d", "--debug", help="Debug Mode", action='store_true')
     parser.add_argument("-t", "--test", help="Only parse the specified location", action='store_true')
+    parser.add_argument("-px", "--proxy", help="Specify a socks5 proxy url")
     parser.set_defaults(DEBUG=False, TEST=False)
     config = parser.parse_args()
 
@@ -104,6 +105,8 @@ def main():
 
     # instantiate pgoapi
     api = pgoapi.PGoApi()
+    if config.proxy:
+        api.set_proxy({'http': config.proxy, 'https': config.proxy})
 
     # parse position
     position = util.get_pos_by_name(config.location)
@@ -117,7 +120,10 @@ def main():
     api.set_position(*position)
 
     # new authentication initialitation
-    api.set_authentication(provider = config.auth_service, username = config.username, password =  config.password)
+    if config.proxy:
+        api.set_authentication(provider = config.auth_service, username = config.username, password =  config.password, proxy_config = {'http': config.proxy, 'https': config.proxy})
+    else:
+        api.set_authentication(provider = config.auth_service, username = config.username, password =  config.password)
 
     # provide the path for your encrypt dll
     api.activate_signature("encrypt.dll")
