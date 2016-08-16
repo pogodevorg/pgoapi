@@ -1,8 +1,0 @@
-syntax = "proto3";
-package POGOProtos.Networking.Requests.Messages;
-
-import "POGOProtos/Inventory/Item/ItemId.proto";
-
-message UseItemXpBoostMessage {
-	.POGOProtos.Inventory.Item.ItemId item_id = 1;
-}
