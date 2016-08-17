@@ -11,9 +11,9 @@ import pprint
 import time
 import threading
 
-def accept_tos(username, password, auth='ptc'):
+def accept_tos(username, password, lat, lon, alt, auth='ptc'):
 	api = PGoApi()
-	api.set_position(40.7127837, -74.005941, 0.0)
+	api.set_position(lat, lon, alt)
 	api.login(auth, username, password)
 	time.sleep(2)
 	req = api.create_request()
@@ -24,6 +24,6 @@ def accept_tos(username, password, auth='ptc'):
 
 """auth service defaults to ptc if not given"""
 
-accept_tos('username', 'password')
-accept_tos('username2', 'password', 'ptc')
-accept_tos('username3', 'password', 'google')
+accept_tos('username', 'password', 40.7127837, -74.005941, 0.0)
+accept_tos('username2', 'password', 5.612711763, -1.0632, 15.0, 'ptc')
+accept_tos('username3', 'password', -22.2156, 35.1237, 3.45, 'google')
