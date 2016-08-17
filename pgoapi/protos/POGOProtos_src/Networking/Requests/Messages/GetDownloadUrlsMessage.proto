@@ -1,7 +1,0 @@
-syntax = "proto3";
-package POGOProtos.Networking.Requests.Messages;
-
-// UNTESTED
-message GetDownloadUrlsMessage {
-	repeated string asset_id = 1;
-}

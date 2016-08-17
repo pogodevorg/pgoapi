@@ -1,6 +1,0 @@
-syntax = "proto3";
-package POGOProtos.Settings.Master.Item;
-
-message ReviveAttributes {
-	float sta_percent = 1;
-}

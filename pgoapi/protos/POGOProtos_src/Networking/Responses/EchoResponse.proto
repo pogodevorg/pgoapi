@@ -1,6 +1,0 @@
-syntax = "proto3";
-package POGOProtos.Networking.Responses;
-
-message EchoResponse {
-	string context = 1;
-}

@@ -1,7 +1,0 @@
-syntax = "proto3";
-package POGOProtos.Map.Fort;
-
-enum FortType {
-	GYM = 0;
-	CHECKPOINT = 1;
-}

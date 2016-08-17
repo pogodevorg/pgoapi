@@ -1,7 +1,0 @@
-syntax = "proto3";
-package POGOProtos.Map;
-
-message SpawnPoint {
-	double latitude = 2;
-	double longitude = 3;
-}

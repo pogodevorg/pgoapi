@@ -1,7 +1,0 @@
-syntax = "proto3";
-package POGOProtos.Settings;
-
-message LevelSettings {
-	double trainer_cp_modifier = 2;
-	double trainer_difficulty_modifier = 3;
-}

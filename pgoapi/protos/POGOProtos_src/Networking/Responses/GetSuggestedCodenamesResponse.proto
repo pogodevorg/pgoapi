@@ -1,7 +1,0 @@
-syntax = "proto3";
-package POGOProtos.Networking.Responses;
-
-message GetSuggestedCodenamesResponse {
-	repeated string codenames = 1;
-	bool success = 2;
-}
