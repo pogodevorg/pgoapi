@@ -46,6 +46,9 @@ class AuthGoogle(Auth):
 
         self._refresh_token = None
 
+    def set_proxy(self, proxy_config):
+        self._session.proxies = proxy_config
+
     def user_login(self, username, password):
         self.log.info('Google User Login for: {}'.format(username))
 
@@ -54,7 +57,11 @@ class AuthGoogle(Auth):
 
         user_login = perform_master_login(username, password, self.GOOGLE_LOGIN_ANDROID_ID)
 
-        refresh_token = user_login.get('Token', None)
+        try:
+            refresh_token = user_login.get('Token', None)
+        except ConnectionError as e:
+            raise AuthException("Caught ConnectionError: %s", e)
+
         if refresh_token is not None:
             self._refresh_token = refresh_token
             self.log.info('Google User Login successful.')

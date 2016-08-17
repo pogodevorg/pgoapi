@@ -51,7 +51,7 @@ class PGoApi:
 
         self._auth_provider = None
         if provider is not None and ((username is not None and password is not None) or (oauth2_refresh_token is not None)):
-            self.set_authentication(provider, oauth2_refresh_token, username, password)
+            self.set_authentication(provider, oauth2_refresh_token, username, password, proxy_config)
 
         self.set_api_endpoint("pgorelease.nianticlabs.com/plfe")
 
@@ -71,7 +71,7 @@ class PGoApi:
     def set_logger(self, logger=None):
         self.log = logger or logging.getLogger(__name__)
 
-    def set_authentication(self, provider=None, oauth2_refresh_token=None, username=None, password=None):
+    def set_authentication(self, provider=None, oauth2_refresh_token=None, username=None, password=None, proxy_config=None):
         if provider == 'ptc':
             self._auth_provider = AuthPtc()
         elif provider == 'google':
@@ -82,6 +82,9 @@ class PGoApi:
             raise AuthException("Invalid authentication provider - only ptc/google available.")
 
         self.log.debug('Auth provider: %s', provider)
+
+        if proxy_config is not None:
+            self._auth_provider.set_proxy(proxy_config)
 
         if oauth2_refresh_token is not None:
             self._auth_provider.set_refresh_token(oauth2_refresh_token)
