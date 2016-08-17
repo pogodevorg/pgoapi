@@ -86,7 +86,8 @@ class PGoApi:
         if oauth2_refresh_token is not None:
             self._auth_provider.set_refresh_token(oauth2_refresh_token)
         elif username is not None and password is not None:
-            self._auth_provider.user_login(username, password)
+            if not self._auth_provider.user_login(username, password):
+                raise AuthException("User login failed!")
         else:
             raise AuthException("Invalid Credential Input - Please provide username/password or an oauth2 refresh token")
 
