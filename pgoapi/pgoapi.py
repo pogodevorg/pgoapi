@@ -123,7 +123,7 @@ class PGoApi:
 
     def create_request(self):
         request = PGoApiRequest(self, self._position_lat, self._position_lng,
-                                self._position_alt)
+                                self._position_alt, self.device_info)
         return request
 
     def activate_signature(self, lib_path):
@@ -194,7 +194,9 @@ class PGoApi:
 
 
 class PGoApiRequest:
-    def __init__(self, parent, position_lat, position_lng, position_alt):
+
+    def __init__(self, parent, position_lat, position_lng, position_alt,
+                 device_info=None):
         self.log = logging.getLogger(__name__)
 
         self.__parent__ = parent
@@ -208,6 +210,7 @@ class PGoApiRequest:
         self._position_alt = position_alt
 
         self._req_method_list = []
+        self.device_info = device_info
 
     def call(self):
         if not self._req_method_list:
