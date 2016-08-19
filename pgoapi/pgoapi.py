@@ -45,7 +45,7 @@ logger = logging.getLogger(__name__)
 
 class PGoApi:
 
-    def __init__(self, provider=None, oauth2_refresh_token=None, username=None, password=None, position_lat=None, position_lng=None, position_alt=None, proxy_config=None):
+    def __init__(self, provider=None, oauth2_refresh_token=None, username=None, password=None, position_lat=None, position_lng=None, position_alt=None, proxy_config=None, device_info=None):
         self.set_logger()
         self.log.info('%s v%s - %s', __title__, __version__, __copyright__)
 
@@ -67,6 +67,8 @@ class PGoApi:
 
         if proxy_config is not None:
             self._session.proxies = proxy_config
+
+        self.device_info = device_info
 
     def set_logger(self, logger=None):
         self.log = logger or logging.getLogger(__name__)
@@ -218,7 +220,7 @@ class PGoApiRequest:
             self.log.info('Not logged in')
             raise NotLoggedInException()
 
-        request = RpcApi(self._auth_provider)
+        request = RpcApi(self._auth_provider, self.device_info)
         request._session = self.__parent__._session
 
         lib_path = self.__parent__.get_signature_lib()

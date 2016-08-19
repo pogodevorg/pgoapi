@@ -58,7 +58,7 @@ class RpcApi:
     RPC_ID = 0
     START_TIME = 0
 
-    def __init__(self, auth_provider):
+    def __init__(self, auth_provider, device_info):
 
         self.log = logging.getLogger(__name__)
 
@@ -74,6 +74,11 @@ class RpcApi:
         if RpcApi.RPC_ID == 0:
             RpcApi.RPC_ID = int(random.random() * 10 ** 18)
             self.log.debug('Generated new random RPC Request id: %s', RpcApi.RPC_ID)
+
+        """ data fields for unknown6 """
+        self.session_hash = os.urandom(32)
+
+        self.device_info = device_info
 
     def activate_signature(self, lib_path):
         try:
@@ -203,9 +208,12 @@ class RpcApi:
                 hash = generateRequestHash(ticket_serialized, req.SerializeToString())
                 sig.request_hash.append(hash)
 
-            sig.session_hash = os.urandom(32)
+            sig.session_hash = self.session_hash
             sig.timestamp = get_time(ms=True)
             sig.timestamp_since_start = get_time(ms=True) - RpcApi.START_TIME
+
+            for key in self.device_info:
+                setattr(sig.device_info, key, self.device_info[key])
 
             signature_proto = sig.SerializeToString()
 
