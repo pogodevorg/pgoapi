@@ -180,7 +180,9 @@ class RpcApi:
         if player_position is not None:
             request.latitude, request.longitude, request.altitude = player_position
 
-        request.altitude = 8  # not as suspicious as 0
+        if request.altitude is None:
+            alts = (10, 30, 50, 65, 100, 200)
+            request.altitude = random.choice(alts)
 
         """ generate sub requests before signature generation """
         request = self._build_sub_requests(request, subrequests)
@@ -211,6 +213,36 @@ class RpcApi:
             sig.session_hash = self.session_hash
             sig.timestamp = get_time(ms=True)
             sig.timestamp_since_start = get_time(ms=True) - RpcApi.START_TIME
+
+            fix = sig.location_fix.add()
+            fix.provider = 'fused'
+            fix.timestamp_snapshot = sig.timestamp_since_start
+            fix.latitude = request.latitude
+            fix.longitude = request.longitude
+            fix.altitude = request.altitude
+            fix.provider_status = 3
+            fix.location_type = 1
+            fix.horizontal_accuracy = random.triangular(5,300,10)
+            fix.vertical_accuracy = random.triangular(10,250,25)
+            sig.sensor_info.timestamp_snapshot = sig.timestamp_since_start
+            sig.sensor_info.magnetometer_x = random.triangular(-0.4,0.6,0)
+            sig.sensor_info.magnetometer_y = random.triangular(-0.2,0.3,0)
+            sig.sensor_info.magnetometer_z = random.triangular(-0.2,0.3,0)
+            sig.sensor_info.angle_normalized_x = random.triangular(-200,50,-8)
+            sig.sensor_info.angle_normalized_y = random.triangular(-300,35,-44)
+            sig.sensor_info.angle_normalized_z = random.triangular(-260,20,-8)
+            sig.sensor_info.accel_raw_x = random.triangular(-.06,1.2,0.8)
+            sig.sensor_info.accel_raw_y = random.triangular(-1.1,1.1,.19)
+            sig.sensor_info.accel_raw_z = random.triangular(-.5,1.5,0.01)
+            sig.sensor_info.gyroscope_raw_x = random.triangular(-4.4,2.3,0)
+            sig.sensor_info.gyroscope_raw_y = random.triangular(-6.3,0.7,0)
+            sig.sensor_info.gyroscope_raw_z = random.triangular(-3,3,0)
+            sig.sensor_info.accel_normalized_x = random.triangular(-0.4,1,0)
+            sig.sensor_info.accel_normalized_y = random.triangular(-1,0.06,-0.5)
+            sig.sensor_info.accel_normalized_z = random.triangular(-1,-0.08,-0.66)
+            sig.sensor_info.accelerometer_axes = 3
+
+            sig.unknown25 = -8537042734809897855
 
             for key in self.device_info:
                 setattr(sig.device_info, key, self.device_info[key])
