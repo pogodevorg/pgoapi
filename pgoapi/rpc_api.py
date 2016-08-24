@@ -79,6 +79,7 @@ class RpcApi:
         self.session_hash = os.urandom(32)
 
         self.device_info = device_info
+        self.locationfix_time = RpcApi.START_TIME
 
     def activate_signature(self, lib_path):
         try:
@@ -224,6 +225,7 @@ class RpcApi:
             fix.location_type = 1
             fix.horizontal_accuracy = random.triangular(5,300,10)
             fix.vertical_accuracy = random.triangular(10,250,25)
+            self.locationfix_time = get_time(ms=True)
             sig.sensor_info.timestamp_snapshot = sig.timestamp_since_start
             sig.sensor_info.magnetometer_x = random.triangular(-0.4,0.6,0)
             sig.sensor_info.magnetometer_y = random.triangular(-0.2,0.3,0)
@@ -253,7 +255,7 @@ class RpcApi:
             u6.request_type = 6
             u6.unknown2.encrypted_signature = self._generate_signature(signature_proto)
 
-        request.ms_since_last_locationfix = 989
+        request.ms_since_last_locationfix = get_time(ms=True) - self.locationfix_time
 
         self.log.debug('Generated protobuf request: \n\r%s', request)
 
