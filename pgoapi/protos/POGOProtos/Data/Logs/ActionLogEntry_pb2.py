@@ -15,15 +15,16 @@ _sym_db = _symbol_database.Default()
 
 from POGOProtos.Data.Logs import CatchPokemonLogEntry_pb2 as POGOProtos_dot_Data_dot_Logs_dot_CatchPokemonLogEntry__pb2
 from POGOProtos.Data.Logs import FortSearchLogEntry_pb2 as POGOProtos_dot_Data_dot_Logs_dot_FortSearchLogEntry__pb2
+from POGOProtos.Data.Logs import BuddyPokemonLogEntry_pb2 as POGOProtos_dot_Data_dot_Logs_dot_BuddyPokemonLogEntry__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='POGOProtos/Data/Logs/ActionLogEntry.proto',
   package='POGOProtos.Data.Logs',
   syntax='proto3',
-  serialized_pb=_b('\n)POGOProtos/Data/Logs/ActionLogEntry.proto\x12\x14POGOProtos.Data.Logs\x1a/POGOProtos/Data/Logs/CatchPokemonLogEntry.proto\x1a-POGOProtos/Data/Logs/FortSearchLogEntry.proto\"\xc5\x01\n\x0e\x41\x63tionLogEntry\x12\x14\n\x0ctimestamp_ms\x18\x01 \x01(\x03\x12\r\n\x05sfida\x18\x02 \x01(\x08\x12\x43\n\rcatch_pokemon\x18\x03 \x01(\x0b\x32*.POGOProtos.Data.Logs.CatchPokemonLogEntryH\x00\x12?\n\x0b\x66ort_search\x18\x04 \x01(\x0b\x32(.POGOProtos.Data.Logs.FortSearchLogEntryH\x00\x42\x08\n\x06\x41\x63tionb\x06proto3')
+  serialized_pb=_b('\n)POGOProtos/Data/Logs/ActionLogEntry.proto\x12\x14POGOProtos.Data.Logs\x1a/POGOProtos/Data/Logs/CatchPokemonLogEntry.proto\x1a-POGOProtos/Data/Logs/FortSearchLogEntry.proto\x1a/POGOProtos/Data/Logs/BuddyPokemonLogEntry.proto\"\x8a\x02\n\x0e\x41\x63tionLogEntry\x12\x14\n\x0ctimestamp_ms\x18\x01 \x01(\x03\x12\r\n\x05sfida\x18\x02 \x01(\x08\x12\x43\n\rcatch_pokemon\x18\x03 \x01(\x0b\x32*.POGOProtos.Data.Logs.CatchPokemonLogEntryH\x00\x12?\n\x0b\x66ort_search\x18\x04 \x01(\x0b\x32(.POGOProtos.Data.Logs.FortSearchLogEntryH\x00\x12\x43\n\rbuddy_pokemon\x18\x05 \x01(\x0b\x32*.POGOProtos.Data.Logs.BuddyPokemonLogEntryH\x00\x42\x08\n\x06\x41\x63tionb\x06proto3')
   ,
-  dependencies=[POGOProtos_dot_Data_dot_Logs_dot_CatchPokemonLogEntry__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Logs_dot_FortSearchLogEntry__pb2.DESCRIPTOR,])
+  dependencies=[POGOProtos_dot_Data_dot_Logs_dot_CatchPokemonLogEntry__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Logs_dot_FortSearchLogEntry__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Logs_dot_BuddyPokemonLogEntry__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
@@ -64,6 +65,13 @@ _ACTIONLOGENTRY = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='buddy_pokemon', full_name='POGOProtos.Data.Logs.ActionLogEntry.buddy_pokemon', index=4,
+      number=5, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -79,18 +87,22 @@ _ACTIONLOGENTRY = _descriptor.Descriptor(
       name='Action', full_name='POGOProtos.Data.Logs.ActionLogEntry.Action',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=164,
-  serialized_end=361,
+  serialized_start=213,
+  serialized_end=479,
 )
 
 _ACTIONLOGENTRY.fields_by_name['catch_pokemon'].message_type = POGOProtos_dot_Data_dot_Logs_dot_CatchPokemonLogEntry__pb2._CATCHPOKEMONLOGENTRY
 _ACTIONLOGENTRY.fields_by_name['fort_search'].message_type = POGOProtos_dot_Data_dot_Logs_dot_FortSearchLogEntry__pb2._FORTSEARCHLOGENTRY
+_ACTIONLOGENTRY.fields_by_name['buddy_pokemon'].message_type = POGOProtos_dot_Data_dot_Logs_dot_BuddyPokemonLogEntry__pb2._BUDDYPOKEMONLOGENTRY
 _ACTIONLOGENTRY.oneofs_by_name['Action'].fields.append(
   _ACTIONLOGENTRY.fields_by_name['catch_pokemon'])
 _ACTIONLOGENTRY.fields_by_name['catch_pokemon'].containing_oneof = _ACTIONLOGENTRY.oneofs_by_name['Action']
 _ACTIONLOGENTRY.oneofs_by_name['Action'].fields.append(
   _ACTIONLOGENTRY.fields_by_name['fort_search'])
 _ACTIONLOGENTRY.fields_by_name['fort_search'].containing_oneof = _ACTIONLOGENTRY.oneofs_by_name['Action']
+_ACTIONLOGENTRY.oneofs_by_name['Action'].fields.append(
+  _ACTIONLOGENTRY.fields_by_name['buddy_pokemon'])
+_ACTIONLOGENTRY.fields_by_name['buddy_pokemon'].containing_oneof = _ACTIONLOGENTRY.oneofs_by_name['Action']
 DESCRIPTOR.message_types_by_name['ActionLogEntry'] = _ACTIONLOGENTRY
 
 ActionLogEntry = _reflection.GeneratedProtocolMessageType('ActionLogEntry', (_message.Message,), dict(
