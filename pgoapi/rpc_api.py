@@ -217,14 +217,11 @@ class RpcApi:
 
             signature_proto = sig.SerializeToString()
 
-            #u6 = request.unknown6.add()
-            
-            u6 = request.unknown6
+            u6 = request.unknown6.add()
             u6.request_type = 6
             u6.unknown2.encrypted_signature = self._generate_signature(signature_proto)
 
-        # unknown stuff
-        request.unknown12 = 989
+        request.ms_since_last_locationfix = 989
 
         self.log.debug('Generated protobuf request: \n\r%s', request)
 
@@ -268,8 +265,7 @@ class RpcApi:
             request.auth_info.token.contents = self._auth_provider.get_access_token()
             request.auth_info.token.unknown2 = 59
 
-        # unknown stuff
-        request.unknown12 = 3352
+        request.ms_since_last_locationfix = 3352
 
         self.log.debug('Generated protobuf request: \n\r%s', request)
 
