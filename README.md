@@ -32,8 +32,7 @@ Documentation is available at the github [pgoapi wiki](https://github.com/tejado
  * s2sphere (only for pokecli demo)
 
 ## Contribution
-Contributions are highly welcome. Please use github or [pgoapi.slack.com](https://pgoapi.slack.com) for it!  
-Join pgoapi.slack.com [here](https://pgoapislack.herokuapp.com/)!
+Contributions are highly welcome. Please use github or [Discord](https://discordapp.com/invite/dKTSHZC) for it!
 
 ## Credits
 [Mila432](https://github.com/Mila432/Pokemon_Go_API) for the login secrets  
