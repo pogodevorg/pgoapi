@@ -18,10 +18,10 @@ It allows automatic parsing of requests/responses by finding the correct protobu
  * Thread-safety
  * Advanced logging/debugging
  * Uses [POGOProtos](https://github.com/AeonLucid/POGOProtos)
- * Mostly all available RPC calls (see [API reference](https://github.com/tejado/pgoapi/wiki/api_functions) on the wiki)
+ * Mostly all available RPC calls (see [API reference](https://docs.pogodev.org) on the wiki)
 
 ## Documentation
-Documentation is available at the github [pgoapi wiki](https://github.com/tejado/pgoapi/wiki).
+Documentation is available at the github [pgoapi wiki](https://wiki.pogodev.org).
 
 ## Requirements
  * Python 2 or 3
