@@ -19,6 +19,7 @@ from POGOProtos.Data.Player import DailyBonus_pb2 as POGOProtos_dot_Data_dot_Pla
 from POGOProtos.Data.Player import EquippedBadge_pb2 as POGOProtos_dot_Data_dot_Player_dot_EquippedBadge__pb2
 from POGOProtos.Data.Player import ContactSettings_pb2 as POGOProtos_dot_Data_dot_Player_dot_ContactSettings__pb2
 from POGOProtos.Data.Player import Currency_pb2 as POGOProtos_dot_Data_dot_Player_dot_Currency__pb2
+from POGOProtos.Data import BuddyPokemon_pb2 as POGOProtos_dot_Data_dot_BuddyPokemon__pb2
 from POGOProtos.Enums import TeamColor_pb2 as POGOProtos_dot_Enums_dot_TeamColor__pb2
 
 
@@ -26,9 +27,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='POGOProtos/Data/PlayerData.proto',
   package='POGOProtos.Data',
   syntax='proto3',
-  serialized_pb=_b('\n POGOProtos/Data/PlayerData.proto\x12\x0fPOGOProtos.Data\x1a$POGOProtos/Enums/TutorialState.proto\x1a)POGOProtos/Data/Player/PlayerAvatar.proto\x1a\'POGOProtos/Data/Player/DailyBonus.proto\x1a*POGOProtos/Data/Player/EquippedBadge.proto\x1a,POGOProtos/Data/Player/ContactSettings.proto\x1a%POGOProtos/Data/Player/Currency.proto\x1a POGOProtos/Enums/TeamColor.proto\"\xa6\x04\n\nPlayerData\x12\x1d\n\x15\x63reation_timestamp_ms\x18\x01 \x01(\x03\x12\x10\n\x08username\x18\x02 \x01(\t\x12)\n\x04team\x18\x05 \x01(\x0e\x32\x1b.POGOProtos.Enums.TeamColor\x12;\n\x0etutorial_state\x18\x07 \x03(\x0e\x32\x1f.POGOProtos.Enums.TutorialStateB\x02\x10\x01\x12\x34\n\x06\x61vatar\x18\x08 \x01(\x0b\x32$.POGOProtos.Data.Player.PlayerAvatar\x12\x1b\n\x13max_pokemon_storage\x18\t \x01(\x05\x12\x18\n\x10max_item_storage\x18\n \x01(\x05\x12\x37\n\x0b\x64\x61ily_bonus\x18\x0b \x01(\x0b\x32\".POGOProtos.Data.Player.DailyBonus\x12=\n\x0e\x65quipped_badge\x18\x0c \x01(\x0b\x32%.POGOProtos.Data.Player.EquippedBadge\x12\x41\n\x10\x63ontact_settings\x18\r \x01(\x0b\x32\'.POGOProtos.Data.Player.ContactSettings\x12\x34\n\ncurrencies\x18\x0e \x03(\x0b\x32 .POGOProtos.Data.Player.Currency\x12!\n\x19remaining_codename_claims\x18\x0f \x01(\x05\x62\x06proto3')
+  serialized_pb=_b('\n POGOProtos/Data/PlayerData.proto\x12\x0fPOGOProtos.Data\x1a$POGOProtos/Enums/TutorialState.proto\x1a)POGOProtos/Data/Player/PlayerAvatar.proto\x1a\'POGOProtos/Data/Player/DailyBonus.proto\x1a*POGOProtos/Data/Player/EquippedBadge.proto\x1a,POGOProtos/Data/Player/ContactSettings.proto\x1a%POGOProtos/Data/Player/Currency.proto\x1a\"POGOProtos/Data/BuddyPokemon.proto\x1a POGOProtos/Enums/TeamColor.proto\"\xdc\x04\n\nPlayerData\x12\x1d\n\x15\x63reation_timestamp_ms\x18\x01 \x01(\x03\x12\x10\n\x08username\x18\x02 \x01(\t\x12)\n\x04team\x18\x05 \x01(\x0e\x32\x1b.POGOProtos.Enums.TeamColor\x12;\n\x0etutorial_state\x18\x07 \x03(\x0e\x32\x1f.POGOProtos.Enums.TutorialStateB\x02\x10\x01\x12\x34\n\x06\x61vatar\x18\x08 \x01(\x0b\x32$.POGOProtos.Data.Player.PlayerAvatar\x12\x1b\n\x13max_pokemon_storage\x18\t \x01(\x05\x12\x18\n\x10max_item_storage\x18\n \x01(\x05\x12\x37\n\x0b\x64\x61ily_bonus\x18\x0b \x01(\x0b\x32\".POGOProtos.Data.Player.DailyBonus\x12=\n\x0e\x65quipped_badge\x18\x0c \x01(\x0b\x32%.POGOProtos.Data.Player.EquippedBadge\x12\x41\n\x10\x63ontact_settings\x18\r \x01(\x0b\x32\'.POGOProtos.Data.Player.ContactSettings\x12\x34\n\ncurrencies\x18\x0e \x03(\x0b\x32 .POGOProtos.Data.Player.Currency\x12!\n\x19remaining_codename_claims\x18\x0f \x01(\x05\x12\x34\n\rbuddy_pokemon\x18\x10 \x01(\x0b\x32\x1d.POGOProtos.Data.BuddyPokemonb\x06proto3')
   ,
-  dependencies=[POGOProtos_dot_Enums_dot_TutorialState__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Player_dot_PlayerAvatar__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Player_dot_DailyBonus__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Player_dot_EquippedBadge__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Player_dot_ContactSettings__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Player_dot_Currency__pb2.DESCRIPTOR,POGOProtos_dot_Enums_dot_TeamColor__pb2.DESCRIPTOR,])
+  dependencies=[POGOProtos_dot_Enums_dot_TutorialState__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Player_dot_PlayerAvatar__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Player_dot_DailyBonus__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Player_dot_EquippedBadge__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Player_dot_ContactSettings__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Player_dot_Currency__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_BuddyPokemon__pb2.DESCRIPTOR,POGOProtos_dot_Enums_dot_TeamColor__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
@@ -125,6 +126,13 @@ _PLAYERDATA = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='buddy_pokemon', full_name='POGOProtos.Data.PlayerData.buddy_pokemon', index=12,
+      number=16, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -137,8 +145,8 @@ _PLAYERDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=339,
-  serialized_end=889,
+  serialized_start=375,
+  serialized_end=979,
 )
 
 _PLAYERDATA.fields_by_name['team'].enum_type = POGOProtos_dot_Enums_dot_TeamColor__pb2._TEAMCOLOR
@@ -148,6 +156,7 @@ _PLAYERDATA.fields_by_name['daily_bonus'].message_type = POGOProtos_dot_Data_dot
 _PLAYERDATA.fields_by_name['equipped_badge'].message_type = POGOProtos_dot_Data_dot_Player_dot_EquippedBadge__pb2._EQUIPPEDBADGE
 _PLAYERDATA.fields_by_name['contact_settings'].message_type = POGOProtos_dot_Data_dot_Player_dot_ContactSettings__pb2._CONTACTSETTINGS
 _PLAYERDATA.fields_by_name['currencies'].message_type = POGOProtos_dot_Data_dot_Player_dot_Currency__pb2._CURRENCY
+_PLAYERDATA.fields_by_name['buddy_pokemon'].message_type = POGOProtos_dot_Data_dot_BuddyPokemon__pb2._BUDDYPOKEMON
 DESCRIPTOR.message_types_by_name['PlayerData'] = _PLAYERDATA
 
 PlayerData = _reflection.GeneratedProtocolMessageType('PlayerData', (_message.Message,), dict(
