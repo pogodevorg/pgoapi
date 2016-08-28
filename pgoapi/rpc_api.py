@@ -212,8 +212,9 @@ class RpcApi:
             sig.timestamp = get_time(ms=True)
             sig.timestamp_since_start = get_time(ms=True) - RpcApi.START_TIME
 
-            for key in self.device_info:
-                setattr(sig.device_info, key, self.device_info[key])
+            if self.device_info is not None:
+                for key in self.device_info:
+                    setattr(sig.device_info, key, self.device_info[key])
 
             signature_proto = sig.SerializeToString()
 
