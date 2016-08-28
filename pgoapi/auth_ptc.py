@@ -49,9 +49,9 @@ class AuthPtc(Auth):
 
     def __init__(self):
         Auth.__init__(self)
-        
+
         self._auth_provider = 'ptc'
-        
+
         self._session = requests.session()
         self._session.verify = True
 
@@ -63,7 +63,7 @@ class AuthPtc(Auth):
 
         if not isinstance(username, six.string_types) or not isinstance(password, six.string_types):
             raise AuthException("Username/password not correctly specified")
-        
+
         head = {'User-Agent': 'niantic'}
 
         try:
@@ -128,18 +128,22 @@ class AuthPtc(Auth):
                 'grant_type': 'refresh_token',
                 'code': self._refresh_token,
             }
-            
+
             r2 = self._session.post(self.PTC_LOGIN_OAUTH, data=data1)
 
             qs = r2.content.decode('utf-8')
             token_data = parse_qs(qs)
-            
+
             access_token = token_data.get('access_token', None)
             if access_token is not None:
                 self._access_token = access_token[0]
 
                 now_s = get_time()
-                expires = int(token_data.get('expires', [0])[0])
+                # set expiration to an hour less than value received because Pokemon OAuth
+                # login servers return an access token with an explicit expiry time of
+                # three hours, however, the token stops being valid after two hours.
+                # See issue #86
+                expires = int(token_data.get('expires', [0])[0]) - 3600
                 if expires > 0:
                     self._access_token_expiry = expires + now_s
                 else:
@@ -155,4 +159,4 @@ class AuthPtc(Auth):
                 raise AuthException("Could not retrieve a PTC Access Token")
 
 
-        
+
