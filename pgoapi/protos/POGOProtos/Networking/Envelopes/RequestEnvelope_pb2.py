@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='POGOProtos/Networking/Envelopes/RequestEnvelope.proto',
   package='POGOProtos.Networking.Envelopes',
   syntax='proto3',
-  serialized_pb=_b('\n5POGOProtos/Networking/Envelopes/RequestEnvelope.proto\x12\x1fPOGOProtos.Networking.Envelopes\x1a,POGOProtos/Networking/Requests/Request.proto\x1a\x30POGOProtos/Networking/Envelopes/AuthTicket.proto\x1a.POGOProtos/Networking/Envelopes/Unknown6.proto\"\xb4\x04\n\x0fRequestEnvelope\x12\x13\n\x0bstatus_code\x18\x01 \x01(\x05\x12\x12\n\nrequest_id\x18\x03 \x01(\x04\x12\x39\n\x08requests\x18\x04 \x03(\x0b\x32\'.POGOProtos.Networking.Requests.Request\x12;\n\x08unknown6\x18\x06 \x03(\x0b\x32).POGOProtos.Networking.Envelopes.Unknown6\x12\x10\n\x08latitude\x18\x07 \x01(\x01\x12\x11\n\tlongitude\x18\x08 \x01(\x01\x12\x10\n\x08\x61ltitude\x18\t \x01(\x01\x12L\n\tauth_info\x18\n \x01(\x0b\x32\x39.POGOProtos.Networking.Envelopes.RequestEnvelope.AuthInfo\x12@\n\x0b\x61uth_ticket\x18\x0b \x01(\x0b\x32+.POGOProtos.Networking.Envelopes.AuthTicket\x12!\n\x19ms_since_last_locationfix\x18\x0c \x01(\x03\x1a\x95\x01\n\x08\x41uthInfo\x12\x10\n\x08provider\x18\x01 \x01(\t\x12L\n\x05token\x18\x02 \x01(\x0b\x32=.POGOProtos.Networking.Envelopes.RequestEnvelope.AuthInfo.JWT\x1a)\n\x03JWT\x12\x10\n\x08\x63ontents\x18\x01 \x01(\t\x12\x10\n\x08unknown2\x18\x02 \x01(\x05\x62\x06proto3')
+  serialized_pb=_b('\n5POGOProtos/Networking/Envelopes/RequestEnvelope.proto\x12\x1fPOGOProtos.Networking.Envelopes\x1a,POGOProtos/Networking/Requests/Request.proto\x1a\x30POGOProtos/Networking/Envelopes/AuthTicket.proto\x1a.POGOProtos/Networking/Envelopes/Unknown6.proto\"\xb4\x04\n\x0fRequestEnvelope\x12\x13\n\x0bstatus_code\x18\x01 \x01(\x05\x12\x12\n\nrequest_id\x18\x03 \x01(\x04\x12\x39\n\x08requests\x18\x04 \x03(\x0b\x32\'.POGOProtos.Networking.Requests.Request\x12;\n\x08unknown6\x18\x06 \x03(\x0b\x32).POGOProtos.Networking.Envelopes.Unknown6\x12\x10\n\x08latitude\x18\x07 \x01(\x01\x12\x11\n\tlongitude\x18\x08 \x01(\x01\x12\x10\n\x08\x61\x63\x63uracy\x18\t \x01(\x01\x12L\n\tauth_info\x18\n \x01(\x0b\x32\x39.POGOProtos.Networking.Envelopes.RequestEnvelope.AuthInfo\x12@\n\x0b\x61uth_ticket\x18\x0b \x01(\x0b\x32+.POGOProtos.Networking.Envelopes.AuthTicket\x12!\n\x19ms_since_last_locationfix\x18\x0c \x01(\x03\x1a\x95\x01\n\x08\x41uthInfo\x12\x10\n\x08provider\x18\x01 \x01(\t\x12L\n\x05token\x18\x02 \x01(\x0b\x32=.POGOProtos.Networking.Envelopes.RequestEnvelope.AuthInfo.JWT\x1a)\n\x03JWT\x12\x10\n\x08\x63ontents\x18\x01 \x01(\t\x12\x10\n\x08unknown2\x18\x02 \x01(\x05\x62\x06proto3')
   ,
   dependencies=[POGOProtos_dot_Networking_dot_Requests_dot_Request__pb2.DESCRIPTOR,POGOProtos_dot_Networking_dot_Envelopes_dot_AuthTicket__pb2.DESCRIPTOR,POGOProtos_dot_Networking_dot_Envelopes_dot_Unknown6__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -154,7 +154,7 @@ _REQUESTENVELOPE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='altitude', full_name='POGOProtos.Networking.Envelopes.RequestEnvelope.altitude', index=6,
+      name='accuracy', full_name='POGOProtos.Networking.Envelopes.RequestEnvelope.accuracy', index=6,
       number=9, type=1, cpp_type=5, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,

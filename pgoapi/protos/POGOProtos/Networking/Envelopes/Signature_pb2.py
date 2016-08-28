@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='POGOProtos/Networking/Envelopes/Signature.proto',
   package='POGOProtos.Networking.Envelopes',
   syntax='proto3',
-  serialized_pb=_b('\n/POGOProtos/Networking/Envelopes/Signature.proto\x12\x1fPOGOProtos.Networking.Envelopes\"\xad\x0f\n\tSignature\x12\x1d\n\x15timestamp_since_start\x18\x02 \x01(\x04\x12L\n\x0clocation_fix\x18\x04 \x03(\x0b\x32\x36.POGOProtos.Networking.Envelopes.Signature.LocationFix\x12K\n\x08gps_info\x18\x05 \x01(\x0b\x32\x39.POGOProtos.Networking.Envelopes.Signature.AndroidGpsInfo\x12J\n\x0bsensor_info\x18\x07 \x01(\x0b\x32\x35.POGOProtos.Networking.Envelopes.Signature.SensorInfo\x12J\n\x0b\x64\x65vice_info\x18\x08 \x01(\x0b\x32\x35.POGOProtos.Networking.Envelopes.Signature.DeviceInfo\x12R\n\x0f\x61\x63tivity_status\x18\t \x01(\x0b\x32\x39.POGOProtos.Networking.Envelopes.Signature.ActivityStatus\x12\x16\n\x0elocation_hash1\x18\n \x01(\x04\x12\x16\n\x0elocation_hash2\x18\x14 \x01(\x04\x12\x14\n\x0csession_hash\x18\x16 \x01(\x0c\x12\x11\n\ttimestamp\x18\x17 \x01(\x04\x12\x14\n\x0crequest_hash\x18\x18 \x03(\x04\x12\x11\n\tunknown25\x18\x19 \x01(\x03\x1a\xe9\x01\n\x0bLocationFix\x12\x10\n\x08provider\x18\x01 \x01(\t\x12\x1a\n\x12timestamp_snapshot\x18\x02 \x01(\x04\x12\x10\n\x08latitude\x18\r \x01(\x02\x12\x11\n\tlongitude\x18\x0e \x01(\x02\x12\x1b\n\x13horizontal_accuracy\x18\x14 \x01(\x02\x12\x10\n\x08\x61ltitude\x18\x15 \x01(\x02\x12\x19\n\x11vertical_accuracy\x18\x16 \x01(\x02\x12\x17\n\x0fprovider_status\x18\x1a \x01(\x04\x12\r\n\x05\x66loor\x18\x1b \x01(\r\x12\x15\n\rlocation_type\x18\x1c \x01(\x04\x1a\xaf\x01\n\x0e\x41ndroidGpsInfo\x12\x13\n\x0btime_to_fix\x18\x01 \x01(\x04\x12\x16\n\x0esatellites_prn\x18\x02 \x03(\x05\x12\x0f\n\x07\x61zimuth\x18\x03 \x03(\x02\x12\x11\n\televation\x18\x04 \x03(\x02\x12\x0b\n\x03snr\x18\x05 \x03(\x02\x12\x13\n\x0bhas_almanac\x18\x06 \x03(\x08\x12\x15\n\rhas_ephemeris\x18\x07 \x03(\x08\x12\x13\n\x0bused_in_fix\x18\x08 \x03(\x08\x1a\xbe\x03\n\nSensorInfo\x12\x1a\n\x12timestamp_snapshot\x18\x01 \x01(\x04\x12\x16\n\x0emagnetometer_x\x18\x03 \x01(\x01\x12\x16\n\x0emagnetometer_y\x18\x04 \x01(\x01\x12\x16\n\x0emagnetometer_z\x18\x05 \x01(\x01\x12\x1a\n\x12\x61ngle_normalized_x\x18\x06 \x01(\x01\x12\x1a\n\x12\x61ngle_normalized_y\x18\x07 \x01(\x01\x12\x1a\n\x12\x61ngle_normalized_z\x18\x08 \x01(\x01\x12\x13\n\x0b\x61\x63\x63\x65l_raw_x\x18\n \x01(\x01\x12\x13\n\x0b\x61\x63\x63\x65l_raw_y\x18\x0b \x01(\x01\x12\x13\n\x0b\x61\x63\x63\x65l_raw_z\x18\x0c \x01(\x01\x12\x17\n\x0fgyroscope_raw_x\x18\r \x01(\x01\x12\x17\n\x0fgyroscope_raw_y\x18\x0e \x01(\x01\x12\x17\n\x0fgyroscope_raw_z\x18\x0f \x01(\x01\x12\x1a\n\x12\x61\x63\x63\x65l_normalized_x\x18\x10 \x01(\x01\x12\x1a\n\x12\x61\x63\x63\x65l_normalized_y\x18\x11 \x01(\x01\x12\x1a\n\x12\x61\x63\x63\x65l_normalized_z\x18\x12 \x01(\x01\x12\x1a\n\x12\x61\x63\x63\x65lerometer_axes\x18\x13 \x01(\x04\x1a\xda\x02\n\nDeviceInfo\x12\x11\n\tdevice_id\x18\x01 \x01(\t\x12\x1a\n\x12\x61ndroid_board_name\x18\x02 \x01(\t\x12\x1a\n\x12\x61ndroid_bootloader\x18\x03 \x01(\t\x12\x14\n\x0c\x64\x65vice_brand\x18\x04 \x01(\t\x12\x14\n\x0c\x64\x65vice_model\x18\x05 \x01(\t\x12\x1f\n\x17\x64\x65vice_model_identifier\x18\x06 \x01(\t\x12\x19\n\x11\x64\x65vice_model_boot\x18\x07 \x01(\t\x12\x1d\n\x15hardware_manufacturer\x18\x08 \x01(\t\x12\x16\n\x0ehardware_model\x18\t \x01(\t\x12\x16\n\x0e\x66irmware_brand\x18\n \x01(\t\x12\x15\n\rfirmware_tags\x18\x0c \x01(\t\x12\x15\n\rfirmware_type\x18\r \x01(\t\x12\x1c\n\x14\x66irmware_fingerprint\x18\x0e \x01(\t\x1a\xbb\x01\n\x0e\x41\x63tivityStatus\x12\x15\n\rstart_time_ms\x18\x01 \x01(\x04\x12\x16\n\x0eunknown_status\x18\x02 \x01(\x08\x12\x0f\n\x07walking\x18\x03 \x01(\x08\x12\x0f\n\x07running\x18\x04 \x01(\x08\x12\x12\n\nstationary\x18\x05 \x01(\x08\x12\x12\n\nautomotive\x18\x06 \x01(\x08\x12\x0f\n\x07tilting\x18\x07 \x01(\x08\x12\x0f\n\x07\x63ycling\x18\x08 \x01(\x08\x12\x0e\n\x06status\x18\t \x01(\x0c\x62\x06proto3')
+  serialized_pb=_b('\n/POGOProtos/Networking/Envelopes/Signature.proto\x12\x1fPOGOProtos.Networking.Envelopes\"\xcc\x0f\n\tSignature\x12\x1d\n\x15timestamp_since_start\x18\x02 \x01(\x04\x12L\n\x0clocation_fix\x18\x04 \x03(\x0b\x32\x36.POGOProtos.Networking.Envelopes.Signature.LocationFix\x12K\n\x08gps_info\x18\x05 \x01(\x0b\x32\x39.POGOProtos.Networking.Envelopes.Signature.AndroidGpsInfo\x12J\n\x0bsensor_info\x18\x07 \x01(\x0b\x32\x35.POGOProtos.Networking.Envelopes.Signature.SensorInfo\x12J\n\x0b\x64\x65vice_info\x18\x08 \x01(\x0b\x32\x35.POGOProtos.Networking.Envelopes.Signature.DeviceInfo\x12R\n\x0f\x61\x63tivity_status\x18\t \x01(\x0b\x32\x39.POGOProtos.Networking.Envelopes.Signature.ActivityStatus\x12\x16\n\x0elocation_hash1\x18\n \x01(\x04\x12\x16\n\x0elocation_hash2\x18\x14 \x01(\x04\x12\x14\n\x0csession_hash\x18\x16 \x01(\x0c\x12\x11\n\ttimestamp\x18\x17 \x01(\x04\x12\x14\n\x0crequest_hash\x18\x18 \x03(\x04\x12\x11\n\tunknown25\x18\x19 \x01(\x03\x1a\x88\x02\n\x0bLocationFix\x12\x10\n\x08provider\x18\x01 \x01(\t\x12\x1a\n\x12timestamp_snapshot\x18\x02 \x01(\x04\x12\x10\n\x08\x61ltitude\x18\x04 \x01(\x02\x12\x10\n\x08latitude\x18\r \x01(\x02\x12\x11\n\tlongitude\x18\x0e \x01(\x02\x12\r\n\x05speed\x18\x12 \x01(\x02\x12\x0e\n\x06\x63ourse\x18\x14 \x01(\x02\x12\x1b\n\x13horizontal_accuracy\x18\x15 \x01(\x02\x12\x19\n\x11vertical_accuracy\x18\x16 \x01(\x02\x12\x17\n\x0fprovider_status\x18\x1a \x01(\x04\x12\r\n\x05\x66loor\x18\x1b \x01(\r\x12\x15\n\rlocation_type\x18\x1c \x01(\x04\x1a\xaf\x01\n\x0e\x41ndroidGpsInfo\x12\x13\n\x0btime_to_fix\x18\x01 \x01(\x04\x12\x16\n\x0esatellites_prn\x18\x02 \x03(\x05\x12\x0f\n\x07\x61zimuth\x18\x03 \x03(\x02\x12\x11\n\televation\x18\x04 \x03(\x02\x12\x0b\n\x03snr\x18\x05 \x03(\x02\x12\x13\n\x0bhas_almanac\x18\x06 \x03(\x08\x12\x15\n\rhas_ephemeris\x18\x07 \x03(\x08\x12\x13\n\x0bused_in_fix\x18\x08 \x03(\x08\x1a\xbe\x03\n\nSensorInfo\x12\x1a\n\x12timestamp_snapshot\x18\x01 \x01(\x04\x12\x16\n\x0emagnetometer_x\x18\x03 \x01(\x01\x12\x16\n\x0emagnetometer_y\x18\x04 \x01(\x01\x12\x16\n\x0emagnetometer_z\x18\x05 \x01(\x01\x12\x1a\n\x12\x61ngle_normalized_x\x18\x06 \x01(\x01\x12\x1a\n\x12\x61ngle_normalized_y\x18\x07 \x01(\x01\x12\x1a\n\x12\x61ngle_normalized_z\x18\x08 \x01(\x01\x12\x13\n\x0b\x61\x63\x63\x65l_raw_x\x18\n \x01(\x01\x12\x13\n\x0b\x61\x63\x63\x65l_raw_y\x18\x0b \x01(\x01\x12\x13\n\x0b\x61\x63\x63\x65l_raw_z\x18\x0c \x01(\x01\x12\x17\n\x0fgyroscope_raw_x\x18\r \x01(\x01\x12\x17\n\x0fgyroscope_raw_y\x18\x0e \x01(\x01\x12\x17\n\x0fgyroscope_raw_z\x18\x0f \x01(\x01\x12\x1a\n\x12\x61\x63\x63\x65l_normalized_x\x18\x10 \x01(\x01\x12\x1a\n\x12\x61\x63\x63\x65l_normalized_y\x18\x11 \x01(\x01\x12\x1a\n\x12\x61\x63\x63\x65l_normalized_z\x18\x12 \x01(\x01\x12\x1a\n\x12\x61\x63\x63\x65lerometer_axes\x18\x13 \x01(\x04\x1a\xda\x02\n\nDeviceInfo\x12\x11\n\tdevice_id\x18\x01 \x01(\t\x12\x1a\n\x12\x61ndroid_board_name\x18\x02 \x01(\t\x12\x1a\n\x12\x61ndroid_bootloader\x18\x03 \x01(\t\x12\x14\n\x0c\x64\x65vice_brand\x18\x04 \x01(\t\x12\x14\n\x0c\x64\x65vice_model\x18\x05 \x01(\t\x12\x1f\n\x17\x64\x65vice_model_identifier\x18\x06 \x01(\t\x12\x19\n\x11\x64\x65vice_model_boot\x18\x07 \x01(\t\x12\x1d\n\x15hardware_manufacturer\x18\x08 \x01(\t\x12\x16\n\x0ehardware_model\x18\t \x01(\t\x12\x16\n\x0e\x66irmware_brand\x18\n \x01(\t\x12\x15\n\rfirmware_tags\x18\x0c \x01(\t\x12\x15\n\rfirmware_type\x18\r \x01(\t\x12\x1c\n\x14\x66irmware_fingerprint\x18\x0e \x01(\t\x1a\xbb\x01\n\x0e\x41\x63tivityStatus\x12\x15\n\rstart_time_ms\x18\x01 \x01(\x04\x12\x16\n\x0eunknown_status\x18\x02 \x01(\x08\x12\x0f\n\x07walking\x18\x03 \x01(\x08\x12\x0f\n\x07running\x18\x04 \x01(\x08\x12\x12\n\nstationary\x18\x05 \x01(\x08\x12\x12\n\nautomotive\x18\x06 \x01(\x08\x12\x0f\n\x07tilting\x18\x07 \x01(\x08\x12\x0f\n\x07\x63ycling\x18\x08 \x01(\x08\x12\x0e\n\x06status\x18\t \x01(\x0c\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -48,56 +48,70 @@ _SIGNATURE_LOCATIONFIX = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='latitude', full_name='POGOProtos.Networking.Envelopes.Signature.LocationFix.latitude', index=2,
+      name='altitude', full_name='POGOProtos.Networking.Envelopes.Signature.LocationFix.altitude', index=2,
+      number=4, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='latitude', full_name='POGOProtos.Networking.Envelopes.Signature.LocationFix.latitude', index=3,
       number=13, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='longitude', full_name='POGOProtos.Networking.Envelopes.Signature.LocationFix.longitude', index=3,
+      name='longitude', full_name='POGOProtos.Networking.Envelopes.Signature.LocationFix.longitude', index=4,
       number=14, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='horizontal_accuracy', full_name='POGOProtos.Networking.Envelopes.Signature.LocationFix.horizontal_accuracy', index=4,
+      name='speed', full_name='POGOProtos.Networking.Envelopes.Signature.LocationFix.speed', index=5,
+      number=18, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='course', full_name='POGOProtos.Networking.Envelopes.Signature.LocationFix.course', index=6,
       number=20, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='altitude', full_name='POGOProtos.Networking.Envelopes.Signature.LocationFix.altitude', index=5,
+      name='horizontal_accuracy', full_name='POGOProtos.Networking.Envelopes.Signature.LocationFix.horizontal_accuracy', index=7,
       number=21, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='vertical_accuracy', full_name='POGOProtos.Networking.Envelopes.Signature.LocationFix.vertical_accuracy', index=6,
+      name='vertical_accuracy', full_name='POGOProtos.Networking.Envelopes.Signature.LocationFix.vertical_accuracy', index=8,
       number=22, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='provider_status', full_name='POGOProtos.Networking.Envelopes.Signature.LocationFix.provider_status', index=7,
+      name='provider_status', full_name='POGOProtos.Networking.Envelopes.Signature.LocationFix.provider_status', index=9,
       number=26, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='floor', full_name='POGOProtos.Networking.Envelopes.Signature.LocationFix.floor', index=8,
+      name='floor', full_name='POGOProtos.Networking.Envelopes.Signature.LocationFix.floor', index=10,
       number=27, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='location_type', full_name='POGOProtos.Networking.Envelopes.Signature.LocationFix.location_type', index=9,
+      name='location_type', full_name='POGOProtos.Networking.Envelopes.Signature.LocationFix.location_type', index=11,
       number=28, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -116,7 +130,7 @@ _SIGNATURE_LOCATIONFIX = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=651,
-  serialized_end=884,
+  serialized_end=915,
 )
 
 _SIGNATURE_ANDROIDGPSINFO = _descriptor.Descriptor(
@@ -194,8 +208,8 @@ _SIGNATURE_ANDROIDGPSINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=887,
-  serialized_end=1062,
+  serialized_start=918,
+  serialized_end=1093,
 )
 
 _SIGNATURE_SENSORINFO = _descriptor.Descriptor(
@@ -336,8 +350,8 @@ _SIGNATURE_SENSORINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1065,
-  serialized_end=1511,
+  serialized_start=1096,
+  serialized_end=1542,
 )
 
 _SIGNATURE_DEVICEINFO = _descriptor.Descriptor(
@@ -450,8 +464,8 @@ _SIGNATURE_DEVICEINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1514,
-  serialized_end=1860,
+  serialized_start=1545,
+  serialized_end=1891,
 )
 
 _SIGNATURE_ACTIVITYSTATUS = _descriptor.Descriptor(
@@ -536,8 +550,8 @@ _SIGNATURE_ACTIVITYSTATUS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1863,
-  serialized_end=2050,
+  serialized_start=1894,
+  serialized_end=2081,
 )
 
 _SIGNATURE = _descriptor.Descriptor(
@@ -644,7 +658,7 @@ _SIGNATURE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=85,
-  serialized_end=2050,
+  serialized_end=2081,
 )
 
 _SIGNATURE_LOCATIONFIX.containing_type = _SIGNATURE

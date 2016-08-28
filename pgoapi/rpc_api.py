@@ -182,8 +182,7 @@ class RpcApi:
             request.latitude, request.longitude, request.altitude = player_position
 
         if request.altitude is None:
-            alts = (10, 30, 50, 65, 100, 200)
-            request.altitude = random.choice(alts)
+            request.altitude = 1476.7987501954125
 
         """ generate sub requests before signature generation """
         request = self._build_sub_requests(request, subrequests)
@@ -215,6 +214,7 @@ class RpcApi:
             sig.timestamp = get_time(ms=True)
             sig.timestamp_since_start = get_time(ms=True) - RpcApi.START_TIME
 
+            accuracies = (10, 30, 50, 65, 100)
             fix = sig.location_fix.add()
             fix.provider = 'fused'
             fix.timestamp_snapshot = sig.timestamp_since_start
@@ -223,15 +223,15 @@ class RpcApi:
             fix.altitude = request.altitude
             fix.provider_status = 3
             fix.location_type = 1
-            fix.horizontal_accuracy = random.triangular(5,300,10)
-            fix.vertical_accuracy = random.triangular(10,250,25)
+            fix.horizontal_accuracy = random.choice(accuracies)
+            fix.vertical_accuracy = random.choice(accuracies)
             self.locationfix_time = get_time(ms=True)
             sig.sensor_info.timestamp_snapshot = sig.timestamp_since_start
             sig.sensor_info.magnetometer_x = random.triangular(-0.4,0.6,0)
             sig.sensor_info.magnetometer_y = random.triangular(-0.2,0.3,0)
             sig.sensor_info.magnetometer_z = random.triangular(-0.2,0.3,0)
             sig.sensor_info.angle_normalized_x = random.triangular(-200,50,-8)
-            sig.sensor_info.angle_normalized_y = random.triangular(-300,35,-44)
+            sig.sensor_info.angle_normalized_y = random.triangular(-300,60,-44)
             sig.sensor_info.angle_normalized_z = random.triangular(-260,20,-8)
             sig.sensor_info.accel_raw_x = random.triangular(-.06,1.2,0.8)
             sig.sensor_info.accel_raw_y = random.triangular(-1.1,1.1,.19)
@@ -244,7 +244,7 @@ class RpcApi:
             sig.sensor_info.accel_normalized_z = random.triangular(-1,-0.08,-0.66)
             sig.sensor_info.accelerometer_axes = 3
 
-            sig.unknown25 = -8537042734809897855
+            sig.unknown25 = 7363665268261373700
 
             for key in self.device_info:
                 setattr(sig.device_info, key, self.device_info[key])
