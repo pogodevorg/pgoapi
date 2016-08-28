@@ -179,10 +179,13 @@ class RpcApi:
         request.request_id = self.get_rpc_id()
 
         if player_position is not None:
-            request.latitude, request.longitude, request.altitude = player_position
+            request.latitude, request.longitude, altitude = player_position
 
-        if request.altitude is None:
-            request.altitude = 1476.7987501954125
+        if not altitude:
+            altitude = 1476.7987501954125
+
+        accuracies = (10, 30, 50, 65, 100)
+        request.accuracy = random.choice(accuracies)
 
         """ generate sub requests before signature generation """
         request = self._build_sub_requests(request, subrequests)
@@ -203,8 +206,8 @@ class RpcApi:
         if self._signature_gen:
             sig = Signature()
 
-            sig.location_hash1 = generateLocation1(ticket_serialized, request.latitude, request.longitude, request.altitude)
-            sig.location_hash2 = generateLocation2(request.latitude, request.longitude, request.altitude)
+            sig.location_hash1 = generateLocation1(ticket_serialized, request.latitude, request.longitude, request.accuracy)
+            sig.location_hash2 = generateLocation2(request.latitude, request.longitude, request.accuracy)
 
             for req in request.requests:
                 hash = generateRequestHash(ticket_serialized, req.SerializeToString())
@@ -214,18 +217,23 @@ class RpcApi:
             sig.timestamp = get_time(ms=True)
             sig.timestamp_since_start = get_time(ms=True) - RpcApi.START_TIME
 
-            accuracies = (10, 30, 50, 65, 100)
+            snapshot = sig.timestamp_since_start - random.randint(10,100)
+            if snapshot < 1:
+                snapshot = random.randint(10,100)
+
             fix = sig.location_fix.add()
             fix.provider = 'fused'
-            fix.timestamp_snapshot = sig.timestamp_since_start
+            fix.timestamp_snapshot = snapshot
             fix.latitude = request.latitude
             fix.longitude = request.longitude
-            fix.altitude = request.altitude
+            fix.altitude = altitude
+            fix.speed = -1
+            fix.course = random.choice((-1,random.triangular(0,360,0.5)))
             fix.provider_status = 3
             fix.location_type = 1
-            fix.horizontal_accuracy = random.choice(accuracies)
+            fix.horizontal_accuracy = request.accuracy
             fix.vertical_accuracy = random.choice(accuracies)
-            self.locationfix_time = get_time(ms=True)
+            self.locationfix_time = get_time(ms=True) - random.randint(20,75)
             sig.sensor_info.timestamp_snapshot = sig.timestamp_since_start
             sig.sensor_info.magnetometer_x = random.triangular(-0.4,0.6,0)
             sig.sensor_info.magnetometer_y = random.triangular(-0.2,0.3,0)
