@@ -99,7 +99,7 @@ class PGoApi:
     def get_position(self):
         return (self._position_lat, self._position_lng, self._position_alt)
 
-    def set_position(self, lat, lng, alt):
+    def set_position(self, lat, lng, alt=None):
         self.log.debug('Set Position - Lat: %s Long: %s Alt: %s', lat, lng, alt)
 
         self._position_lat = lat
@@ -166,9 +166,10 @@ class PGoApi:
     """
     def login(self, provider, username, password, lat=None, lng=None, alt=None, app_simulation=True):
 
-        if lat is not None and lng is not None and alt is not None:
+        if lat and lng:
             self._position_lat = lat
             self._position_lng = lng
+        if alt:
             self._position_alt = alt
 
         try:
@@ -216,7 +217,7 @@ class PGoApiRequest:
         if not self._req_method_list:
             raise EmptySubrequestChainException()
 
-        if (self._position_lat is None) or (self._position_lng is None) or (self._position_alt is None):
+        if (self._position_lat is None) or (self._position_lng is None):
             raise NoPlayerPositionSetException()
 
         if self._auth_provider is None or not self._auth_provider.is_login():
@@ -284,7 +285,7 @@ class PGoApiRequest:
     def get_position(self):
         return (self._position_lat, self._position_lng, self._position_alt)
 
-    def set_position(self, lat, lng, alt):
+    def set_position(self, lat, lng, alt=None):
         self.log.debug('Set Position - Lat: %s Long: %s Alt: %s', lat, lng, alt)
 
         self._position_lat = lat
