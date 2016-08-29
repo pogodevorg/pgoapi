@@ -13,25 +13,25 @@ from google.protobuf import descriptor_pb2
 _sym_db = _symbol_database.Default()
 
 
-from POGOProtos.Inventory.Item import ItemData_pb2 as POGOProtos_dot_Inventory_dot_Item_dot_ItemData__pb2
-from POGOProtos.Inventory import AppliedItems_pb2 as POGOProtos_dot_Inventory_dot_AppliedItems__pb2
-from POGOProtos.Inventory import EggIncubators_pb2 as POGOProtos_dot_Inventory_dot_EggIncubators__pb2
-from POGOProtos.Inventory import Candy_pb2 as POGOProtos_dot_Inventory_dot_Candy__pb2
-from POGOProtos.Inventory import InventoryUpgrades_pb2 as POGOProtos_dot_Inventory_dot_InventoryUpgrades__pb2
-from POGOProtos.Data import PokemonData_pb2 as POGOProtos_dot_Data_dot_PokemonData__pb2
-from POGOProtos.Data import PokedexEntry_pb2 as POGOProtos_dot_Data_dot_PokedexEntry__pb2
-from POGOProtos.Data.Player import PlayerStats_pb2 as POGOProtos_dot_Data_dot_Player_dot_PlayerStats__pb2
-from POGOProtos.Data.Player import PlayerCurrency_pb2 as POGOProtos_dot_Data_dot_Player_dot_PlayerCurrency__pb2
 from POGOProtos.Data.Player import PlayerCamera_pb2 as POGOProtos_dot_Data_dot_Player_dot_PlayerCamera__pb2
+from POGOProtos.Data.Player import PlayerCurrency_pb2 as POGOProtos_dot_Data_dot_Player_dot_PlayerCurrency__pb2
+from POGOProtos.Data.Player import PlayerStats_pb2 as POGOProtos_dot_Data_dot_Player_dot_PlayerStats__pb2
+from POGOProtos.Data import PokedexEntry_pb2 as POGOProtos_dot_Data_dot_PokedexEntry__pb2
+from POGOProtos.Data import PokemonData_pb2 as POGOProtos_dot_Data_dot_PokemonData__pb2
+from POGOProtos.Inventory import AppliedItems_pb2 as POGOProtos_dot_Inventory_dot_AppliedItems__pb2
+from POGOProtos.Inventory import Candy_pb2 as POGOProtos_dot_Inventory_dot_Candy__pb2
+from POGOProtos.Inventory import EggIncubators_pb2 as POGOProtos_dot_Inventory_dot_EggIncubators__pb2
+from POGOProtos.Inventory import InventoryUpgrades_pb2 as POGOProtos_dot_Inventory_dot_InventoryUpgrades__pb2
+from POGOProtos.Inventory.Item import ItemData_pb2 as POGOProtos_dot_Inventory_dot_Item_dot_ItemData__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='POGOProtos/Inventory/InventoryItemData.proto',
   package='POGOProtos.Inventory',
   syntax='proto3',
-  serialized_pb=_b('\n,POGOProtos/Inventory/InventoryItemData.proto\x12\x14POGOProtos.Inventory\x1a(POGOProtos/Inventory/Item/ItemData.proto\x1a\'POGOProtos/Inventory/AppliedItems.proto\x1a(POGOProtos/Inventory/EggIncubators.proto\x1a POGOProtos/Inventory/Candy.proto\x1a,POGOProtos/Inventory/InventoryUpgrades.proto\x1a!POGOProtos/Data/PokemonData.proto\x1a\"POGOProtos/Data/PokedexEntry.proto\x1a(POGOProtos/Data/Player/PlayerStats.proto\x1a+POGOProtos/Data/Player/PlayerCurrency.proto\x1a)POGOProtos/Data/Player/PlayerCamera.proto\"\xd2\x04\n\x11InventoryItemData\x12\x32\n\x0cpokemon_data\x18\x01 \x01(\x0b\x32\x1c.POGOProtos.Data.PokemonData\x12\x31\n\x04item\x18\x02 \x01(\x0b\x32#.POGOProtos.Inventory.Item.ItemData\x12\x34\n\rpokedex_entry\x18\x03 \x01(\x0b\x32\x1d.POGOProtos.Data.PokedexEntry\x12\x39\n\x0cplayer_stats\x18\x04 \x01(\x0b\x32#.POGOProtos.Data.Player.PlayerStats\x12?\n\x0fplayer_currency\x18\x05 \x01(\x0b\x32&.POGOProtos.Data.Player.PlayerCurrency\x12;\n\rplayer_camera\x18\x06 \x01(\x0b\x32$.POGOProtos.Data.Player.PlayerCamera\x12\x43\n\x12inventory_upgrades\x18\x07 \x01(\x0b\x32\'.POGOProtos.Inventory.InventoryUpgrades\x12\x39\n\rapplied_items\x18\x08 \x01(\x0b\x32\".POGOProtos.Inventory.AppliedItems\x12;\n\x0e\x65gg_incubators\x18\t \x01(\x0b\x32#.POGOProtos.Inventory.EggIncubators\x12*\n\x05\x63\x61ndy\x18\n \x01(\x0b\x32\x1b.POGOProtos.Inventory.Candyb\x06proto3')
+  serialized_pb=_b('\n,POGOProtos/Inventory/InventoryItemData.proto\x12\x14POGOProtos.Inventory\x1a)POGOProtos/Data/Player/PlayerCamera.proto\x1a+POGOProtos/Data/Player/PlayerCurrency.proto\x1a(POGOProtos/Data/Player/PlayerStats.proto\x1a\"POGOProtos/Data/PokedexEntry.proto\x1a!POGOProtos/Data/PokemonData.proto\x1a\'POGOProtos/Inventory/AppliedItems.proto\x1a POGOProtos/Inventory/Candy.proto\x1a(POGOProtos/Inventory/EggIncubators.proto\x1a,POGOProtos/Inventory/InventoryUpgrades.proto\x1a(POGOProtos/Inventory/Item/ItemData.proto\"\xd2\x04\n\x11InventoryItemData\x12\x32\n\x0cpokemon_data\x18\x01 \x01(\x0b\x32\x1c.POGOProtos.Data.PokemonData\x12\x31\n\x04item\x18\x02 \x01(\x0b\x32#.POGOProtos.Inventory.Item.ItemData\x12\x34\n\rpokedex_entry\x18\x03 \x01(\x0b\x32\x1d.POGOProtos.Data.PokedexEntry\x12\x39\n\x0cplayer_stats\x18\x04 \x01(\x0b\x32#.POGOProtos.Data.Player.PlayerStats\x12?\n\x0fplayer_currency\x18\x05 \x01(\x0b\x32&.POGOProtos.Data.Player.PlayerCurrency\x12;\n\rplayer_camera\x18\x06 \x01(\x0b\x32$.POGOProtos.Data.Player.PlayerCamera\x12\x43\n\x12inventory_upgrades\x18\x07 \x01(\x0b\x32\'.POGOProtos.Inventory.InventoryUpgrades\x12\x39\n\rapplied_items\x18\x08 \x01(\x0b\x32\".POGOProtos.Inventory.AppliedItems\x12;\n\x0e\x65gg_incubators\x18\t \x01(\x0b\x32#.POGOProtos.Inventory.EggIncubators\x12*\n\x05\x63\x61ndy\x18\n \x01(\x0b\x32\x1b.POGOProtos.Inventory.Candyb\x06proto3')
   ,
-  dependencies=[POGOProtos_dot_Inventory_dot_Item_dot_ItemData__pb2.DESCRIPTOR,POGOProtos_dot_Inventory_dot_AppliedItems__pb2.DESCRIPTOR,POGOProtos_dot_Inventory_dot_EggIncubators__pb2.DESCRIPTOR,POGOProtos_dot_Inventory_dot_Candy__pb2.DESCRIPTOR,POGOProtos_dot_Inventory_dot_InventoryUpgrades__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_PokemonData__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_PokedexEntry__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Player_dot_PlayerStats__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Player_dot_PlayerCurrency__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Player_dot_PlayerCamera__pb2.DESCRIPTOR,])
+  dependencies=[POGOProtos_dot_Data_dot_Player_dot_PlayerCamera__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Player_dot_PlayerCurrency__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Player_dot_PlayerStats__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_PokedexEntry__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_PokemonData__pb2.DESCRIPTOR,POGOProtos_dot_Inventory_dot_AppliedItems__pb2.DESCRIPTOR,POGOProtos_dot_Inventory_dot_Candy__pb2.DESCRIPTOR,POGOProtos_dot_Inventory_dot_EggIncubators__pb2.DESCRIPTOR,POGOProtos_dot_Inventory_dot_InventoryUpgrades__pb2.DESCRIPTOR,POGOProtos_dot_Inventory_dot_Item_dot_ItemData__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 

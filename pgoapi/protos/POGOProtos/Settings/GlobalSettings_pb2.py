@@ -14,19 +14,19 @@ _sym_db = _symbol_database.Default()
 
 
 from POGOProtos.Settings import FortSettings_pb2 as POGOProtos_dot_Settings_dot_FortSettings__pb2
-from POGOProtos.Settings import MapSettings_pb2 as POGOProtos_dot_Settings_dot_MapSettings__pb2
-from POGOProtos.Settings import LevelSettings_pb2 as POGOProtos_dot_Settings_dot_LevelSettings__pb2
-from POGOProtos.Settings import InventorySettings_pb2 as POGOProtos_dot_Settings_dot_InventorySettings__pb2
 from POGOProtos.Settings import GpsSettings_pb2 as POGOProtos_dot_Settings_dot_GpsSettings__pb2
+from POGOProtos.Settings import InventorySettings_pb2 as POGOProtos_dot_Settings_dot_InventorySettings__pb2
+from POGOProtos.Settings import LevelSettings_pb2 as POGOProtos_dot_Settings_dot_LevelSettings__pb2
+from POGOProtos.Settings import MapSettings_pb2 as POGOProtos_dot_Settings_dot_MapSettings__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='POGOProtos/Settings/GlobalSettings.proto',
   package='POGOProtos.Settings',
   syntax='proto3',
-  serialized_pb=_b('\n(POGOProtos/Settings/GlobalSettings.proto\x12\x13POGOProtos.Settings\x1a&POGOProtos/Settings/FortSettings.proto\x1a%POGOProtos/Settings/MapSettings.proto\x1a\'POGOProtos/Settings/LevelSettings.proto\x1a+POGOProtos/Settings/InventorySettings.proto\x1a%POGOProtos/Settings/GpsSettings.proto\"\xda\x02\n\x0eGlobalSettings\x12\x38\n\rfort_settings\x18\x02 \x01(\x0b\x32!.POGOProtos.Settings.FortSettings\x12\x36\n\x0cmap_settings\x18\x03 \x01(\x0b\x32 .POGOProtos.Settings.MapSettings\x12:\n\x0elevel_settings\x18\x04 \x01(\x0b\x32\".POGOProtos.Settings.LevelSettings\x12\x42\n\x12inventory_settings\x18\x05 \x01(\x0b\x32&.POGOProtos.Settings.InventorySettings\x12\x1e\n\x16minimum_client_version\x18\x06 \x01(\t\x12\x36\n\x0cgps_settings\x18\x07 \x01(\x0b\x32 .POGOProtos.Settings.GpsSettingsb\x06proto3')
+  serialized_pb=_b('\n(POGOProtos/Settings/GlobalSettings.proto\x12\x13POGOProtos.Settings\x1a&POGOProtos/Settings/FortSettings.proto\x1a%POGOProtos/Settings/GpsSettings.proto\x1a+POGOProtos/Settings/InventorySettings.proto\x1a\'POGOProtos/Settings/LevelSettings.proto\x1a%POGOProtos/Settings/MapSettings.proto\"\xda\x02\n\x0eGlobalSettings\x12\x38\n\rfort_settings\x18\x02 \x01(\x0b\x32!.POGOProtos.Settings.FortSettings\x12\x36\n\x0cmap_settings\x18\x03 \x01(\x0b\x32 .POGOProtos.Settings.MapSettings\x12:\n\x0elevel_settings\x18\x04 \x01(\x0b\x32\".POGOProtos.Settings.LevelSettings\x12\x42\n\x12inventory_settings\x18\x05 \x01(\x0b\x32&.POGOProtos.Settings.InventorySettings\x12\x1e\n\x16minimum_client_version\x18\x06 \x01(\t\x12\x36\n\x0cgps_settings\x18\x07 \x01(\x0b\x32 .POGOProtos.Settings.GpsSettingsb\x06proto3')
   ,
-  dependencies=[POGOProtos_dot_Settings_dot_FortSettings__pb2.DESCRIPTOR,POGOProtos_dot_Settings_dot_MapSettings__pb2.DESCRIPTOR,POGOProtos_dot_Settings_dot_LevelSettings__pb2.DESCRIPTOR,POGOProtos_dot_Settings_dot_InventorySettings__pb2.DESCRIPTOR,POGOProtos_dot_Settings_dot_GpsSettings__pb2.DESCRIPTOR,])
+  dependencies=[POGOProtos_dot_Settings_dot_FortSettings__pb2.DESCRIPTOR,POGOProtos_dot_Settings_dot_GpsSettings__pb2.DESCRIPTOR,POGOProtos_dot_Settings_dot_InventorySettings__pb2.DESCRIPTOR,POGOProtos_dot_Settings_dot_LevelSettings__pb2.DESCRIPTOR,POGOProtos_dot_Settings_dot_MapSettings__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
