@@ -79,7 +79,6 @@ class RpcApi:
         self.session_hash = os.urandom(32)
 
         self.device_info = device_info
-        self.locationfix_time = RpcApi.START_TIME
 
     def activate_signature(self, lib_path):
         try:
@@ -184,7 +183,7 @@ class RpcApi:
         if not altitude:
             altitude = 1476.7987501954125
 
-        accuracies = (10, 30, 50, 65, 100)
+        accuracies = (5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 30, 50, 65)
         request.accuracy = random.choice(accuracies)
 
         """ generate sub requests before signature generation """
@@ -217,39 +216,56 @@ class RpcApi:
             sig.timestamp = get_time(ms=True)
             sig.timestamp_since_start = get_time(ms=True) - RpcApi.START_TIME
 
-            snapshot = sig.timestamp_since_start - random.randint(10,100)
-            if snapshot < 1:
-                snapshot = random.randint(10,100)
-
             fix = sig.location_fix.add()
+            if sig.timestamp_since_start > 29999:
+                min_subtract = 50
+                max_subtract = 29999
+            elif sig.timestamp_since_start < 50:
+                min_subtract = 1
+                max_subtract = sig.timestamp_since_start
+            else:
+                min_subtract = 45
+                max_subtract = sig.timestamp_since_start
+            fix.timestamp_snapshot = sig.timestamp_since_start - random.randint(min_subtract,max_subtract)
+
             fix.provider = 'fused'
-            fix.timestamp_snapshot = snapshot
             fix.latitude = request.latitude
             fix.longitude = request.longitude
             fix.altitude = altitude
-            fix.speed = -1
-            fix.course = random.choice((-1,random.triangular(0,360,0.5)))
+            if random.randint(0,19) == 0:
+                fix.course = -1
+                fix.speed = -1
+            else:
+                fix.course = random.uniform(0,360)
+                fix.speed = random.triangular(0.1,3.1,.8)
             fix.provider_status = 3
             fix.location_type = 1
             fix.horizontal_accuracy = request.accuracy
-            fix.vertical_accuracy = random.choice(accuracies)
-            self.locationfix_time = get_time(ms=True) - random.randint(20,75)
-            sig.sensor_info.timestamp_snapshot = sig.timestamp_since_start
-            sig.sensor_info.magnetometer_x = random.triangular(-0.4,0.6,0)
-            sig.sensor_info.magnetometer_y = random.triangular(-0.2,0.3,0)
-            sig.sensor_info.magnetometer_z = random.triangular(-0.2,0.3,0)
-            sig.sensor_info.angle_normalized_x = random.triangular(-200,50,-8)
-            sig.sensor_info.angle_normalized_y = random.triangular(-300,60,-44)
-            sig.sensor_info.angle_normalized_z = random.triangular(-260,20,-8)
-            sig.sensor_info.accel_raw_x = random.triangular(-.06,1.2,0.8)
-            sig.sensor_info.accel_raw_y = random.triangular(-1.1,1.1,.19)
-            sig.sensor_info.accel_raw_z = random.triangular(-.5,1.5,0.01)
-            sig.sensor_info.gyroscope_raw_x = random.triangular(-4.4,2.3,0)
-            sig.sensor_info.gyroscope_raw_y = random.triangular(-6.3,0.7,0)
-            sig.sensor_info.gyroscope_raw_z = random.triangular(-3,3,0)
-            sig.sensor_info.accel_normalized_x = random.triangular(-0.4,1,0)
-            sig.sensor_info.accel_normalized_y = random.triangular(-1,0.06,-0.5)
-            sig.sensor_info.accel_normalized_z = random.triangular(-1,-0.08,-0.66)
+            if request.accuracy == 65:
+                fix.vertical_accuracy = random.triangular(50,200,65)
+            else:
+                if request.accuracy > 10:
+                    vertical_accuracies = (24, 32, 64, 96)
+                else:
+                    vertical_accuracies = (3, 4, 6, 8, 12, 24)
+                fix.vertical_accuracy = random.choice(vertical_accuracies)
+
+            sig.sensor_info.timestamp_snapshot = fix.timestamp_snapshot
+            sig.sensor_info.magnetometer_x = random.triangular(-3,3,0)
+            sig.sensor_info.magnetometer_y = random.triangular(-3,3,sig.sensor_info.magnetometer_x * -1)
+            sig.sensor_info.magnetometer_z = random.triangular(-4,4,sig.sensor_info.magnetometer_x * -1)
+            sig.sensor_info.angle_normalized_x = random.triangular(-60,60,0)
+            sig.sensor_info.angle_normalized_y = random.triangular(-60,60,sig.sensor_info.angle_normalized_x * -1)
+            sig.sensor_info.angle_normalized_z = random.triangular(-60,60,sig.sensor_info.angle_normalized_x * -1)
+            sig.sensor_info.accel_raw_x = random.triangular(-.6,1.5,0.5)
+            sig.sensor_info.accel_raw_y = random.uniform(-3,3)
+            sig.sensor_info.accel_raw_z = random.triangular(-1.5,1.5,0.25)
+            sig.sensor_info.gyroscope_raw_x = random.triangular(-6,6,0)
+            sig.sensor_info.gyroscope_raw_y = random.triangular(-6,6,sig.sensor_info.gyroscope_raw_x * -1)
+            sig.sensor_info.gyroscope_raw_z = random.triangular(-4,4,sig.sensor_info.gyroscope_raw_x * .65)
+            sig.sensor_info.accel_normalized_x = random.triangular(-.99,.99,0)
+            sig.sensor_info.accel_normalized_y = random.triangular(-.99,.8,sig.sensor_info.accel_normalized_x * -.8)
+            sig.sensor_info.accel_normalized_z = random.triangular(-1,-0.01,-0.8)
             sig.sensor_info.accelerometer_axes = 3
 
             sig.unknown25 = 7363665268261373700
@@ -263,7 +279,7 @@ class RpcApi:
             u6.request_type = 6
             u6.unknown2.encrypted_signature = self._generate_signature(signature_proto)
 
-        request.ms_since_last_locationfix = get_time(ms=True) - self.locationfix_time
+        request.ms_since_last_locationfix = int(random.triangular(75,5000,1000))
 
         self.log.debug('Generated protobuf request: \n\r%s', request)
 
