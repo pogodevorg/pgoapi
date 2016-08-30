@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='POGOProtos/Networking/Envelopes/SignalAgglomUpdates.proto',
   package='',
   syntax='proto3',
-  serialized_pb=_b('\n9POGOProtos/Networking/Envelopes/SignalAgglomUpdates.proto\"\xf0\x10\n\x13SignalAgglomUpdates\x12\x1f\n\x06\x66ield1\x18\x01 \x03(\x0b\x32\x0f.UnknownMessage\x12 \n\x18timestamp_ms_since_start\x18\x02 \x01(\x04\x12\x0e\n\x06\x66ield3\x18\x03 \x01(\t\x12=\n\x10location_updates\x18\x04 \x03(\x0b\x32#.SignalAgglomUpdates.LocationUpdate\x12=\n\x10\x61ndroid_gps_info\x18\x05 \x03(\x0b\x32#.SignalAgglomUpdates.AndroidGpsInfo\x12\x1f\n\x06\x66ield6\x18\x06 \x03(\x0b\x32\x0f.UnknownMessage\x12\x39\n\x0esensor_updates\x18\x07 \x03(\x0b\x32!.SignalAgglomUpdates.SensorUpdate\x12\x34\n\x0b\x64\x65vice_info\x18\x08 \x01(\x0b\x32\x1f.SignalAgglomUpdates.DeviceInfo\x12;\n\x0fios_device_info\x18\t \x01(\x0b\x32\".SignalAgglomUpdates.IOSDeviceInfo\x12#\n\x1blocation_hash_by_token_seed\x18\n \x01(\r\x12\x0f\n\x07\x66ield11\x18\x0b \x01(\x08\x12\x0f\n\x07\x66ield12\x18\x0c \x01(\x08\x12\x0f\n\x07\x66ield13\x18\r \x01(\x05\x12\x0f\n\x07\x66ield14\x18\x0e \x01(\x05\x12\x0f\n\x07\x66ield15\x18\x0f \x01(\t\x12\x0f\n\x07\x66ield16\x18\x10 \x01(\x05\x12\x0f\n\x07\x66ield17\x18\x11 \x01(\t\x12\x0f\n\x07\x66ield18\x18\x12 \x01(\t\x12\x0f\n\x07\x66ield19\x18\x13 \x01(\x08\x12\x15\n\rlocation_hash\x18\x14 \x01(\r\x12\x0f\n\x07\x66ield21\x18\x15 \x01(\x08\x12\x0f\n\x07\x66ield22\x18\x16 \x01(\x0c\x12\x1a\n\x12\x65poch_timestamp_ms\x18\x17 \x01(\x04\x12\x16\n\x0erequest_hashes\x18\x18 \x03(\x04\x12\x0f\n\x07\x66ield25\x18\x19 \x01(\x04\x1a\x8f\x02\n\x0eLocationUpdate\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x14\n\x0ctimestamp_ms\x18\x02 \x01(\x03\x12\x10\n\x08\x61ltitude\x18\x04 \x01(\x01\x12\x10\n\x08latitude\x18\r \x01(\x01\x12\x11\n\tlongitude\x18\x0e \x01(\x01\x12\x14\n\x0c\x64\x65vice_speed\x18\x12 \x01(\x01\x12\x15\n\rdevice_course\x18\x14 \x01(\x01\x12\x1b\n\x13horizontal_accuracy\x18\x15 \x01(\x01\x12\x19\n\x11vertical_accuracy\x18\x16 \x01(\x01\x12\x17\n\x0fprovider_status\x18\x1a \x01(\x05\x12\r\n\x05\x66loor\x18\x1b \x01(\x03\x12\x15\n\rlocation_type\x18\x1c \x01(\x05\x1a\xa6\x01\n\rIOSDeviceInfo\x12\r\n\x05\x62ool1\x18\x01 \x01(\x08\x12\r\n\x05\x62ool2\x18\x02 \x01(\x08\x12\r\n\x05\x62ool3\x18\x03 \x01(\x08\x12\r\n\x05\x62ool4\x18\x04 \x01(\x08\x12\r\n\x05\x62ool5\x18\x05 \x01(\x08\x12\r\n\x05\x62ool6\x18\x06 \x01(\x08\x12\r\n\x05\x62ool7\x18\x07 \x01(\x08\x12\r\n\x05\x62ool8\x18\x08 \x01(\x08\x12\r\n\x05\x62ool9\x18\t \x01(\x08\x12\x0e\n\x06\x62ool10\x18\n \x01(\x08\x1a\xb1\x03\n\x0cSensorUpdate\x12\x11\n\ttimestamp\x18\x01 \x01(\x04\x12\x16\n\x0e\x61\x63\x63\x65leration_x\x18\x03 \x01(\x01\x12\x16\n\x0e\x61\x63\x63\x65leration_y\x18\x04 \x01(\x01\x12\x16\n\x0e\x61\x63\x63\x65leration_z\x18\x05 \x01(\x01\x12\x18\n\x10magnetic_field_x\x18\x06 \x01(\x01\x12\x18\n\x10magnetic_field_y\x18\x07 \x01(\x01\x12\x18\n\x10magnetic_field_z\x18\x08 \x01(\x01\x12\x1f\n\x17magnetic_field_accuracy\x18\t \x01(\x05\x12\x16\n\x0e\x61ttitude_pitch\x18\n \x01(\x01\x12\x14\n\x0c\x61ttitude_yaw\x18\x0b \x01(\x01\x12\x15\n\rattitude_roll\x18\x0c \x01(\x01\x12\x17\n\x0frotation_rate_x\x18\r \x01(\x01\x12\x17\n\x0frotation_rate_y\x18\x0e \x01(\x01\x12\x17\n\x0frotation_rate_z\x18\x0f \x01(\x01\x12\x11\n\tgravity_x\x18\x10 \x01(\x01\x12\x11\n\tgravity_y\x18\x11 \x01(\x01\x12\x11\n\tgravity_z\x18\x12 \x01(\x01\x12\x0e\n\x06status\x18\x13 \x01(\x05\x1a\xdb\x02\n\nDeviceInfo\x12\x11\n\tdevice_id\x18\x01 \x01(\t\x12\x1a\n\x12\x61ndroid_board_name\x18\x02 \x01(\t\x12\x1a\n\x12\x61ndroid_bootloader\x18\x03 \x01(\t\x12\x14\n\x0c\x64\x65vice_brand\x18\x04 \x01(\t\x12\x14\n\x0c\x64\x65vice_model\x18\x05 \x01(\t\x12\x1f\n\x17\x64\x65vice_model_identifier\x18\x06 \x01(\t\x12\x1a\n\x12\x64\x65vice_comms_model\x18\x07 \x01(\t\x12\x1d\n\x15hardware_manufacturer\x18\x08 \x01(\t\x12\x16\n\x0ehardware_model\x18\t \x01(\t\x12\x16\n\x0e\x66irmware_brand\x18\n \x01(\t\x12\x15\n\rfirmware_tags\x18\x0c \x01(\t\x12\x15\n\rfirmware_type\x18\r \x01(\t\x12\x1c\n\x14\x66irmware_fingerprint\x18\x0e \x01(\t\x1a\xaf\x01\n\x0e\x41ndroidGpsInfo\x12\x13\n\x0btime_to_fix\x18\x01 \x01(\x04\x12\x16\n\x0esatellites_prn\x18\x02 \x03(\x05\x12\x0f\n\x07\x61zimuth\x18\x03 \x03(\x02\x12\x11\n\televation\x18\x04 \x03(\x02\x12\x0b\n\x03snr\x18\x05 \x03(\x02\x12\x13\n\x0bhas_almanac\x18\x06 \x03(\x08\x12\x15\n\rhas_ephemeris\x18\x07 \x03(\x08\x12\x13\n\x0bused_in_fix\x18\x08 \x03(\x08\"\x10\n\x0eUnknownMessageb\x06proto3')
+  serialized_pb=_b('\n9POGOProtos/Networking/Envelopes/SignalAgglomUpdates.proto\"\xf0\x10\n\x13SignalAgglomUpdates\x12\x1f\n\x06\x66ield1\x18\x01 \x03(\x0b\x32\x0f.UnknownMessage\x12 \n\x18timestamp_ms_since_start\x18\x02 \x01(\x03\x12\x0e\n\x06\x66ield3\x18\x03 \x01(\t\x12=\n\x10location_updates\x18\x04 \x03(\x0b\x32#.SignalAgglomUpdates.LocationUpdate\x12=\n\x10\x61ndroid_gps_info\x18\x05 \x03(\x0b\x32#.SignalAgglomUpdates.AndroidGpsInfo\x12\x1f\n\x06\x66ield6\x18\x06 \x03(\x0b\x32\x0f.UnknownMessage\x12\x39\n\x0esensor_updates\x18\x07 \x03(\x0b\x32!.SignalAgglomUpdates.SensorUpdate\x12\x34\n\x0b\x64\x65vice_info\x18\x08 \x01(\x0b\x32\x1f.SignalAgglomUpdates.DeviceInfo\x12;\n\x0fios_device_info\x18\t \x01(\x0b\x32\".SignalAgglomUpdates.IOSDeviceInfo\x12#\n\x1blocation_hash_by_token_seed\x18\n \x01(\x05\x12\x0f\n\x07\x66ield11\x18\x0b \x01(\x08\x12\x0f\n\x07\x66ield12\x18\x0c \x01(\x08\x12\x0f\n\x07\x66ield13\x18\r \x01(\x05\x12\x0f\n\x07\x66ield14\x18\x0e \x01(\x05\x12\x0f\n\x07\x66ield15\x18\x0f \x01(\t\x12\x0f\n\x07\x66ield16\x18\x10 \x01(\x05\x12\x0f\n\x07\x66ield17\x18\x11 \x01(\t\x12\x0f\n\x07\x66ield18\x18\x12 \x01(\t\x12\x0f\n\x07\x66ield19\x18\x13 \x01(\x08\x12\x15\n\rlocation_hash\x18\x14 \x01(\x05\x12\x0f\n\x07\x66ield21\x18\x15 \x01(\x08\x12\x0f\n\x07\x66ield22\x18\x16 \x01(\x0c\x12\x1a\n\x12\x65poch_timestamp_ms\x18\x17 \x01(\x04\x12\x16\n\x0erequest_hashes\x18\x18 \x03(\x03\x12\x0f\n\x07\x66ield25\x18\x19 \x01(\x04\x1a\x8f\x02\n\x0eLocationUpdate\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x14\n\x0ctimestamp_ms\x18\x02 \x01(\x03\x12\x10\n\x08\x61ltitude\x18\x04 \x01(\x02\x12\x10\n\x08latitude\x18\r \x01(\x02\x12\x11\n\tlongitude\x18\x0e \x01(\x02\x12\x14\n\x0c\x64\x65vice_speed\x18\x12 \x01(\x02\x12\x15\n\rdevice_course\x18\x14 \x01(\x02\x12\x1b\n\x13horizontal_accuracy\x18\x15 \x01(\x02\x12\x19\n\x11vertical_accuracy\x18\x16 \x01(\x02\x12\x17\n\x0fprovider_status\x18\x1a \x01(\x05\x12\r\n\x05\x66loor\x18\x1b \x01(\x03\x12\x15\n\rlocation_type\x18\x1c \x01(\x05\x1a\xa6\x01\n\rIOSDeviceInfo\x12\r\n\x05\x62ool1\x18\x01 \x01(\x08\x12\r\n\x05\x62ool2\x18\x02 \x01(\x08\x12\r\n\x05\x62ool3\x18\x03 \x01(\x08\x12\r\n\x05\x62ool4\x18\x04 \x01(\x08\x12\r\n\x05\x62ool5\x18\x05 \x01(\x08\x12\r\n\x05\x62ool6\x18\x06 \x01(\x08\x12\r\n\x05\x62ool7\x18\x07 \x01(\x08\x12\r\n\x05\x62ool8\x18\x08 \x01(\x08\x12\r\n\x05\x62ool9\x18\t \x01(\x08\x12\x0e\n\x06\x62ool10\x18\n \x01(\x08\x1a\xb1\x03\n\x0cSensorUpdate\x12\x11\n\ttimestamp\x18\x01 \x01(\x04\x12\x16\n\x0e\x61\x63\x63\x65leration_x\x18\x03 \x01(\x01\x12\x16\n\x0e\x61\x63\x63\x65leration_y\x18\x04 \x01(\x01\x12\x16\n\x0e\x61\x63\x63\x65leration_z\x18\x05 \x01(\x01\x12\x18\n\x10magnetic_field_x\x18\x06 \x01(\x01\x12\x18\n\x10magnetic_field_y\x18\x07 \x01(\x01\x12\x18\n\x10magnetic_field_z\x18\x08 \x01(\x01\x12\x1f\n\x17magnetic_field_accuracy\x18\t \x01(\x05\x12\x16\n\x0e\x61ttitude_pitch\x18\n \x01(\x01\x12\x14\n\x0c\x61ttitude_yaw\x18\x0b \x01(\x01\x12\x15\n\rattitude_roll\x18\x0c \x01(\x01\x12\x17\n\x0frotation_rate_x\x18\r \x01(\x01\x12\x17\n\x0frotation_rate_y\x18\x0e \x01(\x01\x12\x17\n\x0frotation_rate_z\x18\x0f \x01(\x01\x12\x11\n\tgravity_x\x18\x10 \x01(\x01\x12\x11\n\tgravity_y\x18\x11 \x01(\x01\x12\x11\n\tgravity_z\x18\x12 \x01(\x01\x12\x0e\n\x06status\x18\x13 \x01(\x05\x1a\xdb\x02\n\nDeviceInfo\x12\x11\n\tdevice_id\x18\x01 \x01(\t\x12\x1a\n\x12\x61ndroid_board_name\x18\x02 \x01(\t\x12\x1a\n\x12\x61ndroid_bootloader\x18\x03 \x01(\t\x12\x14\n\x0c\x64\x65vice_brand\x18\x04 \x01(\t\x12\x14\n\x0c\x64\x65vice_model\x18\x05 \x01(\t\x12\x1f\n\x17\x64\x65vice_model_identifier\x18\x06 \x01(\t\x12\x1a\n\x12\x64\x65vice_comms_model\x18\x07 \x01(\t\x12\x1d\n\x15hardware_manufacturer\x18\x08 \x01(\t\x12\x16\n\x0ehardware_model\x18\t \x01(\t\x12\x16\n\x0e\x66irmware_brand\x18\n \x01(\t\x12\x15\n\rfirmware_tags\x18\x0c \x01(\t\x12\x15\n\rfirmware_type\x18\r \x01(\t\x12\x1c\n\x14\x66irmware_fingerprint\x18\x0e \x01(\t\x1a\xaf\x01\n\x0e\x41ndroidGpsInfo\x12\x13\n\x0btime_to_fix\x18\x01 \x01(\x04\x12\x16\n\x0esatellites_prn\x18\x02 \x03(\x05\x12\x0f\n\x07\x61zimuth\x18\x03 \x03(\x02\x12\x11\n\televation\x18\x04 \x03(\x02\x12\x0b\n\x03snr\x18\x05 \x03(\x02\x12\x13\n\x0bhas_almanac\x18\x06 \x03(\x08\x12\x15\n\rhas_ephemeris\x18\x07 \x03(\x08\x12\x13\n\x0bused_in_fix\x18\x08 \x03(\x08\"\x10\n\x0eUnknownMessageb\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -49,49 +49,49 @@ _SIGNALAGGLOMUPDATES_LOCATIONUPDATE = _descriptor.Descriptor(
       options=None),
     _descriptor.FieldDescriptor(
       name='altitude', full_name='SignalAgglomUpdates.LocationUpdate.altitude', index=2,
-      number=4, type=1, cpp_type=5, label=1,
+      number=4, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='latitude', full_name='SignalAgglomUpdates.LocationUpdate.latitude', index=3,
-      number=13, type=1, cpp_type=5, label=1,
+      number=13, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='longitude', full_name='SignalAgglomUpdates.LocationUpdate.longitude', index=4,
-      number=14, type=1, cpp_type=5, label=1,
+      number=14, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='device_speed', full_name='SignalAgglomUpdates.LocationUpdate.device_speed', index=5,
-      number=18, type=1, cpp_type=5, label=1,
+      number=18, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='device_course', full_name='SignalAgglomUpdates.LocationUpdate.device_course', index=6,
-      number=20, type=1, cpp_type=5, label=1,
+      number=20, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='horizontal_accuracy', full_name='SignalAgglomUpdates.LocationUpdate.horizontal_accuracy', index=7,
-      number=21, type=1, cpp_type=5, label=1,
+      number=21, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='vertical_accuracy', full_name='SignalAgglomUpdates.LocationUpdate.vertical_accuracy', index=8,
-      number=22, type=1, cpp_type=5, label=1,
+      number=22, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -584,7 +584,7 @@ _SIGNALAGGLOMUPDATES = _descriptor.Descriptor(
       options=None),
     _descriptor.FieldDescriptor(
       name='timestamp_ms_since_start', full_name='SignalAgglomUpdates.timestamp_ms_since_start', index=1,
-      number=2, type=4, cpp_type=4, label=1,
+      number=2, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -640,7 +640,7 @@ _SIGNALAGGLOMUPDATES = _descriptor.Descriptor(
       options=None),
     _descriptor.FieldDescriptor(
       name='location_hash_by_token_seed', full_name='SignalAgglomUpdates.location_hash_by_token_seed', index=9,
-      number=10, type=13, cpp_type=3, label=1,
+      number=10, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -710,7 +710,7 @@ _SIGNALAGGLOMUPDATES = _descriptor.Descriptor(
       options=None),
     _descriptor.FieldDescriptor(
       name='location_hash', full_name='SignalAgglomUpdates.location_hash', index=19,
-      number=20, type=13, cpp_type=3, label=1,
+      number=20, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -738,7 +738,7 @@ _SIGNALAGGLOMUPDATES = _descriptor.Descriptor(
       options=None),
     _descriptor.FieldDescriptor(
       name='request_hashes', full_name='SignalAgglomUpdates.request_hashes', index=23,
-      number=24, type=4, cpp_type=4, label=3,
+      number=24, type=3, cpp_type=2, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,

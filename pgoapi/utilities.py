@@ -40,6 +40,9 @@ from s2sphere import LatLng, Angle, Cap, RegionCoverer, math
 
 log = logging.getLogger(__name__)
 
+HASH_SEED = 0x61656632  # static hash seed from app
+EARTH_RADIUS = 6371000  # radius of Earth in meters
+
 
 def f2i(float):
   return struct.unpack('<Q', struct.pack('<d', float))[0]
@@ -73,8 +76,6 @@ def get_pos_by_name(location_name):
     log.info('Coordinates (lat/long/alt) for location: %s %s %s', loc.latitude, loc.longitude, loc.altitude)
 
     return (loc.latitude, loc.longitude, loc.altitude)
-
-EARTH_RADIUS = 6371 * 1000
 
 
 def get_cell_ids(lat, long, radius=1000):
@@ -172,25 +173,23 @@ def long_to_bytes(val, endianness='big'):
     return s
 
 
-def generate_location_hash_by_seed(authticket, lat, lng, alt):
-    firstHash = xxhash.xxh32(authticket, seed=0x1B845238).intdigest()
-    locationBytes = d2h(lat) + d2h(lng) + d2h(alt)
-    if not alt:
-        alt = "\x00\x00\x00\x00\x00\x00\x00\x00"
-    return xxhash.xxh32(locationBytes, seed=firstHash).intdigest()
+def generate_location_hash_by_seed(authticket, lat, lng, acc=5):
+    first_hash = xxhash.xxh32(authticket, seed=HASH_SEED).intdigest()
+    location_bytes = d2h(lat) + d2h(lng) + d2h(acc)
+    loc_hash = xxhash.xxh32(location_bytes, seed=first_hash).intdigest()
+    return ctypes.c_int32(loc_hash).value
 
 
-def generate_location_hash(lat, lng, alt):
-    locationBytes = d2h(lat) + d2h(lng) + d2h(alt)
-    if not alt:
-        alt = "\x00\x00\x00\x00\x00\x00\x00\x00"
-    # Hash of location using static seed 0x1B845238
-    return xxhash.xxh32(locationBytes, seed=0x1B845238).intdigest()
+def generate_location_hash(lat, lng, acc=5):
+    location_bytes = d2h(lat) + d2h(lng) + d2h(acc)
+    loc_hash = xxhash.xxh32(location_bytes, seed=HASH_SEED).intdigest()
+    return ctypes.c_int32(loc_hash).value
 
 
 def generate_request_hash(authticket, request):
-    firstHash = xxhash.xxh64(authticket, seed=0x1B845238).intdigest()
-    return xxhash.xxh64(request, seed=firstHash).intdigest()
+    first_hash = xxhash.xxh64(authticket, seed=HASH_SEED).intdigest()
+    req_hash = xxhash.xxh64(request, seed=first_hash).intdigest()
+    return ctypes.c_int64(req_hash).value
 
 
 def d2h(f):
