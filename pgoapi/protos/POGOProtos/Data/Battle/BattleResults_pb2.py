@@ -13,17 +13,17 @@ from google.protobuf import descriptor_pb2
 _sym_db = _symbol_database.Default()
 
 
-from POGOProtos.Data.Gym import GymState_pb2 as POGOProtos_dot_Data_dot_Gym_dot_GymState__pb2
 from POGOProtos.Data.Battle import BattleParticipant_pb2 as POGOProtos_dot_Data_dot_Battle_dot_BattleParticipant__pb2
+from POGOProtos.Data.Gym import GymState_pb2 as POGOProtos_dot_Data_dot_Gym_dot_GymState__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='POGOProtos/Data/Battle/BattleResults.proto',
   package='POGOProtos.Data.Battle',
   syntax='proto3',
-  serialized_pb=_b('\n*POGOProtos/Data/Battle/BattleResults.proto\x12\x16POGOProtos.Data.Battle\x1a\"POGOProtos/Data/Gym/GymState.proto\x1a.POGOProtos/Data/Battle/BattleParticipant.proto\"\xde\x01\n\rBattleResults\x12\x30\n\tgym_state\x18\x01 \x01(\x0b\x32\x1d.POGOProtos.Data.Gym.GymState\x12<\n\tattackers\x18\x02 \x03(\x0b\x32).POGOProtos.Data.Battle.BattleParticipant\x12!\n\x19player_experience_awarded\x18\x03 \x03(\x05\x12 \n\x18next_defender_pokemon_id\x18\x04 \x01(\x03\x12\x18\n\x10gym_points_delta\x18\x05 \x01(\x05\x62\x06proto3')
+  serialized_pb=_b('\n*POGOProtos/Data/Battle/BattleResults.proto\x12\x16POGOProtos.Data.Battle\x1a.POGOProtos/Data/Battle/BattleParticipant.proto\x1a\"POGOProtos/Data/Gym/GymState.proto\"\xde\x01\n\rBattleResults\x12\x30\n\tgym_state\x18\x01 \x01(\x0b\x32\x1d.POGOProtos.Data.Gym.GymState\x12<\n\tattackers\x18\x02 \x03(\x0b\x32).POGOProtos.Data.Battle.BattleParticipant\x12!\n\x19player_experience_awarded\x18\x03 \x03(\x05\x12 \n\x18next_defender_pokemon_id\x18\x04 \x01(\x03\x12\x18\n\x10gym_points_delta\x18\x05 \x01(\x05\x62\x06proto3')
   ,
-  dependencies=[POGOProtos_dot_Data_dot_Gym_dot_GymState__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Battle_dot_BattleParticipant__pb2.DESCRIPTOR,])
+  dependencies=[POGOProtos_dot_Data_dot_Battle_dot_BattleParticipant__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Gym_dot_GymState__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 

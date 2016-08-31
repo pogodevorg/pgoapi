@@ -40,22 +40,31 @@ from s2sphere import LatLng, Angle, Cap, RegionCoverer, math
 
 log = logging.getLogger(__name__)
 
+HASH_SEED = 0x61656632  # static hash seed from app
+EARTH_RADIUS = 6371000  # radius of Earth in meters
+
+
 def f2i(float):
   return struct.unpack('<Q', struct.pack('<d', float))[0]
+
 
 def f2h(float):
   return hex(struct.unpack('<Q', struct.pack('<d', float))[0])
 
+
 def h2f(hex):
   return struct.unpack('<d', struct.pack('<Q', int(hex,16)))[0]
 
+
 def to_camel_case(value):
   return ''.join(word.capitalize() if word else '_' for word in value.split('_'))
+
 
 # JSON Encoder to handle bytes
 class JSONByteEncoder(JSONEncoder):
     def default(self, o):
         return o.decode('utf-8')
+
 
 def get_pos_by_name(location_name):
     geolocator = GoogleV3()
@@ -68,7 +77,7 @@ def get_pos_by_name(location_name):
 
     return (loc.latitude, loc.longitude, loc.altitude)
 
-EARTH_RADIUS = 6371 * 1000
+
 def get_cell_ids(lat, long, radius=1000):
     # Max values allowed by server according to this comment:
     # https://github.com/AeonLucid/POGOProtos/issues/83#issuecomment-235612285
@@ -82,11 +91,13 @@ def get_cell_ids(lat, long, radius=1000):
     cells = cells[:100]  # len(cells) = 100 is max allowed by the server
     return sorted([x.id() for x in cells])
 
+
 def get_time(ms = False):
     if ms:
-        return int(round(time.time() * 1000))
+        return int(time.time() * 1000)
     else:
-        return int(round(time.time()))
+        return int(time.time())
+
 
 def get_format_time_diff(low, high, ms = True):
     diff = (high - low)
@@ -95,8 +106,9 @@ def get_format_time_diff(low, high, ms = True):
     else:
         m, s = divmod(diff, 60)
     h, m = divmod(m, 60)
-    
+
     return (h, m, s)
+
 
 def parse_api_endpoint(api_url):
     if not api_url.startswith("https"):
@@ -123,9 +135,10 @@ class Rand48(object):
         n = self.next() >> 16
         if n & (1 << 31):
             n -= 1 << 32
-        return n   
+        return n
 
-def long_to_bytes (val, endianness='big'):
+
+def long_to_bytes(val, endianness='big'):
     """
     Use :ref:`string formatting` and :func:`~binascii.unhexlify` to
     convert ``val``, a :func:`long`, to a byte :func:`str`.
@@ -158,25 +171,25 @@ def long_to_bytes (val, endianness='big'):
         s = s[::-1]
 
     return s
-    
-    
-def generateLocation1(authticket, lat, lng, alt): 
-    firstHash = xxhash.xxh32(authticket, seed=0x1B845238).intdigest()
-    locationBytes = d2h(lat) + d2h(lng) + d2h(alt)
-    if not alt:
-        alt = "\x00\x00\x00\x00\x00\x00\x00\x00"
-    return xxhash.xxh32(locationBytes, seed=firstHash).intdigest()
 
-def generateLocation2(lat, lng, alt):
-    locationBytes = d2h(lat) + d2h(lng) + d2h(alt)
-    if not alt:
-        alt = "\x00\x00\x00\x00\x00\x00\x00\x00"
-    return xxhash.xxh32(locationBytes, seed=0x1B845238).intdigest()      #Hash of location using static seed 0x1B845238
-    
 
-def generateRequestHash(authticket, request):
-    firstHash = xxhash.xxh64(authticket, seed=0x1B845238).intdigest()                      
-    return xxhash.xxh64(request, seed=firstHash).intdigest()
+def generate_location_hash_by_seed(authticket, lat, lng, acc=5):
+    first_hash = xxhash.xxh32(authticket, seed=HASH_SEED).intdigest()
+    location_bytes = d2h(lat) + d2h(lng) + d2h(acc)
+    loc_hash = xxhash.xxh32(location_bytes, seed=first_hash).intdigest()
+    return ctypes.c_int32(loc_hash).value
+
+
+def generate_location_hash(lat, lng, acc=5):
+    location_bytes = d2h(lat) + d2h(lng) + d2h(acc)
+    loc_hash = xxhash.xxh32(location_bytes, seed=HASH_SEED).intdigest()
+    return ctypes.c_int32(loc_hash).value
+
+
+def generate_request_hash(authticket, request):
+    first_hash = xxhash.xxh64(authticket, seed=HASH_SEED).intdigest()
+    req_hash = xxhash.xxh64(request, seed=first_hash).intdigest()
+    return ctypes.c_int64(req_hash).value
 
 
 def d2h(f):

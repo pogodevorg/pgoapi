@@ -44,13 +44,14 @@ import ctypes
 
 from pgoapi.protobuf_to_dict import protobuf_to_dict
 from pgoapi.exceptions import NotLoggedInException, ServerBusyOrOfflineException, ServerSideRequestThrottlingException, ServerSideAccessForbiddenException, UnexpectedResponseException, AuthTokenExpiredException, ServerApiEndpointRedirectException
-from pgoapi.utilities import to_camel_case, get_time, get_format_time_diff, Rand48, long_to_bytes, generateLocation1, generateLocation2, generateRequestHash, f2i
+from pgoapi.utilities import to_camel_case, get_time, get_format_time_diff, Rand48, long_to_bytes, generate_location_hash_by_seed, generate_location_hash, generate_request_hash, f2i
 
 from . import protos
 from POGOProtos.Networking.Envelopes.RequestEnvelope_pb2 import RequestEnvelope
 from POGOProtos.Networking.Envelopes.ResponseEnvelope_pb2 import ResponseEnvelope
 from POGOProtos.Networking.Requests.RequestType_pb2 import RequestType
-from POGOProtos.Networking.Envelopes.Signature_pb2 import Signature
+from POGOProtos.Networking.Envelopes.SignalAgglomUpdates_pb2 import SignalAgglomUpdates
+from POGOProtos.Networking.Platform.Requests.SendEncryptedSignatureRequest_pb2 import SendEncryptedSignatureRequest
 
 
 class RpcApi:
@@ -64,8 +65,8 @@ class RpcApi:
 
         self._auth_provider = auth_provider
 
-        """ mystic unknown6 - revolved by PokemonGoDev """
-        self._signature_gen = False
+        # mystical unknown6 - resolved by PokemonGoDev
+        self._signal_agglom_gen = False
         self._signature_lib = None
 
         if RpcApi.START_TIME == 0:
@@ -75,14 +76,14 @@ class RpcApi:
             RpcApi.RPC_ID = int(random.random() * 10 ** 18)
             self.log.debug('Generated new random RPC Request id: %s', RpcApi.RPC_ID)
 
-        """ data fields for unknown6 """
+        # data fields for unknown6
         self.session_hash = os.urandom(32)
 
         self.device_info = device_info
 
     def activate_signature(self, lib_path):
         try:
-            self._signature_gen = True
+            self._signal_agglom_gen = True
             self._signature_lib = ctypes.cdll.LoadLibrary(lib_path)
         except:
             raise
@@ -131,9 +132,7 @@ class RpcApi:
 
         self.check_authentication(response_dict)
 
-        """
-        some response validations
-        """
+        # some response validations
         if isinstance(response_dict, dict):
             status_code = response_dict.get('status_code', None)
             if status_code == 102:
@@ -176,13 +175,12 @@ class RpcApi:
         request = RequestEnvelope()
         request.status_code = 2
         request.request_id = self.get_rpc_id()
+        request.accuracy = random.choice((5, 5, 5, 10, 10, 30, 50, 65))
 
-        if player_position is not None:
-            request.latitude, request.longitude, request.altitude = player_position
+        if player_position:
+            request.latitude, request.longitude, altitude = player_position
 
-        request.altitude = 8  # not as suspicious as 0
-
-        """ generate sub requests before signature generation """
+        # generate sub requests before SignalAgglomUpdates generation
         request = self._build_sub_requests(request, subrequests)
 
         ticket = self._auth_provider.get_ticket()
@@ -198,29 +196,31 @@ class RpcApi:
             request.auth_info.token.unknown2 = 59
             ticket_serialized = request.auth_info.SerializeToString() #Sig uses this when no auth_ticket available
 
-        if self._signature_gen:
-            sig = Signature()
+        if self._signal_agglom_gen:
+            sig = SignalAgglomUpdates()
 
-            sig.location_hash1 = generateLocation1(ticket_serialized, request.latitude, request.longitude, request.altitude)
-            sig.location_hash2 = generateLocation2(request.latitude, request.longitude, request.altitude)
+            sig.location_hash_by_token_seed = generate_location_hash_by_seed(ticket_serialized, request.latitude, request.longitude, request.accuracy)
+            sig.location_hash = generate_location_hash(request.latitude, request.longitude, request.accuracy)
 
             for req in request.requests:
-                hash = generateRequestHash(ticket_serialized, req.SerializeToString())
-                sig.request_hash.append(hash)
+                hash = generate_request_hash(ticket_serialized, req.SerializeToString())
+                sig.request_hashes.append(hash)
 
-            sig.session_hash = self.session_hash
-            sig.timestamp = get_time(ms=True)
-            sig.timestamp_since_start = get_time(ms=True) - RpcApi.START_TIME
+            sig.field22 = self.session_hash
+            sig.epoch_timestamp_ms = get_time(ms=True)
+            sig.timestamp_ms_since_start = get_time(ms=True) - RpcApi.START_TIME
 
-            if self.device_info is not None:
+            if self.device_info:
                 for key in self.device_info:
                     setattr(sig.device_info, key, self.device_info[key])
 
-            signature_proto = sig.SerializeToString()
+            signal_agglom_proto = sig.SerializeToString()
 
-            u6 = request.unknown6.add()
-            u6.request_type = 6
-            u6.unknown2.encrypted_signature = self._generate_signature(signature_proto)
+            sig_request = SendEncryptedSignatureRequest()
+            sig_request.encrypted_signature = self._generate_signature(signal_agglom_proto)
+            plat = request.platform_requests.add()
+            plat.type = 6
+            plat.request_message = sig_request.SerializeToString()
 
         request.ms_since_last_locationfix = 989
 
@@ -243,34 +243,6 @@ class RpcApi:
         self._signature_lib.encrypt(signature_plain, len(signature_plain), iv, 32, ctypes.byref(output), ctypes.byref(output_size))
         signature = b''.join(list(map(lambda x: six.int2byte(x), output)))
         return signature
-
-    def _build_main_request_orig(self, subrequests, player_position=None):
-        self.log.debug('Generating main RPC request...')
-
-        request = RequestEnvelope()
-        request.status_code = 2
-        request.request_id = self.get_rpc_id()
-
-        request = self._build_sub_requests(request, subrequests)
-
-        if player_position is not None:
-            request.latitude, request.longitude, request.altitude = player_position
-
-        ticket = self._auth_provider.get_ticket()
-        if ticket:
-            self.log.debug('Found Session Ticket - using this instead of oauth token')
-            request.auth_ticket.expire_timestamp_ms, request.auth_ticket.start, request.auth_ticket.end = ticket
-        else:
-            self.log.debug('No Session Ticket found - using OAUTH Access Token')
-            request.auth_info.provider = self._auth_provider.get_name()
-            request.auth_info.token.contents = self._auth_provider.get_access_token()
-            request.auth_info.token.unknown2 = 59
-
-        request.ms_since_last_locationfix = 3352
-
-        self.log.debug('Generated protobuf request: \n\r%s', request)
-
-        return request
 
     def _build_sub_requests(self, mainrequest, subrequest_list):
         self.log.debug('Generating sub RPC requests...')

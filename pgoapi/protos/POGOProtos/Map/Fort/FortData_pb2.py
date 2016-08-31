@@ -16,19 +16,19 @@ _sym_db = _symbol_database.Default()
 from POGOProtos.Enums import PokemonId_pb2 as POGOProtos_dot_Enums_dot_PokemonId__pb2
 from POGOProtos.Enums import TeamColor_pb2 as POGOProtos_dot_Enums_dot_TeamColor__pb2
 from POGOProtos.Inventory.Item import ItemId_pb2 as POGOProtos_dot_Inventory_dot_Item_dot_ItemId__pb2
-from POGOProtos.Map.Fort import FortType_pb2 as POGOProtos_dot_Map_dot_Fort_dot_FortType__pb2
-from POGOProtos.Map.Fort import FortSponsor_pb2 as POGOProtos_dot_Map_dot_Fort_dot_FortSponsor__pb2
-from POGOProtos.Map.Fort import FortRenderingType_pb2 as POGOProtos_dot_Map_dot_Fort_dot_FortRenderingType__pb2
 from POGOProtos.Map.Fort import FortLureInfo_pb2 as POGOProtos_dot_Map_dot_Fort_dot_FortLureInfo__pb2
+from POGOProtos.Map.Fort import FortRenderingType_pb2 as POGOProtos_dot_Map_dot_Fort_dot_FortRenderingType__pb2
+from POGOProtos.Map.Fort import FortSponsor_pb2 as POGOProtos_dot_Map_dot_Fort_dot_FortSponsor__pb2
+from POGOProtos.Map.Fort import FortType_pb2 as POGOProtos_dot_Map_dot_Fort_dot_FortType__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='POGOProtos/Map/Fort/FortData.proto',
   package='POGOProtos.Map.Fort',
   syntax='proto3',
-  serialized_pb=_b('\n\"POGOProtos/Map/Fort/FortData.proto\x12\x13POGOProtos.Map.Fort\x1a POGOProtos/Enums/PokemonId.proto\x1a POGOProtos/Enums/TeamColor.proto\x1a&POGOProtos/Inventory/Item/ItemId.proto\x1a\"POGOProtos/Map/Fort/FortType.proto\x1a%POGOProtos/Map/Fort/FortSponsor.proto\x1a+POGOProtos/Map/Fort/FortRenderingType.proto\x1a&POGOProtos/Map/Fort/FortLureInfo.proto\"\xde\x04\n\x08\x46ortData\x12\n\n\x02id\x18\x01 \x01(\t\x12\"\n\x1alast_modified_timestamp_ms\x18\x02 \x01(\x03\x12\x10\n\x08latitude\x18\x03 \x01(\x01\x12\x11\n\tlongitude\x18\x04 \x01(\x01\x12\x0f\n\x07\x65nabled\x18\x08 \x01(\x08\x12+\n\x04type\x18\t \x01(\x0e\x32\x1d.POGOProtos.Map.Fort.FortType\x12\x32\n\rowned_by_team\x18\x05 \x01(\x0e\x32\x1b.POGOProtos.Enums.TeamColor\x12\x35\n\x10guard_pokemon_id\x18\x06 \x01(\x0e\x32\x1b.POGOProtos.Enums.PokemonId\x12\x18\n\x10guard_pokemon_cp\x18\x07 \x01(\x05\x12\x12\n\ngym_points\x18\n \x01(\x03\x12\x14\n\x0cis_in_battle\x18\x0b \x01(\x08\x12?\n\x14\x61\x63tive_fort_modifier\x18\x0c \x03(\x0e\x32!.POGOProtos.Inventory.Item.ItemId\x12\x34\n\tlure_info\x18\r \x01(\x0b\x32!.POGOProtos.Map.Fort.FortLureInfo\x12&\n\x1e\x63ooldown_complete_timestamp_ms\x18\x0e \x01(\x03\x12\x31\n\x07sponsor\x18\x0f \x01(\x0e\x32 .POGOProtos.Map.Fort.FortSponsor\x12>\n\x0erendering_type\x18\x10 \x01(\x0e\x32&.POGOProtos.Map.Fort.FortRenderingTypeb\x06proto3')
+  serialized_pb=_b('\n\"POGOProtos/Map/Fort/FortData.proto\x12\x13POGOProtos.Map.Fort\x1a POGOProtos/Enums/PokemonId.proto\x1a POGOProtos/Enums/TeamColor.proto\x1a&POGOProtos/Inventory/Item/ItemId.proto\x1a&POGOProtos/Map/Fort/FortLureInfo.proto\x1a+POGOProtos/Map/Fort/FortRenderingType.proto\x1a%POGOProtos/Map/Fort/FortSponsor.proto\x1a\"POGOProtos/Map/Fort/FortType.proto\"\xde\x04\n\x08\x46ortData\x12\n\n\x02id\x18\x01 \x01(\t\x12\"\n\x1alast_modified_timestamp_ms\x18\x02 \x01(\x03\x12\x10\n\x08latitude\x18\x03 \x01(\x01\x12\x11\n\tlongitude\x18\x04 \x01(\x01\x12\x0f\n\x07\x65nabled\x18\x08 \x01(\x08\x12+\n\x04type\x18\t \x01(\x0e\x32\x1d.POGOProtos.Map.Fort.FortType\x12\x32\n\rowned_by_team\x18\x05 \x01(\x0e\x32\x1b.POGOProtos.Enums.TeamColor\x12\x35\n\x10guard_pokemon_id\x18\x06 \x01(\x0e\x32\x1b.POGOProtos.Enums.PokemonId\x12\x18\n\x10guard_pokemon_cp\x18\x07 \x01(\x05\x12\x12\n\ngym_points\x18\n \x01(\x03\x12\x14\n\x0cis_in_battle\x18\x0b \x01(\x08\x12?\n\x14\x61\x63tive_fort_modifier\x18\x0c \x03(\x0e\x32!.POGOProtos.Inventory.Item.ItemId\x12\x34\n\tlure_info\x18\r \x01(\x0b\x32!.POGOProtos.Map.Fort.FortLureInfo\x12&\n\x1e\x63ooldown_complete_timestamp_ms\x18\x0e \x01(\x03\x12\x31\n\x07sponsor\x18\x0f \x01(\x0e\x32 .POGOProtos.Map.Fort.FortSponsor\x12>\n\x0erendering_type\x18\x10 \x01(\x0e\x32&.POGOProtos.Map.Fort.FortRenderingTypeb\x06proto3')
   ,
-  dependencies=[POGOProtos_dot_Enums_dot_PokemonId__pb2.DESCRIPTOR,POGOProtos_dot_Enums_dot_TeamColor__pb2.DESCRIPTOR,POGOProtos_dot_Inventory_dot_Item_dot_ItemId__pb2.DESCRIPTOR,POGOProtos_dot_Map_dot_Fort_dot_FortType__pb2.DESCRIPTOR,POGOProtos_dot_Map_dot_Fort_dot_FortSponsor__pb2.DESCRIPTOR,POGOProtos_dot_Map_dot_Fort_dot_FortRenderingType__pb2.DESCRIPTOR,POGOProtos_dot_Map_dot_Fort_dot_FortLureInfo__pb2.DESCRIPTOR,])
+  dependencies=[POGOProtos_dot_Enums_dot_PokemonId__pb2.DESCRIPTOR,POGOProtos_dot_Enums_dot_TeamColor__pb2.DESCRIPTOR,POGOProtos_dot_Inventory_dot_Item_dot_ItemId__pb2.DESCRIPTOR,POGOProtos_dot_Map_dot_Fort_dot_FortLureInfo__pb2.DESCRIPTOR,POGOProtos_dot_Map_dot_Fort_dot_FortRenderingType__pb2.DESCRIPTOR,POGOProtos_dot_Map_dot_Fort_dot_FortSponsor__pb2.DESCRIPTOR,POGOProtos_dot_Map_dot_Fort_dot_FortType__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
