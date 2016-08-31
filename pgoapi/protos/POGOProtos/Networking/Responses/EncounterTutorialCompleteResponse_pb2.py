@@ -13,17 +13,17 @@ from google.protobuf import descriptor_pb2
 _sym_db = _symbol_database.Default()
 
 
-from POGOProtos.Data import PokemonData_pb2 as POGOProtos_dot_Data_dot_PokemonData__pb2
 from POGOProtos.Data.Capture import CaptureAward_pb2 as POGOProtos_dot_Data_dot_Capture_dot_CaptureAward__pb2
+from POGOProtos.Data import PokemonData_pb2 as POGOProtos_dot_Data_dot_PokemonData__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='POGOProtos/Networking/Responses/EncounterTutorialCompleteResponse.proto',
   package='POGOProtos.Networking.Responses',
   syntax='proto3',
-  serialized_pb=_b('\nGPOGOProtos/Networking/Responses/EncounterTutorialCompleteResponse.proto\x12\x1fPOGOProtos.Networking.Responses\x1a!POGOProtos/Data/PokemonData.proto\x1a*POGOProtos/Data/Capture/CaptureAward.proto\"\xad\x02\n!EncounterTutorialCompleteResponse\x12Y\n\x06result\x18\x01 \x01(\x0e\x32I.POGOProtos.Networking.Responses.EncounterTutorialCompleteResponse.Result\x12\x32\n\x0cpokemon_data\x18\x02 \x01(\x0b\x32\x1c.POGOProtos.Data.PokemonData\x12<\n\rcapture_award\x18\x03 \x01(\x0b\x32%.POGOProtos.Data.Capture.CaptureAward\";\n\x06Result\x12\t\n\x05UNSET\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x12\x19\n\x15\x45RROR_INVALID_POKEMON\x10\x02\x62\x06proto3')
+  serialized_pb=_b('\nGPOGOProtos/Networking/Responses/EncounterTutorialCompleteResponse.proto\x12\x1fPOGOProtos.Networking.Responses\x1a*POGOProtos/Data/Capture/CaptureAward.proto\x1a!POGOProtos/Data/PokemonData.proto\"\xad\x02\n!EncounterTutorialCompleteResponse\x12Y\n\x06result\x18\x01 \x01(\x0e\x32I.POGOProtos.Networking.Responses.EncounterTutorialCompleteResponse.Result\x12\x32\n\x0cpokemon_data\x18\x02 \x01(\x0b\x32\x1c.POGOProtos.Data.PokemonData\x12<\n\rcapture_award\x18\x03 \x01(\x0b\x32%.POGOProtos.Data.Capture.CaptureAward\";\n\x06Result\x12\t\n\x05UNSET\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x12\x19\n\x15\x45RROR_INVALID_POKEMON\x10\x02\x62\x06proto3')
   ,
-  dependencies=[POGOProtos_dot_Data_dot_PokemonData__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Capture_dot_CaptureAward__pb2.DESCRIPTOR,])
+  dependencies=[POGOProtos_dot_Data_dot_Capture_dot_CaptureAward__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_PokemonData__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 

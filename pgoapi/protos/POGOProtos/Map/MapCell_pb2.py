@@ -13,21 +13,21 @@ from google.protobuf import descriptor_pb2
 _sym_db = _symbol_database.Default()
 
 
-from POGOProtos.Map import SpawnPoint_pb2 as POGOProtos_dot_Map_dot_SpawnPoint__pb2
 from POGOProtos.Map.Fort import FortData_pb2 as POGOProtos_dot_Map_dot_Fort_dot_FortData__pb2
 from POGOProtos.Map.Fort import FortSummary_pb2 as POGOProtos_dot_Map_dot_Fort_dot_FortSummary__pb2
+from POGOProtos.Map.Pokemon import MapPokemon_pb2 as POGOProtos_dot_Map_dot_Pokemon_dot_MapPokemon__pb2
 from POGOProtos.Map.Pokemon import NearbyPokemon_pb2 as POGOProtos_dot_Map_dot_Pokemon_dot_NearbyPokemon__pb2
 from POGOProtos.Map.Pokemon import WildPokemon_pb2 as POGOProtos_dot_Map_dot_Pokemon_dot_WildPokemon__pb2
-from POGOProtos.Map.Pokemon import MapPokemon_pb2 as POGOProtos_dot_Map_dot_Pokemon_dot_MapPokemon__pb2
+from POGOProtos.Map import SpawnPoint_pb2 as POGOProtos_dot_Map_dot_SpawnPoint__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='POGOProtos/Map/MapCell.proto',
   package='POGOProtos.Map',
   syntax='proto3',
-  serialized_pb=_b('\n\x1cPOGOProtos/Map/MapCell.proto\x12\x0ePOGOProtos.Map\x1a\x1fPOGOProtos/Map/SpawnPoint.proto\x1a\"POGOProtos/Map/Fort/FortData.proto\x1a%POGOProtos/Map/Fort/FortSummary.proto\x1a*POGOProtos/Map/Pokemon/NearbyPokemon.proto\x1a(POGOProtos/Map/Pokemon/WildPokemon.proto\x1a\'POGOProtos/Map/Pokemon/MapPokemon.proto\"\x81\x04\n\x07MapCell\x12\x12\n\ns2_cell_id\x18\x01 \x01(\x04\x12\x1c\n\x14\x63urrent_timestamp_ms\x18\x02 \x01(\x03\x12,\n\x05\x66orts\x18\x03 \x03(\x0b\x32\x1d.POGOProtos.Map.Fort.FortData\x12\x30\n\x0cspawn_points\x18\x04 \x03(\x0b\x32\x1a.POGOProtos.Map.SpawnPoint\x12\x17\n\x0f\x64\x65leted_objects\x18\x06 \x03(\t\x12\x19\n\x11is_truncated_list\x18\x07 \x01(\x08\x12\x38\n\x0e\x66ort_summaries\x18\x08 \x03(\x0b\x32 .POGOProtos.Map.Fort.FortSummary\x12:\n\x16\x64\x65\x63imated_spawn_points\x18\t \x03(\x0b\x32\x1a.POGOProtos.Map.SpawnPoint\x12:\n\rwild_pokemons\x18\x05 \x03(\x0b\x32#.POGOProtos.Map.Pokemon.WildPokemon\x12>\n\x12\x63\x61tchable_pokemons\x18\n \x03(\x0b\x32\".POGOProtos.Map.Pokemon.MapPokemon\x12>\n\x0fnearby_pokemons\x18\x0b \x03(\x0b\x32%.POGOProtos.Map.Pokemon.NearbyPokemonb\x06proto3')
+  serialized_pb=_b('\n\x1cPOGOProtos/Map/MapCell.proto\x12\x0ePOGOProtos.Map\x1a\"POGOProtos/Map/Fort/FortData.proto\x1a%POGOProtos/Map/Fort/FortSummary.proto\x1a\'POGOProtos/Map/Pokemon/MapPokemon.proto\x1a*POGOProtos/Map/Pokemon/NearbyPokemon.proto\x1a(POGOProtos/Map/Pokemon/WildPokemon.proto\x1a\x1fPOGOProtos/Map/SpawnPoint.proto\"\x81\x04\n\x07MapCell\x12\x12\n\ns2_cell_id\x18\x01 \x01(\x04\x12\x1c\n\x14\x63urrent_timestamp_ms\x18\x02 \x01(\x03\x12,\n\x05\x66orts\x18\x03 \x03(\x0b\x32\x1d.POGOProtos.Map.Fort.FortData\x12\x30\n\x0cspawn_points\x18\x04 \x03(\x0b\x32\x1a.POGOProtos.Map.SpawnPoint\x12\x17\n\x0f\x64\x65leted_objects\x18\x06 \x03(\t\x12\x19\n\x11is_truncated_list\x18\x07 \x01(\x08\x12\x38\n\x0e\x66ort_summaries\x18\x08 \x03(\x0b\x32 .POGOProtos.Map.Fort.FortSummary\x12:\n\x16\x64\x65\x63imated_spawn_points\x18\t \x03(\x0b\x32\x1a.POGOProtos.Map.SpawnPoint\x12:\n\rwild_pokemons\x18\x05 \x03(\x0b\x32#.POGOProtos.Map.Pokemon.WildPokemon\x12>\n\x12\x63\x61tchable_pokemons\x18\n \x03(\x0b\x32\".POGOProtos.Map.Pokemon.MapPokemon\x12>\n\x0fnearby_pokemons\x18\x0b \x03(\x0b\x32%.POGOProtos.Map.Pokemon.NearbyPokemonb\x06proto3')
   ,
-  dependencies=[POGOProtos_dot_Map_dot_SpawnPoint__pb2.DESCRIPTOR,POGOProtos_dot_Map_dot_Fort_dot_FortData__pb2.DESCRIPTOR,POGOProtos_dot_Map_dot_Fort_dot_FortSummary__pb2.DESCRIPTOR,POGOProtos_dot_Map_dot_Pokemon_dot_NearbyPokemon__pb2.DESCRIPTOR,POGOProtos_dot_Map_dot_Pokemon_dot_WildPokemon__pb2.DESCRIPTOR,POGOProtos_dot_Map_dot_Pokemon_dot_MapPokemon__pb2.DESCRIPTOR,])
+  dependencies=[POGOProtos_dot_Map_dot_Fort_dot_FortData__pb2.DESCRIPTOR,POGOProtos_dot_Map_dot_Fort_dot_FortSummary__pb2.DESCRIPTOR,POGOProtos_dot_Map_dot_Pokemon_dot_MapPokemon__pb2.DESCRIPTOR,POGOProtos_dot_Map_dot_Pokemon_dot_NearbyPokemon__pb2.DESCRIPTOR,POGOProtos_dot_Map_dot_Pokemon_dot_WildPokemon__pb2.DESCRIPTOR,POGOProtos_dot_Map_dot_SpawnPoint__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 

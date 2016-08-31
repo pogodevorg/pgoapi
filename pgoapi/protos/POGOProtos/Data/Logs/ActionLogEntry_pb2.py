@@ -13,18 +13,18 @@ from google.protobuf import descriptor_pb2
 _sym_db = _symbol_database.Default()
 
 
+from POGOProtos.Data.Logs import BuddyPokemonLogEntry_pb2 as POGOProtos_dot_Data_dot_Logs_dot_BuddyPokemonLogEntry__pb2
 from POGOProtos.Data.Logs import CatchPokemonLogEntry_pb2 as POGOProtos_dot_Data_dot_Logs_dot_CatchPokemonLogEntry__pb2
 from POGOProtos.Data.Logs import FortSearchLogEntry_pb2 as POGOProtos_dot_Data_dot_Logs_dot_FortSearchLogEntry__pb2
-from POGOProtos.Data.Logs import BuddyPokemonLogEntry_pb2 as POGOProtos_dot_Data_dot_Logs_dot_BuddyPokemonLogEntry__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='POGOProtos/Data/Logs/ActionLogEntry.proto',
   package='POGOProtos.Data.Logs',
   syntax='proto3',
-  serialized_pb=_b('\n)POGOProtos/Data/Logs/ActionLogEntry.proto\x12\x14POGOProtos.Data.Logs\x1a/POGOProtos/Data/Logs/CatchPokemonLogEntry.proto\x1a-POGOProtos/Data/Logs/FortSearchLogEntry.proto\x1a/POGOProtos/Data/Logs/BuddyPokemonLogEntry.proto\"\x8a\x02\n\x0e\x41\x63tionLogEntry\x12\x14\n\x0ctimestamp_ms\x18\x01 \x01(\x03\x12\r\n\x05sfida\x18\x02 \x01(\x08\x12\x43\n\rcatch_pokemon\x18\x03 \x01(\x0b\x32*.POGOProtos.Data.Logs.CatchPokemonLogEntryH\x00\x12?\n\x0b\x66ort_search\x18\x04 \x01(\x0b\x32(.POGOProtos.Data.Logs.FortSearchLogEntryH\x00\x12\x43\n\rbuddy_pokemon\x18\x05 \x01(\x0b\x32*.POGOProtos.Data.Logs.BuddyPokemonLogEntryH\x00\x42\x08\n\x06\x41\x63tionb\x06proto3')
+  serialized_pb=_b('\n)POGOProtos/Data/Logs/ActionLogEntry.proto\x12\x14POGOProtos.Data.Logs\x1a/POGOProtos/Data/Logs/BuddyPokemonLogEntry.proto\x1a/POGOProtos/Data/Logs/CatchPokemonLogEntry.proto\x1a-POGOProtos/Data/Logs/FortSearchLogEntry.proto\"\x8a\x02\n\x0e\x41\x63tionLogEntry\x12\x14\n\x0ctimestamp_ms\x18\x01 \x01(\x03\x12\r\n\x05sfida\x18\x02 \x01(\x08\x12\x43\n\rcatch_pokemon\x18\x03 \x01(\x0b\x32*.POGOProtos.Data.Logs.CatchPokemonLogEntryH\x00\x12?\n\x0b\x66ort_search\x18\x04 \x01(\x0b\x32(.POGOProtos.Data.Logs.FortSearchLogEntryH\x00\x12\x43\n\rbuddy_pokemon\x18\x05 \x01(\x0b\x32*.POGOProtos.Data.Logs.BuddyPokemonLogEntryH\x00\x42\x08\n\x06\x41\x63tionb\x06proto3')
   ,
-  dependencies=[POGOProtos_dot_Data_dot_Logs_dot_CatchPokemonLogEntry__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Logs_dot_FortSearchLogEntry__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Logs_dot_BuddyPokemonLogEntry__pb2.DESCRIPTOR,])
+  dependencies=[POGOProtos_dot_Data_dot_Logs_dot_BuddyPokemonLogEntry__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Logs_dot_CatchPokemonLogEntry__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Logs_dot_FortSearchLogEntry__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 

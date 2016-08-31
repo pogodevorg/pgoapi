@@ -13,17 +13,17 @@ from google.protobuf import descriptor_pb2
 _sym_db = _symbol_database.Default()
 
 
-from POGOProtos.Data import PokemonData_pb2 as POGOProtos_dot_Data_dot_PokemonData__pb2
 from POGOProtos.Data.Capture import CaptureProbability_pb2 as POGOProtos_dot_Data_dot_Capture_dot_CaptureProbability__pb2
+from POGOProtos.Data import PokemonData_pb2 as POGOProtos_dot_Data_dot_PokemonData__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='POGOProtos/Networking/Responses/DiskEncounterResponse.proto',
   package='POGOProtos.Networking.Responses',
   syntax='proto3',
-  serialized_pb=_b('\n;POGOProtos/Networking/Responses/DiskEncounterResponse.proto\x12\x1fPOGOProtos.Networking.Responses\x1a!POGOProtos/Data/PokemonData.proto\x1a\x30POGOProtos/Data/Capture/CaptureProbability.proto\"\xea\x02\n\x15\x44iskEncounterResponse\x12M\n\x06result\x18\x01 \x01(\x0e\x32=.POGOProtos.Networking.Responses.DiskEncounterResponse.Result\x12\x32\n\x0cpokemon_data\x18\x02 \x01(\x0b\x32\x1c.POGOProtos.Data.PokemonData\x12H\n\x13\x63\x61pture_probability\x18\x03 \x01(\x0b\x32+.POGOProtos.Data.Capture.CaptureProbability\"\x83\x01\n\x06Result\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x12\x11\n\rNOT_AVAILABLE\x10\x02\x12\x10\n\x0cNOT_IN_RANGE\x10\x03\x12\x1e\n\x1a\x45NCOUNTER_ALREADY_FINISHED\x10\x04\x12\x1a\n\x16POKEMON_INVENTORY_FULL\x10\x05\x62\x06proto3')
+  serialized_pb=_b('\n;POGOProtos/Networking/Responses/DiskEncounterResponse.proto\x12\x1fPOGOProtos.Networking.Responses\x1a\x30POGOProtos/Data/Capture/CaptureProbability.proto\x1a!POGOProtos/Data/PokemonData.proto\"\xea\x02\n\x15\x44iskEncounterResponse\x12M\n\x06result\x18\x01 \x01(\x0e\x32=.POGOProtos.Networking.Responses.DiskEncounterResponse.Result\x12\x32\n\x0cpokemon_data\x18\x02 \x01(\x0b\x32\x1c.POGOProtos.Data.PokemonData\x12H\n\x13\x63\x61pture_probability\x18\x03 \x01(\x0b\x32+.POGOProtos.Data.Capture.CaptureProbability\"\x83\x01\n\x06Result\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x12\x11\n\rNOT_AVAILABLE\x10\x02\x12\x10\n\x0cNOT_IN_RANGE\x10\x03\x12\x1e\n\x1a\x45NCOUNTER_ALREADY_FINISHED\x10\x04\x12\x1a\n\x16POKEMON_INVENTORY_FULL\x10\x05\x62\x06proto3')
   ,
-  dependencies=[POGOProtos_dot_Data_dot_PokemonData__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Capture_dot_CaptureProbability__pb2.DESCRIPTOR,])
+  dependencies=[POGOProtos_dot_Data_dot_Capture_dot_CaptureProbability__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_PokemonData__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 

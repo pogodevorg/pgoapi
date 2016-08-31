@@ -44,13 +44,14 @@ import ctypes
 
 from pgoapi.protobuf_to_dict import protobuf_to_dict
 from pgoapi.exceptions import NotLoggedInException, ServerBusyOrOfflineException, ServerSideRequestThrottlingException, ServerSideAccessForbiddenException, UnexpectedResponseException, AuthTokenExpiredException, ServerApiEndpointRedirectException
-from pgoapi.utilities import to_camel_case, get_time, get_format_time_diff, Rand48, long_to_bytes, generateLocation1, generateLocation2, generateRequestHash, f2i
+from pgoapi.utilities import to_camel_case, get_time, get_format_time_diff, Rand48, long_to_bytes, generate_location_hash_by_seed, generate_location_hash, generate_request_hash, f2i
 
 from . import protos
 from POGOProtos.Networking.Envelopes.RequestEnvelope_pb2 import RequestEnvelope
 from POGOProtos.Networking.Envelopes.ResponseEnvelope_pb2 import ResponseEnvelope
 from POGOProtos.Networking.Requests.RequestType_pb2 import RequestType
-from POGOProtos.Networking.Envelopes.Signature_pb2 import Signature
+from POGOProtos.Networking.Envelopes.SignalAgglomUpdates_pb2 import SignalAgglomUpdates
+from POGOProtos.Networking.Platform.Requests.SendEncryptedSignatureRequest_pb2 import SendEncryptedSignatureRequest
 
 
 class RpcApi:
@@ -64,8 +65,8 @@ class RpcApi:
 
         self._auth_provider = auth_provider
 
-        """ mystic unknown6 - revolved by PokemonGoDev """
-        self._signature_gen = False
+        # mystical unknown6 - resolved by PokemonGoDev
+        self._signal_agglom_gen = False
         self._signature_lib = None
 
         if RpcApi.START_TIME == 0:
@@ -75,14 +76,14 @@ class RpcApi:
             RpcApi.RPC_ID = int(random.random() * 10 ** 18)
             self.log.debug('Generated new random RPC Request id: %s', RpcApi.RPC_ID)
 
-        """ data fields for unknown6 """
+        # data field for SignalAgglom
         self.session_hash = os.urandom(32)
 
         self.device_info = device_info
 
     def activate_signature(self, lib_path):
         try:
-            self._signature_gen = True
+            self._signal_agglom_gen = True
             self._signature_lib = ctypes.cdll.LoadLibrary(lib_path)
         except:
             raise
@@ -131,9 +132,7 @@ class RpcApi:
 
         self.check_authentication(response_dict)
 
-        """
-        some response validations
-        """
+        # some response validations
         if isinstance(response_dict, dict):
             status_code = response_dict.get('status_code', None)
             if status_code == 102:
@@ -176,17 +175,12 @@ class RpcApi:
         request = RequestEnvelope()
         request.status_code = 2
         request.request_id = self.get_rpc_id()
+        request.accuracy = random.choice((5, 5, 5, 10, 10, 30, 50, 65))
 
-        if player_position is not None:
+        if player_position:
             request.latitude, request.longitude, altitude = player_position
 
-        if not altitude:
-            altitude = 1476.7987501954125
-
-        accuracies = (5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 30, 50, 65)
-        request.accuracy = random.choice(accuracies)
-
-        """ generate sub requests before signature generation """
+        # generate sub requests before SignalAgglomUpdates generation
         request = self._build_sub_requests(request, subrequests)
 
         ticket = self._auth_provider.get_ticket()
@@ -200,86 +194,99 @@ class RpcApi:
             request.auth_info.provider = self._auth_provider.get_name()
             request.auth_info.token.contents = self._auth_provider.get_access_token()
             request.auth_info.token.unknown2 = 59
-            ticket_serialized = request.auth_info.SerializeToString() #Sig uses this when no auth_ticket available
+            ticket_serialized = request.auth_info.SerializeToString()  #Sig uses this when no auth_ticket available
 
-        if self._signature_gen:
-            sig = Signature()
+        if self._signal_agglom_gen:
+            sig = SignalAgglomUpdates()
 
-            sig.location_hash1 = generateLocation1(ticket_serialized, request.latitude, request.longitude, request.accuracy)
-            sig.location_hash2 = generateLocation2(request.latitude, request.longitude, request.accuracy)
+            sig.location_hash_by_token_seed = generate_location_hash_by_seed(ticket_serialized, request.latitude, request.longitude, request.accuracy)
+            sig.location_hash = generate_location_hash(request.latitude, request.longitude, request.accuracy)
 
             for req in request.requests:
-                hash = generateRequestHash(ticket_serialized, req.SerializeToString())
-                sig.request_hash.append(hash)
+                hash = generate_request_hash(ticket_serialized, req.SerializeToString())
+                sig.request_hashes.append(hash)
 
-            sig.session_hash = self.session_hash
-            sig.timestamp = get_time(ms=True)
-            sig.timestamp_since_start = get_time(ms=True) - RpcApi.START_TIME
+            sig.field22 = self.session_hash
+            sig.epoch_timestamp_ms = get_time(ms=True)
+            sig.timestamp_ms_since_start = get_time(ms=True) - RpcApi.START_TIME
+            if sig.timestamp_ms_since_start < 50:
+                sig.timestamp_ms_since_start = random.randint(50,100)
 
-            fix = sig.location_fix.add()
-            if sig.timestamp_since_start > 29999:
-                min_subtract = 50
-                max_subtract = 29999
-            elif sig.timestamp_since_start < 50:
-                min_subtract = 1
-                max_subtract = sig.timestamp_since_start
+            loc = sig.location_updates.add()
+            sen = sig.sensor_updates.add()
+
+            if sig.timestamp_ms_since_start < 1000:
+                loc.timestamp_ms = random.randint(-4096, sig.timestamp_ms_since_start - 50)
+                sen.timestamp = random.randint(1, sig.timestamp_ms_since_start - 48)
             else:
-                min_subtract = 45
-                max_subtract = sig.timestamp_since_start
-            fix.timestamp_snapshot = sig.timestamp_since_start - random.randint(min_subtract,max_subtract)
+                sen.timestamp = random.randint(sig.timestamp_ms_since_start - 1000, sig.timestamp_ms_since_start - 50)
+                if sig.timestamp_ms_since_start < 30000:
+                    # do not create negative values after 30 seconds have passed
+                    loc.timestamp_ms = random.randint(1, sig.timestamp_ms_since_start - 50)
+                else:
+                    loc.timestamp_ms = random.randint(sig.timestamp_ms_since_start - 30000, sig.timestamp_ms_since_start - 100)
 
-            fix.provider = 'fused'
-            fix.latitude = request.latitude
-            fix.longitude = request.longitude
-            fix.altitude = altitude
-            if random.randint(0,19) == 0:
-                fix.course = -1
-                fix.speed = -1
+            loc.name = 'fused'
+            loc.latitude = request.latitude
+            loc.longitude = request.longitude
+            
+            if not altitude:
+                loc.altitude = random.uniform(300,400)
             else:
-                fix.course = random.uniform(0,360)
-                fix.speed = random.triangular(0.1,3.1,.8)
-            fix.provider_status = 3
-            fix.location_type = 1
-            fix.horizontal_accuracy = request.accuracy
+                loc.altitude = altitude
+
+            if random.random() > .95:
+                # no reading for roughly 1 in 20 updates
+                loc.device_course = -1
+                loc.device_speed = -1
+            else:
+                loc.device_course = random.uniform(0,360)
+                loc.device_speed = random.triangular(0.1,3.1,.8)
+
+            loc.provider_status = 3
+            loc.location_type = 1
+            loc.horizontal_accuracy = request.accuracy
             if request.accuracy == 65:
-                fix.vertical_accuracy = random.triangular(50,200,65)
+                loc.vertical_accuracy = random.triangular(50,200,65)
             else:
                 if request.accuracy > 10:
                     vertical_accuracies = (24, 32, 64, 96)
                 else:
                     vertical_accuracies = (3, 4, 6, 8, 12, 24)
-                fix.vertical_accuracy = random.choice(vertical_accuracies)
+                loc.vertical_accuracy = random.choice(vertical_accuracies)
 
-            sig.sensor_info.timestamp_snapshot = fix.timestamp_snapshot
-            sig.sensor_info.magnetometer_x = random.triangular(-3,3,0)
-            sig.sensor_info.magnetometer_y = random.triangular(-3,3,sig.sensor_info.magnetometer_x * -1)
-            sig.sensor_info.magnetometer_z = random.triangular(-4,4,sig.sensor_info.magnetometer_x * -1)
-            sig.sensor_info.angle_normalized_x = random.triangular(-60,60,0)
-            sig.sensor_info.angle_normalized_y = random.triangular(-60,60,sig.sensor_info.angle_normalized_x * -1)
-            sig.sensor_info.angle_normalized_z = random.triangular(-60,60,sig.sensor_info.angle_normalized_x * -1)
-            sig.sensor_info.accel_raw_x = random.triangular(-.6,1.5,0.5)
-            sig.sensor_info.accel_raw_y = random.uniform(-3,3)
-            sig.sensor_info.accel_raw_z = random.triangular(-1.5,1.5,0.25)
-            sig.sensor_info.gyroscope_raw_x = random.triangular(-6,6,0)
-            sig.sensor_info.gyroscope_raw_y = random.triangular(-6,6,sig.sensor_info.gyroscope_raw_x * -1)
-            sig.sensor_info.gyroscope_raw_z = random.triangular(-4,4,sig.sensor_info.gyroscope_raw_x * .65)
-            sig.sensor_info.accel_normalized_x = random.triangular(-.99,.99,0)
-            sig.sensor_info.accel_normalized_y = random.triangular(-.99,.8,sig.sensor_info.accel_normalized_x * -.8)
-            sig.sensor_info.accel_normalized_z = random.triangular(-1,-0.01,-0.8)
-            sig.sensor_info.accelerometer_axes = 3
+            sen.acceleration_x = random.triangular(-3,3,0)
+            sen.acceleration_y = random.triangular(-3,3,sen.acceleration_x * -1)
+            sen.acceleration_z = random.triangular(-4,4,sen.acceleration_x * -1)
+            sen.magnetic_field_x = random.triangular(-60,60,0)
+            sen.magnetic_field_y = random.triangular(-60,60,sen.magnetic_field_x * -1)
+            sen.magnetic_field_z = random.triangular(-60,60,sen.magnetic_field_x * -1)
+            sen.attitude_pitch = random.triangular(-.6,1.5,0.5)
+            sen.attitude_yaw = random.uniform(-3,3)
+            sen.attitude_roll = random.triangular(-1.5,1.5,0.25)
+            sen.rotation_rate_x = random.triangular(-6,6,0)
+            sen.rotation_rate_y = random.triangular(-6,6,sen.rotation_rate_x * -1)
+            sen.rotation_rate_z = random.triangular(-4,4,sen.rotation_rate_x * .65)
+            sen.gravity_x = random.triangular(-.99,.99,0)
+            sen.gravity_y = random.triangular(-.99,.8,sen.gravity_x * -.8)
+            sen.gravity_z = random.triangular(-1,-0.01,-0.8)
+            sen.status = 3
 
-            sig.unknown25 = 7363665268261373700
+            sig.field25 = 7363665268261373700
 
-            for key in self.device_info:
-                setattr(sig.device_info, key, self.device_info[key])
+            if self.device_info:
+                for key in self.device_info:
+                    setattr(sig.device_info, key, self.device_info[key])
 
-            signature_proto = sig.SerializeToString()
+            signal_agglom_proto = sig.SerializeToString()
 
-            u6 = request.unknown6.add()
-            u6.request_type = 6
-            u6.unknown2.encrypted_signature = self._generate_signature(signature_proto)
+            sig_request = SendEncryptedSignatureRequest()
+            sig_request.encrypted_signature = self._generate_signature(signal_agglom_proto)
+            plat = request.platform_requests.add()
+            plat.type = 6
+            plat.request_message = sig_request.SerializeToString()
 
-        request.ms_since_last_locationfix = int(random.triangular(75,5000,1000))
+        request.ms_since_last_locationfix = int(random.triangular(100,10000,1000))
 
         self.log.debug('Generated protobuf request: \n\r%s', request)
 
@@ -300,34 +307,6 @@ class RpcApi:
         self._signature_lib.encrypt(signature_plain, len(signature_plain), iv, 32, ctypes.byref(output), ctypes.byref(output_size))
         signature = b''.join(list(map(lambda x: six.int2byte(x), output)))
         return signature
-
-    def _build_main_request_orig(self, subrequests, player_position=None):
-        self.log.debug('Generating main RPC request...')
-
-        request = RequestEnvelope()
-        request.status_code = 2
-        request.request_id = self.get_rpc_id()
-
-        request = self._build_sub_requests(request, subrequests)
-
-        if player_position is not None:
-            request.latitude, request.longitude, request.altitude = player_position
-
-        ticket = self._auth_provider.get_ticket()
-        if ticket:
-            self.log.debug('Found Session Ticket - using this instead of oauth token')
-            request.auth_ticket.expire_timestamp_ms, request.auth_ticket.start, request.auth_ticket.end = ticket
-        else:
-            self.log.debug('No Session Ticket found - using OAUTH Access Token')
-            request.auth_info.provider = self._auth_provider.get_name()
-            request.auth_info.token.contents = self._auth_provider.get_access_token()
-            request.auth_info.token.unknown2 = 59
-
-        request.ms_since_last_locationfix = 3352
-
-        self.log.debug('Generated protobuf request: \n\r%s', request)
-
-        return request
 
     def _build_sub_requests(self, mainrequest, subrequest_list):
         self.log.debug('Generating sub RPC requests...')

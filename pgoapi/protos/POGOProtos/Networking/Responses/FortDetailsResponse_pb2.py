@@ -15,17 +15,17 @@ _sym_db = _symbol_database.Default()
 
 from POGOProtos.Data import PokemonData_pb2 as POGOProtos_dot_Data_dot_PokemonData__pb2
 from POGOProtos.Enums import TeamColor_pb2 as POGOProtos_dot_Enums_dot_TeamColor__pb2
-from POGOProtos.Map.Fort import FortType_pb2 as POGOProtos_dot_Map_dot_Fort_dot_FortType__pb2
 from POGOProtos.Map.Fort import FortModifier_pb2 as POGOProtos_dot_Map_dot_Fort_dot_FortModifier__pb2
+from POGOProtos.Map.Fort import FortType_pb2 as POGOProtos_dot_Map_dot_Fort_dot_FortType__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='POGOProtos/Networking/Responses/FortDetailsResponse.proto',
   package='POGOProtos.Networking.Responses',
   syntax='proto3',
-  serialized_pb=_b('\n9POGOProtos/Networking/Responses/FortDetailsResponse.proto\x12\x1fPOGOProtos.Networking.Responses\x1a!POGOProtos/Data/PokemonData.proto\x1a POGOProtos/Enums/TeamColor.proto\x1a\"POGOProtos/Map/Fort/FortType.proto\x1a&POGOProtos/Map/Fort/FortModifier.proto\"\xfc\x02\n\x13\x46ortDetailsResponse\x12\x0f\n\x07\x66ort_id\x18\x01 \x01(\t\x12/\n\nteam_color\x18\x02 \x01(\x0e\x32\x1b.POGOProtos.Enums.TeamColor\x12\x32\n\x0cpokemon_data\x18\x03 \x01(\x0b\x32\x1c.POGOProtos.Data.PokemonData\x12\x0c\n\x04name\x18\x04 \x01(\t\x12\x12\n\nimage_urls\x18\x05 \x03(\t\x12\n\n\x02\x66p\x18\x06 \x01(\x05\x12\x0f\n\x07stamina\x18\x07 \x01(\x05\x12\x13\n\x0bmax_stamina\x18\x08 \x01(\x05\x12+\n\x04type\x18\t \x01(\x0e\x32\x1d.POGOProtos.Map.Fort.FortType\x12\x10\n\x08latitude\x18\n \x01(\x01\x12\x11\n\tlongitude\x18\x0b \x01(\x01\x12\x13\n\x0b\x64\x65scription\x18\x0c \x01(\t\x12\x34\n\tmodifiers\x18\r \x03(\x0b\x32!.POGOProtos.Map.Fort.FortModifierb\x06proto3')
+  serialized_pb=_b('\n9POGOProtos/Networking/Responses/FortDetailsResponse.proto\x12\x1fPOGOProtos.Networking.Responses\x1a!POGOProtos/Data/PokemonData.proto\x1a POGOProtos/Enums/TeamColor.proto\x1a&POGOProtos/Map/Fort/FortModifier.proto\x1a\"POGOProtos/Map/Fort/FortType.proto\"\xfc\x02\n\x13\x46ortDetailsResponse\x12\x0f\n\x07\x66ort_id\x18\x01 \x01(\t\x12/\n\nteam_color\x18\x02 \x01(\x0e\x32\x1b.POGOProtos.Enums.TeamColor\x12\x32\n\x0cpokemon_data\x18\x03 \x01(\x0b\x32\x1c.POGOProtos.Data.PokemonData\x12\x0c\n\x04name\x18\x04 \x01(\t\x12\x12\n\nimage_urls\x18\x05 \x03(\t\x12\n\n\x02\x66p\x18\x06 \x01(\x05\x12\x0f\n\x07stamina\x18\x07 \x01(\x05\x12\x13\n\x0bmax_stamina\x18\x08 \x01(\x05\x12+\n\x04type\x18\t \x01(\x0e\x32\x1d.POGOProtos.Map.Fort.FortType\x12\x10\n\x08latitude\x18\n \x01(\x01\x12\x11\n\tlongitude\x18\x0b \x01(\x01\x12\x13\n\x0b\x64\x65scription\x18\x0c \x01(\t\x12\x34\n\tmodifiers\x18\r \x03(\x0b\x32!.POGOProtos.Map.Fort.FortModifierb\x06proto3')
   ,
-  dependencies=[POGOProtos_dot_Data_dot_PokemonData__pb2.DESCRIPTOR,POGOProtos_dot_Enums_dot_TeamColor__pb2.DESCRIPTOR,POGOProtos_dot_Map_dot_Fort_dot_FortType__pb2.DESCRIPTOR,POGOProtos_dot_Map_dot_Fort_dot_FortModifier__pb2.DESCRIPTOR,])
+  dependencies=[POGOProtos_dot_Data_dot_PokemonData__pb2.DESCRIPTOR,POGOProtos_dot_Enums_dot_TeamColor__pb2.DESCRIPTOR,POGOProtos_dot_Map_dot_Fort_dot_FortModifier__pb2.DESCRIPTOR,POGOProtos_dot_Map_dot_Fort_dot_FortType__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 

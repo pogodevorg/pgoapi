@@ -13,17 +13,17 @@ from google.protobuf import descriptor_pb2
 _sym_db = _symbol_database.Default()
 
 
-from POGOProtos.Data import PokemonData_pb2 as POGOProtos_dot_Data_dot_PokemonData__pb2
 from POGOProtos.Data.Player import PlayerPublicProfile_pb2 as POGOProtos_dot_Data_dot_Player_dot_PlayerPublicProfile__pb2
+from POGOProtos.Data import PokemonData_pb2 as POGOProtos_dot_Data_dot_PokemonData__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='POGOProtos/Data/Gym/GymMembership.proto',
   package='POGOProtos.Data.Gym',
   syntax='proto3',
-  serialized_pb=_b('\n\'POGOProtos/Data/Gym/GymMembership.proto\x12\x13POGOProtos.Data.Gym\x1a!POGOProtos/Data/PokemonData.proto\x1a\x30POGOProtos/Data/Player/PlayerPublicProfile.proto\"\x90\x01\n\rGymMembership\x12\x32\n\x0cpokemon_data\x18\x01 \x01(\x0b\x32\x1c.POGOProtos.Data.PokemonData\x12K\n\x16trainer_public_profile\x18\x02 \x01(\x0b\x32+.POGOProtos.Data.Player.PlayerPublicProfileb\x06proto3')
+  serialized_pb=_b('\n\'POGOProtos/Data/Gym/GymMembership.proto\x12\x13POGOProtos.Data.Gym\x1a\x30POGOProtos/Data/Player/PlayerPublicProfile.proto\x1a!POGOProtos/Data/PokemonData.proto\"\x90\x01\n\rGymMembership\x12\x32\n\x0cpokemon_data\x18\x01 \x01(\x0b\x32\x1c.POGOProtos.Data.PokemonData\x12K\n\x16trainer_public_profile\x18\x02 \x01(\x0b\x32+.POGOProtos.Data.Player.PlayerPublicProfileb\x06proto3')
   ,
-  dependencies=[POGOProtos_dot_Data_dot_PokemonData__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Player_dot_PlayerPublicProfile__pb2.DESCRIPTOR,])
+  dependencies=[POGOProtos_dot_Data_dot_Player_dot_PlayerPublicProfile__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_PokemonData__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 

@@ -13,17 +13,17 @@ from google.protobuf import descriptor_pb2
 _sym_db = _symbol_database.Default()
 
 
-from POGOProtos.Map.Fort import FortData_pb2 as POGOProtos_dot_Map_dot_Fort_dot_FortData__pb2
 from POGOProtos.Data.Gym import GymMembership_pb2 as POGOProtos_dot_Data_dot_Gym_dot_GymMembership__pb2
+from POGOProtos.Map.Fort import FortData_pb2 as POGOProtos_dot_Map_dot_Fort_dot_FortData__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='POGOProtos/Data/Gym/GymState.proto',
   package='POGOProtos.Data.Gym',
   syntax='proto3',
-  serialized_pb=_b('\n\"POGOProtos/Data/Gym/GymState.proto\x12\x13POGOProtos.Data.Gym\x1a\"POGOProtos/Map/Fort/FortData.proto\x1a\'POGOProtos/Data/Gym/GymMembership.proto\"u\n\x08GymState\x12\x30\n\tfort_data\x18\x01 \x01(\x0b\x32\x1d.POGOProtos.Map.Fort.FortData\x12\x37\n\x0bmemberships\x18\x02 \x03(\x0b\x32\".POGOProtos.Data.Gym.GymMembershipb\x06proto3')
+  serialized_pb=_b('\n\"POGOProtos/Data/Gym/GymState.proto\x12\x13POGOProtos.Data.Gym\x1a\'POGOProtos/Data/Gym/GymMembership.proto\x1a\"POGOProtos/Map/Fort/FortData.proto\"u\n\x08GymState\x12\x30\n\tfort_data\x18\x01 \x01(\x0b\x32\x1d.POGOProtos.Map.Fort.FortData\x12\x37\n\x0bmemberships\x18\x02 \x03(\x0b\x32\".POGOProtos.Data.Gym.GymMembershipb\x06proto3')
   ,
-  dependencies=[POGOProtos_dot_Map_dot_Fort_dot_FortData__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Gym_dot_GymMembership__pb2.DESCRIPTOR,])
+  dependencies=[POGOProtos_dot_Data_dot_Gym_dot_GymMembership__pb2.DESCRIPTOR,POGOProtos_dot_Map_dot_Fort_dot_FortData__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 

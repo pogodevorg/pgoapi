@@ -13,17 +13,17 @@ from google.protobuf import descriptor_pb2
 _sym_db = _symbol_database.Default()
 
 
-from POGOProtos.Enums import CameraTarget_pb2 as POGOProtos_dot_Enums_dot_CameraTarget__pb2
 from POGOProtos.Enums import CameraInterpolation_pb2 as POGOProtos_dot_Enums_dot_CameraInterpolation__pb2
+from POGOProtos.Enums import CameraTarget_pb2 as POGOProtos_dot_Enums_dot_CameraTarget__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='POGOProtos/Settings/Master/CameraSettings.proto',
   package='POGOProtos.Settings.Master',
   syntax='proto3',
-  serialized_pb=_b('\n/POGOProtos/Settings/Master/CameraSettings.proto\x12\x1aPOGOProtos.Settings.Master\x1a#POGOProtos/Enums/CameraTarget.proto\x1a*POGOProtos/Enums/CameraInterpolation.proto\"\xd7\x03\n\x0e\x43\x61meraSettings\x12\x13\n\x0bnext_camera\x18\x01 \x01(\t\x12<\n\rinterpolation\x18\x02 \x03(\x0e\x32%.POGOProtos.Enums.CameraInterpolation\x12\x33\n\x0btarget_type\x18\x03 \x03(\x0e\x32\x1e.POGOProtos.Enums.CameraTarget\x12\x15\n\rease_in_speed\x18\x04 \x03(\x02\x12\x16\n\x0e\x65\x61st_out_speed\x18\x05 \x03(\x02\x12\x18\n\x10\x64uration_seconds\x18\x06 \x03(\x02\x12\x14\n\x0cwait_seconds\x18\x07 \x03(\x02\x12\x1a\n\x12transition_seconds\x18\x08 \x03(\x02\x12\x14\n\x0c\x61ngle_degree\x18\t \x03(\x02\x12\x1b\n\x13\x61ngle_offset_degree\x18\n \x03(\x02\x12\x14\n\x0cpitch_degree\x18\x0b \x03(\x02\x12\x1b\n\x13pitch_offset_degree\x18\x0c \x03(\x02\x12\x13\n\x0broll_degree\x18\r \x03(\x02\x12\x17\n\x0f\x64istance_meters\x18\x0e \x03(\x02\x12\x16\n\x0eheight_percent\x18\x0f \x03(\x02\x12\x16\n\x0evert_ctr_ratio\x18\x10 \x03(\x02\x62\x06proto3')
+  serialized_pb=_b('\n/POGOProtos/Settings/Master/CameraSettings.proto\x12\x1aPOGOProtos.Settings.Master\x1a*POGOProtos/Enums/CameraInterpolation.proto\x1a#POGOProtos/Enums/CameraTarget.proto\"\xd7\x03\n\x0e\x43\x61meraSettings\x12\x13\n\x0bnext_camera\x18\x01 \x01(\t\x12<\n\rinterpolation\x18\x02 \x03(\x0e\x32%.POGOProtos.Enums.CameraInterpolation\x12\x33\n\x0btarget_type\x18\x03 \x03(\x0e\x32\x1e.POGOProtos.Enums.CameraTarget\x12\x15\n\rease_in_speed\x18\x04 \x03(\x02\x12\x16\n\x0e\x65\x61st_out_speed\x18\x05 \x03(\x02\x12\x18\n\x10\x64uration_seconds\x18\x06 \x03(\x02\x12\x14\n\x0cwait_seconds\x18\x07 \x03(\x02\x12\x1a\n\x12transition_seconds\x18\x08 \x03(\x02\x12\x14\n\x0c\x61ngle_degree\x18\t \x03(\x02\x12\x1b\n\x13\x61ngle_offset_degree\x18\n \x03(\x02\x12\x14\n\x0cpitch_degree\x18\x0b \x03(\x02\x12\x1b\n\x13pitch_offset_degree\x18\x0c \x03(\x02\x12\x13\n\x0broll_degree\x18\r \x03(\x02\x12\x17\n\x0f\x64istance_meters\x18\x0e \x03(\x02\x12\x16\n\x0eheight_percent\x18\x0f \x03(\x02\x12\x16\n\x0evert_ctr_ratio\x18\x10 \x03(\x02\x62\x06proto3')
   ,
-  dependencies=[POGOProtos_dot_Enums_dot_CameraTarget__pb2.DESCRIPTOR,POGOProtos_dot_Enums_dot_CameraInterpolation__pb2.DESCRIPTOR,])
+  dependencies=[POGOProtos_dot_Enums_dot_CameraInterpolation__pb2.DESCRIPTOR,POGOProtos_dot_Enums_dot_CameraTarget__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 

@@ -13,18 +13,18 @@ from google.protobuf import descriptor_pb2
 _sym_db = _symbol_database.Default()
 
 
-from POGOProtos.Data.Battle import BattleResults_pb2 as POGOProtos_dot_Data_dot_Battle_dot_BattleResults__pb2
 from POGOProtos.Data.Battle import BattleActionType_pb2 as POGOProtos_dot_Data_dot_Battle_dot_BattleActionType__pb2
 from POGOProtos.Data.Battle import BattleParticipant_pb2 as POGOProtos_dot_Data_dot_Battle_dot_BattleParticipant__pb2
+from POGOProtos.Data.Battle import BattleResults_pb2 as POGOProtos_dot_Data_dot_Battle_dot_BattleResults__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='POGOProtos/Data/Battle/BattleAction.proto',
   package='POGOProtos.Data.Battle',
   syntax='proto3',
-  serialized_pb=_b('\n)POGOProtos/Data/Battle/BattleAction.proto\x12\x16POGOProtos.Data.Battle\x1a*POGOProtos/Data/Battle/BattleResults.proto\x1a-POGOProtos/Data/Battle/BattleActionType.proto\x1a.POGOProtos/Data/Battle/BattleParticipant.proto\"\x85\x04\n\x0c\x42\x61ttleAction\x12\x36\n\x04Type\x18\x01 \x01(\x0e\x32(.POGOProtos.Data.Battle.BattleActionType\x12\x17\n\x0f\x61\x63tion_start_ms\x18\x02 \x01(\x03\x12\x13\n\x0b\x64uration_ms\x18\x03 \x01(\x05\x12\x14\n\x0c\x65nergy_delta\x18\x05 \x01(\x05\x12\x16\n\x0e\x61ttacker_index\x18\x06 \x01(\x05\x12\x14\n\x0ctarget_index\x18\x07 \x01(\x05\x12\x19\n\x11\x61\x63tive_pokemon_id\x18\x08 \x01(\x06\x12@\n\rplayer_joined\x18\t \x01(\x0b\x32).POGOProtos.Data.Battle.BattleParticipant\x12=\n\x0e\x62\x61ttle_results\x18\n \x01(\x0b\x32%.POGOProtos.Data.Battle.BattleResults\x12*\n\"damage_windows_start_timestamp_mss\x18\x0b \x01(\x03\x12(\n damage_windows_end_timestamp_mss\x18\x0c \x01(\x03\x12>\n\x0bplayer_left\x18\r \x01(\x0b\x32).POGOProtos.Data.Battle.BattleParticipant\x12\x19\n\x11target_pokemon_id\x18\x0e \x01(\x06\x62\x06proto3')
+  serialized_pb=_b('\n)POGOProtos/Data/Battle/BattleAction.proto\x12\x16POGOProtos.Data.Battle\x1a-POGOProtos/Data/Battle/BattleActionType.proto\x1a.POGOProtos/Data/Battle/BattleParticipant.proto\x1a*POGOProtos/Data/Battle/BattleResults.proto\"\x85\x04\n\x0c\x42\x61ttleAction\x12\x36\n\x04Type\x18\x01 \x01(\x0e\x32(.POGOProtos.Data.Battle.BattleActionType\x12\x17\n\x0f\x61\x63tion_start_ms\x18\x02 \x01(\x03\x12\x13\n\x0b\x64uration_ms\x18\x03 \x01(\x05\x12\x14\n\x0c\x65nergy_delta\x18\x05 \x01(\x05\x12\x16\n\x0e\x61ttacker_index\x18\x06 \x01(\x05\x12\x14\n\x0ctarget_index\x18\x07 \x01(\x05\x12\x19\n\x11\x61\x63tive_pokemon_id\x18\x08 \x01(\x06\x12@\n\rplayer_joined\x18\t \x01(\x0b\x32).POGOProtos.Data.Battle.BattleParticipant\x12=\n\x0e\x62\x61ttle_results\x18\n \x01(\x0b\x32%.POGOProtos.Data.Battle.BattleResults\x12*\n\"damage_windows_start_timestamp_mss\x18\x0b \x01(\x03\x12(\n damage_windows_end_timestamp_mss\x18\x0c \x01(\x03\x12>\n\x0bplayer_left\x18\r \x01(\x0b\x32).POGOProtos.Data.Battle.BattleParticipant\x12\x19\n\x11target_pokemon_id\x18\x0e \x01(\x06\x62\x06proto3')
   ,
-  dependencies=[POGOProtos_dot_Data_dot_Battle_dot_BattleResults__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Battle_dot_BattleActionType__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Battle_dot_BattleParticipant__pb2.DESCRIPTOR,])
+  dependencies=[POGOProtos_dot_Data_dot_Battle_dot_BattleActionType__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Battle_dot_BattleParticipant__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Battle_dot_BattleResults__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 

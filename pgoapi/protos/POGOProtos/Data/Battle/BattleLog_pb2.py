@@ -13,18 +13,18 @@ from google.protobuf import descriptor_pb2
 _sym_db = _symbol_database.Default()
 
 
+from POGOProtos.Data.Battle import BattleAction_pb2 as POGOProtos_dot_Data_dot_Battle_dot_BattleAction__pb2
 from POGOProtos.Data.Battle import BattleState_pb2 as POGOProtos_dot_Data_dot_Battle_dot_BattleState__pb2
 from POGOProtos.Data.Battle import BattleType_pb2 as POGOProtos_dot_Data_dot_Battle_dot_BattleType__pb2
-from POGOProtos.Data.Battle import BattleAction_pb2 as POGOProtos_dot_Data_dot_Battle_dot_BattleAction__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='POGOProtos/Data/Battle/BattleLog.proto',
   package='POGOProtos.Data.Battle',
   syntax='proto3',
-  serialized_pb=_b('\n&POGOProtos/Data/Battle/BattleLog.proto\x12\x16POGOProtos.Data.Battle\x1a(POGOProtos/Data/Battle/BattleState.proto\x1a\'POGOProtos/Data/Battle/BattleType.proto\x1a)POGOProtos/Data/Battle/BattleAction.proto\"\x8d\x02\n\tBattleLog\x12\x32\n\x05state\x18\x01 \x01(\x0e\x32#.POGOProtos.Data.Battle.BattleState\x12\x37\n\x0b\x62\x61ttle_type\x18\x02 \x01(\x0e\x32\".POGOProtos.Data.Battle.BattleType\x12\x11\n\tserver_ms\x18\x03 \x01(\x03\x12<\n\x0e\x62\x61ttle_actions\x18\x04 \x03(\x0b\x32$.POGOProtos.Data.Battle.BattleAction\x12!\n\x19\x62\x61ttle_start_timestamp_ms\x18\x05 \x01(\x03\x12\x1f\n\x17\x62\x61ttle_end_timestamp_ms\x18\x06 \x01(\x03\x62\x06proto3')
+  serialized_pb=_b('\n&POGOProtos/Data/Battle/BattleLog.proto\x12\x16POGOProtos.Data.Battle\x1a)POGOProtos/Data/Battle/BattleAction.proto\x1a(POGOProtos/Data/Battle/BattleState.proto\x1a\'POGOProtos/Data/Battle/BattleType.proto\"\x8d\x02\n\tBattleLog\x12\x32\n\x05state\x18\x01 \x01(\x0e\x32#.POGOProtos.Data.Battle.BattleState\x12\x37\n\x0b\x62\x61ttle_type\x18\x02 \x01(\x0e\x32\".POGOProtos.Data.Battle.BattleType\x12\x11\n\tserver_ms\x18\x03 \x01(\x03\x12<\n\x0e\x62\x61ttle_actions\x18\x04 \x03(\x0b\x32$.POGOProtos.Data.Battle.BattleAction\x12!\n\x19\x62\x61ttle_start_timestamp_ms\x18\x05 \x01(\x03\x12\x1f\n\x17\x62\x61ttle_end_timestamp_ms\x18\x06 \x01(\x03\x62\x06proto3')
   ,
-  dependencies=[POGOProtos_dot_Data_dot_Battle_dot_BattleState__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Battle_dot_BattleType__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Battle_dot_BattleAction__pb2.DESCRIPTOR,])
+  dependencies=[POGOProtos_dot_Data_dot_Battle_dot_BattleAction__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Battle_dot_BattleState__pb2.DESCRIPTOR,POGOProtos_dot_Data_dot_Battle_dot_BattleType__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
