@@ -76,8 +76,10 @@ class RpcApi:
             RpcApi.RPC_ID = int(random.random() * 10 ** 18)
             self.log.debug('Generated new random RPC Request id: %s', RpcApi.RPC_ID)
 
-        # data field for SignalAgglom
+        # data fields for SignalAgglom
         self.session_hash = os.urandom(16)
+        self.token2 = random.randint(1,59)
+        self.course = random.uniform(0, 360)
 
         self.device_info = device_info
 
@@ -175,7 +177,7 @@ class RpcApi:
         request = RequestEnvelope()
         request.status_code = 2
         request.request_id = self.get_rpc_id()
-        request.accuracy = random.choice((5, 5, 5, 10, 10, 30, 50, 65))
+        request.accuracy = random.choice((5, 5, 5, 5, 10, 10, 10, 30, 30, 50, 65, random.uniform(66,80)))
 
         if player_position:
             request.latitude, request.longitude, altitude = player_position
@@ -193,7 +195,7 @@ class RpcApi:
             self.log.debug('No Session Ticket found - using OAUTH Access Token')
             request.auth_info.provider = self._auth_provider.get_name()
             request.auth_info.token.contents = self._auth_provider.get_access_token()
-            request.auth_info.token.unknown2 = random.randint(1,59)
+            request.auth_info.token.unknown2 = self.token2
             ticket_serialized = request.auth_info.SerializeToString()  #Sig uses this when no auth_ticket available
 
         if self._signal_agglom_gen:
@@ -209,29 +211,21 @@ class RpcApi:
             sig.field22 = self.session_hash
             sig.epoch_timestamp_ms = get_time(ms=True)
             sig.timestamp_ms_since_start = get_time(ms=True) - RpcApi.START_TIME
-            if sig.timestamp_ms_since_start < 50:
-                sig.timestamp_ms_since_start = random.randint(50, 100)
+            if sig.timestamp_ms_since_start < 5000:
+                sig.timestamp_ms_since_start = random.randint(5000, 8000)
 
             loc = sig.location_updates.add()
             sen = sig.sensor_updates.add()
 
-            if sig.timestamp_ms_since_start < 1000:
-                loc.timestamp_ms = random.randint(-4096, sig.timestamp_ms_since_start - 50)
-                sen.timestamp = random.randint(1, sig.timestamp_ms_since_start - 48)
-            else:
-                sen.timestamp = random.randint(sig.timestamp_ms_since_start - 1000, sig.timestamp_ms_since_start - 50)
-                if sig.timestamp_ms_since_start < 30000:
-                    # do not create negative values after 30 seconds have passed
-                    loc.timestamp_ms = random.randint(1, sig.timestamp_ms_since_start - 50)
-                else:
-                    loc.timestamp_ms = random.randint(sig.timestamp_ms_since_start - 30000, sig.timestamp_ms_since_start - 100)
+            sen.timestamp = random.randint(sig.timestamp_ms_since_start - 5000, sig.timestamp_ms_since_start - 100)
+            loc.timestamp_ms = random.randint(sig.timestamp_ms_since_start - 30000, sig.timestamp_ms_since_start - 1000)
 
-            loc.name = 'fused'
+            loc.name = random.choice(('network', 'network', 'network', 'network', 'fused'))
             loc.latitude = request.latitude
             loc.longitude = request.longitude
-            
+
             if not altitude:
-                loc.altitude = random.uniform(300, 400)
+                loc.altitude = random.triangular(300, 400, 350)
             else:
                 loc.altitude = altitude
 
@@ -240,37 +234,38 @@ class RpcApi:
                 loc.device_course = -1
                 loc.device_speed = -1
             else:
-                loc.device_course = random.uniform(0, 360)
-                loc.device_speed = random.triangular(0.1, 3.1, .8)
+                self.course = random.triangular(0, 360, self.course)
+                loc.device_course = self.course
+                loc.device_speed = random.triangular(0.2, 4.25, 1)
 
             loc.provider_status = 3
             loc.location_type = 1
-            loc.horizontal_accuracy = request.accuracy
-            if request.accuracy == 65:
-                loc.vertical_accuracy = random.triangular(50, 200, 65)
+            if request.accuracy >= 65:
+                loc.vertical_accuracy = random.triangular(35, 100, 65)
+                loc.horizontal_accuracy = random.choice((request.accuracy, 65, 65, random.uniform(66,80), 200))
             else:
                 if request.accuracy > 10:
-                    vertical_accuracies = (24, 32, 64, 96)
+                    loc.vertical_accuracy = random.choice((24, 32, 48, 48, 64, 64, 96, 128))
                 else:
-                    vertical_accuracies = (3, 4, 6, 8, 12, 24)
-                loc.vertical_accuracy = random.choice(vertical_accuracies)
+                    loc.vertical_accuracy = random.choice((3, 4, 6, 6, 8, 12, 24))
+                loc.horizontal_accuracy = request.accuracy
 
-            sen.acceleration_x = random.triangular(-3, 3, 0)
-            sen.acceleration_y = random.triangular(-3, 3, sen.acceleration_x * -1)
-            sen.acceleration_z = random.triangular(-4, 4, sen.acceleration_x * -1)
-            sen.magnetic_field_x = random.triangular(-60, 60, 0)
-            sen.magnetic_field_y = random.triangular(-60, 60, sen.magnetic_field_x * -1)
-            sen.magnetic_field_z = random.triangular(-60, 60, sen.magnetic_field_x * -1)
-            sen.magnetic_field_accuracy = random.choice((-1, 1, 1, 2, 2))
-            sen.attitude_pitch = random.triangular(-.6, 1.5, 0.5)
+            sen.acceleration_x = random.triangular(-3, 1, 0)
+            sen.acceleration_y = random.triangular(-2, 3, 0)
+            sen.acceleration_z = random.triangular(-4, 2, 0)
+            sen.magnetic_field_x = random.triangular(-50, 50, 0)
+            sen.magnetic_field_y = random.triangular(-60, 50, -5)
+            sen.magnetic_field_z = random.triangular(-60, 40, -30)
+            sen.magnetic_field_accuracy = random.choice((-1, 1, 1, 2, 2, 2, 2))
+            sen.attitude_pitch = random.triangular(-1.5, 1.5, 0.2)
             sen.attitude_yaw = random.uniform(-3, 3)
-            sen.attitude_roll = random.triangular(-1.5, 1.5, 0.25)
-            sen.rotation_rate_x = random.triangular(-6, 6, 0)
-            sen.rotation_rate_y = random.triangular(-6, 6, sen.rotation_rate_x * -1)
-            sen.rotation_rate_z = random.triangular(-4, 4, sen.rotation_rate_x * .65)
-            sen.gravity_x = random.triangular(-.99, .99, 0)
-            sen.gravity_y = random.triangular(-.99, .8, sen.gravity_x * -.8)
-            sen.gravity_z = random.triangular(-1,- 0.01, -0.8)
+            sen.attitude_roll = random.triangular(-2.8, 2.5, 0.25)
+            sen.rotation_rate_x = random.triangular(-6, 4, 0)
+            sen.rotation_rate_y = random.triangular(-5.5, 5, 0)
+            sen.rotation_rate_z = random.triangular(-5, 3, 0)
+            sen.gravity_x = random.triangular(-1, 1, 0.15)
+            sen.gravity_y = random.triangular(-1, 1, -.2)
+            sen.gravity_z = random.triangular(-1, .7, -0.8)
             sen.status = 3
 
             sig.field25 = 7363665268261373700
@@ -291,7 +286,7 @@ class RpcApi:
             plat.type = 6
             plat.request_message = sig_request.SerializeToString()
 
-        request.ms_since_last_locationfix = int(random.triangular(100, 10000, 1000))
+        request.ms_since_last_locationfix = int(random.triangular(300, 30000, 10000))
 
         self.log.debug('Generated protobuf request: \n\r%s', request)
 
