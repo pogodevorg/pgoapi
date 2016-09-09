@@ -72,10 +72,6 @@ class RpcApi:
         if RpcApi.START_TIME == 0:
             RpcApi.START_TIME = get_time(ms=True)
 
-        if RpcApi.RPC_ID == 0:
-            RpcApi.RPC_ID = int(random.random() * 10 ** 18)
-            self.log.debug('Generated new random RPC Request id: %s', RpcApi.RPC_ID)
-
         # data fields for SignalAgglom
         self.session_hash = os.urandom(16)
         self.token2 = random.randint(1,59)
@@ -91,10 +87,21 @@ class RpcApi:
             raise
 
     def get_rpc_id(self):
+        if RpcApi.RPC_ID==0 :  #Startup
+            RpcApi.RPC_ID=1
+            if self.device_info is not None  and  \
+               self.device_info.get('device_brand','Apple')!='Apple':
+                rand=0x53B77E48
+            else:
+                rand=0x000041A7
+        else:
+            rand=random.randint(0,2**31)
         RpcApi.RPC_ID += 1
-        self.log.debug("Incremented RPC Request ID: %s", RpcApi.RPC_ID)
+        cnt= RpcApi.RPC_ID
+        reqid= ((rand| ((cnt&0xFFFFFFFF)>>31))<<32)|cnt
+        self.log.debug("Incremented RPC Request ID: %s", reqid)
 
-        return RpcApi.RPC_ID
+        return reqid
 
     def decode_raw(self, raw):
         output = error = None
