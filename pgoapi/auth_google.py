@@ -47,7 +47,7 @@ class AuthGoogle(Auth):
         self._refresh_token = None
 
     def set_proxy(self, proxy_config):
-        self._session.proxies = proxy_config
+        self._proxy = proxy_config
 
     def user_login(self, username, password):
         self.log.info('Google User Login for: {}'.format(username))
@@ -55,7 +55,7 @@ class AuthGoogle(Auth):
         if not isinstance(username, six.string_types) or not isinstance(password, six.string_types):
             raise AuthException("Username/password not correctly specified")
 
-        user_login = perform_master_login(username, password, self.GOOGLE_LOGIN_ANDROID_ID)
+        user_login = perform_master_login(username, password, self.GOOGLE_LOGIN_ANDROID_ID, proxy=self._proxy)
 
         try:
             refresh_token = user_login.get('Token', None)
@@ -89,7 +89,7 @@ class AuthGoogle(Auth):
                 self.log.info('Request Google Access Token...')
 
             token_data = perform_oauth(None, self._refresh_token, self.GOOGLE_LOGIN_ANDROID_ID, self.GOOGLE_LOGIN_SERVICE, self.GOOGLE_LOGIN_APP,
-                self.GOOGLE_LOGIN_CLIENT_SIG)
+                self.GOOGLE_LOGIN_CLIENT_SIG, proxy=self._proxy)
 
             access_token = token_data.get('Auth', None)
             if access_token is not None:
