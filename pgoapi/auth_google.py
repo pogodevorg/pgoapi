@@ -43,8 +43,8 @@ class AuthGoogle(Auth):
         Auth.__init__(self)
 
         self._auth_provider = 'google'
-
         self._refresh_token = None
+        self._proxy = None
 
     def set_proxy(self, proxy_config):
         self._proxy = proxy_config
