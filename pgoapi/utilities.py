@@ -40,11 +40,6 @@ log = logging.getLogger(__name__)
 HASH_SEED = 0x61247FBF  # static hash seed from app
 EARTH_RADIUS = 6371000  # radius of Earth in meters
 
-hashlibname = os.path.join(os.path.dirname(os.path.realpath(__file__)), "lib\\niantichash.dll")
-_nhash = ctypes.cdll.LoadLibrary(hashlibname)
-_nhash.compute_hash.argtypes = (ctypes.POINTER(ctypes.c_ubyte), ctypes.c_uint32)
-_nhash.compute_hash.restype = ctypes.c_uint64
-
 def f2i(float):
   return struct.unpack('<Q', struct.pack('<d', float))[0]
 
@@ -173,55 +168,55 @@ def long_to_bytes(val, endianness='big'):
 
     return s
 
+class HashGenerator:
+    def __init__(self, library_path):
+        self._hash_lib = ctypes.cdll.LoadLibrary(library_path)
+        self._hash_lib.compute_hash.argtypes = (ctypes.POINTER(ctypes.c_ubyte), ctypes.c_uint32)
+        self._hash_lib.compute_hash.restype = ctypes.c_uint64
 
-def generate_location_hash_by_seed(authticket, lat, lng, acc=5):
-    first_hash = hash32(authticket, seed=HASH_SEED)
-    #print "location_hash_by_seed_1: %s" % (first_hash)
-    location_bytes = d2h(lat) + d2h(lng) + d2h(acc)
-    loc_hash = hash32(location_bytes, seed=first_hash)
-    #print "location_hash_by_seed_2: %s" % (loc_hash)
-    return ctypes.c_int32(loc_hash).value
+    def generate_location_hash_by_seed(self, authticket, lat, lng, acc=5):
+        first_hash = self.hash32(authticket, seed=HASH_SEED)
+        #print "location_hash_by_seed_1: %s" % (first_hash)
+        location_bytes = d2h(lat) + d2h(lng) + d2h(acc)
+        loc_hash = self.hash32(location_bytes, seed=first_hash)
+        #print "location_hash_by_seed_2: %s" % (loc_hash)
+        return ctypes.c_int32(loc_hash).value
 
+    def generate_location_hash(self, lat, lng, acc=5):
+        location_bytes = d2h(lat) + d2h(lng) + d2h(acc)
+        loc_hash = self.hash32(location_bytes, seed=HASH_SEED)
+        #print "location_hash: %s" % hex(loc_hash)
+        return ctypes.c_int32(loc_hash).value
 
-def generate_location_hash(lat, lng, acc=5):
-    location_bytes = d2h(lat) + d2h(lng) + d2h(acc)
-    loc_hash = hash32(location_bytes, seed=HASH_SEED)
-    #print "location_hash: %s" % hex(loc_hash)
-    return ctypes.c_int32(loc_hash).value
+    def generate_request_hash(self, authticket, request):
+        first_hash = self.hash64salt32(authticket, seed=HASH_SEED)
+        #print "request_hash_1: %s" % hex(first_hash)
+        req_hash = self.hash64salt64(request, seed=first_hash)
+        #print "request_hash_2: %s" % hex(req_hash)
+        return ctypes.c_int64(req_hash).value
 
+    def hash64salt32(self, buf, seed):
+        buf = struct.pack(">I", seed) + buf
+        return self.calcHash(buf)
 
-def generate_request_hash(authticket, request):
-    first_hash = hash64salt32(authticket, seed=HASH_SEED)
-    #print "request_hash_1: %s" % hex(first_hash)
-    req_hash = hash64salt64(request, seed=first_hash)
-    #print "request_hash_2: %s" % hex(req_hash)
-    return ctypes.c_int64(req_hash).value
+    def hash64salt64(self, buf, seed):
+        buf = struct.pack(">Q", seed) + buf
+        return self.calcHash(buf)
 
-def hash64salt32(buf, seed):
-    buf = struct.pack(">I", seed) + buf
-    return calcHash(buf)
-    
-def hash64salt64(buf, seed):
-    buf = struct.pack(">Q", seed) + buf
-    return calcHash(buf)
-    
-def hash32(buf, seed):
-    buf = struct.pack(">I", seed) + buf
-    hash64 = calcHash(buf)
-    signedhash64 = ctypes.c_int64(hash64)
-    return ctypes.c_uint(signedhash64.value).value ^ ctypes.c_uint(signedhash64.value >> 32).value
+    def hash32(self, buf, seed):
+        buf = struct.pack(">I", seed) + buf
+        hash64 = self.calcHash(buf)
+        signedhash64 = ctypes.c_int64(hash64)
+        return ctypes.c_uint(signedhash64.value).value ^ ctypes.c_uint(signedhash64.value >> 32).value
 
+    def calcHash(self, buf):
+        #buf = b"\x61\x24\x7f\xbf\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"
+        buf = list(bytearray(buf))
+        #print buf
+        num_bytes = len(buf)
+        array_type = ctypes.c_ubyte * num_bytes
 
-def calcHash(buf):
-    global _nhash
+        data = self._hash_lib.compute_hash(array_type(*buf), ctypes.c_uint32(num_bytes));
 
-    #buf = b"\x61\x24\x7f\xbf\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00" 
-    buf = list(bytearray(buf))
-    #print buf
-    num_bytes = len(buf)
-    array_type = ctypes.c_ubyte * num_bytes
-
-    data = _nhash.compute_hash(array_type(*buf), ctypes.c_uint32(num_bytes));
-
-    #print data
-    return ctypes.c_uint64(data).value
+        #print data
+        return ctypes.c_uint64(data).value

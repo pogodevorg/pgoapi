@@ -126,11 +126,15 @@ class PGoApi:
                                 self._position_alt, self.device_info)
         return request
 
-    def activate_signature(self, lib_path):
-        self._signature_lib = lib_path
+    def activate_signature(self, signature_lib_path, hash_lib_path):
+        self._signature_lib = signature_lib_path
+        self._hash_lib = hash_lib_path
 
     def get_signature_lib(self):
         return self._signature_lib
+
+    def get_hash_lib(self):
+        return self._hash_lib
 
     def __getattr__(self, func):
         def function(**kwargs):
@@ -227,9 +231,10 @@ class PGoApiRequest:
         request = RpcApi(self._auth_provider, self.device_info)
         request._session = self.__parent__._session
 
-        lib_path = self.__parent__.get_signature_lib()
-        if lib_path is not None:
-            request.activate_signature(lib_path)
+        signature_lib_path = self.__parent__.get_signature_lib()
+        hash_lib_path = self.__parent__.get_hash_lib()
+        if signature_lib_path is not None and hash_lib_path is not None:
+            request.activate_signature(signature_lib_path, hash_lib_path)
 
         self.log.info('Execution of RPC')
         response = None
