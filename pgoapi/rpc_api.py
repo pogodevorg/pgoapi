@@ -121,8 +121,7 @@ class RpcApi:
         self.log.debug('Execution of RPC')
 
         request_proto_serialized = request_proto_plain.SerializeToString()
-        print "request"
-        print binascii.hexlify(request_proto_serialized)
+        #print binascii.hexlify(request_proto_serialized)
         try:
             http_response = self._session.post(endpoint, data=request_proto_serialized, timeout=30)
         except (requests.exceptions.Timeout, requests.exceptions.ConnectionError) as e:

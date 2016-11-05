@@ -185,7 +185,7 @@ def generate_location_hash_by_seed(authticket, lat, lng, acc=5):
 def generate_location_hash(lat, lng, acc=5):
     location_bytes = d2h(lat) + d2h(lng) + d2h(acc)
     loc_hash = hash32(location_bytes, seed=HASH_SEED)
-    print "location_hash: %s" % hex(loc_hash)
+    #print "location_hash: %s" % hex(loc_hash)
     return ctypes.c_int32(loc_hash).value
 
 
