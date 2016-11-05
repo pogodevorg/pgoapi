@@ -126,8 +126,8 @@ def main():
         api.set_authentication(provider = config.auth_service, username = config.username, password =  config.password)
 
     # provide the path for your encrypt dll
-    api.activate_signature(os.path.join(os.path.dirname(os.path.realpath(__file__)), "pgoapi\\lib\\pcrypt.dll"),
-                           os.path.join(os.path.dirname(os.path.realpath(__file__)), "pgoapi\\lib\\niantichash.dll"))
+    # api.set_signature_lib(os.path.join(os.path.dirname(os.path.realpath(__file__)), "pgoapi\\lib\\pcrypt.dll"))
+    # api.set_hash_lib(os.path.join(os.path.dirname(os.path.realpath(__file__)), "pgoapi\\lib\\niantichash.dll"))
 
     # print get maps object
     cell_ids = util.get_cell_ids(position[0], position[1])

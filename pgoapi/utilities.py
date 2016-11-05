@@ -26,6 +26,8 @@ import ctypes
 import logging
 import socket
 import os
+import sys
+import platform
 
 from json import JSONEncoder
 from binascii import unhexlify, hexlify
@@ -167,6 +169,69 @@ def long_to_bytes(val, endianness='big'):
         s = s[::-1]
 
     return s
+
+def get_encryption_lib_paths():
+    # win32 doesn't mean necessarily 32 bits
+    hash_lib = None
+    if sys.platform == "win32" or sys.platform == "cygwin":
+        if platform.architecture()[0] == '64bit':
+            encrypt_lib = "encrypt64.dll"
+            hash_lib = "niantichash64.dll"
+        else:
+            encrypt_lib = "encrypt32.dll"
+            hash_lib = "niantichash32.dll"
+
+    elif sys.platform == "darwin":
+        encrypt_lib = "libencrypt-osx-64.so"
+        hash_lib = "libniantichash-osx-64.so"
+
+    elif os.uname()[4].startswith("arm") and platform.architecture()[0] == '32bit':
+        encrypt_lib = "libencrypt-linux-arm-32.so"
+        hash_lib = "libniantichash-linux-arm-32.so"
+
+    elif os.uname()[4].startswith("aarch64") and platform.architecture()[0] == '64bit':
+        encrypt_lib = "libencrypt-linux-arm-64.so"
+        hash_lib = "libniantichash-linux-arm-64.so"
+
+    elif sys.platform.startswith('linux'):
+        if "centos" in platform.platform():
+            if platform.architecture()[0] == '64bit':
+                encrypt_lib = "libencrypt-centos-x86-64.so"
+                hash_lib = "libniantichash-centos-x86-64.so"
+            else:
+                encrypt_lib = "libencrypt-linux-x86-32.so"
+                hash_lib = "libniantichash-linux-x86-32.so"
+        else:
+            if platform.architecture()[0] == '64bit':
+                encrypt_lib = "libencrypt-linux-x86-64.so"
+                hash_lib = "libniantichash-linux-x86-64.so"
+            else:
+                encrypt_lib = "libencrypt-linux-x86-32.so"
+                hash_lib = "libniantichash-linux-x86-32.so"
+
+    elif sys.platform.startswith('freebsd'):
+        encrypt_lib = "libencrypt-freebsd-64.so"
+        hash_lib = "libniantichash-freebsd-64.so"
+
+    else:
+        err = "Unexpected/unsupported platform '{}'".format(sys.platform)
+        log.error(err)
+        raise Exception(err)
+
+    encrypt_lib_path = os.path.join(os.path.dirname(__file__), "lib", encrypt_lib)
+    hash_lib_path = os.path.join(os.path.dirname(__file__), "lib", hash_lib)
+
+    if not os.path.isfile(encrypt_lib_path):
+        err = "Could not find {} encryption library {}".format(sys.platform, encrypt_lib_path)
+        log.error(err)
+        raise Exception(err)
+    if not os.path.isfile(hash_lib_path):
+        err = "Could not find {} hashing library {}".format(sys.platform, hash_lib_path)
+        log.error(err)
+        raise Exception(err)
+
+    return (encrypt_lib_path, hash_lib_path)
+
 
 class HashGenerator:
     def __init__(self, library_path):
