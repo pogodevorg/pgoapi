@@ -34,13 +34,12 @@ import logging
 import requests
 import subprocess
 import six
+import binascii
+import ctypes
 
 from google.protobuf import message
 
 from importlib import import_module
-
-
-import ctypes
 
 from pgoapi.protobuf_to_dict import protobuf_to_dict
 from pgoapi.exceptions import NotLoggedInException, ServerBusyOrOfflineException, ServerSideRequestThrottlingException, ServerSideAccessForbiddenException, UnexpectedResponseException, AuthTokenExpiredException, ServerApiEndpointRedirectException
@@ -122,6 +121,8 @@ class RpcApi:
         self.log.debug('Execution of RPC')
 
         request_proto_serialized = request_proto_plain.SerializeToString()
+        print "request"
+        print binascii.hexlify(request_proto_serialized)
         try:
             http_response = self._session.post(endpoint, data=request_proto_serialized, timeout=30)
         except (requests.exceptions.Timeout, requests.exceptions.ConnectionError) as e:
@@ -275,7 +276,7 @@ class RpcApi:
             sen.gravity_z = random.triangular(-1, .7, -0.8)
             sen.status = 3
 
-            sig.field25 = 7363665268261373700
+            sig.field25 = ctypes.c_uint64(-8408506833887075802).value
 
             if self.device_info:
                 for key in self.device_info:
@@ -288,7 +289,7 @@ class RpcApi:
             signal_agglom_proto = sig.SerializeToString()
 
             sig_request = SendEncryptedSignatureRequest()
-            sig_request.encrypted_signature = self._generate_signature(signal_agglom_proto)
+            sig_request.encrypted_signature = self._generate_signature(signal_agglom_proto, sig.timestamp_ms_since_start)
             plat = request.platform_requests.add()
             plat.type = 6
             plat.request_message = sig_request.SerializeToString()
@@ -299,20 +300,18 @@ class RpcApi:
 
         return request
 
-    def _generate_signature(self, signature_plain, lib_path="encrypt.so"):
+    def _generate_signature(self, signature_plain, iv, lib_path="encrypt.so"):
         if self._signature_lib is None:
             self.activate_signature(lib_path)
-        self._signature_lib.argtypes = [ctypes.c_char_p, ctypes.c_size_t, ctypes.c_char_p, ctypes.c_size_t, ctypes.POINTER(ctypes.c_ubyte), ctypes.POINTER(ctypes.c_size_t)]
+        self._signature_lib.argtypes = [ctypes.c_char_p, ctypes.c_size_t, ctypes.c_char_p, ctypes.POINTER(ctypes.POINTER(ctypes.c_ubyte))]
         self._signature_lib.restype = ctypes.c_int
-
-        iv = os.urandom(32)
-
-        output_size = ctypes.c_size_t()
-
-        self._signature_lib.encrypt(signature_plain, len(signature_plain), iv, 32, None, ctypes.byref(output_size))
-        output = (ctypes.c_ubyte * output_size.value)()
-        self._signature_lib.encrypt(signature_plain, len(signature_plain), iv, 32, ctypes.byref(output), ctypes.byref(output_size))
-        signature = b''.join(list(map(lambda x: six.int2byte(x), output)))
+        rounded_size = len(signature_plain) + (256 - (len(signature_plain) % 256));
+        total_size = rounded_size + 5;
+        output = ctypes.POINTER(ctypes.c_ubyte * total_size)()
+        print binascii.hexlify(signature_plain)
+        output_size = self._signature_lib.encrypt(signature_plain, len(signature_plain), iv, ctypes.byref(output))
+        print binascii.hexlify(output.contents)
+        signature = b''.join(list(map(lambda x: six.int2byte(x), output.contents)))
         return signature
 
     def _build_sub_requests(self, mainrequest, subrequest_list):
