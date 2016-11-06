@@ -128,8 +128,11 @@ class PGoApi:
         return request
 
     def activate_signature(self, signature_lib_path=None, hash_lib_path=None):
-        if signature_lib_path: self.set_signature_lib(signature_lib_path)
-        if hash_lib_path: self.set_hash_lib(hash_lib_path)
+        raise Exception("activate_signature is deprecated, binaries compatible with 0.41 API are now required." +
+                        "\r\n Comment out all calls to activate_signature to let them be autodetected. " +
+                        "\r\n Use set_signature_lib and set_hash_lib to override if needed.")
+        # if signature_lib_path: self.set_signature_lib(signature_lib_path)
+        # if hash_lib_path: self.set_hash_lib(hash_lib_path)
 
     def set_signature_lib(self, signature_lib_path):
         self._signature_lib = signature_lib_path
