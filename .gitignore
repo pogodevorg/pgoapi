@@ -4,6 +4,9 @@ __pycache__/
 *$py.class
 
 # C extensions
+*.so
+*.dylib
+*.dll
 
 # Distribution / packaging
 .Python
@@ -14,6 +17,7 @@ dist/
 downloads/
 eggs/
 .eggs/
+lib/
 lib64/
 parts/
 sdist/
@@ -89,3 +93,13 @@ ENV/
 # Personal load details
 config.json
 /.idea
+
+# macOS junk
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows Junk
+Thumbs.db
+ehthumbs.db
+Desktop.ini
