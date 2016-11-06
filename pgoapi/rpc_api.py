@@ -308,9 +308,9 @@ class RpcApi:
         rounded_size = len(signature_plain) + (256 - (len(signature_plain) % 256));
         total_size = rounded_size + 5;
         output = ctypes.POINTER(ctypes.c_ubyte * total_size)()
-        print binascii.hexlify(signature_plain)
+        #print binascii.hexlify(signature_plain)
         output_size = self._signature_lib.encrypt(signature_plain, len(signature_plain), iv, ctypes.byref(output))
-        print binascii.hexlify(output.contents)
+        #print binascii.hexlify(output.contents)
         signature = b''.join(list(map(lambda x: six.int2byte(x), output.contents)))
         return signature
 
