@@ -178,7 +178,7 @@ def get_hash_lib_path():
         else:
             hash_lib = "niantichash32.dll"
     elif sys.platform == "darwin":
-        hash_lib = "libniantichash-osx-64.so"
+        hash_lib = "libniantichash-macos-64.dylib"
     elif os.uname()[4].startswith("arm") and platform.architecture()[0] == '32bit':
         hash_lib = "libniantichash-linux-arm-32.so"
     elif os.uname()[4].startswith("aarch64") and platform.architecture()[0] == '64bit':
