@@ -1,17 +1,14 @@
 """
 pgoapi - Pokemon Go API
 Copyright (c) 2016 tjado <https://github.com/tejado>
-
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
-
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
-
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -19,7 +16,6 @@ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
 DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 OR OTHER DEALINGS IN THE SOFTWARE.
-
 Author: tjado <https://github.com/tejado>
 """
 
@@ -27,8 +23,10 @@ import re
 import time
 import struct
 import ctypes
-import xxhash
 import logging
+import os
+import sys
+import platform
 
 from json import JSONEncoder
 from binascii import unhexlify
@@ -40,9 +38,8 @@ from s2sphere import LatLng, Angle, Cap, RegionCoverer, math
 
 log = logging.getLogger(__name__)
 
-HASH_SEED = 0x61656632  # static hash seed from app
+HASH_SEED = 0x61247FBF  # static hash seed from app
 EARTH_RADIUS = 6371000  # radius of Earth in meters
-
 
 def f2i(float):
   return struct.unpack('<Q', struct.pack('<d', float))[0]
@@ -55,6 +52,10 @@ def f2h(float):
 def h2f(hex):
   return struct.unpack('<d', struct.pack('<Q', int(hex,16)))[0]
 
+def d2h(f):
+    hex_str = f2h(f)[2:].replace('L','')
+    hex_str = ("0" * (len(hex_str) % 2)) + hex_str
+    return unhexlify(hex_str)
 
 def to_camel_case(value):
   return ''.join(word.capitalize() if word else '_' for word in value.split('_'))
@@ -142,14 +143,10 @@ def long_to_bytes(val, endianness='big'):
     """
     Use :ref:`string formatting` and :func:`~binascii.unhexlify` to
     convert ``val``, a :func:`long`, to a byte :func:`str`.
-
     :param long val: The value to pack
-
     :param str endianness: The endianness of the result. ``'big'`` for
       big-endian, ``'little'`` for little-endian.
-
     If you want byte- and word-ordering to differ, you're on your own.
-
     Using :ref:`string formatting` lets us use Python's C innards.
     """
 
@@ -172,27 +169,88 @@ def long_to_bytes(val, endianness='big'):
 
     return s
 
+def get_hash_lib_path():
+    # win32 doesn't mean necessarily 32 bits
+    hash_lib = None
+    if sys.platform == "win32" or sys.platform == "cygwin":
+        if platform.architecture()[0] == '64bit':
+            hash_lib = "niantichash64.dll"
+        else:
+            hash_lib = "niantichash32.dll"
+    elif sys.platform == "darwin":
+        hash_lib = "libniantichash-macos-64.dylib"
+    elif os.uname()[4].startswith("arm") and platform.architecture()[0] == '32bit':
+        hash_lib = "libniantichash-linux-arm-32.so"
+    elif os.uname()[4].startswith("aarch64") and platform.architecture()[0] == '64bit':
+        hash_lib = "libniantichash-linux-arm-64.so"
+    elif sys.platform.startswith('linux'):
+        if "centos" in platform.platform():
+            if platform.architecture()[0] == '64bit':
+                hash_lib = "libniantichash-centos-x86-64.so"
+            else:
+                hash_lib = "libniantichash-linux-x86-32.so"
+        else:
+            if platform.architecture()[0] == '64bit':
+                hash_lib = "libniantichash-linux-x86-64.so"
+            else:
+                hash_lib = "libniantichash-linux-x86-32.so"
+    elif sys.platform.startswith('freebsd'):
+        hash_lib = "libniantichash-freebsd-64.so"
+    else:
+        err = "Unexpected/unsupported platform '{}'".format(sys.platform)
+        log.error(err)
+        raise Exception(err)
 
-def generate_location_hash_by_seed(authticket, lat, lng, acc=5):
-    first_hash = xxhash.xxh32(authticket, seed=HASH_SEED).intdigest()
-    location_bytes = d2h(lat) + d2h(lng) + d2h(acc)
-    loc_hash = xxhash.xxh32(location_bytes, seed=first_hash).intdigest()
-    return ctypes.c_int32(loc_hash).value
+    hash_lib_path = os.path.join(os.path.dirname(__file__), "lib", hash_lib)
+
+    if not os.path.isfile(hash_lib_path):
+        err = "Could not find {} hashing library {}".format(sys.platform, hash_lib_path)
+        log.error(err)
+        raise Exception(err)
+
+    return hash_lib_path
 
 
-def generate_location_hash(lat, lng, acc=5):
-    location_bytes = d2h(lat) + d2h(lng) + d2h(acc)
-    loc_hash = xxhash.xxh32(location_bytes, seed=HASH_SEED).intdigest()
-    return ctypes.c_int32(loc_hash).value
+class HashGenerator:
+    def __init__(self, library_path):
+        self._hash_lib = ctypes.cdll.LoadLibrary(library_path)
+        self._hash_lib.compute_hash.argtypes = (ctypes.POINTER(ctypes.c_ubyte), ctypes.c_uint32)
+        self._hash_lib.compute_hash.restype = ctypes.c_uint64
 
+    def generate_location_hash_by_seed(self, authticket, lat, lng, acc=5):
+        first_hash = self.hash32(authticket, seed=HASH_SEED)
+        location_bytes = d2h(lat) + d2h(lng) + d2h(acc)
+        loc_hash = self.hash32(location_bytes, seed=first_hash)
+        return ctypes.c_int32(loc_hash).value
 
-def generate_request_hash(authticket, request):
-    first_hash = xxhash.xxh64(authticket, seed=HASH_SEED).intdigest()
-    req_hash = xxhash.xxh64(request, seed=first_hash).intdigest()
-    return ctypes.c_int64(req_hash).value
+    def generate_location_hash(self, lat, lng, acc=5):
+        location_bytes = d2h(lat) + d2h(lng) + d2h(acc)
+        loc_hash = self.hash32(location_bytes, seed=HASH_SEED)
+        return ctypes.c_int32(loc_hash).value
 
+    def generate_request_hash(self, authticket, request):
+        first_hash = self.hash64salt32(authticket, seed=HASH_SEED)
+        req_hash = self.hash64salt64(request, seed=first_hash)
+        return ctypes.c_int64(req_hash).value
 
-def d2h(f):
-    hex_str = f2h(f)[2:].replace('L','')
-    hex_str = ("0" * (len(hex_str) % 2)) + hex_str
-    return unhexlify(hex_str)
+    def hash64salt32(self, buf, seed):
+        buf = struct.pack(">I", seed) + buf
+        return self.calcHash(buf)
+
+    def hash64salt64(self, buf, seed):
+        buf = struct.pack(">Q", seed) + buf
+        return self.calcHash(buf)
+
+    def hash32(self, buf, seed):
+        buf = struct.pack(">I", seed) + buf
+        hash64 = self.calcHash(buf)
+        signedhash64 = ctypes.c_int64(hash64)
+        return ctypes.c_uint(signedhash64.value).value ^ ctypes.c_uint(signedhash64.value >> 32).value
+
+    def calcHash(self, buf):
+        buf = list(bytearray(buf))
+        num_bytes = len(buf)
+        array_type = ctypes.c_ubyte * num_bytes
+
+        data = self._hash_lib.compute_hash(array_type(*buf), ctypes.c_uint32(num_bytes));
+        return ctypes.c_uint64(data).value
