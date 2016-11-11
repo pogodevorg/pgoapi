@@ -38,7 +38,7 @@ from s2sphere import LatLng, Angle, Cap, RegionCoverer, math
 
 log = logging.getLogger(__name__)
 
-HASH_SEED = 0x61247FBF  # static hash seed from app
+HASH_SEED = 0x46E945F8  # static hash seed from app
 EARTH_RADIUS = 6371000  # radius of Earth in meters
 
 def f2i(float):
@@ -174,11 +174,11 @@ def get_hash_lib_path():
     hash_lib = None
     if sys.platform == "win32" or sys.platform == "cygwin":
         if platform.architecture()[0] == '64bit':
-            hash_lib = "niantichash64.dll"
+            hash_lib = "libniantichash-windows-x86-64.dll"
         else:
-            hash_lib = "niantichash32.dll"
+            hash_lib = "libniantichash-windows-i386.dll"
     elif sys.platform == "darwin":
-        hash_lib = "libniantichash-macos-64.dylib"
+        hash_lib = "libniantichash-macos-x86-64.dylib"
     elif os.uname()[4].startswith("arm") and platform.architecture()[0] == '32bit':
         hash_lib = "libniantichash-linux-arm-32.so"
     elif os.uname()[4].startswith("aarch64") and platform.architecture()[0] == '64bit':
@@ -188,14 +188,14 @@ def get_hash_lib_path():
             if platform.architecture()[0] == '64bit':
                 hash_lib = "libniantichash-centos-x86-64.so"
             else:
-                hash_lib = "libniantichash-linux-x86-32.so"
+                hash_lib = "libniantichash-centos-i386.so"
         else:
             if platform.architecture()[0] == '64bit':
                 hash_lib = "libniantichash-linux-x86-64.so"
             else:
-                hash_lib = "libniantichash-linux-x86-32.so"
+                hash_lib = "libniantichash-linux-i386.so"
     elif sys.platform.startswith('freebsd'):
-        hash_lib = "libniantichash-freebsd-64.so"
+        hash_lib = "libniantichash-freebsd-x86-64.so"
     else:
         err = "Unexpected/unsupported platform '{}'".format(sys.platform)
         log.error(err)
