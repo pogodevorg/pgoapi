@@ -38,7 +38,7 @@ from s2sphere import LatLng, Angle, Cap, RegionCoverer, math
 
 log = logging.getLogger(__name__)
 
-HASH_SEED = 0x61247FBF  # static hash seed from app
+HASH_SEED = 0x46E945F8  # static hash seed from app
 EARTH_RADIUS = 6371000  # radius of Earth in meters
 
 def f2i(float):
@@ -172,30 +172,31 @@ def long_to_bytes(val, endianness='big'):
 def get_hash_lib_path():
     # win32 doesn't mean necessarily 32 bits
     hash_lib = None
+    arch = platform.architecture()[0]
     if sys.platform == "win32" or sys.platform == "cygwin":
-        if platform.architecture()[0] == '64bit':
-            hash_lib = "niantichash64.dll"
+        if arch == '64bit':
+            hash_lib = "libniantichash-windows-x86-64.dll"
         else:
-            hash_lib = "niantichash32.dll"
+            hash_lib = "libniantichash-windows-i686.dll"
     elif sys.platform == "darwin":
-        hash_lib = "libniantichash-macos-64.dylib"
-    elif os.uname()[4].startswith("arm") and platform.architecture()[0] == '32bit':
-        hash_lib = "libniantichash-linux-arm-32.so"
-    elif os.uname()[4].startswith("aarch64") and platform.architecture()[0] == '64bit':
-        hash_lib = "libniantichash-linux-arm-64.so"
-    elif sys.platform.startswith('linux'):
-        if "centos" in platform.platform():
-            if platform.architecture()[0] == '64bit':
-                hash_lib = "libniantichash-centos-x86-64.so"
-            else:
-                hash_lib = "libniantichash-linux-x86-32.so"
+        if arch == '64bit':
+            hash_lib = "libniantichash-macos-x86-64.dylib"
         else:
-            if platform.architecture()[0] == '64bit':
-                hash_lib = "libniantichash-linux-x86-64.so"
-            else:
-                hash_lib = "libniantichash-linux-x86-32.so"
+            hash_lib = "libniantichash-macos-i386.dylib"
+    elif os.uname()[4].startswith("arm") and arch == '32bit':
+        hash_lib = "libniantichash-linux-arm32.so"
+    elif os.uname()[4].startswith("aarch64") and arch == '64bit':
+        hash_lib = "libniantichash-linux-arm64.so"
+    elif sys.platform.startswith('linux'):
+        if arch == '64bit':
+            hash_lib = "libniantichash-linux-x86-64.so"
+        else:
+            hash_lib = "libniantichash-linux-i386.so"
     elif sys.platform.startswith('freebsd'):
-        hash_lib = "libniantichash-freebsd-64.so"
+        if arch == '64bit':
+            hash_lib = "libniantichash-freebsd-x86-64.so"
+        else:
+            hash_lib = "libniantichash-freebsd-i386.so"
     else:
         err = "Unexpected/unsupported platform '{}'".format(sys.platform)
         log.error(err)
