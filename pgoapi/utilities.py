@@ -169,47 +169,62 @@ def long_to_bytes(val, endianness='big'):
 
     return s
 
-def get_hash_lib_path():
+def get_lib_paths():
     # win32 doesn't mean necessarily 32 bits
     hash_lib = None
     arch = platform.architecture()[0]
     if sys.platform == "win32" or sys.platform == "cygwin":
         if arch == '64bit':
-            hash_lib = "libniantichash-windows-x86-64.dll"
+            encrypt_lib = "libpcrypt-windows-x86-64.dll"
+            hash_lib = "libniahash-windows-x86-64.dll"
         else:
-            hash_lib = "libniantichash-windows-i686.dll"
+            encrypt_lib = "libpcrypt-windows-i686.dll"
+            hash_lib = "libniahash-windows-i686.dll"
     elif sys.platform == "darwin":
         if arch == '64bit':
-            hash_lib = "libniantichash-macos-x86-64.dylib"
+            encrypt_lib = "libpcrypt-macos-x86-64.dylib"
+            hash_lib = "libniahash-macos-x86-64.dylib"
         else:
-            hash_lib = "libniantichash-macos-i386.dylib"
+            encrypt_lib = "libpcrypt-macos-i386.dylib"
+            hash_lib = "libniahash-macos-i386.dylib"
     elif os.uname()[4].startswith("arm") and arch == '32bit':
-        hash_lib = "libniantichash-linux-arm32.so"
+        encrypt_lib = "libpcrypt-linux-arm32.so"
+        hash_lib = "libniahash-linux-arm32.so"
     elif os.uname()[4].startswith("aarch64") and arch == '64bit':
-        hash_lib = "libniantichash-linux-arm64.so"
+        encrypt_lib = "libpcrypt-linux-arm64.so"
+        hash_lib = "libniahash-linux-arm64.so"
     elif sys.platform.startswith('linux'):
         if arch == '64bit':
-            hash_lib = "libniantichash-linux-x86-64.so"
+            encrypt_lib = "libpcrypt-linux-x86-64.so"
+            hash_lib = "libniahash-linux-x86-64.so"
         else:
-            hash_lib = "libniantichash-linux-i386.so"
+            encrypt_lib = "libpcrypt-linux-i386.so"
+            hash_lib = "libniahash-linux-i386.so"
     elif sys.platform.startswith('freebsd'):
         if arch == '64bit':
-            hash_lib = "libniantichash-freebsd-x86-64.so"
+            encrypt_lib = "libpcrypt-freebsd-x86-64.so"
+            hash_lib = "libniahash-freebsd-x86-64.so"
         else:
-            hash_lib = "libniantichash-freebsd-i386.so"
+            encrypt_lib = "libpcrypt-freebsd-i386.so"
+            hash_lib = "libniahash-freebsd-i386.so"
     else:
         err = "Unexpected/unsupported platform '{}'".format(sys.platform)
         log.error(err)
         raise Exception(err)
 
+    encrypt_lib_path = os.path.join(os.path.dirname(__file__), "lib", encrypt_lib)
     hash_lib_path = os.path.join(os.path.dirname(__file__), "lib", hash_lib)
 
+    if not os.path.isfile(encrypt_lib_path):
+        err = "Could not find {} encryption library {}".format(sys.platform, encrypt_lib_path)
+        log.error(err)
+        raise Exception(err)
     if not os.path.isfile(hash_lib_path):
         err = "Could not find {} hashing library {}".format(sys.platform, hash_lib_path)
         log.error(err)
         raise Exception(err)
 
-    return hash_lib_path
+    return encrypt_lib_path, hash_lib_path
 
 
 class HashGenerator:

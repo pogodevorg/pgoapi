@@ -34,7 +34,7 @@ from . import __title__, __version__, __copyright__
 from pgoapi.rpc_api import RpcApi
 from pgoapi.auth_ptc import AuthPtc
 from pgoapi.auth_google import AuthGoogle
-from pgoapi.utilities import parse_api_endpoint, get_hash_lib_path
+from pgoapi.utilities import parse_api_endpoint, get_lib_paths
 from pgoapi.exceptions import AuthException, NotLoggedInException, ServerBusyOrOfflineException, NoPlayerPositionSetException, EmptySubrequestChainException, AuthTokenExpiredException, ServerApiEndpointRedirectException, UnexpectedResponseException
 
 from . import protos
@@ -240,8 +240,12 @@ class PGoApiRequest:
 
         signature_lib_path = self.__parent__.get_signature_lib()
         hash_lib_path = self.__parent__.get_hash_lib()
-        if not hash_lib_path:
-            hash_lib_path = get_hash_lib_path()
+        if not signature_lib_path or not hash_lib_path:
+            default_libraries = get_lib_paths()
+            if not signature_lib_path:
+                signature_lib_path = default_libraries[0]
+            if not hash_lib_path:
+                hash_lib_path = default_libraries[1]
         request.activate_signature(signature_lib_path, hash_lib_path)
 
         self.log.info('Execution of RPC')
