@@ -38,7 +38,7 @@ from pgoapi.utilities import parse_api_endpoint, get_lib_paths
 from pgoapi.exceptions import AuthException, NotLoggedInException, ServerBusyOrOfflineException, NoPlayerPositionSetException, EmptySubrequestChainException, AuthTokenExpiredException, ServerApiEndpointRedirectException, UnexpectedResponseException
 
 from . import protos
-from POGOProtos.Networking.Requests.RequestType_pb2 import RequestType
+from pogoprotos.networking.requests.request_type_pb2 import RequestType
 
 logger = logging.getLogger(__name__)
 

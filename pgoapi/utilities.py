@@ -247,7 +247,7 @@ class HashGenerator:
     def generate_request_hash(self, authticket, request):
         first_hash = self.hash64salt32(authticket, seed=HASH_SEED)
         req_hash = self.hash64salt64(request, seed=first_hash)
-        return ctypes.c_int64(req_hash).value
+        return ctypes.c_uint64(req_hash).value
 
     def hash64salt32(self, buf, seed):
         buf = struct.pack(">I", seed) + buf

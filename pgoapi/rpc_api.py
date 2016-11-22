@@ -46,11 +46,11 @@ from pgoapi.utilities import to_camel_case, get_time, get_format_time_diff, Rand
     HashGenerator
 
 from . import protos
-from POGOProtos.Networking.Envelopes.RequestEnvelope_pb2 import RequestEnvelope
-from POGOProtos.Networking.Envelopes.ResponseEnvelope_pb2 import ResponseEnvelope
-from POGOProtos.Networking.Requests.RequestType_pb2 import RequestType
-from POGOProtos.Networking.Envelopes.SignalAgglomUpdates_pb2 import SignalAgglomUpdates
-from POGOProtos.Networking.Platform.Requests.SendEncryptedSignatureRequest_pb2 import SendEncryptedSignatureRequest
+from pogoprotos.networking.envelopes.request_envelope_pb2 import RequestEnvelope
+from pogoprotos.networking.envelopes.response_envelope_pb2 import ResponseEnvelope
+from pogoprotos.networking.requests.request_type_pb2 import RequestType
+from pogoprotos.networking.envelopes.signature_pb2 import Signature
+from pogoprotos.networking.platform.requests.send_encrypted_signature_request_pb2 import SendEncryptedSignatureRequest
 
 
 class RpcApi:
@@ -65,7 +65,7 @@ class RpcApi:
         self._auth_provider = auth_provider
 
         # mystical unknown6 - resolved by PokemonGoDev
-        self._signal_agglom_gen = False
+        self._signature_gen = False
         self._signature_lib = None
         self._hash_engine = None
 
@@ -81,7 +81,7 @@ class RpcApi:
 
     def activate_signature(self, signature_lib_path, hash_lib_path):
         try:
-            self._signal_agglom_gen = True
+            self._signature_gen = True
             self._signature_lib = ctypes.cdll.LoadLibrary(signature_lib_path)
             self._hash_engine = HashGenerator(hash_lib_path)
         except:
@@ -116,7 +116,7 @@ class RpcApi:
 
     def get_class(self, cls):
         module_, class_ = cls.rsplit('.', 1)
-        class_ = getattr(import_module(module_), class_)
+        class_ = getattr(import_module(module_), to_camel_case(class_))
         return class_
 
     def _make_rpc(self, endpoint, request_proto_plain):
@@ -190,7 +190,7 @@ class RpcApi:
         if player_position:
             request.latitude, request.longitude, altitude = player_position
 
-        # generate sub requests before SignalAgglomUpdates generation
+        # generate sub requests before Signature generation
         request = self._build_sub_requests(request, subrequests)
 
         ticket = self._auth_provider.get_ticket()
@@ -206,29 +206,29 @@ class RpcApi:
             request.auth_info.token.unknown2 = self.token2
             ticket_serialized = request.auth_info.SerializeToString()  #Sig uses this when no auth_ticket available
 
-        if self._signal_agglom_gen:
-            sig = SignalAgglomUpdates()
+        if self._signature_gen:
+            sig = Signature()
 
-            sig.location_hash_by_token_seed = self._hash_engine.generate_location_hash_by_seed(ticket_serialized, request.latitude, request.longitude, request.accuracy)
-            sig.location_hash = self._hash_engine.generate_location_hash(request.latitude, request.longitude, request.accuracy)
+            sig.location_hash1 = self._hash_engine.generate_location_hash_by_seed(ticket_serialized, request.latitude, request.longitude, request.accuracy)
+            sig.location_hash2 = self._hash_engine.generate_location_hash(request.latitude, request.longitude, request.accuracy)
 
             for req in request.requests:
                 hash = self._hash_engine.generate_request_hash(ticket_serialized, req.SerializeToString())
-                sig.request_hashes.append(hash)
+                sig.request_hash.append(hash)
 
-            sig.field22 = self.session_hash
-            sig.epoch_timestamp_ms = get_time(ms=True)
-            sig.timestamp_ms_since_start = get_time(ms=True) - RpcApi.START_TIME
-            if sig.timestamp_ms_since_start < 5000:
-                sig.timestamp_ms_since_start = random.randint(5000, 8000)
+            sig.session_hash = self.session_hash
+            sig.timestamp = get_time(ms=True)
+            sig.timestamp_since_start = get_time(ms=True) - RpcApi.START_TIME
+            if sig.timestamp_since_start < 5000:
+                sig.timestamp_since_start = random.randint(5000, 8000)
 
-            loc = sig.location_updates.add()
-            sen = sig.sensor_updates.add()
+            loc = sig.location_fix.add()
+            sen = sig.sensor_info.add()
 
-            sen.timestamp = random.randint(sig.timestamp_ms_since_start - 5000, sig.timestamp_ms_since_start - 100)
-            loc.timestamp_ms = random.randint(sig.timestamp_ms_since_start - 30000, sig.timestamp_ms_since_start - 1000)
+            sen.timestamp_snapshot = random.randint(sig.timestamp_since_start - 5000, sig.timestamp_since_start - 100)
+            loc.timestamp_snapshot = random.randint(sig.timestamp_since_start - 5000, sig.timestamp_since_start - 1000)
 
-            loc.name = random.choice(('network', 'network', 'network', 'network', 'fused'))
+            loc.provider = random.choice(('network', 'network', 'network', 'network', 'fused'))
             loc.latitude = request.latitude
             loc.longitude = request.longitude
 
@@ -239,12 +239,12 @@ class RpcApi:
 
             if random.random() > .95:
                 # no reading for roughly 1 in 20 updates
-                loc.device_course = -1
-                loc.device_speed = -1
+                loc.course = -1
+                loc.speed = -1
             else:
                 self.course = random.triangular(0, 360, self.course)
-                loc.device_course = self.course
-                loc.device_speed = random.triangular(0.2, 4.25, 1)
+                loc.course = self.course
+                loc.speed = random.triangular(0.2, 4.25, 1)
 
             loc.provider_status = 3
             loc.location_type = 1
@@ -258,9 +258,9 @@ class RpcApi:
                     loc.vertical_accuracy = random.choice((3, 4, 6, 6, 8, 12, 24))
                 loc.horizontal_accuracy = request.accuracy
 
-            sen.acceleration_x = random.triangular(-3, 1, 0)
-            sen.acceleration_y = random.triangular(-2, 3, 0)
-            sen.acceleration_z = random.triangular(-4, 2, 0)
+            sen.linear_acceleration_x = random.triangular(-3, 1, 0)
+            sen.linear_acceleration_y = random.triangular(-2, 3, 0)
+            sen.linear_acceleration_z = random.triangular(-4, 2, 0)
             sen.magnetic_field_x = random.triangular(-50, 50, 0)
             sen.magnetic_field_y = random.triangular(-60, 50, -5)
             sen.magnetic_field_z = random.triangular(-60, 40, -30)
@@ -276,20 +276,20 @@ class RpcApi:
             sen.gravity_z = random.triangular(-1, .7, -0.8)
             sen.status = 3
 
-            sig.field25 = 16892874496697272497
+            sig.unknown25 = 4773719081358681275
 
             if self.device_info:
                 for key in self.device_info:
                     setattr(sig.device_info, key, self.device_info[key])
                 if self.device_info['device_brand'] == 'Apple':
-                    sig.ios_device_info.bool5 = True
+                    sig.activity_status.stationary = True
             else:
-                sig.ios_device_info.bool5 = True
+                sig.activity_status.stationary = True
 
-            signal_agglom_proto = sig.SerializeToString()
+            signature_proto = sig.SerializeToString()
 
             sig_request = SendEncryptedSignatureRequest()
-            sig_request.encrypted_signature = self._generate_signature(signal_agglom_proto, sig.timestamp_ms_since_start)
+            sig_request.encrypted_signature = self._generate_signature(signature_proto, sig.timestamp_since_start)
             plat = request.platform_requests.add()
             plat.type = 6
             plat.request_message = sig_request.SerializeToString()
@@ -321,8 +321,8 @@ class RpcApi:
 
                 entry_name = RequestType.Name(entry_id)
 
-                proto_name = to_camel_case(entry_name.lower()) + 'Message'
-                proto_classname = 'POGOProtos.Networking.Requests.Messages.' + proto_name + '_pb2.' + proto_name
+                proto_name = entry_name.lower() + '_message'
+                proto_classname = 'pogoprotos.networking.requests.messages.' + proto_name + '_pb2.' + proto_name
                 subrequest_extension = self.get_class(proto_classname)()
 
                 self.log.debug("Subrequest class: %s", proto_classname)
@@ -427,8 +427,8 @@ class RpcApi:
                 entry_id = list(request_entry.items())[0][0]
 
             entry_name = RequestType.Name(entry_id)
-            proto_name = to_camel_case(entry_name.lower()) + 'Response'
-            proto_classname = 'POGOProtos.Networking.Responses.' + proto_name + '_pb2.' + proto_name
+            proto_name = entry_name.lower() + '_response'
+            proto_classname = 'pogoprotos.networking.responses.' + proto_name + '_pb2.' + proto_name
 
             self.log.debug("Parsing class: %s", proto_classname)
 
