@@ -29,6 +29,7 @@ import re
 import six
 import logging
 import requests
+import time
 
 from . import __title__, __version__, __copyright__
 from pgoapi.rpc_api import RpcApi
@@ -155,20 +156,34 @@ class PGoApi:
             raise AttributeError
 
     def app_simulation_login(self):
-        self.log.info('Starting RPC login sequence (app simulation)')
+        self.log.info('Starting RPC login sequence (iOS app simulation)')
 
-        # making a standard call, like it is also done by the client
+        # Send empty initial request
         request = self.create_request()
+        response = request.call()
+        
+        time.sleep(1.5)
+        
+        # Send GET_PLAYER only
+        request = self.create_request()
+        request.get_player(player_locale = {'country': 'US', 'language': 'en', 'timezone': 'America/Chicago'})
+        response = request.call()
+        
+        if response['responses']['GET_PLAYER']['banned'] == True:
+            raise AuthException("Account is banned")
+        
+        time.sleep(1.5)
 
-        request.get_player()
+        request = self.create_request()
+        request.download_remote_config_version(platform = 1, app_version = 4500)
+        request.check_challenge()
         request.get_hatched_eggs()
         request.get_inventory()
         request.check_awarded_badges()
-        request.download_settings(hash="54b359c97e46900f87211ef6e6dd0b7f2a3ea1f5")
-
+        request.download_settings()
         response = request.call()
 
-        self.log.info('Finished RPC login sequence (app simulation)')
+        self.log.info('Finished RPC login sequence (iOS app simulation)')
 
         return response
 
@@ -225,9 +240,6 @@ class PGoApiRequest:
         self.device_info = device_info
 
     def call(self):
-        if not self._req_method_list:
-            raise EmptySubrequestChainException()
-
         if (self._position_lat is None) or (self._position_lng is None):
             raise NoPlayerPositionSetException()
 
