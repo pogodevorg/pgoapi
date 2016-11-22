@@ -125,9 +125,6 @@ def main():
     else:
         api.set_authentication(provider = config.auth_service, username = config.username, password =  config.password)
 
-    # provide the path of your pcrypt library
-    api.set_signature_lib('/usr/local/lib/libpcrypt.so')
-
     # print get maps object
     cell_ids = util.get_cell_ids(position[0], position[1])
     timestamps = [0,] * len(cell_ids)
