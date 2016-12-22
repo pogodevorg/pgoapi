@@ -79,7 +79,7 @@ def get_pos_by_name(location_name):
     return (loc.latitude, loc.longitude, loc.altitude)
 
 
-def get_cell_ids(lat, long, radius=1000):
+def get_cell_ids(lat, long, radius=500):
     # Max values allowed by server according to this comment:
     # https://github.com/AeonLucid/POGOProtos/issues/83#issuecomment-235612285
     if radius > 1500:
