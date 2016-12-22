@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/data/badge/badge_capture_reward.proto',
   package='pogoprotos.data.badge',
   syntax='proto3',
-  serialized_pb=_b('\n0pogoprotos/data/badge/badge_capture_reward.proto\x12\x15pogoprotos.data.badge\"7\n\x12\x42\x61\x64geCaptureReward\x12!\n\x19\x63\x61pture_reward_multiplier\x18\x01 \x01(\x02\x62\x06proto3')
+  serialized_pb=_b('\n0pogoprotos/data/badge/badge_capture_reward.proto\x12\x15pogoprotos.data.badge\"T\n\x12\x42\x61\x64geCaptureReward\x12!\n\x19\x63\x61pture_reward_multiplier\x18\x01 \x01(\x02\x12\x1b\n\x13\x61vatar_template_ids\x18\x02 \x03(\tb\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -40,6 +40,13 @@ _BADGECAPTUREREWARD = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='avatar_template_ids', full_name='pogoprotos.data.badge.BadgeCaptureReward.avatar_template_ids', index=1,
+      number=2, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -53,7 +60,7 @@ _BADGECAPTUREREWARD = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=75,
-  serialized_end=130,
+  serialized_end=159,
 )
 
 DESCRIPTOR.message_types_by_name['BadgeCaptureReward'] = _BADGECAPTUREREWARD

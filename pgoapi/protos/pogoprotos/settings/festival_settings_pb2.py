@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/settings/festival_settings.proto',
   package='pogoprotos.settings',
   syntax='proto3',
-  serialized_pb=_b('\n+pogoprotos/settings/festival_settings.proto\x12\x13pogoprotos.settings\"\xa3\x01\n\x10\x46\x65stivalSettings\x12I\n\rfestival_type\x18\x01 \x01(\x0e\x32\x32.pogoprotos.settings.FestivalSettings.FestivalType\x12\x0b\n\x03key\x18\x02 \x01(\t\x12\x0e\n\x06vector\x18\x03 \x01(\t\"\'\n\x0c\x46\x65stivalType\x12\x08\n\x04NONE\x10\x00\x12\r\n\tHALLOWEEN\x10\x01\x62\x06proto3')
+  serialized_pb=_b('\n+pogoprotos/settings/festival_settings.proto\x12\x13pogoprotos.settings\"\xb0\x01\n\x10\x46\x65stivalSettings\x12I\n\rfestival_type\x18\x01 \x01(\x0e\x32\x32.pogoprotos.settings.FestivalSettings.FestivalType\x12\x0b\n\x03key\x18\x02 \x01(\t\x12\x0e\n\x06vector\x18\x03 \x01(\t\"4\n\x0c\x46\x65stivalType\x12\x08\n\x04NONE\x10\x00\x12\r\n\tHALLOWEEN\x10\x01\x12\x0b\n\x07HOLIDAY\x10\x02\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -39,11 +39,15 @@ _FESTIVALSETTINGS_FESTIVALTYPE = _descriptor.EnumDescriptor(
       name='HALLOWEEN', index=1, number=1,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='HOLIDAY', index=2, number=2,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=193,
-  serialized_end=232,
+  serialized_end=245,
 )
 _sym_db.RegisterEnumDescriptor(_FESTIVALSETTINGS_FESTIVALTYPE)
 
@@ -90,7 +94,7 @@ _FESTIVALSETTINGS = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=69,
-  serialized_end=232,
+  serialized_end=245,
 )
 
 _FESTIVALSETTINGS.fields_by_name['festival_type'].enum_type = _FESTIVALSETTINGS_FESTIVALTYPE
