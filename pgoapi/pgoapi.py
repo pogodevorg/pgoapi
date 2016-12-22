@@ -169,7 +169,7 @@ class PGoApi:
         request.get_player(player_locale = {'country': 'US', 'language': 'en', 'timezone': 'America/Chicago'})
         response = request.call()
         
-        if response['responses']['GET_PLAYER']['banned'] == True:
+        if 'banned' in response['responses']['GET_PLAYER'] and response['responses']['GET_PLAYER']['banned'] == True:
             raise AuthException("Account is banned")
         
         time.sleep(1.5)
