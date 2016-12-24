@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/data/pokemon_display.proto',
   package='pogoprotos.data',
   syntax='proto3',
-  serialized_pb=_b('\n%pogoprotos/data/pokemon_display.proto\x12\x0fpogoprotos.data\"r\n\x0ePokemonDisplay\x12\x38\n\x07\x63ostume\x18\x01 \x01(\x0e\x32\'.pogoprotos.data.PokemonDisplay.Costume\"&\n\x07\x43ostume\x12\t\n\x05UNSET\x10\x00\x12\x10\n\x0cHOLIDAY_2016\x10\x01\x62\x06proto3')
+  serialized_pb=_b('\n%pogoprotos/data/pokemon_display.proto\x12\x0fpogoprotos.data\"\xfb\x01\n\x0ePokemonDisplay\x12\x38\n\x07\x63ostume\x18\x01 \x01(\x0e\x32\'.pogoprotos.data.PokemonDisplay.Costume\x12\x36\n\x06gender\x18\x02 \x01(\x0e\x32&.pogoprotos.data.PokemonDisplay.Gender\x12\r\n\x05shiny\x18\x03 \x01(\x08\"&\n\x07\x43ostume\x12\t\n\x05UNSET\x10\x00\x12\x10\n\x0cHOLIDAY_2016\x10\x01\"@\n\x06Gender\x12\x10\n\x0cGENDER_UNSET\x10\x00\x12\x08\n\x04MALE\x10\x01\x12\n\n\x06\x46\x45MALE\x10\x02\x12\x0e\n\nGENDERLESS\x10\x03\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -42,10 +42,40 @@ _POKEMONDISPLAY_COSTUME = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=134,
-  serialized_end=172,
+  serialized_start=206,
+  serialized_end=244,
 )
 _sym_db.RegisterEnumDescriptor(_POKEMONDISPLAY_COSTUME)
+
+_POKEMONDISPLAY_GENDER = _descriptor.EnumDescriptor(
+  name='Gender',
+  full_name='pogoprotos.data.PokemonDisplay.Gender',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='GENDER_UNSET', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='MALE', index=1, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FEMALE', index=2, number=2,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='GENDERLESS', index=3, number=3,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=246,
+  serialized_end=310,
+)
+_sym_db.RegisterEnumDescriptor(_POKEMONDISPLAY_GENDER)
 
 
 _POKEMONDISPLAY = _descriptor.Descriptor(
@@ -62,12 +92,27 @@ _POKEMONDISPLAY = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='gender', full_name='pogoprotos.data.PokemonDisplay.gender', index=1,
+      number=2, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='shiny', full_name='pogoprotos.data.PokemonDisplay.shiny', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
     _POKEMONDISPLAY_COSTUME,
+    _POKEMONDISPLAY_GENDER,
   ],
   options=None,
   is_extendable=False,
@@ -75,12 +120,14 @@ _POKEMONDISPLAY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=58,
-  serialized_end=172,
+  serialized_start=59,
+  serialized_end=310,
 )
 
 _POKEMONDISPLAY.fields_by_name['costume'].enum_type = _POKEMONDISPLAY_COSTUME
+_POKEMONDISPLAY.fields_by_name['gender'].enum_type = _POKEMONDISPLAY_GENDER
 _POKEMONDISPLAY_COSTUME.containing_type = _POKEMONDISPLAY
+_POKEMONDISPLAY_GENDER.containing_type = _POKEMONDISPLAY
 DESCRIPTOR.message_types_by_name['PokemonDisplay'] = _POKEMONDISPLAY
 
 PokemonDisplay = _reflection.GeneratedProtocolMessageType('PokemonDisplay', (_message.Message,), dict(

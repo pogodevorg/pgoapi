@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/data/avatar/avatar_customization.proto',
   package='pogoprotos.data.avatar',
   syntax='proto3',
-  serialized_pb=_b('\n1pogoprotos/data/avatar/avatar_customization.proto\x12\x16pogoprotos.data.avatar\"\xe8\x01\n\x13\x41vatarCustomization\x12\x1a\n\x12\x61vatar_template_id\x18\x01 \x01(\t\x12\x41\n\x06labels\x18\x02 \x03(\x0e\x32\x31.pogoprotos.data.avatar.AvatarCustomization.Label\"r\n\x05Label\x12\x0f\n\x0bUNSET_LABEL\x10\x00\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x01\x12\t\n\x05OWNED\x10\x02\x12\x0c\n\x08\x46\x45\x41TURED\x10\x03\x12\x07\n\x03NEW\x10\x04\x12\x08\n\x04SALE\x10\x05\x12\x0f\n\x0bPURCHASABLE\x10\x06\x12\x0e\n\nUNLOCKABLE\x10\x07\x62\x06proto3')
+  serialized_pb=_b('\n1pogoprotos/data/avatar/avatar_customization.proto\x12\x16pogoprotos.data.avatar\"\xf4\x01\n\x13\x41vatarCustomization\x12\x1a\n\x12\x61vatar_template_id\x18\x01 \x01(\t\x12\x41\n\x06labels\x18\x02 \x03(\x0e\x32\x31.pogoprotos.data.avatar.AvatarCustomization.Label\"~\n\x05Label\x12\x0f\n\x0bUNSET_LABEL\x10\x00\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x01\x12\t\n\x05OWNED\x10\x02\x12\x0c\n\x08\x46\x45\x41TURED\x10\x03\x12\x07\n\x03NEW\x10\x04\x12\x08\n\x04SALE\x10\x05\x12\x0f\n\x0bPURCHASABLE\x10\x06\x12\x0e\n\nUNLOCKABLE\x10\x07\x12\n\n\x06VIEWED\x10\x08\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -63,11 +63,15 @@ _AVATARCUSTOMIZATION_LABEL = _descriptor.EnumDescriptor(
       name='UNLOCKABLE', index=7, number=7,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='VIEWED', index=8, number=8,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=196,
-  serialized_end=310,
+  serialized_end=322,
 )
 _sym_db.RegisterEnumDescriptor(_AVATARCUSTOMIZATION_LABEL)
 
@@ -107,7 +111,7 @@ _AVATARCUSTOMIZATION = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=78,
-  serialized_end=310,
+  serialized_end=322,
 )
 
 _AVATARCUSTOMIZATION.fields_by_name['labels'].enum_type = _AVATARCUSTOMIZATION_LABEL

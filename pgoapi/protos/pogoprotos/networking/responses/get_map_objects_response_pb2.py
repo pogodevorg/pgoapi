@@ -21,12 +21,38 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/networking/responses/get_map_objects_response.proto',
   package='pogoprotos.networking.responses',
   syntax='proto3',
-  serialized_pb=_b('\n>pogoprotos/networking/responses/get_map_objects_response.proto\x12\x1fpogoprotos.networking.responses\x1a\x1dpogoprotos/map/map_cell.proto\x1a\'pogoprotos/map/map_objects_status.proto\"u\n\x15GetMapObjectsResponse\x12*\n\tmap_cells\x18\x01 \x03(\x0b\x32\x17.pogoprotos.map.MapCell\x12\x30\n\x06status\x18\x02 \x01(\x0e\x32 .pogoprotos.map.MapObjectsStatusb\x06proto3')
+  serialized_pb=_b('\n>pogoprotos/networking/responses/get_map_objects_response.proto\x12\x1fpogoprotos.networking.responses\x1a\x1dpogoprotos/map/map_cell.proto\x1a\'pogoprotos/map/map_objects_status.proto\"\xf7\x01\n\x15GetMapObjectsResponse\x12*\n\tmap_cells\x18\x01 \x03(\x0b\x32\x17.pogoprotos.map.MapCell\x12\x30\n\x06status\x18\x02 \x01(\x0e\x32 .pogoprotos.map.MapObjectsStatus\x12U\n\x0btime_of_day\x18\x03 \x01(\x0e\x32@.pogoprotos.networking.responses.GetMapObjectsResponse.TimeOfDay\")\n\tTimeOfDay\x12\x08\n\x04NONE\x10\x00\x12\x07\n\x03\x44\x41Y\x10\x01\x12\t\n\x05NIGHT\x10\x02\x62\x06proto3')
   ,
   dependencies=[pogoprotos_dot_map_dot_map__cell__pb2.DESCRIPTOR,pogoprotos_dot_map_dot_map__objects__status__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
+
+_GETMAPOBJECTSRESPONSE_TIMEOFDAY = _descriptor.EnumDescriptor(
+  name='TimeOfDay',
+  full_name='pogoprotos.networking.responses.GetMapObjectsResponse.TimeOfDay',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='NONE', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='DAY', index=1, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='NIGHT', index=2, number=2,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=378,
+  serialized_end=419,
+)
+_sym_db.RegisterEnumDescriptor(_GETMAPOBJECTSRESPONSE_TIMEOFDAY)
 
 
 _GETMAPOBJECTSRESPONSE = _descriptor.Descriptor(
@@ -50,11 +76,19 @@ _GETMAPOBJECTSRESPONSE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='time_of_day', full_name='pogoprotos.networking.responses.GetMapObjectsResponse.time_of_day', index=2,
+      number=3, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
+    _GETMAPOBJECTSRESPONSE_TIMEOFDAY,
   ],
   options=None,
   is_extendable=False,
@@ -62,12 +96,14 @@ _GETMAPOBJECTSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=171,
-  serialized_end=288,
+  serialized_start=172,
+  serialized_end=419,
 )
 
 _GETMAPOBJECTSRESPONSE.fields_by_name['map_cells'].message_type = pogoprotos_dot_map_dot_map__cell__pb2._MAPCELL
 _GETMAPOBJECTSRESPONSE.fields_by_name['status'].enum_type = pogoprotos_dot_map_dot_map__objects__status__pb2._MAPOBJECTSSTATUS
+_GETMAPOBJECTSRESPONSE.fields_by_name['time_of_day'].enum_type = _GETMAPOBJECTSRESPONSE_TIMEOFDAY
+_GETMAPOBJECTSRESPONSE_TIMEOFDAY.containing_type = _GETMAPOBJECTSRESPONSE
 DESCRIPTOR.message_types_by_name['GetMapObjectsResponse'] = _GETMAPOBJECTSRESPONSE
 
 GetMapObjectsResponse = _reflection.GeneratedProtocolMessageType('GetMapObjectsResponse', (_message.Message,), dict(

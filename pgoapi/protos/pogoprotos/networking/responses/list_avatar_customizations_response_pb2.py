@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/networking/responses/list_avatar_customizations_response.proto',
   package='pogoprotos.networking.responses',
   syntax='proto3',
-  serialized_pb=_b('\nIpogoprotos/networking/responses/list_avatar_customizations_response.proto\x12\x1fpogoprotos.networking.responses\x1a\x31pogoprotos/data/avatar/avatar_customization.proto\"\xf6\x01\n ListAvatarCustomizationsResponse\x12X\n\x06result\x18\x01 \x01(\x0e\x32H.pogoprotos.networking.responses.ListAvatarCustomizationsResponse.Result\x12I\n\x14\x61vatar_customization\x18\x02 \x01(\x0b\x32+.pogoprotos.data.avatar.AvatarCustomization\"-\n\x06Result\x12\t\n\x05UNSET\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x12\x0b\n\x07\x46\x41ILURE\x10\x02\x62\x06proto3')
+  serialized_pb=_b('\nIpogoprotos/networking/responses/list_avatar_customizations_response.proto\x12\x1fpogoprotos.networking.responses\x1a\x31pogoprotos/data/avatar/avatar_customization.proto\"\xf7\x01\n ListAvatarCustomizationsResponse\x12X\n\x06result\x18\x01 \x01(\x0e\x32H.pogoprotos.networking.responses.ListAvatarCustomizationsResponse.Result\x12J\n\x15\x61vatar_customizations\x18\x02 \x01(\x0b\x32+.pogoprotos.data.avatar.AvatarCustomization\"-\n\x06Result\x12\t\n\x05UNSET\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x12\x0b\n\x07\x46\x41ILURE\x10\x02\x62\x06proto3')
   ,
   dependencies=[pogoprotos_dot_data_dot_avatar_dot_avatar__customization__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -48,8 +48,8 @@ _LISTAVATARCUSTOMIZATIONSRESPONSE_RESULT = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=363,
-  serialized_end=408,
+  serialized_start=364,
+  serialized_end=409,
 )
 _sym_db.RegisterEnumDescriptor(_LISTAVATARCUSTOMIZATIONSRESPONSE_RESULT)
 
@@ -69,7 +69,7 @@ _LISTAVATARCUSTOMIZATIONSRESPONSE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='avatar_customization', full_name='pogoprotos.networking.responses.ListAvatarCustomizationsResponse.avatar_customization', index=1,
+      name='avatar_customizations', full_name='pogoprotos.networking.responses.ListAvatarCustomizationsResponse.avatar_customizations', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -89,11 +89,11 @@ _LISTAVATARCUSTOMIZATIONSRESPONSE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=162,
-  serialized_end=408,
+  serialized_end=409,
 )
 
 _LISTAVATARCUSTOMIZATIONSRESPONSE.fields_by_name['result'].enum_type = _LISTAVATARCUSTOMIZATIONSRESPONSE_RESULT
-_LISTAVATARCUSTOMIZATIONSRESPONSE.fields_by_name['avatar_customization'].message_type = pogoprotos_dot_data_dot_avatar_dot_avatar__customization__pb2._AVATARCUSTOMIZATION
+_LISTAVATARCUSTOMIZATIONSRESPONSE.fields_by_name['avatar_customizations'].message_type = pogoprotos_dot_data_dot_avatar_dot_avatar__customization__pb2._AVATARCUSTOMIZATION
 _LISTAVATARCUSTOMIZATIONSRESPONSE_RESULT.containing_type = _LISTAVATARCUSTOMIZATIONSRESPONSE
 DESCRIPTOR.message_types_by_name['ListAvatarCustomizationsResponse'] = _LISTAVATARCUSTOMIZATIONSRESPONSE
 
