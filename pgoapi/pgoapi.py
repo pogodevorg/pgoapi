@@ -60,8 +60,7 @@ class PGoApi:
         self._position_lng = position_lng
         self._position_alt = position_alt
 
-        self._signature_lib = None
-        self._hash_lib = None
+        self._hash_server_token = None
 
         self._session = requests.session()
         self._session.headers.update({'User-Agent': 'Niantic App'})
@@ -128,21 +127,11 @@ class PGoApi:
                                 self._position_alt, self.device_info)
         return request
 
-    def activate_signature(self, signature_lib_path=None, hash_lib_path=None):
-        if signature_lib_path: self.set_signature_lib(signature_lib_path)
-        if hash_lib_path: self.set_hash_lib(hash_lib_path)
+    def activate_hash_server(self, hash_server_token):
+        self._hash_server_token = hash_server_token
 
-    def set_signature_lib(self, signature_lib_path):
-        self._signature_lib = signature_lib_path
-
-    def set_hash_lib(self, hash_lib_path):
-        self._hash_lib = hash_lib_path
-
-    def get_signature_lib(self):
-        return self._signature_lib
-
-    def get_hash_lib(self):
-        return self._hash_lib
+    def get_hash_server_token(self):
+        return self._hash_server_token
 
     def __getattr__(self, func):
         def function(**kwargs):
@@ -250,15 +239,23 @@ class PGoApiRequest:
         request = RpcApi(self._auth_provider, self.device_info)
         request._session = self.__parent__._session
 
-        signature_lib_path = self.__parent__.get_signature_lib()
-        hash_lib_path = self.__parent__.get_hash_lib()
-        if not signature_lib_path or not hash_lib_path:
-            default_libraries = get_lib_paths()
-            if not signature_lib_path:
-                signature_lib_path = default_libraries[0]
-            if not hash_lib_path:
-                hash_lib_path = default_libraries[1]
-        request.activate_signature(signature_lib_path, hash_lib_path)
+        hash_server_token = self.__parent__.get_hash_server_token()
+        if hash_server_token:
+            version = "0_51"
+            request.set_api_version(version)
+            default_libraries = get_lib_paths(version)
+            signature_lib_path = default_libraries[0]
+            request.activate_signature(signature_lib_path)
+
+            request.activate_hash_server(hash_server_token)
+        else:
+            version = "0_45"
+            request.set_api_version(version)
+            default_libraries = get_lib_paths(version)
+            signature_lib_path = default_libraries[0]
+            request.activate_signature(signature_lib_path)
+            hash_lib_path = default_libraries[1]
+            request.activate_hash_library(hash_lib_path)
 
         self.log.info('Execution of RPC')
         response = None

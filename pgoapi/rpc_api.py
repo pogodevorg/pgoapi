@@ -35,6 +35,7 @@ import requests
 import subprocess
 import six
 import ctypes
+import binascii
 
 from google.protobuf import message
 
@@ -42,8 +43,10 @@ from importlib import import_module
 
 from pgoapi.protobuf_to_dict import protobuf_to_dict
 from pgoapi.exceptions import NotLoggedInException, ServerBusyOrOfflineException, ServerSideRequestThrottlingException, ServerSideAccessForbiddenException, UnexpectedResponseException, AuthTokenExpiredException, ServerApiEndpointRedirectException
-from pgoapi.utilities import to_camel_case, get_time, get_format_time_diff, Rand48, long_to_bytes, f2i, \
-    HashGenerator
+from pgoapi.utilities import to_camel_case, get_time, get_format_time_diff, Rand48, long_to_bytes, f2i
+from pgoapi.hash_library import HashLibrary
+from pgoapi.hash_engine import HashEngine
+from pgoapi.hash_server import HashServer
 
 from . import protos
 from pogoprotos.networking.envelopes.request_envelope_pb2 import RequestEnvelope
@@ -68,24 +71,33 @@ class RpcApi:
         self._signature_gen = False
         self._signature_lib = None
         self._hash_engine = None
+        self._api_version = "0.45"
 
         if RpcApi.START_TIME == 0:
             RpcApi.START_TIME = get_time(ms=True)
 
         # data fields for SignalAgglom
         self.session_hash = os.urandom(16)
-        self.token2 = random.randint(1,59)
+        self.token2 = random.randint(1, 59)
         self.course = random.uniform(0, 360)
 
         self.device_info = device_info
 
-    def activate_signature(self, signature_lib_path, hash_lib_path):
+    def activate_signature(self, signature_lib_path):
         try:
             self._signature_gen = True
             self._signature_lib = ctypes.cdll.LoadLibrary(signature_lib_path)
-            self._hash_engine = HashGenerator(hash_lib_path)
         except:
             raise
+
+    def activate_hash_library(self, hash_lib_path):
+        self._hash_engine = HashLibrary(hash_lib_path)
+
+    def activate_hash_server(self, auth_token):
+        self._hash_engine = HashServer(auth_token)
+
+    def set_api_version(self, api_version):
+        self._api_version = api_version
 
     def get_rpc_id(self):
         if RpcApi.RPC_ID==0 :  #Startup
@@ -209,18 +221,17 @@ class RpcApi:
         if self._signature_gen:
             sig = Signature()
 
-            sig.location_hash1 = self._hash_engine.generate_location_hash_by_seed(ticket_serialized, request.latitude, request.longitude, request.accuracy)
-            sig.location_hash2 = self._hash_engine.generate_location_hash(request.latitude, request.longitude, request.accuracy)
-
-            for req in request.requests:
-                hash = self._hash_engine.generate_request_hash(ticket_serialized, req.SerializeToString())
-                sig.request_hash.append(hash)
-
             sig.session_hash = self.session_hash
             sig.timestamp = get_time(ms=True)
             sig.timestamp_since_start = get_time(ms=True) - RpcApi.START_TIME
             if sig.timestamp_since_start < 5000:
                 sig.timestamp_since_start = random.randint(5000, 8000)
+
+            self._hash_engine.hash(sig.timestamp, request.latitude, request.longitude, request.accuracy, ticket_serialized, sig.session_hash, request.requests)
+            sig.location_hash1 = self._hash_engine.get_location_auth_hash()
+            sig.location_hash2 = self._hash_engine.get_location_hash()
+            for req_hash in self._hash_engine.get_request_hashes():
+                sig.request_hash.append(req_hash)
 
             loc = sig.location_fix.add()
             sen = sig.sensor_info.add()
@@ -276,7 +287,10 @@ class RpcApi:
             sen.gravity_z = random.triangular(-1, .7, -0.8)
             sen.status = 3
 
-            sig.unknown25 = 4773719081358681275
+            if self._api_version == "0_45":
+                sig.unknown25 = 16892874496697272497
+            elif self._api_version == "0_51":
+                sig.unknown25 = 9614703498812943922
 
             if self.device_info:
                 for key in self.device_info:
@@ -300,13 +314,13 @@ class RpcApi:
 
         return request
 
-    def _generate_signature(self, signature_plain, iv):
+    def _generate_signature(self, signature_plain, timestamp):
         self._signature_lib.argtypes = [ctypes.c_char_p, ctypes.c_size_t, ctypes.c_char_p, ctypes.POINTER(ctypes.POINTER(ctypes.c_ubyte))]
         self._signature_lib.restype = ctypes.c_int
-        rounded_size = len(signature_plain) + (256 - (len(signature_plain) % 256));
-        total_size = rounded_size + 5;
+        rounded_size = len(signature_plain) + (256 - (len(signature_plain) % 256))
+        total_size = rounded_size + 5
         output = ctypes.POINTER(ctypes.c_ubyte * total_size)()
-        output_size = self._signature_lib.encrypt(signature_plain, len(signature_plain), iv, ctypes.byref(output))
+        output_size = self._signature_lib.encrypt(signature_plain, len(signature_plain), timestamp, ctypes.byref(output))
         signature = b''.join(list(map(lambda x: six.int2byte(x), output.contents)))
         return signature
 

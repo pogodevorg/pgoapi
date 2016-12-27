@@ -272,3 +272,4 @@ pip-selfcheck.json
 
 ### Node ###
 node_modules
+test.py

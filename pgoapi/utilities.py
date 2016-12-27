@@ -19,10 +19,8 @@ OR OTHER DEALINGS IN THE SOFTWARE.
 Author: tjado <https://github.com/tejado>
 """
 
-import re
 import time
 import struct
-import ctypes
 import logging
 import os
 import sys
@@ -38,7 +36,6 @@ from s2sphere import LatLng, Angle, Cap, RegionCoverer, math
 
 log = logging.getLogger(__name__)
 
-HASH_SEED = 0x46E945F8  # static hash seed from app
 EARTH_RADIUS = 6371000  # radius of Earth in meters
 
 def f2i(float):
@@ -169,7 +166,7 @@ def long_to_bytes(val, endianness='big'):
 
     return s
 
-def get_lib_paths():
+def get_lib_paths(api_version):
     # win32 doesn't mean necessarily 32 bits
     hash_lib = None
     arch = platform.architecture()[0]
@@ -212,8 +209,8 @@ def get_lib_paths():
         log.error(err)
         raise Exception(err)
 
-    encrypt_lib_path = os.path.join(os.path.dirname(__file__), "lib", encrypt_lib)
-    hash_lib_path = os.path.join(os.path.dirname(__file__), "lib", hash_lib)
+    encrypt_lib_path = os.path.join(os.path.dirname(__file__), "lib_" + api_version, encrypt_lib)
+    hash_lib_path = os.path.join(os.path.dirname(__file__), "lib_" + api_version, hash_lib)
 
     if not os.path.isfile(encrypt_lib_path):
         err = "Could not find {} encryption library {}".format(sys.platform, encrypt_lib_path)
@@ -226,47 +223,3 @@ def get_lib_paths():
 
     return encrypt_lib_path, hash_lib_path
 
-
-class HashGenerator:
-    def __init__(self, library_path):
-        self._hash_lib = ctypes.cdll.LoadLibrary(library_path)
-        self._hash_lib.compute_hash.argtypes = (ctypes.POINTER(ctypes.c_ubyte), ctypes.c_uint32)
-        self._hash_lib.compute_hash.restype = ctypes.c_uint64
-
-    def generate_location_hash_by_seed(self, authticket, lat, lng, acc=5):
-        first_hash = self.hash32(authticket, seed=HASH_SEED)
-        location_bytes = d2h(lat) + d2h(lng) + d2h(acc)
-        loc_hash = self.hash32(location_bytes, seed=first_hash)
-        return ctypes.c_int32(loc_hash).value
-
-    def generate_location_hash(self, lat, lng, acc=5):
-        location_bytes = d2h(lat) + d2h(lng) + d2h(acc)
-        loc_hash = self.hash32(location_bytes, seed=HASH_SEED)
-        return ctypes.c_int32(loc_hash).value
-
-    def generate_request_hash(self, authticket, request):
-        first_hash = self.hash64salt32(authticket, seed=HASH_SEED)
-        req_hash = self.hash64salt64(request, seed=first_hash)
-        return ctypes.c_uint64(req_hash).value
-
-    def hash64salt32(self, buf, seed):
-        buf = struct.pack(">I", seed) + buf
-        return self.calcHash(buf)
-
-    def hash64salt64(self, buf, seed):
-        buf = struct.pack(">Q", seed) + buf
-        return self.calcHash(buf)
-
-    def hash32(self, buf, seed):
-        buf = struct.pack(">I", seed) + buf
-        hash64 = self.calcHash(buf)
-        signedhash64 = ctypes.c_int64(hash64)
-        return ctypes.c_uint(signedhash64.value).value ^ ctypes.c_uint(signedhash64.value >> 32).value
-
-    def calcHash(self, buf):
-        buf = list(bytearray(buf))
-        num_bytes = len(buf)
-        array_type = ctypes.c_ubyte * num_bytes
-
-        data = self._hash_lib.compute_hash(array_type(*buf), ctypes.c_uint32(num_bytes));
-        return ctypes.c_uint64(data).value
