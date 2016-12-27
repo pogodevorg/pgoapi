@@ -197,10 +197,11 @@ class RpcApi:
         request = RequestEnvelope()
         request.status_code = 2
         request.request_id = self.get_rpc_id()
-        request.accuracy = random.choice((5, 5, 5, 5, 10, 10, 10, 30, 30, 50, 65, random.uniform(66,80)))
 
         if player_position:
-            request.latitude, request.longitude, altitude = player_position
+            request.latitude, request.longitude, request.altitude = player_position
+        if not request.altitude or request.altitude == 0:
+            request.altitude = random.choice((5, 5, 5, 5, 10, 10, 10, 30, 30, 50, 65, random.uniform(66,80)))
 
         # generate sub requests before Signature generation
         request = self._build_sub_requests(request, subrequests)
@@ -227,7 +228,7 @@ class RpcApi:
             if sig.timestamp_since_start < 5000:
                 sig.timestamp_since_start = random.randint(5000, 8000)
 
-            self._hash_engine.hash(sig.timestamp, request.latitude, request.longitude, request.accuracy, ticket_serialized, sig.session_hash, request.requests)
+            self._hash_engine.hash(sig.timestamp, request.latitude, request.longitude, request.altitude, ticket_serialized, sig.session_hash, request.requests)
             sig.location_hash1 = self._hash_engine.get_location_auth_hash()
             sig.location_hash2 = self._hash_engine.get_location_hash()
             for req_hash in self._hash_engine.get_request_hashes():
@@ -243,10 +244,7 @@ class RpcApi:
             loc.latitude = request.latitude
             loc.longitude = request.longitude
 
-            if not altitude:
-                loc.altitude = random.triangular(300, 400, 350)
-            else:
-                loc.altitude = altitude
+            loc.altitude = request.altitude
 
             if random.random() > .95:
                 # no reading for roughly 1 in 20 updates
@@ -259,15 +257,15 @@ class RpcApi:
 
             loc.provider_status = 3
             loc.location_type = 1
-            if request.accuracy >= 65:
+            if request.altitude >= 65:
                 loc.vertical_accuracy = random.triangular(35, 100, 65)
-                loc.horizontal_accuracy = random.choice((request.accuracy, 65, 65, random.uniform(66,80), 200))
+                loc.horizontal_accuracy = random.choice((request.altitude, 65, 65, random.uniform(66, 80), 200))
             else:
-                if request.accuracy > 10:
+                if request.altitude > 10:
                     loc.vertical_accuracy = random.choice((24, 32, 48, 48, 64, 64, 96, 128))
                 else:
                     loc.vertical_accuracy = random.choice((3, 4, 6, 6, 8, 12, 24))
-                loc.horizontal_accuracy = request.accuracy
+                loc.horizontal_accuracy = request.altitude
 
             sen.linear_acceleration_x = random.triangular(-3, 1, 0)
             sen.linear_acceleration_y = random.triangular(-2, 3, 0)
