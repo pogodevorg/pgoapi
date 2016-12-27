@@ -231,7 +231,7 @@ class RpcApi:
             sig.location_hash1 = self._hash_engine.get_location_auth_hash()
             sig.location_hash2 = self._hash_engine.get_location_hash()
             for req_hash in self._hash_engine.get_request_hashes():
-                sig.request_hash.append(req_hash)
+                sig.request_hash.append(ctypes.c_uint64(req_hash).value)
 
             loc = sig.location_fix.add()
             sen = sig.sensor_info.add()
@@ -288,9 +288,9 @@ class RpcApi:
             sen.status = 3
 
             if self._api_version == "0_45":
-                sig.unknown25 = 16892874496697272497
+                sig.unknown25 = -1553869577012279119
             elif self._api_version == "0_51":
-                sig.unknown25 = 9614703498812943922
+                sig.unknown25 = -8832040574896607694
 
             if self.device_info:
                 for key in self.device_info:
