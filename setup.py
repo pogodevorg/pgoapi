@@ -18,5 +18,5 @@ setup(name='pgoapi',
       download_url = "https://github.com/tejado/pgoapi/releases",
       packages = find_packages(),
       install_requires = reqs,
-      package_data={'pgoapi': ['lib/*']}
+      package_data={'pgoapi': ['lib_0_45/*', 'lib_0_51/*']}
       )
