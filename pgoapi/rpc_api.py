@@ -199,7 +199,10 @@ class RpcApi:
         request.request_id = self.get_rpc_id()
 
         if player_position:
-            request.latitude, request.longitude, request.altitude = player_position
+            if player_position[2] == None:
+                request.latitude, request.longitude, _ = player_position
+            else:
+                request.latitude, request.longitude, request.altitude = player_position
         if not request.altitude or request.altitude == 0:
             request.altitude = random.choice((5, 5, 5, 5, 10, 10, 10, 30, 30, 50, 65, random.uniform(66,80)))
 
