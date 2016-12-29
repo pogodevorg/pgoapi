@@ -28,11 +28,11 @@ class HashServer(HashEngine):
         payload["Latitude"] = latitude
         payload["Longitude"] = longitude
         payload["Altitude"] = altitude
-        payload["AuthTicket"] = base64.b64encode(authticket)
-        payload["SessionData"] = base64.b64encode(sessiondata)
+        payload["AuthTicket"] = base64.b64encode(authticket).decode('ascii')
+        payload["SessionData"] = base64.b64encode(sessiondata).decode('ascii')
         payload["Requests"] = []
         for request in requestslist:
-            payload["Requests"].append(base64.b64encode(request.SerializeToString()))
+            payload["Requests"].append(base64.b64encode(request.SerializeToString()).decode('ascii'))
 
         # ask hash server how is it going ? and get json
         try:
