@@ -227,7 +227,10 @@ class RpcApi:
             if sig.timestamp_since_start < 5000:
                 sig.timestamp_since_start = random.randint(5000, 8000)
 
-            self._hash_engine.hash(sig.timestamp, request.latitude, request.longitude, request.accuracy, ticket_serialized, sig.session_hash, request.requests)
+            if not altitude:
+                altitude = random.triangular(300, 400, 350)
+
+            self._hash_engine.hash(sig.timestamp, request.latitude, request.longitude, altitude, ticket_serialized, sig.session_hash, request.requests)
             sig.location_hash1 = self._hash_engine.get_location_auth_hash()
             sig.location_hash2 = self._hash_engine.get_location_hash()
             for req_hash in self._hash_engine.get_request_hashes():
@@ -243,10 +246,7 @@ class RpcApi:
             loc.latitude = request.latitude
             loc.longitude = request.longitude
 
-            if not altitude:
-                loc.altitude = random.triangular(300, 400, 350)
-            else:
-                loc.altitude = altitude
+            loc.altitude = altitude
 
             if random.random() > .95:
                 # no reading for roughly 1 in 20 updates
