@@ -279,8 +279,8 @@ class PGoApiRequest:
                     self.log.error(error)
                     raise NotLoggedInException(error)
 
-                """ reexecute the call"""
-                execute = True
+                request.request_proto = None  # reset request and rebuild
+                execute = True  # reexecute the call
             except ServerApiEndpointRedirectException as e:
                 self.log.info('API Endpoint redirect... re-execution of call')
                 new_api_endpoint = e.get_redirected_endpoint()
@@ -288,8 +288,7 @@ class PGoApiRequest:
                 self._api_endpoint = parse_api_endpoint(new_api_endpoint)
                 self.__parent__.set_api_endpoint(self._api_endpoint)
 
-                """ reexecute the call"""
-                execute = True
+                execute = True  # reexecute the call
             except ServerBusyOrOfflineException as e:
                 """ no execute = True here, as API retries on HTTP level should be done on a lower level, e.g. in rpc_api """
                 self.log.info('Server seems to be busy or offline - try again!')

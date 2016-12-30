@@ -72,6 +72,7 @@ class RpcApi:
         self._signature_lib = None
         self._hash_engine = None
         self._api_version = "0.45"
+        self.request_proto = None
 
         if RpcApi.START_TIME == 0:
             RpcApi.START_TIME = get_time(ms=True)
@@ -147,8 +148,8 @@ class RpcApi:
         if not self._auth_provider or self._auth_provider.is_login() is False:
             raise NotLoggedInException()
 
-        request_proto = self._build_main_request(subrequests, player_position)
-        response = self._make_rpc(endpoint, request_proto)
+        self.request_proto = self.request_proto or self._build_main_request(subrequests, player_position)
+        response = self._make_rpc(endpoint, self.request_proto)
 
         response_dict = self._parse_main_response(response, subrequests)
 
