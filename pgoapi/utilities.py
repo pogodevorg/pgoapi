@@ -210,14 +210,19 @@ def get_lib_paths(api_version):
         raise Exception(err)
 
     encrypt_lib_path = os.path.join(os.path.dirname(__file__), "lib_" + api_version, encrypt_lib)
-    hash_lib_path = os.path.join(os.path.dirname(__file__), "lib_" + api_version, hash_lib)
+
+    if api_version == "0_45":
+        hash_lib_path = os.path.join(os.path.dirname(__file__), "lib_" + api_version, hash_lib)
+
+        if not os.path.isfile(hash_lib_path):
+            err = "Could not find {} hashing library {}".format(sys.platform, hash_lib_path)
+            log.error(err)
+            raise Exception(err)
+    else:
+        hash_lib_path = None
 
     if not os.path.isfile(encrypt_lib_path):
         err = "Could not find {} encryption library {}".format(sys.platform, encrypt_lib_path)
-        log.error(err)
-        raise Exception(err)
-    if not os.path.isfile(hash_lib_path):
-        err = "Could not find {} hashing library {}".format(sys.platform, hash_lib_path)
         log.error(err)
         raise Exception(err)
 

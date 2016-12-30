@@ -243,18 +243,15 @@ class PGoApiRequest:
         if hash_server_token:
             version = "0_51"
             request.set_api_version(version)
-            default_libraries = get_lib_paths(version)
-            signature_lib_path = default_libraries[0]
-            request.activate_signature(signature_lib_path)
-
             request.activate_hash_server(hash_server_token)
         else:
             version = "0_45"
-            request.set_api_version(version)
-            default_libraries = get_lib_paths(version)
-            signature_lib_path = default_libraries[0]
-            request.activate_signature(signature_lib_path)
-            hash_lib_path = default_libraries[1]
+
+        default_libraries = get_lib_paths(version)
+        signature_lib_path, hash_lib_path = default_libraries
+        request.activate_signature(signature_lib_path)
+
+        if hash_lib_path:
             request.activate_hash_library(hash_lib_path)
 
         self.log.info('Execution of RPC')

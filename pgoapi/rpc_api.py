@@ -71,7 +71,7 @@ class RpcApi:
         self._signature_gen = False
         self._signature_lib = None
         self._hash_engine = None
-        self._api_version = "0.45"
+        self._api_version = "0_45"
         self.request_proto = None
 
         if RpcApi.START_TIME == 0:
