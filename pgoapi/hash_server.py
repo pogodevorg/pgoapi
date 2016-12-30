@@ -12,6 +12,7 @@ class HashServer(HashEngine):
     _session.verify = True
     _session.headers.update({'User-Agent': 'Python pgoapi @pogodev'})
     endpoint = "https://pokehash.buddyauth.com/api/v121_2/hash"
+    status = {}
 
     def __init__(self, auth_token):
         self.headers = {'content-type': 'application/json', 'Accept' : 'application/json', 'X-AuthToken' : auth_token}
@@ -50,6 +51,14 @@ class HashServer(HashEngine):
 
         if not response.content:
             raise UnexpectedResponseException
+
+        headers = response.headers
+        try:
+            self.status['period'] = int(headers.get('X-RatePeriodEnd'))
+            self.status['remaining'] = int(headers.get('X-RateRequestsRemaining'))
+            self.status['maximum'] = int(headers.get('X-MaxRequestCount'))
+        except TypeError:
+            pass
 
         response_parsed = response.json()
         self.location_auth_hash = ctypes.c_int32(response_parsed['locationAuthHash']).value
