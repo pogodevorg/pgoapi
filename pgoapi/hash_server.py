@@ -11,7 +11,7 @@ from pgoapi.exceptions import ServerBusyOrOfflineException, ServerSideAccessForb
 class HashServer(HashEngine):
 
     def __init__(self, auth_token):
-        self.endpoint = "https://pokehash.buddyauth.com/api/v122/hash"
+        self.endpoint = "https://pokehash.buddyauth.com/api/v121_2/hash"
         self.headers = {'content-type': 'application/json', 'Accept' : 'application/json', 'X-AuthToken' : auth_token}
 
         self._session = requests.session()
