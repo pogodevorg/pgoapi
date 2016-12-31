@@ -42,7 +42,7 @@ from google.protobuf import message
 from importlib import import_module
 
 from pgoapi.protobuf_to_dict import protobuf_to_dict
-from pgoapi.exceptions import NotLoggedInException, ServerBusyOrOfflineException, ServerSideRequestThrottlingException, ServerSideAccessForbiddenException, UnexpectedResponseException, AuthTokenExpiredException, ServerApiEndpointRedirectException
+from pgoapi.exceptions import AuthTokenExpiredException, BadRequestException, MalformedNianticResponseException, NianticIPBannedException, NianticOfflineException, NianticThrottlingException, NotLoggedInException, ServerApiEndpointRedirectException, UnexpectedResponseException
 from pgoapi.utilities import to_camel_case, get_time, get_format_time_diff, Rand48, long_to_bytes, f2i
 from pgoapi.hash_library import HashLibrary
 from pgoapi.hash_engine import HashEngine
@@ -85,11 +85,8 @@ class RpcApi:
         self.device_info = device_info
 
     def activate_signature(self, signature_lib_path):
-        try:
-            self._signature_gen = True
-            self._signature_lib = ctypes.cdll.LoadLibrary(signature_lib_path)
-        except:
-            raise
+        self._signature_gen = True
+        self._signature_lib = ctypes.cdll.LoadLibrary(signature_lib_path)
 
     def activate_hash_library(self, hash_lib_path):
         self._hash_engine = HashLibrary(hash_lib_path)
@@ -122,7 +119,7 @@ class RpcApi:
         try:
             process = subprocess.Popen(['protoc', '--decode_raw'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=True)
             output, error = process.communicate(raw)
-        except:
+        except (subprocess.SubprocessError, OSError):
             output = "Couldn't find protoc in your environment OR other issue..."
 
         return output
@@ -139,7 +136,7 @@ class RpcApi:
         try:
             http_response = self._session.post(endpoint, data=request_proto_serialized, timeout=30)
         except (requests.exceptions.Timeout, requests.exceptions.ConnectionError) as e:
-            raise ServerBusyOrOfflineException(e)
+            raise NianticOfflineException(e)
 
         return http_response
 
@@ -157,19 +154,19 @@ class RpcApi:
 
         # some response validations
         if isinstance(response_dict, dict):
-            status_code = response_dict.get('status_code', None)
+            status_code = response_dict.get('status_code')
             if status_code == 102:
-                raise AuthTokenExpiredException()
+                raise AuthTokenExpiredException
             elif status_code == 52:
-                raise ServerSideRequestThrottlingException("Request throttled by server... slow down man")
+                raise NianticThrottlingException("Request throttled by server... slow down man")
             elif status_code == 53:
-                api_url = response_dict.get('api_url', None)
-                if api_url is not None:
+                api_url = response_dict.get('api_url')
+                if api_url:
                     exception = ServerApiEndpointRedirectException()
                     exception.set_redirected_endpoint(api_url)
                     raise exception
                 else:
-                    raise UnexpectedResponseException()
+                    raise UnexpectedResponseException
 
         return response_dict
 
@@ -339,7 +336,7 @@ class RpcApi:
 
                 self.log.debug("Subrequest class: %s", proto_classname)
 
-                for (key, value) in entry_content.items():
+                for key, value in entry_content.items():
                     if isinstance(value, list):
                         self.log.debug("Found list: %s - trying as repeated", key)
                         for i in value:
@@ -382,35 +379,40 @@ class RpcApi:
     def _parse_main_response(self, response_raw, subrequests):
         self.log.debug('Parsing main RPC response...')
 
+        if response_raw.status_code == 400:
+            raise BadRequestException("400: Bad Request")
         if response_raw.status_code == 403:
-            raise ServerSideAccessForbiddenException("Seems your IP Address is banned or something else went badly wrong...")
-        elif response_raw.status_code == 502:
-            raise ServerBusyOrOfflineException("502: Bad Gateway")
+            raise NianticIPBannedException("Seems your IP Address is banned or something else went badly wrong...")
+        elif response_raw.status_code in (502, 503, 504):
+            raise NianticOfflineException('{} Server Error'.format(response_raw.status_code))
         elif response_raw.status_code != 200:
             error = 'Unexpected HTTP server response - needs 200 got {}'.format(response_raw.status_code)
             self.log.warning(error)
             self.log.debug('HTTP output: \n%s', response_raw.content.decode('utf-8'))
             raise UnexpectedResponseException(error)
 
-        if response_raw.content is None:
+        if not response_raw.content:
             self.log.warning('Empty server response!')
-            return False
+            raise MalformedNianticResponseException('Empty server response!')
 
         response_proto = ResponseEnvelope()
         try:
             response_proto.ParseFromString(response_raw.content)
         except message.DecodeError as e:
-            self.log.warning('Could not parse response: %s', e)
-            return False
+            self.log.error('Could not parse response: %s', e)
+            raise MalformedNianticResponseException('Could not decode response.')
 
         self.log.debug('Protobuf structure of rpc response:\n\r%s', response_proto)
         try:
             self.log.debug('Decode raw over protoc (protoc has to be in your PATH):\n\r%s', self.decode_raw(response_raw.content).decode('utf-8'))
-        except:
+        except Exception:
             self.log.debug('Error during protoc parsing - ignored.')
 
         response_proto_dict = protobuf_to_dict(response_proto)
         response_proto_dict = self._parse_sub_responses(response_proto, subrequests, response_proto_dict)
+
+        if not response_proto_dict:
+            raise MalformedNianticResponseException('Could not convert protobuf to dict.')
 
         return response_proto_dict
 
@@ -426,12 +428,9 @@ class RpcApi:
         if 'returns' in response_proto_dict:
             del response_proto_dict['returns']
 
-        list_len = len(subrequests_list)-1
+        list_len = len(subrequests_list) - 1
         i = 0
         for subresponse in response_proto.returns:
-            if i > list_len:
-                self.log.info("Error - something strange happend...")
-
             request_entry = subrequests_list[i]
             if isinstance(request_entry, int):
                 entry_id = request_entry
@@ -451,16 +450,16 @@ class RpcApi:
                 subresponse_extension = None
                 error = 'Protobuf definition for {} not found'.format(proto_classname)
                 subresponse_return = error
-                self.log.debug(error)
+                self.log.warning(error)
 
             if subresponse_extension:
                 try:
                     subresponse_extension.ParseFromString(subresponse)
                     subresponse_return = protobuf_to_dict(subresponse_extension)
-                except:
+                except Exception:
                     error = "Protobuf definition for {} seems not to match".format(proto_classname)
                     subresponse_return = error
-                    self.log.debug(error)
+                    self.log.warning(error)
 
             response_proto_dict['responses'][entry_name] = subresponse_return
             i += 1

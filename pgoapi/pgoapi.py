@@ -36,7 +36,7 @@ from pgoapi.rpc_api import RpcApi
 from pgoapi.auth_ptc import AuthPtc
 from pgoapi.auth_google import AuthGoogle
 from pgoapi.utilities import parse_api_endpoint, get_lib_paths
-from pgoapi.exceptions import AuthException, NotLoggedInException, ServerBusyOrOfflineException, NoPlayerPositionSetException, EmptySubrequestChainException, AuthTokenExpiredException, ServerApiEndpointRedirectException, UnexpectedResponseException
+from pgoapi.exceptions import AuthException, AuthTokenExpiredException, BadRequestException, BannedAccountException, InvalidCredentialsException, NoPlayerPositionSetException, NotLoggedInException, ServerApiEndpointRedirectException, ServerBusyOrOfflineException, UnexpectedResponseException
 
 from . import protos
 from pogoprotos.networking.requests.request_type_pb2 import RequestType
@@ -82,20 +82,20 @@ class PGoApi:
         elif provider is None:
             self._auth_provider = None
         else:
-            raise AuthException("Invalid authentication provider - only ptc/google available.")
+            raise InvalidCredentialsException("Invalid authentication provider - only ptc/google available.")
 
         self.log.debug('Auth provider: %s', provider)
 
-        if proxy_config is not None:
+        if proxy_config:
             self._auth_provider.set_proxy(proxy_config)
 
         if oauth2_refresh_token is not None:
             self._auth_provider.set_refresh_token(oauth2_refresh_token)
-        elif username is not None and password is not None:
+        elif username and password:
             if not self._auth_provider.user_login(username, password):
                 raise AuthException("User login failed!")
         else:
-            raise AuthException("Invalid Credential Input - Please provide username/password or an oauth2 refresh token")
+            raise InvalidCredentialsException("Invalid Credential Input - Please provide username/password or an oauth2 refresh token")
 
     def get_position(self):
         return (self._position_lat, self._position_lng, self._position_alt)
@@ -157,10 +157,10 @@ class PGoApi:
         request = self.create_request()
         request.get_player(player_locale = {'country': 'US', 'language': 'en', 'timezone': 'America/Chicago'})
         response = request.call()
-        
-        if 'banned' in response['responses']['GET_PLAYER'] and response['responses']['GET_PLAYER']['banned'] == True:
-            raise AuthException("Account is banned")
-        
+
+        if response.get('responses', {}).get('GET_PLAYER', {}).get('banned', False):
+            raise BannedAccountException
+
         time.sleep(1.5)
 
         request = self.create_request()
@@ -230,11 +230,11 @@ class PGoApiRequest:
 
     def call(self):
         if (self._position_lat is None) or (self._position_lng is None):
-            raise NoPlayerPositionSetException()
+            raise NoPlayerPositionSetException
 
         if self._auth_provider is None or not self._auth_provider.is_login():
             self.log.info('Not logged in')
-            raise NotLoggedInException()
+            raise NotLoggedInException
 
         request = RpcApi(self._auth_provider, self.device_info)
         request._session = self.__parent__._session
@@ -254,7 +254,6 @@ class PGoApiRequest:
         if hash_lib_path:
             request.activate_hash_library(hash_lib_path)
 
-        self.log.info('Execution of RPC')
         response = None
 
         execute = True
@@ -271,7 +270,7 @@ class PGoApiRequest:
                 try:
                     self.log.info('Access Token rejected! Requesting new one...')
                     self._auth_provider.get_access_token(force_refresh=True)
-                except:
+                except Exception:
                     error = 'Request for new Access Token failed! Logged out...'
                     self.log.error(error)
                     raise NotLoggedInException(error)
@@ -288,10 +287,11 @@ class PGoApiRequest:
                 execute = True  # reexecute the call
             except ServerBusyOrOfflineException as e:
                 """ no execute = True here, as API retries on HTTP level should be done on a lower level, e.g. in rpc_api """
-                self.log.info('Server seems to be busy or offline - try again!')
+                self.log.warning('Server seems to be busy or offline - try again!')
                 self.log.debug('ServerBusyOrOfflineException details: %s', e)
-            except UnexpectedResponseException as e:
-                self.log.error('Unexpected server response!')
+                raise
+            except (UnexpectedResponseException, BadRequestException) as e:
+                self.log.error(e)
                 raise
 
         # cleanup after call execution

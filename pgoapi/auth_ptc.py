@@ -28,16 +28,16 @@ from future.standard_library import install_aliases
 install_aliases()
 
 import re
-import six
 import json
 import logging
 import requests
 
 from urllib.parse import parse_qs
+from six import string_types
 
 from pgoapi.auth import Auth
 from pgoapi.utilities import get_time
-from pgoapi.exceptions import AuthException
+from pgoapi.exceptions import AuthException, InvalidCredentialsException
 
 from requests.exceptions import ConnectionError
 
@@ -61,8 +61,8 @@ class AuthPtc(Auth):
     def user_login(self, username, password):
         self.log.info('PTC User Login for: {}'.format(username))
 
-        if not isinstance(username, six.string_types) or not isinstance(password, six.string_types):
-            raise AuthException("Username/password not correctly specified")
+        if not isinstance(username, string_types) or not isinstance(password, string_types):
+            raise InvalidCredentialsException("Username/password not correctly specified")
 
         head = {'User-Agent': 'niantic'}
 

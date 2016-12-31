@@ -41,7 +41,7 @@ protobuf_version = 0
 try:
     protobuf_version = pkg_resources.get_distribution("protobuf").version
     protobuf_exist = True
-except:
+except Exception:
     pass
 
 if (not protobuf_exist) or (int(protobuf_version[:1]) < 3):
@@ -61,5 +61,5 @@ logging.getLogger("auth_google").addHandler(logging.NullHandler())
 try:
     import requests.packages.urllib3
     requests.packages.urllib3.disable_warnings()
-except:
+except Exception:
     pass

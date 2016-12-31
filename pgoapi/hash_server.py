@@ -5,7 +5,7 @@ import base64
 import requests
 
 from pgoapi.hash_engine import HashEngine
-from pgoapi.exceptions import ServerBusyOrOfflineException, ServerSideAccessForbiddenException, UnexpectedResponseException
+from pgoapi.exceptions import BadHashRequestException, HashingForbiddenException, HashingOfflineException, HashingQuotaExceededException, MalformedHashResponseException, UnexpectedHashResponseException
 
 class HashServer(HashEngine):
     _session = requests.session()
@@ -33,24 +33,26 @@ class HashServer(HashEngine):
         for request in requestslist:
             payload["Requests"].append(base64.b64encode(request.SerializeToString()).decode('ascii'))
 
-        # ask hash server how is it going ? and get json
+        # request hashes from hashing server
         try:
             response = self._session.post(self.endpoint, json=payload, headers=self.headers, timeout=30)
         except (requests.exceptions.Timeout, requests.exceptions.ConnectionError) as error:
-            raise ServerBusyOrOfflineException(error)
+            raise HashingOfflineException(error)
 
         if response.status_code == 400:
-            raise UnexpectedResponseException("400 : Bad request, error: {}".format(response.text))
-        elif response.status_code == 401:
-            raise ServerSideAccessForbiddenException("401 : You are not authorized to use this service")
+            raise BadHashRequestException("400: Bad request, error: {}".format(response.text))
+        elif response.status_code in (401, 403):
+            raise HashingForbiddenException("You are not authorized to use this service")
         elif response.status_code == 429:
-            raise ServerSideAccessForbiddenException("429 : Request limited, error: {}".format(response.text))
+            raise HashingQuotaExceededException("429: Request limited, error: {}".format(response.text))
+        elif response.status_code in (502, 503, 504):
+            raise HashingOfflineException('{} Server Error'.format(response.status_code))
         elif response.status_code != 200:
             error = 'Unexpected HTTP server response - needs 200 got {}'.format(response.status_code)
-            raise UnexpectedResponseException(error)
+            raise UnexpectedHashResponseException(error)
 
         if not response.content:
-            raise UnexpectedResponseException
+            raise MalformedHashResponseException('Response was empty')
 
         headers = response.headers
         try:
@@ -60,7 +62,11 @@ class HashServer(HashEngine):
         except TypeError:
             pass
 
-        response_parsed = response.json()
+        try:
+            response_parsed = response.json()
+        except ValueError:
+            raise MalformedHashResponseException('Unable to parse JSON from hash server.')
+
         self.location_auth_hash = ctypes.c_int32(response_parsed['locationAuthHash']).value
         self.location_hash = ctypes.c_int32(response_parsed['locationHash']).value
 
