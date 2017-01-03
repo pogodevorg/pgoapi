@@ -28,7 +28,6 @@ from __future__ import absolute_import
 import os
 import re
 import time
-import base64
 import random
 import logging
 import requests
@@ -38,10 +37,10 @@ import ctypes
 import binascii
 
 from google.protobuf import message
+from protobuf_to_dict import protobuf_to_dict
 
 from importlib import import_module
 
-from pgoapi.protobuf_to_dict import protobuf_to_dict
 from pgoapi.exceptions import AuthTokenExpiredException, BadRequestException, MalformedNianticResponseException, NianticIPBannedException, NianticOfflineException, NianticThrottlingException, NotLoggedInException, ServerApiEndpointRedirectException, UnexpectedResponseException
 from pgoapi.utilities import to_camel_case, get_time, get_format_time_diff, Rand48, long_to_bytes, f2i
 from pgoapi.hash_library import HashLibrary
@@ -179,7 +178,7 @@ class RpcApi:
 
             auth_ticket = response_dict['auth_ticket']
             self._auth_provider.set_ticket(
-                [auth_ticket['expire_timestamp_ms'], base64.standard_b64decode(auth_ticket['start']), base64.standard_b64decode(auth_ticket['end'])])
+                [auth_ticket['expire_timestamp_ms'], auth_ticket['start'], auth_ticket['end']])
 
             now_ms = get_time(ms=True)
             h, m, s = get_format_time_diff(now_ms, auth_ticket['expire_timestamp_ms'], True)
