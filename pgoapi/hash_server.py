@@ -5,7 +5,7 @@ import base64
 import requests
 
 from pgoapi.hash_engine import HashEngine
-from pgoapi.exceptions import BadHashRequestException, HashingForbiddenException, HashingOfflineException, HashingQuotaExceededException, MalformedHashResponseException, UnexpectedHashResponseException
+from pgoapi.exceptions import BadHashRequestException, HashingForbiddenException, HashingOfflineException, HashingQuotaExceededException, MalformedHashResponseException, TempHashingBanException, UnexpectedHashResponseException
 
 class HashServer(HashEngine):
     _session = requests.session()
@@ -41,7 +41,9 @@ class HashServer(HashEngine):
 
         if response.status_code == 400:
             raise BadHashRequestException("400: Bad request, error: {}".format(response.text))
-        elif response.status_code in (401, 403):
+        elif response.status_code == 401:
+            raise TempHashingBanException('Your IP was banned for 5 minutes for sending too many requests with invalid keys')
+        elif response.status_code == 403:
             raise HashingForbiddenException("You are not authorized to use this service")
         elif response.status_code == 429:
             raise HashingQuotaExceededException("429: Request limited, error: {}".format(response.text))

@@ -92,7 +92,10 @@ class NianticIPBannedException(ServerSideAccessForbiddenException):
     """Raised when Niantic returns a 403, meaning your IP is probably banned"""
 
 class HashingForbiddenException(ServerSideAccessForbiddenException, HashServerException):
-    """Raised when the hashing server returns 401 or 403"""
+    """Raised when the hashing server returns 403"""
+
+class TempHashingBanException(HashingForbiddenException):
+    """Raised when your IP is temporarily banned for sending too many requests with invalid keys."""
 
 
 class ServerSideRequestThrottlingException(PgoapiError):
