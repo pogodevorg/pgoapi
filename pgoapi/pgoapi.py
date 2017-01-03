@@ -285,14 +285,6 @@ class PGoApiRequest:
                 self.__parent__.set_api_endpoint(self._api_endpoint)
 
                 execute = True  # reexecute the call
-            except ServerBusyOrOfflineException as e:
-                """ no execute = True here, as API retries on HTTP level should be done on a lower level, e.g. in rpc_api """
-                self.log.warning('Server seems to be busy or offline - try again!')
-                self.log.debug('ServerBusyOrOfflineException details: %s', e)
-                raise
-            except (UnexpectedResponseException, BadRequestException) as e:
-                self.log.error(e)
-                raise
 
         # cleanup after call execution
         self.log.info('Cleanup of request!')
