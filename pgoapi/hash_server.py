@@ -50,7 +50,8 @@ class HashServer(HashEngine):
         elif response.status_code in (502, 503, 504):
             raise HashingOfflineException('{} Server Error'.format(response.status_code))
         elif response.status_code != 200:
-            error = 'Unexpected HTTP server response - needs 200 got {}'.format(response.status_code)
+            error = 'Unexpected HTTP server response - needs 200 got {c}. {t}'.format(
+                c=response.status_code, t=response.text)
             raise UnexpectedHashResponseException(error)
 
         if not response.content:
