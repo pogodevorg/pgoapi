@@ -37,7 +37,7 @@ from pgoapi.auth import Auth
 from pgoapi.utilities import get_time
 from pgoapi.exceptions import AuthException, InvalidCredentialsException
 
-from requests.exceptions import RequestException
+from requests.exceptions import RequestException, Timeout
 
 class AuthPtc(Auth):
 
@@ -70,6 +70,8 @@ class AuthPtc(Auth):
 
         try:
             r = self._session.get(self.PTC_LOGIN_URL, timeout=15)
+        except Timeout:
+            raise AuthException('Request timed out.')
         except RequestException as e:
             raise AuthException('Caught RequestException: {}'.format(e))
 
@@ -84,7 +86,12 @@ class AuthPtc(Auth):
             self.log.error('PTC User Login Error - invalid JSON response: {}'.format(e))
             return False
 
-        r = self._session.post(self.PTC_LOGIN_URL, data=data, timeout=15, allow_redirects=False)
+        try:
+            r = self._session.post(self.PTC_LOGIN_URL, data=data, timeout=15, allow_redirects=False)
+        except Timeout:
+            raise AuthException('Request timed out.')
+        except RequestException as e:
+            raise AuthException('Caught RequestException: {}'.format(e))
 
         try:
             qs = parse_qs(urlsplit(r.headers['Location'])[3])
@@ -129,7 +136,12 @@ class AuthPtc(Auth):
                 'code': self._refresh_token,
             }
 
-            r = self._session.post(self.PTC_LOGIN_OAUTH, data=data, timeout=15)
+            try:
+                r = self._session.post(self.PTC_LOGIN_OAUTH, data=data, timeout=15)
+            except Timeout:
+                raise AuthException('Request timed out.')
+            except RequestException as e:
+                raise AuthException('Caught RequestException: {}'.format(e))
 
             token_data = parse_qs(r.text)
 
