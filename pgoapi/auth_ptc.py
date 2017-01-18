@@ -35,7 +35,7 @@ from six import string_types
 
 from pgoapi.auth import Auth
 from pgoapi.utilities import get_time
-from pgoapi.exceptions import AuthException, InvalidCredentialsException
+from pgoapi.exceptions import AuthException, AuthTimeoutException, InvalidCredentialsException
 
 from requests.exceptions import RequestException, Timeout
 
@@ -71,7 +71,7 @@ class AuthPtc(Auth):
         try:
             r = self._session.get(self.PTC_LOGIN_URL, timeout=15)
         except Timeout:
-            raise AuthException('Request timed out.')
+            raise AuthTimeoutException('Auth GET timed out.')
         except RequestException as e:
             raise AuthException('Caught RequestException: {}'.format(e))
 
@@ -84,12 +84,12 @@ class AuthPtc(Auth):
             })
         except (ValueError, AttributeError) as e:
             self.log.error('PTC User Login Error - invalid JSON response: {}'.format(e))
-            return False
+            raise AuthException('Invalid JSON response: {}'.format(e))
 
         try:
             r = self._session.post(self.PTC_LOGIN_URL, data=data, timeout=15, allow_redirects=False)
         except Timeout:
-            raise AuthException('Request timed out.')
+            raise AuthTimeoutException('Auth POST timed out.')
         except RequestException as e:
             raise AuthException('Caught RequestException: {}'.format(e))
 
@@ -97,8 +97,7 @@ class AuthPtc(Auth):
             qs = parse_qs(urlsplit(r.headers['Location'])[3])
             self._refresh_token = qs.get('ticket')[0]
         except Exception as e:
-            self.log.error('Could not retrieve token! {}'.format(e))
-            return False
+            raise AuthException('Could not retrieve token! {}'.format(e))
 
         self._access_token = self._session.cookies.get('CASTGC')
         if self._access_token:
@@ -139,7 +138,7 @@ class AuthPtc(Auth):
             try:
                 r = self._session.post(self.PTC_LOGIN_OAUTH, data=data, timeout=15)
             except Timeout:
-                raise AuthException('Request timed out.')
+                raise AuthTimeoutException('Auth POST timed out.')
             except RequestException as e:
                 raise AuthException('Caught RequestException: {}'.format(e))
 
