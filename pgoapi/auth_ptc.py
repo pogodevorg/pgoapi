@@ -45,13 +45,13 @@ class AuthPtc(Auth):
     PTC_LOGIN_OAUTH = 'https://sso.pokemon.com/sso/oauth2.0/accessToken'
     PTC_LOGIN_CLIENT_SECRET = 'w8ScCUXJQc6kXKw8FiOhd8Fixzht18Dq3PEVkUCP5ZPxtgyWsbTvWHFLm2wNY0JR'
 
-    def __init__(self, username=None, password=None):
+    def __init__(self, username=None, password=None, user_agent='pokemongo/0 CFNetwork/758.5.3 Darwin/15.6.0'):
         Auth.__init__(self)
 
         self._auth_provider = 'ptc'
 
         self._session = requests.session()
-        self._session.headers = {'User-Agent': 'pokemongo/0 CFNetwork/758.5.3 Darwin/15.6.0'}
+        self._session.headers = {'User-Agent': user_agent}
         self._username = username
         self._password = password
 

@@ -74,9 +74,12 @@ class PGoApi:
     def set_logger(self, logger=None):
         self.log = logger or logging.getLogger(__name__)
 
-    def set_authentication(self, provider=None, oauth2_refresh_token=None, username=None, password=None, proxy_config=None):
+    def set_authentication(self, provider=None, oauth2_refresh_token=None, username=None, password=None, proxy_config=None, user_agent=None):
         if provider == 'ptc':
-            self._auth_provider = AuthPtc()
+            if user_agent:
+                self._auth_provider = AuthPtc(user_agent=user_agent)
+            else:
+                self._auth_provider = AuthPtc()
         elif provider == 'google':
             self._auth_provider = AuthGoogle()
         elif provider is None:
