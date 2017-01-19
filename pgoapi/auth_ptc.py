@@ -27,7 +27,6 @@ from __future__ import absolute_import
 from future.standard_library import install_aliases
 install_aliases()
 
-import logging
 import requests
 
 from urllib.parse import parse_qs, urlsplit
@@ -45,15 +44,16 @@ class AuthPtc(Auth):
     PTC_LOGIN_OAUTH = 'https://sso.pokemon.com/sso/oauth2.0/accessToken'
     PTC_LOGIN_CLIENT_SECRET = 'w8ScCUXJQc6kXKw8FiOhd8Fixzht18Dq3PEVkUCP5ZPxtgyWsbTvWHFLm2wNY0JR'
 
-    def __init__(self, username=None, password=None, user_agent='pokemongo/0 CFNetwork/758.5.3 Darwin/15.6.0'):
+    def __init__(self, username=None, password=None, user_agent=None, timeout=None):
         Auth.__init__(self)
 
         self._auth_provider = 'ptc'
 
         self._session = requests.session()
-        self._session.headers = {'User-Agent': user_agent}
+        self._session.headers = {'User-Agent': user_agent or 'pokemongo/0 CFNetwork/758.5.3 Darwin/15.6.0'}
         self._username = username
         self._password = password
+        self.timeout = timeout or 15
 
     def set_proxy(self, proxy_config):
         self._session.proxies = proxy_config
@@ -69,7 +69,7 @@ class AuthPtc(Auth):
         now = get_time()
 
         try:
-            r = self._session.get(self.PTC_LOGIN_URL, timeout=15)
+            r = self._session.get(self.PTC_LOGIN_URL, timeout=self.timeout)
         except Timeout:
             raise AuthTimeoutException('Auth GET timed out.')
         except RequestException as e:
@@ -87,7 +87,7 @@ class AuthPtc(Auth):
             raise AuthException('Invalid JSON response: {}'.format(e))
 
         try:
-            r = self._session.post(self.PTC_LOGIN_URL, data=data, timeout=15, allow_redirects=False)
+            r = self._session.post(self.PTC_LOGIN_URL, data=data, timeout=self.timeout, allow_redirects=False)
         except Timeout:
             raise AuthTimeoutException('Auth POST timed out.')
         except RequestException as e:
@@ -136,7 +136,7 @@ class AuthPtc(Auth):
             }
 
             try:
-                r = self._session.post(self.PTC_LOGIN_OAUTH, data=data, timeout=15)
+                r = self._session.post(self.PTC_LOGIN_OAUTH, data=data, timeout=self.timeout)
             except Timeout:
                 raise AuthTimeoutException('Auth POST timed out.')
             except RequestException as e:
@@ -167,5 +167,5 @@ class AuthPtc(Auth):
                 self._login = False
                 if force_refresh:
                     self.log.info('Reauthenticating with refresh token failed, using credentials instead.')
-                    self.user_login(retry=False)
+                    return self.user_login(retry=False)
                 raise AuthException("Could not retrieve a PTC Access Token")
