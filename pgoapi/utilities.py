@@ -167,6 +167,8 @@ def long_to_bytes(val, endianness='big'):
     return s
 
 def get_lib_paths(api_version):
+    if api_version == '0_53':
+        api_version = '0_51'
     # win32 doesn't mean necessarily 32 bits
     hash_lib = None
     arch = platform.architecture()[0]
