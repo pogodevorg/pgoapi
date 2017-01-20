@@ -298,7 +298,7 @@ class RpcApi:
 
             sig_request = SendEncryptedSignatureRequest()
             sig_request.encrypted_signature = self._generate_signature(signature_proto, sig.timestamp_since_start)
-            if len(request.requests) and request.requests[0].request_type == 106 or request.requests[0].request_type == 2:
+            if len(request.requests) and request.requests[0].request_type == RequestType.Value('GET_MAP_OBJECTS') or request.requests[0].request_type == RequestType.Value('GET_PLAYER'):
                 plat = request.platform_requests.add()
                 plat.type = 8
             plat = request.platform_requests.add()
