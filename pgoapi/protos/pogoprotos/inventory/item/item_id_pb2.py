@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/inventory/item/item_id.proto',
   package='pogoprotos.inventory.item',
   syntax='proto3',
-  serialized_pb=_b('\n\'pogoprotos/inventory/item/item_id.proto\x12\x19pogoprotos.inventory.item*\xc7\x05\n\x06ItemId\x12\x10\n\x0cITEM_UNKNOWN\x10\x00\x12\x12\n\x0eITEM_POKE_BALL\x10\x01\x12\x13\n\x0fITEM_GREAT_BALL\x10\x02\x12\x13\n\x0fITEM_ULTRA_BALL\x10\x03\x12\x14\n\x10ITEM_MASTER_BALL\x10\x04\x12\x0f\n\x0bITEM_POTION\x10\x65\x12\x15\n\x11ITEM_SUPER_POTION\x10\x66\x12\x15\n\x11ITEM_HYPER_POTION\x10g\x12\x13\n\x0fITEM_MAX_POTION\x10h\x12\x10\n\x0bITEM_REVIVE\x10\xc9\x01\x12\x14\n\x0fITEM_MAX_REVIVE\x10\xca\x01\x12\x13\n\x0eITEM_LUCKY_EGG\x10\xad\x02\x12\x1a\n\x15ITEM_INCENSE_ORDINARY\x10\x91\x03\x12\x17\n\x12ITEM_INCENSE_SPICY\x10\x92\x03\x12\x16\n\x11ITEM_INCENSE_COOL\x10\x93\x03\x12\x18\n\x13ITEM_INCENSE_FLORAL\x10\x94\x03\x12\x13\n\x0eITEM_TROY_DISK\x10\xf5\x03\x12\x12\n\rITEM_X_ATTACK\x10\xda\x04\x12\x13\n\x0eITEM_X_DEFENSE\x10\xdb\x04\x12\x13\n\x0eITEM_X_MIRACLE\x10\xdc\x04\x12\x14\n\x0fITEM_RAZZ_BERRY\x10\xbd\x05\x12\x14\n\x0fITEM_BLUK_BERRY\x10\xbe\x05\x12\x15\n\x10ITEM_NANAB_BERRY\x10\xbf\x05\x12\x15\n\x10ITEM_WEPAR_BERRY\x10\xc0\x05\x12\x15\n\x10ITEM_PINAP_BERRY\x10\xc1\x05\x12\x18\n\x13ITEM_SPECIAL_CAMERA\x10\xa1\x06\x12#\n\x1eITEM_INCUBATOR_BASIC_UNLIMITED\x10\x85\x07\x12\x19\n\x14ITEM_INCUBATOR_BASIC\x10\x86\x07\x12!\n\x1cITEM_POKEMON_STORAGE_UPGRADE\x10\xe9\x07\x12\x1e\n\x19ITEM_ITEM_STORAGE_UPGRADE\x10\xea\x07\x62\x06proto3')
+  serialized_pb=_b('\n\'pogoprotos/inventory/item/item_id.proto\x12\x19pogoprotos.inventory.item*\xb4\x06\n\x06ItemId\x12\x10\n\x0cITEM_UNKNOWN\x10\x00\x12\x12\n\x0eITEM_POKE_BALL\x10\x01\x12\x13\n\x0fITEM_GREAT_BALL\x10\x02\x12\x13\n\x0fITEM_ULTRA_BALL\x10\x03\x12\x14\n\x10ITEM_MASTER_BALL\x10\x04\x12\x0f\n\x0bITEM_POTION\x10\x65\x12\x15\n\x11ITEM_SUPER_POTION\x10\x66\x12\x15\n\x11ITEM_HYPER_POTION\x10g\x12\x13\n\x0fITEM_MAX_POTION\x10h\x12\x10\n\x0bITEM_REVIVE\x10\xc9\x01\x12\x14\n\x0fITEM_MAX_REVIVE\x10\xca\x01\x12\x13\n\x0eITEM_LUCKY_EGG\x10\xad\x02\x12\x1a\n\x15ITEM_INCENSE_ORDINARY\x10\x91\x03\x12\x17\n\x12ITEM_INCENSE_SPICY\x10\x92\x03\x12\x16\n\x11ITEM_INCENSE_COOL\x10\x93\x03\x12\x18\n\x13ITEM_INCENSE_FLORAL\x10\x94\x03\x12\x13\n\x0eITEM_TROY_DISK\x10\xf5\x03\x12\x12\n\rITEM_X_ATTACK\x10\xda\x04\x12\x13\n\x0eITEM_X_DEFENSE\x10\xdb\x04\x12\x13\n\x0eITEM_X_MIRACLE\x10\xdc\x04\x12\x14\n\x0fITEM_RAZZ_BERRY\x10\xbd\x05\x12\x14\n\x0fITEM_BLUK_BERRY\x10\xbe\x05\x12\x15\n\x10ITEM_NANAB_BERRY\x10\xbf\x05\x12\x15\n\x10ITEM_WEPAR_BERRY\x10\xc0\x05\x12\x15\n\x10ITEM_PINAP_BERRY\x10\xc1\x05\x12\x18\n\x13ITEM_SPECIAL_CAMERA\x10\xa1\x06\x12#\n\x1eITEM_INCUBATOR_BASIC_UNLIMITED\x10\x85\x07\x12\x19\n\x14ITEM_INCUBATOR_BASIC\x10\x86\x07\x12!\n\x1cITEM_POKEMON_STORAGE_UPGRADE\x10\xe9\x07\x12\x1e\n\x19ITEM_ITEM_STORAGE_UPGRADE\x10\xea\x07\x12\x13\n\x0eITEM_SUN_STONE\x10\xcd\x08\x12\x14\n\x0fITEM_KINGS_ROCK\x10\xce\x08\x12\x14\n\x0fITEM_METAL_COAT\x10\xcf\x08\x12\x16\n\x11ITEM_DRAGON_SCALE\x10\xd0\x08\x12\x12\n\rITEM_UP_GRADE\x10\xd1\x08\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -150,11 +150,31 @@ _ITEMID = _descriptor.EnumDescriptor(
       name='ITEM_ITEM_STORAGE_UPGRADE', index=29, number=1002,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ITEM_SUN_STONE', index=30, number=1101,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ITEM_KINGS_ROCK', index=31, number=1102,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ITEM_METAL_COAT', index=32, number=1103,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ITEM_DRAGON_SCALE', index=33, number=1104,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ITEM_UP_GRADE', index=34, number=1105,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=71,
-  serialized_end=782,
+  serialized_end=891,
 )
 _sym_db.RegisterEnumDescriptor(_ITEMID)
 
@@ -189,6 +209,11 @@ ITEM_INCUBATOR_BASIC_UNLIMITED = 901
 ITEM_INCUBATOR_BASIC = 902
 ITEM_POKEMON_STORAGE_UPGRADE = 1001
 ITEM_ITEM_STORAGE_UPGRADE = 1002
+ITEM_SUN_STONE = 1101
+ITEM_KINGS_ROCK = 1102
+ITEM_METAL_COAT = 1103
+ITEM_DRAGON_SCALE = 1104
+ITEM_UP_GRADE = 1105
 
 
 DESCRIPTOR.enum_types_by_name['ItemId'] = _ITEMID

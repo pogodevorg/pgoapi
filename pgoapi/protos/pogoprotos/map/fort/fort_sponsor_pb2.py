@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/map/fort/fort_sponsor.proto',
   package='pogoprotos.map.fort',
   syntax='proto3',
-  serialized_pb=_b('\n&pogoprotos/map/fort/fort_sponsor.proto\x12\x13pogoprotos.map.fort*\xa5\x01\n\x0b\x46ortSponsor\x12\x11\n\rUNSET_SPONSOR\x10\x00\x12\r\n\tMCDONALDS\x10\x01\x12\x11\n\rPOKEMON_STORE\x10\x02\x12\x08\n\x04TOHO\x10\x03\x12\x0c\n\x08SOFTBANK\x10\x04\x12\t\n\x05GLOBE\x10\x05\x12\x0b\n\x07SPATULA\x10\x06\x12\x0f\n\x0bTHERMOMETER\x10\x07\x12\t\n\x05KNIFE\x10\x08\x12\t\n\x05GRILL\x10\t\x12\n\n\x06SMOKER\x10\nb\x06proto3')
+  serialized_pb=_b('\n&pogoprotos/map/fort/fort_sponsor.proto\x12\x13pogoprotos.map.fort*\xc2\x01\n\x0b\x46ortSponsor\x12\x11\n\rUNSET_SPONSOR\x10\x00\x12\r\n\tMCDONALDS\x10\x01\x12\x11\n\rPOKEMON_STORE\x10\x02\x12\x08\n\x04TOHO\x10\x03\x12\x0c\n\x08SOFTBANK\x10\x04\x12\t\n\x05GLOBE\x10\x05\x12\x0b\n\x07SPATULA\x10\x06\x12\x0f\n\x0bTHERMOMETER\x10\x07\x12\t\n\x05KNIFE\x10\x08\x12\t\n\x05GRILL\x10\t\x12\n\n\x06SMOKER\x10\n\x12\x07\n\x03PAN\x10\x0b\x12\x07\n\x03\x42\x42Q\x10\x0c\x12\t\n\x05\x46RYER\x10\rb\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -74,11 +74,23 @@ _FORTSPONSOR = _descriptor.EnumDescriptor(
       name='SMOKER', index=10, number=10,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='PAN', index=11, number=11,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='BBQ', index=12, number=12,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FRYER', index=13, number=13,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=64,
-  serialized_end=229,
+  serialized_end=258,
 )
 _sym_db.RegisterEnumDescriptor(_FORTSPONSOR)
 
@@ -94,6 +106,9 @@ THERMOMETER = 7
 KNIFE = 8
 GRILL = 9
 SMOKER = 10
+PAN = 11
+BBQ = 12
+FRYER = 13
 
 
 DESCRIPTOR.enum_types_by_name['FortSponsor'] = _FORTSPONSOR

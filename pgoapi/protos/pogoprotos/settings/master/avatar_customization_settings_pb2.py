@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/settings/master/avatar_customization_settings.proto',
   package='pogoprotos.settings.master',
   syntax='proto3',
-  serialized_pb=_b('\n>pogoprotos/settings/master/avatar_customization_settings.proto\x12\x1apogoprotos.settings.master\x1a/pogoprotos/data/player/player_avatar_type.proto\x1a!pogoprotos/enums/badge_type.proto\x1a\x1bpogoprotos/enums/slot.proto\"\xd6\x05\n\x1b\x41vatarCustomizationSettings\x12\x0f\n\x07\x65nabled\x18\x01 \x01(\x08\x12=\n\x0b\x61vatar_type\x18\x02 \x01(\x0e\x32(.pogoprotos.data.player.PlayerAvatarType\x12$\n\x04slot\x18\x03 \x03(\x0e\x32\x16.pogoprotos.enums.Slot\x12\x13\n\x0b\x62undle_name\x18\x04 \x01(\t\x12\x12\n\nasset_name\x18\x05 \x01(\t\x12\x12\n\ngroup_name\x18\x06 \x01(\t\x12\x12\n\nsort_order\x18\x07 \x01(\x05\x12j\n\x0bunlock_type\x18\x08 \x01(\x0e\x32U.pogoprotos.settings.master.AvatarCustomizationSettings.AvatarCustomizationUnlockType\x12h\n\npromo_type\x18\t \x03(\x0e\x32T.pogoprotos.settings.master.AvatarCustomizationSettings.AvatarCustomizationPromoType\x12\x36\n\x11unlock_badge_type\x18\n \x01(\x0e\x32\x1b.pogoprotos.enums.BadgeType\x12\x1a\n\x12unlock_badge_level\x18\x0c \x01(\x05\x12\x0f\n\x07iap_sku\x18\x0b \x01(\t\"L\n\x1c\x41vatarCustomizationPromoType\x12\x14\n\x10UNSET_PROMO_TYPE\x10\x00\x12\x08\n\x04SALE\x10\x01\x12\x0c\n\x08\x46\x45\x41TURED\x10\x02\"g\n\x1d\x41vatarCustomizationUnlockType\x12\x15\n\x11UNSET_UNLOCK_TYPE\x10\x00\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x01\x12\x10\n\x0cMEDAL_REWARD\x10\x02\x12\x10\n\x0cIAP_CLOTHING\x10\x03\x62\x06proto3')
+  serialized_pb=_b('\n>pogoprotos/settings/master/avatar_customization_settings.proto\x12\x1apogoprotos.settings.master\x1a/pogoprotos/data/player/player_avatar_type.proto\x1a!pogoprotos/enums/badge_type.proto\x1a\x1bpogoprotos/enums/slot.proto\"\xe9\x05\n\x1b\x41vatarCustomizationSettings\x12\x0f\n\x07\x65nabled\x18\x01 \x01(\x08\x12=\n\x0b\x61vatar_type\x18\x02 \x01(\x0e\x32(.pogoprotos.data.player.PlayerAvatarType\x12$\n\x04slot\x18\x03 \x03(\x0e\x32\x16.pogoprotos.enums.Slot\x12\x13\n\x0b\x62undle_name\x18\x04 \x01(\t\x12\x12\n\nasset_name\x18\x05 \x01(\t\x12\x12\n\ngroup_name\x18\x06 \x01(\t\x12\x12\n\nsort_order\x18\x07 \x01(\x05\x12j\n\x0bunlock_type\x18\x08 \x01(\x0e\x32U.pogoprotos.settings.master.AvatarCustomizationSettings.AvatarCustomizationUnlockType\x12h\n\npromo_type\x18\t \x03(\x0e\x32T.pogoprotos.settings.master.AvatarCustomizationSettings.AvatarCustomizationPromoType\x12\x36\n\x11unlock_badge_type\x18\n \x01(\x0e\x32\x1b.pogoprotos.enums.BadgeType\x12\x0f\n\x07iap_sku\x18\x0b \x01(\t\x12\x1a\n\x12unlock_badge_level\x18\x0c \x01(\x05\x12\x11\n\ticon_name\x18\r \x01(\t\"L\n\x1c\x41vatarCustomizationPromoType\x12\x14\n\x10UNSET_PROMO_TYPE\x10\x00\x12\x08\n\x04SALE\x10\x01\x12\x0c\n\x08\x46\x45\x41TURED\x10\x02\"g\n\x1d\x41vatarCustomizationUnlockType\x12\x15\n\x11UNSET_UNLOCK_TYPE\x10\x00\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x01\x12\x10\n\x0cMEDAL_REWARD\x10\x02\x12\x10\n\x0cIAP_CLOTHING\x10\x03\x62\x06proto3')
   ,
   dependencies=[pogoprotos_dot_data_dot_player_dot_player__avatar__type__pb2.DESCRIPTOR,pogoprotos_dot_enums_dot_badge__type__pb2.DESCRIPTOR,pogoprotos_dot_enums_dot_slot__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -50,8 +50,8 @@ _AVATARCUSTOMIZATIONSETTINGS_AVATARCUSTOMIZATIONPROMOTYPE = _descriptor.EnumDesc
   ],
   containing_type=None,
   options=None,
-  serialized_start=753,
-  serialized_end=829,
+  serialized_start=772,
+  serialized_end=848,
 )
 _sym_db.RegisterEnumDescriptor(_AVATARCUSTOMIZATIONSETTINGS_AVATARCUSTOMIZATIONPROMOTYPE)
 
@@ -80,8 +80,8 @@ _AVATARCUSTOMIZATIONSETTINGS_AVATARCUSTOMIZATIONUNLOCKTYPE = _descriptor.EnumDes
   ],
   containing_type=None,
   options=None,
-  serialized_start=831,
-  serialized_end=934,
+  serialized_start=850,
+  serialized_end=953,
 )
 _sym_db.RegisterEnumDescriptor(_AVATARCUSTOMIZATIONSETTINGS_AVATARCUSTOMIZATIONUNLOCKTYPE)
 
@@ -164,15 +164,22 @@ _AVATARCUSTOMIZATIONSETTINGS = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='unlock_badge_level', full_name='pogoprotos.settings.master.AvatarCustomizationSettings.unlock_badge_level', index=10,
+      name='iap_sku', full_name='pogoprotos.settings.master.AvatarCustomizationSettings.iap_sku', index=10,
+      number=11, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='unlock_badge_level', full_name='pogoprotos.settings.master.AvatarCustomizationSettings.unlock_badge_level', index=11,
       number=12, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='iap_sku', full_name='pogoprotos.settings.master.AvatarCustomizationSettings.iap_sku', index=11,
-      number=11, type=9, cpp_type=9, label=1,
+      name='icon_name', full_name='pogoprotos.settings.master.AvatarCustomizationSettings.icon_name', index=12,
+      number=13, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -192,7 +199,7 @@ _AVATARCUSTOMIZATIONSETTINGS = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=208,
-  serialized_end=934,
+  serialized_end=953,
 )
 
 _AVATARCUSTOMIZATIONSETTINGS.fields_by_name['avatar_type'].enum_type = pogoprotos_dot_data_dot_player_dot_player__avatar__type__pb2._PLAYERAVATARTYPE

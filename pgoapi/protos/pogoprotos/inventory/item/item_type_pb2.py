@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/inventory/item/item_type.proto',
   package='pogoprotos.inventory.item',
   syntax='proto3',
-  serialized_pb=_b('\n)pogoprotos/inventory/item/item_type.proto\x12\x19pogoprotos.inventory.item*\xb2\x02\n\x08ItemType\x12\x12\n\x0eITEM_TYPE_NONE\x10\x00\x12\x16\n\x12ITEM_TYPE_POKEBALL\x10\x01\x12\x14\n\x10ITEM_TYPE_POTION\x10\x02\x12\x14\n\x10ITEM_TYPE_REVIVE\x10\x03\x12\x11\n\rITEM_TYPE_MAP\x10\x04\x12\x14\n\x10ITEM_TYPE_BATTLE\x10\x05\x12\x12\n\x0eITEM_TYPE_FOOD\x10\x06\x12\x14\n\x10ITEM_TYPE_CAMERA\x10\x07\x12\x12\n\x0eITEM_TYPE_DISK\x10\x08\x12\x17\n\x13ITEM_TYPE_INCUBATOR\x10\t\x12\x15\n\x11ITEM_TYPE_INCENSE\x10\n\x12\x16\n\x12ITEM_TYPE_XP_BOOST\x10\x0b\x12\x1f\n\x1bITEM_TYPE_INVENTORY_UPGRADE\x10\x0c\x62\x06proto3')
+  serialized_pb=_b('\n)pogoprotos/inventory/item/item_type.proto\x12\x19pogoprotos.inventory.item*\xd7\x02\n\x08ItemType\x12\x12\n\x0eITEM_TYPE_NONE\x10\x00\x12\x16\n\x12ITEM_TYPE_POKEBALL\x10\x01\x12\x14\n\x10ITEM_TYPE_POTION\x10\x02\x12\x14\n\x10ITEM_TYPE_REVIVE\x10\x03\x12\x11\n\rITEM_TYPE_MAP\x10\x04\x12\x14\n\x10ITEM_TYPE_BATTLE\x10\x05\x12\x12\n\x0eITEM_TYPE_FOOD\x10\x06\x12\x14\n\x10ITEM_TYPE_CAMERA\x10\x07\x12\x12\n\x0eITEM_TYPE_DISK\x10\x08\x12\x17\n\x13ITEM_TYPE_INCUBATOR\x10\t\x12\x15\n\x11ITEM_TYPE_INCENSE\x10\n\x12\x16\n\x12ITEM_TYPE_XP_BOOST\x10\x0b\x12\x1f\n\x1bITEM_TYPE_INVENTORY_UPGRADE\x10\x0c\x12#\n\x1fITEM_TYPE_EVOLUTION_REQUIREMENT\x10\rb\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -82,11 +82,15 @@ _ITEMTYPE = _descriptor.EnumDescriptor(
       name='ITEM_TYPE_INVENTORY_UPGRADE', index=12, number=12,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ITEM_TYPE_EVOLUTION_REQUIREMENT', index=13, number=13,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=73,
-  serialized_end=379,
+  serialized_end=416,
 )
 _sym_db.RegisterEnumDescriptor(_ITEMTYPE)
 
@@ -104,6 +108,7 @@ ITEM_TYPE_INCUBATOR = 9
 ITEM_TYPE_INCENSE = 10
 ITEM_TYPE_XP_BOOST = 11
 ITEM_TYPE_INVENTORY_UPGRADE = 12
+ITEM_TYPE_EVOLUTION_REQUIREMENT = 13
 
 
 DESCRIPTOR.enum_types_by_name['ItemType'] = _ITEMTYPE
