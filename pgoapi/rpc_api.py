@@ -300,9 +300,12 @@ class RpcApi:
 
             sig_request = SendEncryptedSignatureRequest()
             sig_request.encrypted_signature = self._generate_signature(signature_proto, sig.timestamp_since_start)
-            if len(request.requests) and request.requests[0].request_type == RequestType.Value('GET_MAP_OBJECTS') or request.requests[0].request_type == RequestType.Value('GET_PLAYER'):
-                plat = request.platform_requests.add()
-                plat.type = 8
+            try:
+                if request.requests[0].request_type in (RequestType.Value('GET_MAP_OBJECTS'), RequestType.Value('GET_PLAYER')):
+                    plat = request.platform_requests.add()
+                    plat.type = 8
+            except (IndexError, AttributeError):
+                pass
             plat = request.platform_requests.add()
             plat.type = 6
             plat.request_message = sig_request.SerializeToString()
