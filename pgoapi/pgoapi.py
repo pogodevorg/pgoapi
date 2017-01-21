@@ -74,9 +74,9 @@ class PGoApi:
     def set_logger(self, logger=None):
         self.log = logger or logging.getLogger(__name__)
 
-    def set_authentication(self, provider=None, oauth2_refresh_token=None, username=None, password=None, proxy_config=None):
+    def set_authentication(self, provider=None, oauth2_refresh_token=None, username=None, password=None, proxy_config=None, user_agent=None, timeout=None):
         if provider == 'ptc':
-            self._auth_provider = AuthPtc()
+            self._auth_provider = AuthPtc(user_agent=user_agent, timeout=timeout)
         elif provider == 'google':
             self._auth_provider = AuthGoogle()
         elif provider is None:
@@ -84,7 +84,7 @@ class PGoApi:
         else:
             raise InvalidCredentialsException("Invalid authentication provider - only ptc/google available.")
 
-        self.log.debug('Auth provider: %s', provider)
+        self.log.debug('Auth provider: {}'.format(provider))
 
         if proxy_config:
             self._auth_provider.set_proxy(proxy_config)
@@ -270,8 +270,8 @@ class PGoApiRequest:
                 try:
                     self.log.info('Access Token rejected! Requesting new one...')
                     self._auth_provider.get_access_token(force_refresh=True)
-                except Exception:
-                    error = 'Request for new Access Token failed! Logged out...'
+                except Exception as e:
+                    error = 'Reauthentication failed: {}'.format(e)
                     self.log.error(error)
                     raise NotLoggedInException(error)
 
@@ -287,7 +287,6 @@ class PGoApiRequest:
                 execute = True  # reexecute the call
 
         # cleanup after call execution
-        self.log.info('Cleanup of request!')
         self._req_method_list = []
 
         return response

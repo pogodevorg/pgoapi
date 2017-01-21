@@ -41,7 +41,7 @@ from protobuf_to_dict import protobuf_to_dict
 
 from importlib import import_module
 
-from pgoapi.exceptions import AuthTokenExpiredException, BadRequestException, MalformedNianticResponseException, NianticIPBannedException, NianticOfflineException, NianticThrottlingException, NotLoggedInException, ServerApiEndpointRedirectException, UnexpectedResponseException
+from pgoapi.exceptions import AuthTokenExpiredException, BadRequestException, MalformedNianticResponseException, NianticIPBannedException, NianticOfflineException, NianticThrottlingException, NianticTimeoutException, NotLoggedInException, ServerApiEndpointRedirectException, UnexpectedResponseException
 from pgoapi.utilities import to_camel_case, get_time, get_format_time_diff, Rand48, long_to_bytes, f2i
 from pgoapi.hash_library import HashLibrary
 from pgoapi.hash_engine import HashEngine
@@ -134,7 +134,9 @@ class RpcApi:
         request_proto_serialized = request_proto_plain.SerializeToString()
         try:
             http_response = self._session.post(endpoint, data=request_proto_serialized, timeout=30)
-        except (requests.exceptions.Timeout, requests.exceptions.ConnectionError) as e:
+        except requests.exceptions.Timeout:
+            raise NianticTimeoutException('RPC request timed out.')
+        except requests.exceptions.ConnectionError as e:
             raise NianticOfflineException(e)
 
         return http_response
