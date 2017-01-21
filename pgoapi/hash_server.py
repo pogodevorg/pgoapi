@@ -5,7 +5,7 @@ import base64
 import requests
 
 from pgoapi.hash_engine import HashEngine
-from pgoapi.exceptions import BadHashRequestException, HashingOfflineException, HashingQuotaExceededException, MalformedHashResponseException, TempHashingBanException, UnexpectedHashResponseException
+from pgoapi.exceptions import BadHashRequestException, HashingOfflineException, HashingQuotaExceededException, HashingTimeoutException, MalformedHashResponseException, TempHashingBanException, UnexpectedHashResponseException
 
 class HashServer(HashEngine):
     _session = requests.session()
@@ -38,7 +38,9 @@ class HashServer(HashEngine):
         # request hashes from hashing server
         try:
             response = self._session.post(self.endpoint, json=payload, headers=self.headers, timeout=30)
-        except (requests.exceptions.Timeout, requests.exceptions.ConnectionError) as error:
+        except requests.exceptions.Timeout:
+            raise HashingTimeoutException('Hashing request timed out.')
+        except requests.exceptions.ConnectionError as error:
             raise HashingOfflineException(error)
 
         if response.status_code == 400:

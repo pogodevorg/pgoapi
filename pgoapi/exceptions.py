@@ -30,9 +30,15 @@ class PgoapiError(Exception):
 class HashServerException(PgoapiError):
     """Parent class of all hashing server errors"""
 
+class TimeoutException(PgoapiError):
+    """Raised when a request times out."""
+
 
 class AuthException(PgoapiError):
     """Raised when logging in fails"""
+
+class AuthTimeoutException(AuthException, TimeoutException):
+    """Raised when an auth request times out."""
 
 class InvalidCredentialsException(AuthException, ValueError):
     """Raised when the username, password, or provider are empty/invalid"""
@@ -77,8 +83,14 @@ class ServerBusyOrOfflineException(PgoapiError):
 class NianticOfflineException(ServerBusyOrOfflineException):
     """Raised when unable to establish a conection with Niantic"""
 
+class NianticTimeoutException(NianticOfflineException, TimeoutException):
+    """Raised when an RPC request times out."""
+
 class HashingOfflineException(ServerBusyOrOfflineException, HashServerException):
     """Raised when unable to establish a conection with the hashing server"""
+
+class HashingTimeoutException(HashingOfflineException, TimeoutException):
+    """Raised when a request to the hashing server times out."""
 
 
 class PleaseInstallProtobufVersion3(PgoapiError):
