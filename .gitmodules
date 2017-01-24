@@ -1,7 +1,3 @@
-[submodule "pgoapi/lib_0_45"]
-	path = pgoapi/lib_0_45
-	url = https://github.com/pokelibs/pgoapi-libs
-[submodule "pgoapi/lib_0_51"]
-	path = pgoapi/lib_0_51
-	url = https://github.com/pokelibs/pgoapi-libs
-	branch = 51updates
+[submodule "pgoapi/lib"]
+	path = pgoapi/lib
+	url = https://github.com/pokelibs/pgoapi-libs.git

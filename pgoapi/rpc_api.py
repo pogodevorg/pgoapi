@@ -71,6 +71,7 @@ class RpcApi:
         self._signature_lib = None
         self._hash_engine = None
         self._api_version = "0_45"
+        self._encrypt_version = 2
         self.request_proto = None
 
         if RpcApi.START_TIME == 0:
@@ -95,6 +96,8 @@ class RpcApi:
 
     def set_api_version(self, api_version):
         self._api_version = api_version
+        if api_version != '0_45':
+            self._encrypt_version = 3
 
     def get_rpc_id(self):
         if RpcApi.RPC_ID==0 :  #Startup
@@ -317,12 +320,12 @@ class RpcApi:
         return request
 
     def _generate_signature(self, signature_plain, timestamp):
-        self._signature_lib.argtypes = [ctypes.c_char_p, ctypes.c_size_t, ctypes.c_char_p, ctypes.POINTER(ctypes.POINTER(ctypes.c_ubyte))]
+        self._signature_lib.argtypes = [ctypes.c_char_p, ctypes.c_size_t, ctypes.c_char_p, ctypes.POINTER(ctypes.POINTER(ctypes.c_ubyte)), ctypes.c_char]
         self._signature_lib.restype = ctypes.c_int
         rounded_size = len(signature_plain) + (256 - (len(signature_plain) % 256))
         total_size = rounded_size + 5
         output = ctypes.POINTER(ctypes.c_ubyte * total_size)()
-        output_size = self._signature_lib.encrypt(signature_plain, len(signature_plain), timestamp, ctypes.byref(output))
+        output_size = self._signature_lib.encrypt(signature_plain, len(signature_plain), timestamp, ctypes.byref(output), self._encrypt_version)
         signature = b''.join(list(map(lambda x: six.int2byte(x), output.contents)))
         return signature
 
