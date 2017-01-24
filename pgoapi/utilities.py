@@ -167,8 +167,6 @@ def long_to_bytes(val, endianness='big'):
     return s
 
 def get_lib_paths(api_version):
-    if api_version == '0_53':
-        api_version = '0_51'
     # win32 doesn't mean necessarily 32 bits
     hash_lib = None
     arch = platform.architecture()[0]
@@ -211,10 +209,10 @@ def get_lib_paths(api_version):
         log.error(err)
         raise Exception(err)
 
-    encrypt_lib_path = os.path.join(os.path.dirname(__file__), "lib_" + api_version, encrypt_lib)
+    encrypt_lib_path = os.path.join(os.path.dirname(__file__), "lib", encrypt_lib)
 
     if api_version == "0_45":
-        hash_lib_path = os.path.join(os.path.dirname(__file__), "lib_" + api_version, hash_lib)
+        hash_lib_path = os.path.join(os.path.dirname(__file__), "lib", hash_lib)
 
         if not os.path.isfile(hash_lib_path):
             err = "Could not find {} hashing library {}".format(sys.platform, hash_lib_path)
