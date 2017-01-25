@@ -53,6 +53,7 @@ from pogoprotos.networking.envelopes.response_envelope_pb2 import ResponseEnvelo
 from pogoprotos.networking.requests.request_type_pb2 import RequestType
 from pogoprotos.networking.envelopes.signature_pb2 import Signature
 from pogoprotos.networking.platform.requests.send_encrypted_signature_request_pb2 import SendEncryptedSignatureRequest
+from pogoprotos.networking.platform.requests.plat_eight_pb2 import PlatEight
 
 
 class RpcApi:
@@ -301,14 +302,18 @@ class RpcApi:
 
             signature_proto = sig.SerializeToString()
 
-            sig_request = SendEncryptedSignatureRequest()
-            sig_request.encrypted_signature = self._generate_signature(signature_proto, sig.timestamp_since_start)
             try:
                 if request.requests[0].request_type in (RequestType.Value('GET_MAP_OBJECTS'), RequestType.Value('GET_PLAYER')):
-                    plat = request.platform_requests.add()
-                    plat.type = 8
+                    plat_eight = PlatEight()
+                    plat_eight.field1 = 'e40c3e64817d9c96d99d28f6488a2efc40b11046'
+                    plat8 = request.platform_requests.add()
+                    plat8.type = 8
+                    plat8.request_message = plat_eight.SerializeToString()
             except (IndexError, AttributeError):
                 pass
+
+            sig_request = SendEncryptedSignatureRequest()
+            sig_request.encrypted_signature = self._generate_signature(signature_proto, sig.timestamp_ms_since_start)
             plat = request.platform_requests.add()
             plat.type = 6
             plat.request_message = sig_request.SerializeToString()
