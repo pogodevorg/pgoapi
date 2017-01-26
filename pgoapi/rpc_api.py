@@ -313,7 +313,7 @@ class RpcApi:
                 pass
 
             sig_request = SendEncryptedSignatureRequest()
-            sig_request.encrypted_signature = self._generate_signature(signature_proto, sig.timestamp_ms_since_start)
+            sig_request.encrypted_signature = self._generate_signature(signature_proto, sig.timestamp_since_start)
             plat = request.platform_requests.add()
             plat.type = 6
             plat.request_message = sig_request.SerializeToString()
