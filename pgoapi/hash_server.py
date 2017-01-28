@@ -61,10 +61,10 @@ class HashServer(HashEngine):
 
         headers = response.headers
         try:
-            self.status['period'] = int(headers.get('X-RatePeriodEnd'))
-            self.status['remaining'] = int(headers.get('X-RateRequestsRemaining'))
-            self.status['maximum'] = int(headers.get('X-MaxRequestCount'))
-        except TypeError:
+            self.status['period'] = int(headers['X-RatePeriodEnd'])
+            self.status['remaining'] = int(headers['X-RateRequestsRemaining'])
+            self.status['maximum'] = int(headers['X-MaxRequestCount'])
+        except (KeyError, TypeError, ValueError):
             pass
 
         try:
