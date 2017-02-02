@@ -164,7 +164,7 @@ class PGoApi:
         time.sleep(1.5)
 
         request = self.create_request()
-        request.download_remote_config_version(platform = 1, app_version = 5301)
+        request.download_remote_config_version(platform = 1, app_version = 5500)
         request.check_challenge()
         request.get_hatched_eggs()
         request.get_inventory()
@@ -241,7 +241,7 @@ class PGoApiRequest:
 
         hash_server_token = self.__parent__.get_hash_server_token()
         if hash_server_token:
-            version = "0_53"
+            version = "0_55"
             request.set_api_version(version)
             request.activate_hash_server(hash_server_token)
         else:

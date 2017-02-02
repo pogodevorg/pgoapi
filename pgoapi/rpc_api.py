@@ -289,8 +289,8 @@ class RpcApi:
 
             if self._api_version == "0_45":
                 sig.unknown25 = -1553869577012279119
-            elif self._api_version == "0_53":
-                sig.unknown25 = -76506539888958491
+            else:
+                sig.unknown25 = -9156899491064153954
 
             if self.device_info:
                 for key in self.device_info:
