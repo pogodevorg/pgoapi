@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/map/fort/fort_sponsor.proto',
   package='pogoprotos.map.fort',
   syntax='proto3',
-  serialized_pb=_b('\n&pogoprotos/map/fort/fort_sponsor.proto\x12\x13pogoprotos.map.fort*\xc2\x01\n\x0b\x46ortSponsor\x12\x11\n\rUNSET_SPONSOR\x10\x00\x12\r\n\tMCDONALDS\x10\x01\x12\x11\n\rPOKEMON_STORE\x10\x02\x12\x08\n\x04TOHO\x10\x03\x12\x0c\n\x08SOFTBANK\x10\x04\x12\t\n\x05GLOBE\x10\x05\x12\x0b\n\x07SPATULA\x10\x06\x12\x0f\n\x0bTHERMOMETER\x10\x07\x12\t\n\x05KNIFE\x10\x08\x12\t\n\x05GRILL\x10\t\x12\n\n\x06SMOKER\x10\n\x12\x07\n\x03PAN\x10\x0b\x12\x07\n\x03\x42\x42Q\x10\x0c\x12\t\n\x05\x46RYER\x10\rb\x06proto3')
+  serialized_pb=_b('\n&pogoprotos/map/fort/fort_sponsor.proto\x12\x13pogoprotos.map.fort*\xf4\x01\n\x0b\x46ortSponsor\x12\x11\n\rUNSET_SPONSOR\x10\x00\x12\r\n\tMCDONALDS\x10\x01\x12\x11\n\rPOKEMON_STORE\x10\x02\x12\x08\n\x04TOHO\x10\x03\x12\x0c\n\x08SOFTBANK\x10\x04\x12\t\n\x05GLOBE\x10\x05\x12\x0b\n\x07SPATULA\x10\x06\x12\x0f\n\x0bTHERMOMETER\x10\x07\x12\t\n\x05KNIFE\x10\x08\x12\t\n\x05GRILL\x10\t\x12\n\n\x06SMOKER\x10\n\x12\x07\n\x03PAN\x10\x0b\x12\x07\n\x03\x42\x42Q\x10\x0c\x12\t\n\x05\x46RYER\x10\r\x12\x0b\n\x07STEAMER\x10\x0e\x12\x08\n\x04HOOD\x10\x0f\x12\x0e\n\nSLOWCOOKER\x10\x10\x12\t\n\x05MIXER\x10\x11\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -86,11 +86,27 @@ _FORTSPONSOR = _descriptor.EnumDescriptor(
       name='FRYER', index=13, number=13,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='STEAMER', index=14, number=14,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='HOOD', index=15, number=15,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='SLOWCOOKER', index=16, number=16,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='MIXER', index=17, number=17,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=64,
-  serialized_end=258,
+  serialized_end=308,
 )
 _sym_db.RegisterEnumDescriptor(_FORTSPONSOR)
 
@@ -109,6 +125,10 @@ SMOKER = 10
 PAN = 11
 BBQ = 12
 FRYER = 13
+STEAMER = 14
+HOOD = 15
+SLOWCOOKER = 16
+MIXER = 17
 
 
 DESCRIPTOR.enum_types_by_name['FortSponsor'] = _FORTSPONSOR
