@@ -241,7 +241,7 @@ class PGoApiRequest:
 
         hash_server_token = self.__parent__.get_hash_server_token()
         if hash_server_token:
-            version = "0_55"
+            version = "0_57"
             request.set_api_version(version)
             request.activate_hash_server(hash_server_token)
         else:
