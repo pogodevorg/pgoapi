@@ -26,15 +26,12 @@ Author: tjado <https://github.com/tejado>
 from __future__ import absolute_import
 
 import os
-import re
-import time
 import random
 import logging
 import requests
 import subprocess
 import six
 import ctypes
-import binascii
 
 from google.protobuf import message
 from protobuf_to_dict import protobuf_to_dict
@@ -42,9 +39,8 @@ from protobuf_to_dict import protobuf_to_dict
 from importlib import import_module
 
 from pgoapi.exceptions import AuthTokenExpiredException, BadRequestException, MalformedNianticResponseException, NianticIPBannedException, NianticOfflineException, NianticThrottlingException, NianticTimeoutException, NotLoggedInException, ServerApiEndpointRedirectException, UnexpectedResponseException
-from pgoapi.utilities import to_camel_case, get_time, get_format_time_diff, Rand48, long_to_bytes, f2i
+from pgoapi.utilities import to_camel_case, get_time, get_format_time_diff
 from pgoapi.hash_library import HashLibrary
-from pgoapi.hash_engine import HashEngine
 from pgoapi.hash_server import HashServer
 
 from . import protos
@@ -287,10 +283,7 @@ class RpcApi:
             sen.gravity_z = random.triangular(-1, .7, -0.8)
             sen.status = 3
 
-            if self._api_version == "0_45":
-                sig.unknown25 = -1553869577012279119
-            else:
-                sig.unknown25 = -816976800928766045
+            sig.unknown25 = -816976800928766045
 
             if self.device_info:
                 for key in self.device_info:
