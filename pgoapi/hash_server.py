@@ -13,7 +13,7 @@ class HashServer(HashEngine):
     _session.mount('https://', _adapter)
     _session.verify = True
     _session.headers.update({'User-Agent': 'Python pgoapi @pogodev'})
-    endpoint = "https://pokehash.buddyauth.com/api/v127_3/hash"
+    endpoint = "https://pokehash.buddyauth.com/api/v127_4/hash"
     status = {}
 
     def __init__(self, auth_token):
