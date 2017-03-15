@@ -66,6 +66,7 @@ class HashServer(HashEngine):
             self.status['remaining'] = int(headers['X-RateRequestsRemaining'])
             self.status['maximum'] = int(headers['X-MaxRequestCount'])
             self.status['expiration'] = int(headers['X-AuthTokenExpiration'])
+            self.status['token'] = self.headers['X-AuthTokenExpiration']
         except (KeyError, TypeError, ValueError):
             pass
 
