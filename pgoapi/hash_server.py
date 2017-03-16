@@ -4,6 +4,8 @@ import ctypes
 import base64
 import requests
 
+from struct import pack, unpack
+
 from pgoapi.hash_engine import HashEngine
 from pgoapi.exceptions import BadHashRequestException, HashingOfflineException, HashingQuotaExceededException, HashingTimeoutException, MalformedHashResponseException, TempHashingBanException, UnexpectedHashResponseException
 
@@ -19,21 +21,20 @@ class HashServer(HashEngine):
     def __init__(self, auth_token):
         self.headers = {'content-type': 'application/json', 'Accept' : 'application/json', 'X-AuthToken' : auth_token}
 
-    def hash(self, timestamp, latitude, longitude, altitude, authticket, sessiondata, requestslist):
+    def hash(self, timestamp, latitude, longitude, accuracy, authticket, sessiondata, requestslist):
         self.location_hash = None
         self.location_auth_hash = None
         self.request_hashes = []
 
-        payload = {}
-        payload["Timestamp"] = timestamp
-        payload["Latitude"] = latitude
-        payload["Longitude"] = longitude
-        payload["Altitude"] = altitude
-        payload["AuthTicket"] = base64.b64encode(authticket).decode('ascii')
-        payload["SessionData"] = base64.b64encode(sessiondata).decode('ascii')
-        payload["Requests"] = []
-        for request in requestslist:
-            payload["Requests"].append(base64.b64encode(request.SerializeToString()).decode('ascii'))
+        payload = {
+            'Timestamp': timestamp,
+            'Latitude64': unpack('<q', pack('<d', latitude))[0],
+            'Longitude64': unpack('<q', pack('<d', longitude))[0],
+            'Accuracy64': unpack('<q', pack('<d', accuracy))[0],
+            'AuthTicket': base64.b64encode(authticket).decode('ascii'),
+            'SessionData': base64.b64encode(sessiondata).decode('ascii'),
+            'Requests': [base64.b64encode(x.SerializeToString()).decode('ascii') for x in requestslist]
+        }
 
         # request hashes from hashing server
         try:
