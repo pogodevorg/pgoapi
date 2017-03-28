@@ -47,6 +47,14 @@ class InvalidCredentialsException(AuthException, ValueError):
 class AuthTokenExpiredException(PgoapiError):
     """Raised when your auth token has expired (code 102)"""
 
+class AuthGoogleTwoFactorRequiredException(Exception):
+    def __init__(self, redirectUrl, message):
+        self.redirectUrl = redirectUrl
+        self.message = message
+
+    def __str__(self):
+        return self.message
+
 
 class BadRequestException(PgoapiError):
     """Raised when HTTP code 400 is returned"""

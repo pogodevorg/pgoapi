@@ -28,7 +28,7 @@ from __future__ import absolute_import
 import logging
 
 from pgoapi.auth import Auth
-from pgoapi.exceptions import AuthException, InvalidCredentialsException
+from pgoapi.exceptions import AuthException, InvalidCredentialsException, AuthGoogleTwoFactorRequiredException
 from gpsoauth import perform_master_login, perform_oauth
 from six import string_types
 
@@ -56,6 +56,9 @@ class AuthGoogle(Auth):
             raise InvalidCredentialsException("Username/password not correctly specified")
 
         user_login = perform_master_login(username, password, self.GOOGLE_LOGIN_ANDROID_ID, proxy=self._proxy)
+
+        if user_login and 'Error' in user_login and user_login['Error'] == 'NeedsBrowser':
+            raise AuthGoogleTwoFactorRequiredException(user_login['Url'], user_login['ErrorDetail'])
 
         try:
             refresh_token = user_login.get('Token', None)
