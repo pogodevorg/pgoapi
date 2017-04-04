@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/networking/responses/add_fort_modifier_response.proto',
   package='pogoprotos.networking.responses',
   syntax='proto3',
-  serialized_pb=_b('\n@pogoprotos/networking/responses/add_fort_modifier_response.proto\x12\x1fpogoprotos.networking.responses\x1a;pogoprotos/networking/responses/fort_details_response.proto\"\xab\x02\n\x17\x41\x64\x64\x46ortModifierResponse\x12O\n\x06result\x18\x01 \x01(\x0e\x32?.pogoprotos.networking.responses.AddFortModifierResponse.Result\x12J\n\x0c\x66ort_details\x18\x02 \x01(\x0b\x32\x34.pogoprotos.networking.responses.FortDetailsResponse\"s\n\x06Result\x12\x11\n\rNO_RESULT_SET\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x12\x1d\n\x19\x46ORT_ALREADY_HAS_MODIFIER\x10\x02\x12\x10\n\x0cTOO_FAR_AWAY\x10\x03\x12\x18\n\x14NO_ITEM_IN_INVENTORY\x10\x04\x62\x06proto3')
+  serialized_pb=_b('\n@pogoprotos/networking/responses/add_fort_modifier_response.proto\x12\x1fpogoprotos.networking.responses\x1a;pogoprotos/networking/responses/fort_details_response.proto\"\xc2\x02\n\x17\x41\x64\x64\x46ortModifierResponse\x12O\n\x06result\x18\x01 \x01(\x0e\x32?.pogoprotos.networking.responses.AddFortModifierResponse.Result\x12J\n\x0c\x66ort_details\x18\x02 \x01(\x0b\x32\x34.pogoprotos.networking.responses.FortDetailsResponse\"\x89\x01\n\x06Result\x12\x11\n\rNO_RESULT_SET\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x12\x1d\n\x19\x46ORT_ALREADY_HAS_MODIFIER\x10\x02\x12\x10\n\x0cTOO_FAR_AWAY\x10\x03\x12\x18\n\x14NO_ITEM_IN_INVENTORY\x10\x04\x12\x14\n\x10POI_INACCESSIBLE\x10\x05\x62\x06proto3')
   ,
   dependencies=[pogoprotos_dot_networking_dot_responses_dot_fort__details__response__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -53,11 +53,15 @@ _ADDFORTMODIFIERRESPONSE_RESULT = _descriptor.EnumDescriptor(
       name='NO_ITEM_IN_INVENTORY', index=4, number=4,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='POI_INACCESSIBLE', index=5, number=5,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=347,
-  serialized_end=462,
+  serialized_start=348,
+  serialized_end=485,
 )
 _sym_db.RegisterEnumDescriptor(_ADDFORTMODIFIERRESPONSE_RESULT)
 
@@ -97,7 +101,7 @@ _ADDFORTMODIFIERRESPONSE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=163,
-  serialized_end=462,
+  serialized_end=485,
 )
 
 _ADDFORTMODIFIERRESPONSE.fields_by_name['result'].enum_type = _ADDFORTMODIFIERRESPONSE_RESULT

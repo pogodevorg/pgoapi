@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/networking/requests/messages/claim_codename_message.proto',
   package='pogoprotos.networking.requests.messages',
   syntax='proto3',
-  serialized_pb=_b('\nDpogoprotos/networking/requests/messages/claim_codename_message.proto\x12\'pogoprotos.networking.requests.messages\"(\n\x14\x43laimCodenameMessage\x12\x10\n\x08\x63odename\x18\x01 \x01(\tb\x06proto3')
+  serialized_pb=_b('\nDpogoprotos/networking/requests/messages/claim_codename_message.proto\x12\'pogoprotos.networking.requests.messages\"7\n\x14\x43laimCodenameMessage\x12\x10\n\x08\x63odename\x18\x01 \x01(\t\x12\r\n\x05\x66orce\x18\x02 \x01(\x08\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -40,6 +40,13 @@ _CLAIMCODENAMEMESSAGE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='force', full_name='pogoprotos.networking.requests.messages.ClaimCodenameMessage.force', index=1,
+      number=2, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -53,7 +60,7 @@ _CLAIMCODENAMEMESSAGE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=113,
-  serialized_end=153,
+  serialized_end=168,
 )
 
 DESCRIPTOR.message_types_by_name['ClaimCodenameMessage'] = _CLAIMCODENAMEMESSAGE

@@ -38,6 +38,8 @@ from protobuf_to_dict import protobuf_to_dict
 
 from importlib import import_module
 
+from pycrypt import pycrypt
+
 from pgoapi.exceptions import AuthTokenExpiredException, BadRequestException, MalformedNianticResponseException, NianticIPBannedException, NianticOfflineException, NianticThrottlingException, NianticTimeoutException, NotLoggedInException, ServerApiEndpointRedirectException, UnexpectedResponseException
 from pgoapi.utilities import to_camel_case, get_time, get_format_time_diff
 from pgoapi.hash_library import HashLibrary
@@ -283,7 +285,7 @@ class RpcApi:
             sen.gravity_z = random.triangular(-1, .7, -0.8)
             sen.status = 3
 
-            sig.unknown25 = -816976800928766045
+            sig.unknown25 = -3226782243204485589
 
             if self.device_info:
                 for key in self.device_info:
@@ -306,7 +308,7 @@ class RpcApi:
                 pass
 
             sig_request = SendEncryptedSignatureRequest()
-            sig_request.encrypted_signature = self._generate_signature(signature_proto, sig.timestamp_since_start)
+            sig_request.encrypted_signature = pycrypt(signature_proto, sig.timestamp_since_start)
             plat = request.platform_requests.add()
             plat.type = 6
             plat.request_message = sig_request.SerializeToString()
