@@ -7,7 +7,7 @@ import requests
 from struct import pack, unpack
 
 from pgoapi.hash_engine import HashEngine
-from pgoapi.exceptions import BadHashRequestException, HashingOfflineException, HashingQuotaExceededException, HashingTimeoutException, MalformedHashResponseException, TempHashingBanException, UnexpectedHashResponseException
+from pgoapi.exceptions import BadHashRequestException, HashingOfflineException, HashingQuotaExceededException, HashingTimeoutException, MalformedHashResponseException, NoHashKeyException, TempHashingBanException, UnexpectedHashResponseException
 
 class HashServer(HashEngine):
     _session = requests.session()
@@ -19,6 +19,8 @@ class HashServer(HashEngine):
     status = {}
 
     def __init__(self, auth_token):
+        if not auth_token:
+            raise NoHashKeyException('Token not provided for hashing server.')
         self.headers = {'content-type': 'application/json', 'Accept' : 'application/json', 'X-AuthToken' : auth_token}
 
     def hash(self, timestamp, latitude, longitude, accuracy, authticket, sessiondata, requestslist):

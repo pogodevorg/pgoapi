@@ -1,3 +1,0 @@
-[submodule "pgoapi/lib"]
-	path = pgoapi/lib
-	url = https://github.com/pokelibs/pgoapi-libs.git

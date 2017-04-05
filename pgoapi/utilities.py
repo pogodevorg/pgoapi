@@ -22,9 +22,6 @@ Author: tjado <https://github.com/tejado>
 import time
 import struct
 import logging
-import os
-import sys
-import platform
 
 from json import JSONEncoder
 from binascii import unhexlify
@@ -38,6 +35,7 @@ log = logging.getLogger(__name__)
 
 EARTH_RADIUS = 6371000  # radius of Earth in meters
 
+
 def f2i(float):
   return struct.unpack('<Q', struct.pack('<d', float))[0]
 
@@ -49,10 +47,12 @@ def f2h(float):
 def h2f(hex):
   return struct.unpack('<d', struct.pack('<Q', int(hex,16)))[0]
 
+
 def d2h(f):
     hex_str = f2h(f)[2:].replace('L','')
     hex_str = ("0" * (len(hex_str) % 2)) + hex_str
     return unhexlify(hex_str)
+
 
 def to_camel_case(value):
   return ''.join(word.capitalize() if word else '_' for word in value.split('_'))
@@ -113,118 +113,3 @@ def parse_api_endpoint(api_url):
         api_url = 'https://{}/rpc'.format(api_url)
 
     return api_url
-
-
-class Rand48(object):
-    def __init__(self, seed):
-        self.n = seed
-    def seed(self, seed):
-        self.n = seed
-    def srand(self, seed):
-        self.n = (seed << 16) + 0x330e
-    def next(self):
-        self.n = (25214903917 * self.n + 11) & (2**48 - 1)
-        return self.n
-    def drand(self):
-        return self.next() / 2**48
-    def lrand(self):
-        return self.next() >> 17
-    def mrand(self):
-        n = self.next() >> 16
-        if n & (1 << 31):
-            n -= 1 << 32
-        return n
-
-
-def long_to_bytes(val, endianness='big'):
-    """
-    Use :ref:`string formatting` and :func:`~binascii.unhexlify` to
-    convert ``val``, a :func:`long`, to a byte :func:`str`.
-    :param long val: The value to pack
-    :param str endianness: The endianness of the result. ``'big'`` for
-      big-endian, ``'little'`` for little-endian.
-    If you want byte- and word-ordering to differ, you're on your own.
-    Using :ref:`string formatting` lets us use Python's C innards.
-    """
-
-    # one (1) hex digit per four (4) bits
-    width = val.bit_length()
-
-    # unhexlify wants an even multiple of eight (8) bits, but we don't
-    # want more digits than we need (hence the ternary-ish 'or')
-    width += 8 - ((width % 8) or 8)
-
-    # format width specifier: four (4) bits per hex digit
-    fmt = '%%0%dx' % (width // 4)
-
-    # prepend zero (0) to the width, to zero-pad the output
-    s = unhexlify(fmt % val)
-
-    if endianness == 'little':
-        # see http://stackoverflow.com/a/931095/309233
-        s = s[::-1]
-
-    return s
-
-def get_lib_paths(api_version):
-    # win32 doesn't mean necessarily 32 bits
-    hash_lib = None
-    arch = platform.architecture()[0]
-    if sys.platform == "win32" or sys.platform == "cygwin":
-        if arch == '64bit':
-            encrypt_lib = "libpcrypt-windows-x86-64.dll"
-            hash_lib = "libniahash-windows-x86-64.dll"
-        else:
-            encrypt_lib = "libpcrypt-windows-i686.dll"
-            hash_lib = "libniahash-windows-i686.dll"
-    elif sys.platform == "darwin":
-        if arch == '64bit':
-            encrypt_lib = "libpcrypt-macos-x86-64.dylib"
-            hash_lib = "libniahash-macos-x86-64.dylib"
-        else:
-            encrypt_lib = "libpcrypt-macos-i386.dylib"
-            hash_lib = "libniahash-macos-i386.dylib"
-    elif os.uname()[4].startswith("arm") and arch == '32bit':
-        encrypt_lib = "libpcrypt-linux-arm32.so"
-        hash_lib = "libniahash-linux-arm32.so"
-    elif os.uname()[4].startswith("aarch64") and arch == '64bit':
-        encrypt_lib = "libpcrypt-linux-arm64.so"
-        hash_lib = "libniahash-linux-arm64.so"
-    elif sys.platform.startswith('linux'):
-        if arch == '64bit':
-            encrypt_lib = "libpcrypt-linux-x86-64.so"
-            hash_lib = "libniahash-linux-x86-64.so"
-        else:
-            encrypt_lib = "libpcrypt-linux-i386.so"
-            hash_lib = "libniahash-linux-i386.so"
-    elif sys.platform.startswith('freebsd'):
-        if arch == '64bit':
-            encrypt_lib = "libpcrypt-freebsd-x86-64.so"
-            hash_lib = "libniahash-freebsd-x86-64.so"
-        else:
-            encrypt_lib = "libpcrypt-freebsd-i386.so"
-            hash_lib = "libniahash-freebsd-i386.so"
-    else:
-        err = "Unexpected/unsupported platform '{}'".format(sys.platform)
-        log.error(err)
-        raise Exception(err)
-
-    encrypt_lib_path = os.path.join(os.path.dirname(__file__), "lib", encrypt_lib)
-
-    if api_version == "0_45":
-        hash_lib_path = os.path.join(os.path.dirname(__file__), "lib", hash_lib)
-
-        if not os.path.isfile(hash_lib_path):
-            err = "Could not find {} hashing library {}".format(sys.platform, hash_lib_path)
-            log.error(err)
-            raise Exception(err)
-    else:
-        hash_lib_path = None
-
-    if not os.path.isfile(encrypt_lib_path):
-        err = "Could not find {} encryption library {}".format(sys.platform, encrypt_lib_path)
-        log.error(err)
-        raise Exception(err)
-
-    return encrypt_lib_path, hash_lib_path
-

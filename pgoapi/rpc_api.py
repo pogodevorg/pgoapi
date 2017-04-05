@@ -30,19 +30,16 @@ import random
 import logging
 import requests
 import subprocess
-import six
 import ctypes
-
-from google.protobuf import message
-from protobuf_to_dict import protobuf_to_dict
 
 from importlib import import_module
 
+from google.protobuf import message
+from protobuf_to_dict import protobuf_to_dict
 from pycrypt import pycrypt
 
 from pgoapi.exceptions import AuthTokenExpiredException, BadRequestException, MalformedNianticResponseException, NianticIPBannedException, NianticOfflineException, NianticThrottlingException, NianticTimeoutException, NotLoggedInException, ServerApiEndpointRedirectException, UnexpectedResponseException
 from pgoapi.utilities import to_camel_case, get_time, get_format_time_diff
-from pgoapi.hash_library import HashLibrary
 from pgoapi.hash_server import HashServer
 
 from . import protos
@@ -66,11 +63,7 @@ class RpcApi:
         self._auth_provider = auth_provider
 
         # mystical unknown6 - resolved by PokemonGoDev
-        self._signature_gen = False
-        self._signature_lib = None
         self._hash_engine = None
-        self._api_version = "0_45"
-        self._encrypt_version = 2
         self.request_proto = None
 
         if RpcApi.START_TIME == 0:
@@ -83,20 +76,8 @@ class RpcApi:
 
         self.device_info = device_info
 
-    def activate_signature(self, signature_lib_path):
-        self._signature_gen = True
-        self._signature_lib = ctypes.cdll.LoadLibrary(signature_lib_path)
-
-    def activate_hash_library(self, hash_lib_path):
-        self._hash_engine = HashLibrary(hash_lib_path)
-
     def activate_hash_server(self, auth_token):
         self._hash_engine = HashServer(auth_token)
-
-    def set_api_version(self, api_version):
-        self._api_version = api_version
-        if api_version != '0_45':
-            self._encrypt_version = 3
 
     def get_rpc_id(self):
         if RpcApi.RPC_ID==0 :  #Startup
@@ -219,115 +200,104 @@ class RpcApi:
             request.auth_info.token.unknown2 = self.token2
             ticket_serialized = request.auth_info.SerializeToString()  #Sig uses this when no auth_ticket available
 
-        if self._signature_gen:
-            sig = Signature()
+        sig = Signature()
 
-            sig.session_hash = self.session_hash
-            sig.timestamp = get_time(ms=True)
-            sig.timestamp_since_start = get_time(ms=True) - RpcApi.START_TIME
-            if sig.timestamp_since_start < 5000:
-                sig.timestamp_since_start = random.randint(5000, 8000)
+        sig.session_hash = self.session_hash
+        sig.timestamp = get_time(ms=True)
+        sig.timestamp_since_start = get_time(ms=True) - RpcApi.START_TIME
+        if sig.timestamp_since_start < 5000:
+            sig.timestamp_since_start = random.randint(5000, 8000)
 
-            self._hash_engine.hash(sig.timestamp, request.latitude, request.longitude, request.accuracy, ticket_serialized, sig.session_hash, request.requests)
-            sig.location_hash1 = self._hash_engine.get_location_auth_hash()
-            sig.location_hash2 = self._hash_engine.get_location_hash()
-            for req_hash in self._hash_engine.get_request_hashes():
-                sig.request_hash.append(ctypes.c_uint64(req_hash).value)
+        self._hash_engine.hash(sig.timestamp, request.latitude, request.longitude, request.accuracy, ticket_serialized, sig.session_hash, request.requests)
+        sig.location_hash1 = self._hash_engine.get_location_auth_hash()
+        sig.location_hash2 = self._hash_engine.get_location_hash()
+        for req_hash in self._hash_engine.get_request_hashes():
+            sig.request_hash.append(ctypes.c_uint64(req_hash).value)
 
-            loc = sig.location_fix.add()
-            sen = sig.sensor_info.add()
+        loc = sig.location_fix.add()
+        sen = sig.sensor_info.add()
 
-            sen.timestamp_snapshot = random.randint(sig.timestamp_since_start - 5000, sig.timestamp_since_start - 100)
-            loc.timestamp_snapshot = random.randint(sig.timestamp_since_start - 5000, sig.timestamp_since_start - 1000)
+        sen.timestamp_snapshot = random.randint(sig.timestamp_since_start - 5000, sig.timestamp_since_start - 100)
+        loc.timestamp_snapshot = random.randint(sig.timestamp_since_start - 5000, sig.timestamp_since_start - 1000)
 
-            loc.provider = random.choice(('network', 'network', 'network', 'network', 'fused'))
-            loc.latitude = request.latitude
-            loc.longitude = request.longitude
+        loc.provider = random.choice(('network', 'network', 'network', 'network', 'fused'))
+        loc.latitude = request.latitude
+        loc.longitude = request.longitude
 
-            loc.altitude = altitude or random.triangular(300, 400, 350)
+        loc.altitude = altitude or random.triangular(300, 400, 350)
 
-            if random.random() > .95:
-                # no reading for roughly 1 in 20 updates
-                loc.course = -1
-                loc.speed = -1
+        if random.random() > .95:
+            # no reading for roughly 1 in 20 updates
+            loc.course = -1
+            loc.speed = -1
+        else:
+            self.course = random.triangular(0, 360, self.course)
+            loc.course = self.course
+            loc.speed = random.triangular(0.2, 4.25, 1)
+
+        loc.provider_status = 3
+        loc.location_type = 1
+        if request.accuracy >= 65:
+            loc.vertical_accuracy = random.triangular(35, 100, 65)
+            loc.horizontal_accuracy = random.choice((request.accuracy, 65, 65, random.uniform(66,80), 200))
+        else:
+            if request.accuracy > 10:
+                loc.vertical_accuracy = random.choice((24, 32, 48, 48, 64, 64, 96, 128))
             else:
-                self.course = random.triangular(0, 360, self.course)
-                loc.course = self.course
-                loc.speed = random.triangular(0.2, 4.25, 1)
+                loc.vertical_accuracy = random.choice((3, 4, 6, 6, 8, 12, 24))
+            loc.horizontal_accuracy = request.accuracy
 
-            loc.provider_status = 3
-            loc.location_type = 1
-            if request.accuracy >= 65:
-                loc.vertical_accuracy = random.triangular(35, 100, 65)
-                loc.horizontal_accuracy = random.choice((request.accuracy, 65, 65, random.uniform(66,80), 200))
-            else:
-                if request.accuracy > 10:
-                    loc.vertical_accuracy = random.choice((24, 32, 48, 48, 64, 64, 96, 128))
-                else:
-                    loc.vertical_accuracy = random.choice((3, 4, 6, 6, 8, 12, 24))
-                loc.horizontal_accuracy = request.accuracy
+        sen.linear_acceleration_x = random.triangular(-3, 1, 0)
+        sen.linear_acceleration_y = random.triangular(-2, 3, 0)
+        sen.linear_acceleration_z = random.triangular(-4, 2, 0)
+        sen.magnetic_field_x = random.triangular(-50, 50, 0)
+        sen.magnetic_field_y = random.triangular(-60, 50, -5)
+        sen.magnetic_field_z = random.triangular(-60, 40, -30)
+        sen.magnetic_field_accuracy = random.choice((-1, 1, 1, 2, 2, 2, 2))
+        sen.attitude_pitch = random.triangular(-1.5, 1.5, 0.2)
+        sen.attitude_yaw = random.uniform(-3, 3)
+        sen.attitude_roll = random.triangular(-2.8, 2.5, 0.25)
+        sen.rotation_rate_x = random.triangular(-6, 4, 0)
+        sen.rotation_rate_y = random.triangular(-5.5, 5, 0)
+        sen.rotation_rate_z = random.triangular(-5, 3, 0)
+        sen.gravity_x = random.triangular(-1, 1, 0.15)
+        sen.gravity_y = random.triangular(-1, 1, -.2)
+        sen.gravity_z = random.triangular(-1, .7, -0.8)
+        sen.status = 3
 
-            sen.linear_acceleration_x = random.triangular(-3, 1, 0)
-            sen.linear_acceleration_y = random.triangular(-2, 3, 0)
-            sen.linear_acceleration_z = random.triangular(-4, 2, 0)
-            sen.magnetic_field_x = random.triangular(-50, 50, 0)
-            sen.magnetic_field_y = random.triangular(-60, 50, -5)
-            sen.magnetic_field_z = random.triangular(-60, 40, -30)
-            sen.magnetic_field_accuracy = random.choice((-1, 1, 1, 2, 2, 2, 2))
-            sen.attitude_pitch = random.triangular(-1.5, 1.5, 0.2)
-            sen.attitude_yaw = random.uniform(-3, 3)
-            sen.attitude_roll = random.triangular(-2.8, 2.5, 0.25)
-            sen.rotation_rate_x = random.triangular(-6, 4, 0)
-            sen.rotation_rate_y = random.triangular(-5.5, 5, 0)
-            sen.rotation_rate_z = random.triangular(-5, 3, 0)
-            sen.gravity_x = random.triangular(-1, 1, 0.15)
-            sen.gravity_y = random.triangular(-1, 1, -.2)
-            sen.gravity_z = random.triangular(-1, .7, -0.8)
-            sen.status = 3
+        sig.unknown25 = -3226782243204485589
 
-            sig.unknown25 = -3226782243204485589
-
-            if self.device_info:
-                for key in self.device_info:
-                    setattr(sig.device_info, key, self.device_info[key])
-                if self.device_info['device_brand'] == 'Apple':
-                    sig.activity_status.stationary = True
-            else:
+        if self.device_info:
+            for key in self.device_info:
+                setattr(sig.device_info, key, self.device_info[key])
+            if self.device_info['device_brand'] == 'Apple':
                 sig.activity_status.stationary = True
+        else:
+            sig.activity_status.stationary = True
 
-            signature_proto = sig.SerializeToString()
+        signature_proto = sig.SerializeToString()
 
-            try:
-                if request.requests[0].request_type in (RequestType.Value('GET_MAP_OBJECTS'), RequestType.Value('GET_PLAYER')):
-                    plat_eight = UnknownPtr8Request()
-                    plat_eight.message = '90f6a704505bccac73cec99b07794993e6fd5a12'
-                    plat8 = request.platform_requests.add()
-                    plat8.type = 8
-                    plat8.request_message = plat_eight.SerializeToString()
-            except (IndexError, AttributeError):
-                pass
+        try:
+            if request.requests[0].request_type in (RequestType.Value('GET_MAP_OBJECTS'), RequestType.Value('GET_PLAYER')):
+                plat_eight = UnknownPtr8Request()
+                plat_eight.message = '90f6a704505bccac73cec99b07794993e6fd5a12'
+                plat8 = request.platform_requests.add()
+                plat8.type = 8
+                plat8.request_message = plat_eight.SerializeToString()
+        except (IndexError, AttributeError):
+            pass
 
-            sig_request = SendEncryptedSignatureRequest()
-            sig_request.encrypted_signature = pycrypt(signature_proto, sig.timestamp_since_start)
-            plat = request.platform_requests.add()
-            plat.type = 6
-            plat.request_message = sig_request.SerializeToString()
+        sig_request = SendEncryptedSignatureRequest()
+        sig_request.encrypted_signature = pycrypt(signature_proto, sig.timestamp_since_start)
+        plat = request.platform_requests.add()
+        plat.type = 6
+        plat.request_message = sig_request.SerializeToString()
 
         request.ms_since_last_locationfix = int(random.triangular(300, 30000, 10000))
 
         self.log.debug('Generated protobuf request: \n\r%s', request)
 
         return request
-
-    def _generate_signature(self, signature_plain, timestamp):
-        self._signature_lib.argtypes = [ctypes.c_char_p, ctypes.c_size_t, ctypes.c_char_p, ctypes.POINTER(ctypes.POINTER(ctypes.c_ubyte)), ctypes.c_char]
-        self._signature_lib.restype = ctypes.c_int
-        rounded_size = len(signature_plain) + (256 - (len(signature_plain) % 256))
-        total_size = rounded_size + 5
-        output = ctypes.POINTER(ctypes.c_ubyte * total_size)()
-        output_size = self._signature_lib.encrypt(signature_plain, len(signature_plain), timestamp, ctypes.byref(output), self._encrypt_version)
-        signature = b''.join(list(map(lambda x: six.int2byte(x), output.contents)))
-        return signature
 
     def _build_sub_requests(self, mainrequest, subrequest_list):
         self.log.debug('Generating sub RPC requests...')

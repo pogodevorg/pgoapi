@@ -93,6 +93,10 @@ class HashingTimeoutException(HashingOfflineException, TimeoutException):
     """Raised when a request to the hashing server times out."""
 
 
+class NoHashKeyException(HashServerException):
+    """Raised when a request is made without a hash key being provided"""
+
+
 class PleaseInstallProtobufVersion3(PgoapiError):
     """Raised when Protobuf is unavailable or too old"""
 
