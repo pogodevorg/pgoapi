@@ -28,8 +28,8 @@ Documentation is available at the github [pgoapi wiki](https://wiki.pogodev.org)
  * requests
  * protobuf (>=3)
  * gpsoauth
+ * s2sphere
  * geopy (only for pokecli demo)
- * s2sphere (only for pokecli demo)
 
 ## Use
 To use this api as part of a python project using setuptools/pip, modify your requirements.txt file to include:

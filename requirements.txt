@@ -6,3 +6,4 @@ gpsoauth>=0.4.0
 protobuf3-to-dict>=0.1.4
 future
 six
+pycrypt>=0.5.0

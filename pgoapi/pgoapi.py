@@ -25,8 +25,6 @@ Author: tjado <https://github.com/tejado>
 
 from __future__ import absolute_import
 
-import re
-import six
 import logging
 import requests
 import time
@@ -35,7 +33,7 @@ from . import __title__, __version__, __copyright__
 from pgoapi.rpc_api import RpcApi
 from pgoapi.auth_ptc import AuthPtc
 from pgoapi.auth_google import AuthGoogle
-from pgoapi.utilities import parse_api_endpoint, get_lib_paths
+from pgoapi.utilities import parse_api_endpoint
 from pgoapi.exceptions import AuthException, AuthTokenExpiredException, BadRequestException, BannedAccountException, InvalidCredentialsException, NoPlayerPositionSetException, NotLoggedInException, ServerApiEndpointRedirectException, ServerBusyOrOfflineException, UnexpectedResponseException
 
 from . import protos
@@ -164,7 +162,7 @@ class PGoApi:
         time.sleep(1.5)
 
         request = self.create_request()
-        request.download_remote_config_version(platform = 1, app_version = 5500)
+        request.download_remote_config_version(platform=1, app_version=5901)
         request.check_challenge()
         request.get_hatched_eggs()
         request.get_inventory()
@@ -240,19 +238,8 @@ class PGoApiRequest:
         request._session = self.__parent__._session
 
         hash_server_token = self.__parent__.get_hash_server_token()
-        if hash_server_token:
-            version = "0_57"
-            request.set_api_version(version)
-            request.activate_hash_server(hash_server_token)
-        else:
-            version = "0_45"
 
-        default_libraries = get_lib_paths(version)
-        signature_lib_path, hash_lib_path = default_libraries
-        request.activate_signature(signature_lib_path)
-
-        if hash_lib_path:
-            request.activate_hash_library(hash_lib_path)
+        request.activate_hash_server(hash_server_token)
 
         response = None
 

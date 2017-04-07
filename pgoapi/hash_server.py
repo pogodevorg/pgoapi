@@ -7,7 +7,7 @@ import requests
 from struct import pack, unpack
 
 from pgoapi.hash_engine import HashEngine
-from pgoapi.exceptions import BadHashRequestException, HashingOfflineException, HashingQuotaExceededException, HashingTimeoutException, MalformedHashResponseException, TempHashingBanException, UnexpectedHashResponseException
+from pgoapi.exceptions import BadHashRequestException, HashingOfflineException, HashingQuotaExceededException, HashingTimeoutException, MalformedHashResponseException, NoHashKeyException, TempHashingBanException, UnexpectedHashResponseException
 
 class HashServer(HashEngine):
     _session = requests.session()
@@ -15,10 +15,12 @@ class HashServer(HashEngine):
     _session.mount('https://', _adapter)
     _session.verify = True
     _session.headers.update({'User-Agent': 'Python pgoapi @pogodev'})
-    endpoint = "https://pokehash.buddyauth.com/api/v127_4/hash"
+    endpoint = "https://pokehash.buddyauth.com/api/v129_1/hash"
     status = {}
 
     def __init__(self, auth_token):
+        if not auth_token:
+            raise NoHashKeyException('Token not provided for hashing server.')
         self.headers = {'content-type': 'application/json', 'Accept' : 'application/json', 'X-AuthToken' : auth_token}
 
     def hash(self, timestamp, latitude, longitude, accuracy, authticket, sessiondata, requestslist):

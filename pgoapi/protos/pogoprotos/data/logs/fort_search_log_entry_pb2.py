@@ -13,6 +13,7 @@ from google.protobuf import descriptor_pb2
 _sym_db = _symbol_database.Default()
 
 
+from pogoprotos.data import pokemon_data_pb2 as pogoprotos_dot_data_dot_pokemon__data__pb2
 from pogoprotos.inventory.item import item_data_pb2 as pogoprotos_dot_inventory_dot_item_dot_item__data__pb2
 
 
@@ -20,9 +21,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/data/logs/fort_search_log_entry.proto',
   package='pogoprotos.data.logs',
   syntax='proto3',
-  serialized_pb=_b('\n0pogoprotos/data/logs/fort_search_log_entry.proto\x12\x14pogoprotos.data.logs\x1a)pogoprotos/inventory/item/item_data.proto\"\xca\x01\n\x12\x46ortSearchLogEntry\x12?\n\x06result\x18\x01 \x01(\x0e\x32/.pogoprotos.data.logs.FortSearchLogEntry.Result\x12\x0f\n\x07\x66ort_id\x18\x02 \x01(\t\x12\x32\n\x05items\x18\x03 \x03(\x0b\x32#.pogoprotos.inventory.item.ItemData\x12\x0c\n\x04\x65ggs\x18\x04 \x01(\x05\" \n\x06Result\x12\t\n\x05UNSET\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x62\x06proto3')
+  serialized_pb=_b('\n0pogoprotos/data/logs/fort_search_log_entry.proto\x12\x14pogoprotos.data.logs\x1a\"pogoprotos/data/pokemon_data.proto\x1a)pogoprotos/inventory/item/item_data.proto\"\xfe\x01\n\x12\x46ortSearchLogEntry\x12?\n\x06result\x18\x01 \x01(\x0e\x32/.pogoprotos.data.logs.FortSearchLogEntry.Result\x12\x0f\n\x07\x66ort_id\x18\x02 \x01(\t\x12\x32\n\x05items\x18\x03 \x03(\x0b\x32#.pogoprotos.inventory.item.ItemData\x12\x0c\n\x04\x65ggs\x18\x04 \x01(\x05\x12\x32\n\x0cpokemon_eggs\x18\x05 \x03(\x0b\x32\x1c.pogoprotos.data.PokemonData\" \n\x06Result\x12\t\n\x05UNSET\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x62\x06proto3')
   ,
-  dependencies=[pogoprotos_dot_inventory_dot_item_dot_item__data__pb2.DESCRIPTOR,])
+  dependencies=[pogoprotos_dot_data_dot_pokemon__data__pb2.DESCRIPTOR,pogoprotos_dot_inventory_dot_item_dot_item__data__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
@@ -44,8 +45,8 @@ _FORTSEARCHLOGENTRY_RESULT = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=288,
-  serialized_end=320,
+  serialized_start=376,
+  serialized_end=408,
 )
 _sym_db.RegisterEnumDescriptor(_FORTSEARCHLOGENTRY_RESULT)
 
@@ -85,6 +86,13 @@ _FORTSEARCHLOGENTRY = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='pokemon_eggs', full_name='pogoprotos.data.logs.FortSearchLogEntry.pokemon_eggs', index=4,
+      number=5, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -98,12 +106,13 @@ _FORTSEARCHLOGENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=118,
-  serialized_end=320,
+  serialized_start=154,
+  serialized_end=408,
 )
 
 _FORTSEARCHLOGENTRY.fields_by_name['result'].enum_type = _FORTSEARCHLOGENTRY_RESULT
 _FORTSEARCHLOGENTRY.fields_by_name['items'].message_type = pogoprotos_dot_inventory_dot_item_dot_item__data__pb2._ITEMDATA
+_FORTSEARCHLOGENTRY.fields_by_name['pokemon_eggs'].message_type = pogoprotos_dot_data_dot_pokemon__data__pb2._POKEMONDATA
 _FORTSEARCHLOGENTRY_RESULT.containing_type = _FORTSEARCHLOGENTRY
 DESCRIPTOR.message_types_by_name['FortSearchLogEntry'] = _FORTSEARCHLOGENTRY
 
