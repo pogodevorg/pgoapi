@@ -27,7 +27,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/map/fort/fort_data.proto',
   package='pogoprotos.map.fort',
   syntax='proto3',
-  serialized_pb=_b('\n#pogoprotos/map/fort/fort_data.proto\x12\x13pogoprotos.map.fort\x1a%pogoprotos/data/pokemon_display.proto\x1a!pogoprotos/enums/pokemon_id.proto\x1a!pogoprotos/enums/team_color.proto\x1a\'pogoprotos/inventory/item/item_id.proto\x1a#pogoprotos/map/fort/fort_type.proto\x1a&pogoprotos/map/fort/fort_sponsor.proto\x1a-pogoprotos/map/fort/fort_rendering_type.proto\x1a(pogoprotos/map/fort/fort_lure_info.proto\"\xbd\x05\n\x08\x46ortData\x12\n\n\x02id\x18\x01 \x01(\t\x12\"\n\x1alast_modified_timestamp_ms\x18\x02 \x01(\x03\x12\x10\n\x08latitude\x18\x03 \x01(\x01\x12\x11\n\tlongitude\x18\x04 \x01(\x01\x12\x32\n\rowned_by_team\x18\x05 \x01(\x0e\x32\x1b.pogoprotos.enums.TeamColor\x12\x35\n\x10guard_pokemon_id\x18\x06 \x01(\x0e\x32\x1b.pogoprotos.enums.PokemonId\x12\x18\n\x10guard_pokemon_cp\x18\x07 \x01(\x05\x12\x0f\n\x07\x65nabled\x18\x08 \x01(\x08\x12+\n\x04type\x18\t \x01(\x0e\x32\x1d.pogoprotos.map.fort.FortType\x12\x12\n\ngym_points\x18\n \x01(\x03\x12\x14\n\x0cis_in_battle\x18\x0b \x01(\x08\x12?\n\x14\x61\x63tive_fort_modifier\x18\x0c \x03(\x0e\x32!.pogoprotos.inventory.item.ItemId\x12\x34\n\tlure_info\x18\r \x01(\x0b\x32!.pogoprotos.map.fort.FortLureInfo\x12&\n\x1e\x63ooldown_complete_timestamp_ms\x18\x0e \x01(\x03\x12\x31\n\x07sponsor\x18\x0f \x01(\x0e\x32 .pogoprotos.map.fort.FortSponsor\x12>\n\x0erendering_type\x18\x10 \x01(\x0e\x32&.pogoprotos.map.fort.FortRenderingType\x12\x1d\n\x15\x64\x65ploy_lockout_end_ms\x18\x11 \x01(\x03\x12>\n\x15guard_pokemon_display\x18\x12 \x01(\x0b\x32\x1f.pogoprotos.data.PokemonDisplayb\x06proto3')
+  serialized_pb=_b('\n#pogoprotos/map/fort/fort_data.proto\x12\x13pogoprotos.map.fort\x1a%pogoprotos/data/pokemon_display.proto\x1a!pogoprotos/enums/pokemon_id.proto\x1a!pogoprotos/enums/team_color.proto\x1a\'pogoprotos/inventory/item/item_id.proto\x1a#pogoprotos/map/fort/fort_type.proto\x1a&pogoprotos/map/fort/fort_sponsor.proto\x1a-pogoprotos/map/fort/fort_rendering_type.proto\x1a(pogoprotos/map/fort/fort_lure_info.proto\"\xcd\x05\n\x08\x46ortData\x12\n\n\x02id\x18\x01 \x01(\t\x12\"\n\x1alast_modified_timestamp_ms\x18\x02 \x01(\x03\x12\x10\n\x08latitude\x18\x03 \x01(\x01\x12\x11\n\tlongitude\x18\x04 \x01(\x01\x12\x32\n\rowned_by_team\x18\x05 \x01(\x0e\x32\x1b.pogoprotos.enums.TeamColor\x12\x35\n\x10guard_pokemon_id\x18\x06 \x01(\x0e\x32\x1b.pogoprotos.enums.PokemonId\x12\x18\n\x10guard_pokemon_cp\x18\x07 \x01(\x05\x12\x0f\n\x07\x65nabled\x18\x08 \x01(\x08\x12+\n\x04type\x18\t \x01(\x0e\x32\x1d.pogoprotos.map.fort.FortType\x12\x12\n\ngym_points\x18\n \x01(\x03\x12\x14\n\x0cis_in_battle\x18\x0b \x01(\x08\x12?\n\x14\x61\x63tive_fort_modifier\x18\x0c \x03(\x0e\x32!.pogoprotos.inventory.item.ItemId\x12\x34\n\tlure_info\x18\r \x01(\x0b\x32!.pogoprotos.map.fort.FortLureInfo\x12&\n\x1e\x63ooldown_complete_timestamp_ms\x18\x0e \x01(\x03\x12\x31\n\x07sponsor\x18\x0f \x01(\x0e\x32 .pogoprotos.map.fort.FortSponsor\x12>\n\x0erendering_type\x18\x10 \x01(\x0e\x32&.pogoprotos.map.fort.FortRenderingType\x12\x1d\n\x15\x64\x65ploy_lockout_end_ms\x18\x11 \x01(\x03\x12>\n\x15guard_pokemon_display\x18\x12 \x01(\x0b\x32\x1f.pogoprotos.data.PokemonDisplay\x12\x0e\n\x06\x63losed\x18\x13 \x01(\x08\x62\x06proto3')
   ,
   dependencies=[pogoprotos_dot_data_dot_pokemon__display__pb2.DESCRIPTOR,pogoprotos_dot_enums_dot_pokemon__id__pb2.DESCRIPTOR,pogoprotos_dot_enums_dot_team__color__pb2.DESCRIPTOR,pogoprotos_dot_inventory_dot_item_dot_item__id__pb2.DESCRIPTOR,pogoprotos_dot_map_dot_fort_dot_fort__type__pb2.DESCRIPTOR,pogoprotos_dot_map_dot_fort_dot_fort__sponsor__pb2.DESCRIPTOR,pogoprotos_dot_map_dot_fort_dot_fort__rendering__type__pb2.DESCRIPTOR,pogoprotos_dot_map_dot_fort_dot_fort__lure__info__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -168,6 +168,13 @@ _FORTDATA = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='closed', full_name='pogoprotos.map.fort.FortData.closed', index=18,
+      number=19, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -181,7 +188,7 @@ _FORTDATA = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=377,
-  serialized_end=1078,
+  serialized_end=1094,
 )
 
 _FORTDATA.fields_by_name['owned_by_team'].enum_type = pogoprotos_dot_enums_dot_team__color__pb2._TEAMCOLOR

@@ -15,7 +15,7 @@ class HashServer(HashEngine):
     _session.mount('https://', _adapter)
     _session.verify = True
     _session.headers.update({'User-Agent': 'Python pgoapi @pogodev'})
-    endpoint = "https://pokehash.buddyauth.com/api/v129_1/hash"
+    endpoint = "https://pokehash.buddyauth.com/api/v131_0/hash"
     status = {}
 
     def __init__(self, auth_token):

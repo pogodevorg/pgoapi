@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/networking/requests/messages/get_asset_digest_message.proto',
   package='pogoprotos.networking.requests.messages',
   syntax='proto3',
-  serialized_pb=_b('\nFpogoprotos/networking/requests/messages/get_asset_digest_message.proto\x12\'pogoprotos.networking.requests.messages\x1a\x1fpogoprotos/enums/platform.proto\"\x9d\x01\n\x15GetAssetDigestMessage\x12,\n\x08platform\x18\x01 \x01(\x0e\x32\x1a.pogoprotos.enums.Platform\x12\x1b\n\x13\x64\x65vice_manufacturer\x18\x02 \x01(\t\x12\x14\n\x0c\x64\x65vice_model\x18\x03 \x01(\t\x12\x0e\n\x06locale\x18\x04 \x01(\t\x12\x13\n\x0b\x61pp_version\x18\x05 \x01(\rb\x06proto3')
+  serialized_pb=_b('\nFpogoprotos/networking/requests/messages/get_asset_digest_message.proto\x12\'pogoprotos.networking.requests.messages\x1a\x1fpogoprotos/enums/platform.proto\"\xdc\x01\n\x15GetAssetDigestMessage\x12,\n\x08platform\x18\x01 \x01(\x0e\x32\x1a.pogoprotos.enums.Platform\x12\x1b\n\x13\x64\x65vice_manufacturer\x18\x02 \x01(\t\x12\x14\n\x0c\x64\x65vice_model\x18\x03 \x01(\t\x12\x0e\n\x06locale\x18\x04 \x01(\t\x12\x13\n\x0b\x61pp_version\x18\x05 \x01(\r\x12\x10\n\x08paginate\x18\x06 \x01(\x08\x12\x13\n\x0bpage_offset\x18\x07 \x01(\x05\x12\x16\n\x0epage_timestamp\x18\x08 \x01(\x04\x62\x06proto3')
   ,
   dependencies=[pogoprotos_dot_enums_dot_platform__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -70,6 +70,27 @@ _GETASSETDIGESTMESSAGE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='paginate', full_name='pogoprotos.networking.requests.messages.GetAssetDigestMessage.paginate', index=5,
+      number=6, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='page_offset', full_name='pogoprotos.networking.requests.messages.GetAssetDigestMessage.page_offset', index=6,
+      number=7, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='page_timestamp', full_name='pogoprotos.networking.requests.messages.GetAssetDigestMessage.page_timestamp', index=7,
+      number=8, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -83,7 +104,7 @@ _GETASSETDIGESTMESSAGE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=149,
-  serialized_end=306,
+  serialized_end=369,
 )
 
 _GETASSETDIGESTMESSAGE.fields_by_name['platform'].enum_type = pogoprotos_dot_enums_dot_platform__pb2._PLATFORM
