@@ -20,12 +20,42 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/networking/responses/get_asset_digest_response.proto',
   package='pogoprotos.networking.responses',
   syntax='proto3',
-  serialized_pb=_b('\n?pogoprotos/networking/responses/get_asset_digest_response.proto\x12\x1fpogoprotos.networking.responses\x1a(pogoprotos/data/asset_digest_entry.proto\"a\n\x16GetAssetDigestResponse\x12\x31\n\x06\x64igest\x18\x01 \x03(\x0b\x32!.pogoprotos.data.AssetDigestEntry\x12\x14\n\x0ctimestamp_ms\x18\x02 \x01(\x04\x62\x06proto3')
+  serialized_pb=_b('\n?pogoprotos/networking/responses/get_asset_digest_response.proto\x12\x1fpogoprotos.networking.responses\x1a(pogoprotos/data/asset_digest_entry.proto\"\xfd\x01\n\x16GetAssetDigestResponse\x12\x31\n\x06\x64igest\x18\x01 \x03(\x0b\x32!.pogoprotos.data.AssetDigestEntry\x12\x14\n\x0ctimestamp_ms\x18\x02 \x01(\x04\x12N\n\x06result\x18\x03 \x01(\x0e\x32>.pogoprotos.networking.responses.GetAssetDigestResponse.Result\x12\x13\n\x0bpage_offset\x18\x04 \x01(\x05\"5\n\x06Result\x12\t\n\x05UNSET\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x12\x08\n\x04PAGE\x10\x02\x12\t\n\x05RETRY\x10\x03\x62\x06proto3')
   ,
   dependencies=[pogoprotos_dot_data_dot_asset__digest__entry__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
+
+_GETASSETDIGESTRESPONSE_RESULT = _descriptor.EnumDescriptor(
+  name='Result',
+  full_name='pogoprotos.networking.responses.GetAssetDigestResponse.Result',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='UNSET', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='SUCCESS', index=1, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='PAGE', index=2, number=2,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='RETRY', index=3, number=3,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=343,
+  serialized_end=396,
+)
+_sym_db.RegisterEnumDescriptor(_GETASSETDIGESTRESPONSE_RESULT)
 
 
 _GETASSETDIGESTRESPONSE = _descriptor.Descriptor(
@@ -49,11 +79,26 @@ _GETASSETDIGESTRESPONSE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='result', full_name='pogoprotos.networking.responses.GetAssetDigestResponse.result', index=2,
+      number=3, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='page_offset', full_name='pogoprotos.networking.responses.GetAssetDigestResponse.page_offset', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
+    _GETASSETDIGESTRESPONSE_RESULT,
   ],
   options=None,
   is_extendable=False,
@@ -61,11 +106,13 @@ _GETASSETDIGESTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=142,
-  serialized_end=239,
+  serialized_start=143,
+  serialized_end=396,
 )
 
 _GETASSETDIGESTRESPONSE.fields_by_name['digest'].message_type = pogoprotos_dot_data_dot_asset__digest__entry__pb2._ASSETDIGESTENTRY
+_GETASSETDIGESTRESPONSE.fields_by_name['result'].enum_type = _GETASSETDIGESTRESPONSE_RESULT
+_GETASSETDIGESTRESPONSE_RESULT.containing_type = _GETASSETDIGESTRESPONSE
 DESCRIPTOR.message_types_by_name['GetAssetDigestResponse'] = _GETASSETDIGESTRESPONSE
 
 GetAssetDigestResponse = _reflection.GeneratedProtocolMessageType('GetAssetDigestResponse', (_message.Message,), dict(
