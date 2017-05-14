@@ -265,7 +265,7 @@ class RpcApi:
         sen.gravity_z = random.triangular(-1, .7, -0.8)
         sen.status = 3
 
-        sig.unknown25 = 1296456256998993698
+        sig.unknown25 = 5348175887752539474
 
         if self.device_info:
             for key in self.device_info:
@@ -280,7 +280,7 @@ class RpcApi:
         try:
             if request.requests[0].request_type in (RequestType.Value('GET_MAP_OBJECTS'), RequestType.Value('GET_PLAYER')):
                 plat_eight = UnknownPtr8Request()
-                plat_eight.message = '90f6a704505bccac73cec99b07794993e6fd5a12'
+                plat_eight.message = '15c79df0558009a4242518d2ab65de2a59e09499'
                 plat8 = request.platform_requests.add()
                 plat8.type = 8
                 plat8.request_message = plat_eight.SerializeToString()

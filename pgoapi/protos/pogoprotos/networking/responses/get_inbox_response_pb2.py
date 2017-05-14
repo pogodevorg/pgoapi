@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/networking/responses/get_inbox_response.proto',
   package='pogoprotos.networking.responses',
   syntax='proto3',
-  serialized_pb=_b('\n8pogoprotos/networking/responses/get_inbox_response.proto\x12\x1fpogoprotos.networking.responses\"\x82\t\n\x10GetInboxResponse\x12H\n\x06result\x18\x01 \x01(\x0e\x32\x38.pogoprotos.networking.responses.GetInboxResponse.Result\x12L\n\x05inbox\x18\x02 \x01(\x0b\x32=.pogoprotos.networking.responses.GetInboxResponse.ClientInbox\x1a\xa6\x07\n\x0b\x43lientInbox\x12\x61\n\rnotifications\x18\x01 \x03(\x0b\x32J.pogoprotos.networking.responses.GetInboxResponse.ClientInbox.Notification\x12i\n\x11\x62uiltin_variables\x18\x02 \x03(\x0b\x32N.pogoprotos.networking.responses.GetInboxResponse.ClientInbox.TemplateVariable\x1a\x97\x05\n\x0cNotification\x12\x17\n\x0fnotification_id\x18\x01 \x01(\t\x12\x0e\n\x06\x62undle\x18\x02 \x01(\t\x12\r\n\x05\x61sset\x18\x03 \x01(\t\x12\x0c\n\x04icon\x18\x04 \x01(\t\x12\x11\n\ttitle_key\x18\x05 \x01(\t\x12q\n\x08\x63\x61tegory\x18\x06 \x01(\x0e\x32_.pogoprotos.networking.responses.GetInboxResponse.ClientInbox.Notification.NotificationCategory\x12\x1b\n\x13\x63reate_timestamp_ms\x18\x07 \x01(\x03\x12\x1b\n\x13\x65xpire_timestamp_ms\x18\x08 \x01(\x03\x12\x61\n\tvariables\x18\t \x03(\x0b\x32N.pogoprotos.networking.responses.GetInboxResponse.ClientInbox.TemplateVariable\x12`\n\x06labels\x18\x0b \x03(\x0e\x32P.pogoprotos.networking.responses.GetInboxResponse.ClientInbox.Notification.Label\"O\n\x05Label\x12\x0f\n\x0bUNSET_LABEL\x10\x00\x12\n\n\x06UNREAD\x10\x01\x12\x07\n\x03NEW\x10\x02\x12\x11\n\rEXPIRING_SOON\x10\x03\x12\r\n\tIMMEDIATE\x10\x04\"k\n\x14NotificationCategory\x12\x12\n\x0eUNSET_CATEGORY\x10\x00\x12\r\n\tMARKETING\x10\x01\x12\x10\n\x0c\x41NNOUNCEMENT\x10\x02\x12\x0e\n\nADMIN_NOTE\x10\x03\x12\x0e\n\nGAME_EVENT\x10\x04\x1a/\n\x10TemplateVariable\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"-\n\x06Result\x12\t\n\x05UNSET\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x12\x0b\n\x07\x46\x41ILURE\x10\x02\x62\x06proto3')
+  serialized_pb=_b('\n8pogoprotos/networking/responses/get_inbox_response.proto\x12\x1fpogoprotos.networking.responses\"\x90\x07\n\x10GetInboxResponse\x12H\n\x06result\x18\x01 \x01(\x0e\x32\x38.pogoprotos.networking.responses.GetInboxResponse.Result\x12L\n\x05inbox\x18\x02 \x01(\x0b\x32=.pogoprotos.networking.responses.GetInboxResponse.ClientInbox\x1a\xb4\x05\n\x0b\x43lientInbox\x12\x61\n\rnotifications\x18\x01 \x03(\x0b\x32J.pogoprotos.networking.responses.GetInboxResponse.ClientInbox.Notification\x12i\n\x11\x62uiltin_variables\x18\x02 \x03(\x0b\x32N.pogoprotos.networking.responses.GetInboxResponse.ClientInbox.TemplateVariable\x1a\xec\x02\n\x0cNotification\x12\x17\n\x0fnotification_id\x18\x01 \x01(\t\x12\x11\n\ttitle_key\x18\x02 \x01(\t\x12\x10\n\x08\x63\x61tegory\x18\x03 \x01(\t\x12\x1b\n\x13\x63reate_timestamp_ms\x18\x04 \x01(\x03\x12\x61\n\tvariables\x18\x05 \x03(\x0b\x32N.pogoprotos.networking.responses.GetInboxResponse.ClientInbox.TemplateVariable\x12`\n\x06labels\x18\x06 \x03(\x0e\x32P.pogoprotos.networking.responses.GetInboxResponse.ClientInbox.Notification.Label\"<\n\x05Label\x12\x0f\n\x0bUNSET_LABEL\x10\x00\x12\n\n\x06UNREAD\x10\x01\x12\x07\n\x03NEW\x10\x02\x12\r\n\tIMMEDIATE\x10\x03\x1ah\n\x10TemplateVariable\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07literal\x18\x02 \x01(\t\x12\x0b\n\x03key\x18\x03 \x01(\t\x12\x14\n\x0clookup_table\x18\x04 \x01(\t\x12\x12\n\nbyte_value\x18\x05 \x01(\x0c\"-\n\x06Result\x12\t\n\x05UNSET\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x12\x0b\n\x07\x46\x41ILURE\x10\x02\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -44,54 +44,16 @@ _GETINBOXRESPONSE_CLIENTINBOX_NOTIFICATION_LABEL = _descriptor.EnumDescriptor(
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='EXPIRING_SOON', index=3, number=3,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='IMMEDIATE', index=4, number=4,
+      name='IMMEDIATE', index=3, number=3,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=964,
-  serialized_end=1043,
+  serialized_start=793,
+  serialized_end=853,
 )
 _sym_db.RegisterEnumDescriptor(_GETINBOXRESPONSE_CLIENTINBOX_NOTIFICATION_LABEL)
-
-_GETINBOXRESPONSE_CLIENTINBOX_NOTIFICATION_NOTIFICATIONCATEGORY = _descriptor.EnumDescriptor(
-  name='NotificationCategory',
-  full_name='pogoprotos.networking.responses.GetInboxResponse.ClientInbox.Notification.NotificationCategory',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='UNSET_CATEGORY', index=0, number=0,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='MARKETING', index=1, number=1,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='ANNOUNCEMENT', index=2, number=2,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='ADMIN_NOTE', index=3, number=3,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='GAME_EVENT', index=4, number=4,
-      options=None,
-      type=None),
-  ],
-  containing_type=None,
-  options=None,
-  serialized_start=1045,
-  serialized_end=1152,
-)
-_sym_db.RegisterEnumDescriptor(_GETINBOXRESPONSE_CLIENTINBOX_NOTIFICATION_NOTIFICATIONCATEGORY)
 
 _GETINBOXRESPONSE_RESULT = _descriptor.EnumDescriptor(
   name='Result',
@@ -114,8 +76,8 @@ _GETINBOXRESPONSE_RESULT = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1203,
-  serialized_end=1248,
+  serialized_start=961,
+  serialized_end=1006,
 )
 _sym_db.RegisterEnumDescriptor(_GETINBOXRESPONSE_RESULT)
 
@@ -135,64 +97,36 @@ _GETINBOXRESPONSE_CLIENTINBOX_NOTIFICATION = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='bundle', full_name='pogoprotos.networking.responses.GetInboxResponse.ClientInbox.Notification.bundle', index=1,
+      name='title_key', full_name='pogoprotos.networking.responses.GetInboxResponse.ClientInbox.Notification.title_key', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='asset', full_name='pogoprotos.networking.responses.GetInboxResponse.ClientInbox.Notification.asset', index=2,
+      name='category', full_name='pogoprotos.networking.responses.GetInboxResponse.ClientInbox.Notification.category', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='icon', full_name='pogoprotos.networking.responses.GetInboxResponse.ClientInbox.Notification.icon', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='title_key', full_name='pogoprotos.networking.responses.GetInboxResponse.ClientInbox.Notification.title_key', index=4,
-      number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='category', full_name='pogoprotos.networking.responses.GetInboxResponse.ClientInbox.Notification.category', index=5,
-      number=6, type=14, cpp_type=8, label=1,
+      name='create_timestamp_ms', full_name='pogoprotos.networking.responses.GetInboxResponse.ClientInbox.Notification.create_timestamp_ms', index=3,
+      number=4, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='create_timestamp_ms', full_name='pogoprotos.networking.responses.GetInboxResponse.ClientInbox.Notification.create_timestamp_ms', index=6,
-      number=7, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='expire_timestamp_ms', full_name='pogoprotos.networking.responses.GetInboxResponse.ClientInbox.Notification.expire_timestamp_ms', index=7,
-      number=8, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='variables', full_name='pogoprotos.networking.responses.GetInboxResponse.ClientInbox.Notification.variables', index=8,
-      number=9, type=11, cpp_type=10, label=3,
+      name='variables', full_name='pogoprotos.networking.responses.GetInboxResponse.ClientInbox.Notification.variables', index=4,
+      number=5, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='labels', full_name='pogoprotos.networking.responses.GetInboxResponse.ClientInbox.Notification.labels', index=9,
-      number=11, type=14, cpp_type=8, label=3,
+      name='labels', full_name='pogoprotos.networking.responses.GetInboxResponse.ClientInbox.Notification.labels', index=5,
+      number=6, type=14, cpp_type=8, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -203,7 +137,6 @@ _GETINBOXRESPONSE_CLIENTINBOX_NOTIFICATION = _descriptor.Descriptor(
   nested_types=[],
   enum_types=[
     _GETINBOXRESPONSE_CLIENTINBOX_NOTIFICATION_LABEL,
-    _GETINBOXRESPONSE_CLIENTINBOX_NOTIFICATION_NOTIFICATIONCATEGORY,
   ],
   options=None,
   is_extendable=False,
@@ -212,7 +145,7 @@ _GETINBOXRESPONSE_CLIENTINBOX_NOTIFICATION = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=489,
-  serialized_end=1152,
+  serialized_end=853,
 )
 
 _GETINBOXRESPONSE_CLIENTINBOX_TEMPLATEVARIABLE = _descriptor.Descriptor(
@@ -230,9 +163,30 @@ _GETINBOXRESPONSE_CLIENTINBOX_TEMPLATEVARIABLE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='value', full_name='pogoprotos.networking.responses.GetInboxResponse.ClientInbox.TemplateVariable.value', index=1,
+      name='literal', full_name='pogoprotos.networking.responses.GetInboxResponse.ClientInbox.TemplateVariable.literal', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='key', full_name='pogoprotos.networking.responses.GetInboxResponse.ClientInbox.TemplateVariable.key', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='lookup_table', full_name='pogoprotos.networking.responses.GetInboxResponse.ClientInbox.TemplateVariable.lookup_table', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='byte_value', full_name='pogoprotos.networking.responses.GetInboxResponse.ClientInbox.TemplateVariable.byte_value', index=4,
+      number=5, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -248,8 +202,8 @@ _GETINBOXRESPONSE_CLIENTINBOX_TEMPLATEVARIABLE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1154,
-  serialized_end=1201,
+  serialized_start=855,
+  serialized_end=959,
 )
 
 _GETINBOXRESPONSE_CLIENTINBOX = _descriptor.Descriptor(
@@ -286,7 +240,7 @@ _GETINBOXRESPONSE_CLIENTINBOX = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=267,
-  serialized_end=1201,
+  serialized_end=959,
 )
 
 _GETINBOXRESPONSE = _descriptor.Descriptor(
@@ -324,15 +278,13 @@ _GETINBOXRESPONSE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=94,
-  serialized_end=1248,
+  serialized_end=1006,
 )
 
-_GETINBOXRESPONSE_CLIENTINBOX_NOTIFICATION.fields_by_name['category'].enum_type = _GETINBOXRESPONSE_CLIENTINBOX_NOTIFICATION_NOTIFICATIONCATEGORY
 _GETINBOXRESPONSE_CLIENTINBOX_NOTIFICATION.fields_by_name['variables'].message_type = _GETINBOXRESPONSE_CLIENTINBOX_TEMPLATEVARIABLE
 _GETINBOXRESPONSE_CLIENTINBOX_NOTIFICATION.fields_by_name['labels'].enum_type = _GETINBOXRESPONSE_CLIENTINBOX_NOTIFICATION_LABEL
 _GETINBOXRESPONSE_CLIENTINBOX_NOTIFICATION.containing_type = _GETINBOXRESPONSE_CLIENTINBOX
 _GETINBOXRESPONSE_CLIENTINBOX_NOTIFICATION_LABEL.containing_type = _GETINBOXRESPONSE_CLIENTINBOX_NOTIFICATION
-_GETINBOXRESPONSE_CLIENTINBOX_NOTIFICATION_NOTIFICATIONCATEGORY.containing_type = _GETINBOXRESPONSE_CLIENTINBOX_NOTIFICATION
 _GETINBOXRESPONSE_CLIENTINBOX_TEMPLATEVARIABLE.containing_type = _GETINBOXRESPONSE_CLIENTINBOX
 _GETINBOXRESPONSE_CLIENTINBOX.fields_by_name['notifications'].message_type = _GETINBOXRESPONSE_CLIENTINBOX_NOTIFICATION
 _GETINBOXRESPONSE_CLIENTINBOX.fields_by_name['builtin_variables'].message_type = _GETINBOXRESPONSE_CLIENTINBOX_TEMPLATEVARIABLE

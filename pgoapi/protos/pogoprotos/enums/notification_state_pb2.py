@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/enums/notification_state.proto',
   package='pogoprotos.enums',
   syntax='proto3',
-  serialized_pb=_b('\n)pogoprotos/enums/notification_state.proto\x12\x10pogoprotos.enums*I\n\x11NotificationState\x12\x0f\n\x0bUNSET_STATE\x10\x00\x12\n\n\x06LISTED\x10\x01\x12\n\n\x06VIEWED\x10\x02\x12\x0b\n\x07\x44\x45LETED\x10\x03\x62\x06proto3')
+  serialized_pb=_b('\n)pogoprotos/enums/notification_state.proto\x12\x10pogoprotos.enums*0\n\x11NotificationState\x12\x0f\n\x0bUNSET_STATE\x10\x00\x12\n\n\x06VIEWED\x10\x01\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -35,30 +35,20 @@ _NOTIFICATIONSTATE = _descriptor.EnumDescriptor(
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='LISTED', index=1, number=1,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='VIEWED', index=2, number=2,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='DELETED', index=3, number=3,
+      name='VIEWED', index=1, number=1,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=63,
-  serialized_end=136,
+  serialized_end=111,
 )
 _sym_db.RegisterEnumDescriptor(_NOTIFICATIONSTATE)
 
 NotificationState = enum_type_wrapper.EnumTypeWrapper(_NOTIFICATIONSTATE)
 UNSET_STATE = 0
-LISTED = 1
-VIEWED = 2
-DELETED = 3
+VIEWED = 1
 
 
 DESCRIPTOR.enum_types_by_name['NotificationState'] = _NOTIFICATIONSTATE
