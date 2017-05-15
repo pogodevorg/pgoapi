@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/networking/requests/messages/get_inbox_message.proto',
   package='pogoprotos.networking.requests.messages',
   syntax='proto3',
-  serialized_pb=_b('\n?pogoprotos/networking/requests/messages/get_inbox_message.proto\x12\'pogoprotos.networking.requests.messages\"\x11\n\x0fGetInboxMessageb\x06proto3')
+  serialized_pb=_b('\n?pogoprotos/networking/requests/messages/get_inbox_message.proto\x12\'pogoprotos.networking.requests.messages\"P\n\x0fGetInboxMessage\x12\x12\n\nis_history\x18\x01 \x01(\x08\x12\x12\n\nis_reverse\x18\x02 \x01(\x08\x12\x15\n\rnot_before_ms\x18\x03 \x01(\x03\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -33,6 +33,27 @@ _GETINBOXMESSAGE = _descriptor.Descriptor(
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
+    _descriptor.FieldDescriptor(
+      name='is_history', full_name='pogoprotos.networking.requests.messages.GetInboxMessage.is_history', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='is_reverse', full_name='pogoprotos.networking.requests.messages.GetInboxMessage.is_reverse', index=1,
+      number=2, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='not_before_ms', full_name='pogoprotos.networking.requests.messages.GetInboxMessage.not_before_ms', index=2,
+      number=3, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -46,7 +67,7 @@ _GETINBOXMESSAGE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=108,
-  serialized_end=125,
+  serialized_end=188,
 )
 
 DESCRIPTOR.message_types_by_name['GetInboxMessage'] = _GETINBOXMESSAGE
