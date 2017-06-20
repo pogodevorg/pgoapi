@@ -336,7 +336,3 @@ class PGoApiRequest:
             return add_platform
         else:
             raise AttributeError
-
-
-    
-        
