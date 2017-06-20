@@ -38,6 +38,7 @@ from pgoapi.exceptions import AuthException, AuthTokenExpiredException, BadReque
 
 from . import protos
 from pogoprotos.networking.requests.request_type_pb2 import RequestType
+from pogoprotos.networking.platform.platform_request_type_pb2 import PlatformRequestType
 
 logger = logging.getLogger(__name__)
 
@@ -224,6 +225,7 @@ class PGoApiRequest:
         self._position_alt = position_alt
 
         self._req_method_list = []
+        self._req_platform_list = []
         self.device_info = device_info
 
     def call(self, use_dict = True):
@@ -238,17 +240,16 @@ class PGoApiRequest:
         request._session = self.__parent__._session
 
         hash_server_token = self.__parent__.get_hash_server_token()
-
         request.activate_hash_server(hash_server_token)
 
         response = None
-
         execute = True
+        
         while execute:
             execute = False
 
             try:
-                response = request.request(self._api_endpoint, self._req_method_list, self.get_position(), use_dict)
+                response = request.request(self._api_endpoint, self._req_method_list, self._req_platform_list, self.get_position(), use_dict)
             except AuthTokenExpiredException as e:
                 """
                 This exception only occures if the OAUTH service provider (google/ptc) didn't send any expiration date
@@ -293,26 +294,49 @@ class PGoApiRequest:
         self._position_alt = alt
 
     def __getattr__(self, func):
-        def function(**kwargs):
+        def add_request(**kwargs):
+
+                if '_call_direct' in kwargs:
+                    del kwargs['_call_direct']
+                    self.log.info('Creating a new direct request...')
+                elif not self._req_method_list:
+                    self.log.info('Creating a new request...')
+
+                name = func.upper()
+                if kwargs:
+                    self._req_method_list.append((RequestType.Value(name), kwargs))
+                    self.log.info("Adding '%s' to RPC request including arguments", name)
+                    self.log.debug("Arguments of '%s': \n\r%s", name, kwargs)
+                else:
+                    self._req_method_list.append((RequestType.Value(name), None))
+                    self.log.info("Adding '%s' to RPC request", name)
+
+                return self
+
+        def add_platform(**kwargs):
 
             if '_call_direct' in kwargs:
                 del kwargs['_call_direct']
-                self.log.info('Creating a new direct request...')
-            elif not self._req_method_list:
-                self.log.info('Creating a new request...')
 
             name = func.upper()
             if kwargs:
-                self._req_method_list.append({RequestType.Value(name): kwargs})
+                self._req_platform_list.append((PlatformRequestType.Value(name), kwargs))
                 self.log.info("Adding '%s' to RPC request including arguments", name)
                 self.log.debug("Arguments of '%s': \n\r%s", name, kwargs)
             else:
-                self._req_method_list.append(RequestType.Value(name))
+                self._req_platform_list.append((PlatformRequestType.Value(name), None))
                 self.log.info("Adding '%s' to RPC request", name)
 
-            return self
+            return self    
 
-        if func.upper() in RequestType.keys():
-            return function
+        name = func.upper()
+        if name in RequestType.keys():
+            return add_request
+        elif name in PlatformRequestType.keys():
+            return add_platform
         else:
             raise AttributeError
+
+
+    
+        

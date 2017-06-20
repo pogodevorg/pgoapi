@@ -46,6 +46,7 @@ from . import protos
 from pogoprotos.networking.envelopes.request_envelope_pb2 import RequestEnvelope
 from pogoprotos.networking.envelopes.response_envelope_pb2 import ResponseEnvelope
 from pogoprotos.networking.requests.request_type_pb2 import RequestType
+from pogoprotos.networking.platform.platform_request_type_pb2 import PlatformRequestType
 from pogoprotos.networking.envelopes.signature_pb2 import Signature
 from pogoprotos.networking.platform.requests.send_encrypted_signature_request_pb2 import SendEncryptedSignatureRequest
 from pogoprotos.networking.platform.requests.unknown_ptr8_request_pb2 import UnknownPtr8Request
@@ -123,12 +124,12 @@ class RpcApi:
 
         return http_response
 
-    def request(self, endpoint, subrequests, player_position, use_dict = True):
+    def request(self, endpoint, subrequests, platforms, player_position, use_dict = True):
 
         if not self._auth_provider or self._auth_provider.is_login() is False:
             raise NotLoggedInException()
 
-        self.request_proto = self.request_proto or self._build_main_request(subrequests, player_position)
+        self.request_proto = self.request_proto or self._build_main_request(subrequests, platforms, player_position)
         response = self._make_rpc(endpoint, self.request_proto)
 
         response_dict = self._parse_main_response(response, subrequests, use_dict)
@@ -175,7 +176,7 @@ class RpcApi:
             else:
                 self.log.debug('Received Session Ticket valid for %02d:%02d:%02d hours (%s < %s)', h, m, s, now_ms, expire_timestamp_ms)
 
-    def _build_main_request(self, subrequests, player_position=None):
+    def _build_main_request(self, subrequests, platforms, player_position=None):
         self.log.debug('Generating main RPC request...')
 
         request = RequestEnvelope()
@@ -188,6 +189,7 @@ class RpcApi:
 
         # generate sub requests before Signature generation
         request = self._build_sub_requests(request, subrequests)
+        request = self._build_platform_requests(request, platforms)
 
         ticket = self._auth_provider.get_ticket()
         if ticket:
@@ -279,16 +281,13 @@ class RpcApi:
 
         signature_proto = sig.SerializeToString()
 
-        try:
-            if request.requests[0].request_type in (RequestType.Value('GET_MAP_OBJECTS'), RequestType.Value('GET_PLAYER')):
-                plat_eight = UnknownPtr8Request()
-                plat_eight.message = '15c79df0558009a4242518d2ab65de2a59e09499'
-                plat8 = request.platform_requests.add()
-                plat8.type = 8
-                plat8.request_message = plat_eight.SerializeToString()
-        except (IndexError, AttributeError):
-            pass
-
+        if self._needsPtr8(subrequests):
+            plat_eight = UnknownPtr8Request()
+            plat_eight.message = '15c79df0558009a4242518d2ab65de2a59e09499'
+            plat8 = request.platform_requests.add()
+            plat8.type = 8
+            plat8.request_message = plat_eight.SerializeToString()
+        
         sig_request = SendEncryptedSignatureRequest()
         sig_request.encrypted_signature = pycrypt(signature_proto, sig.timestamp_since_start)
         plat = request.platform_requests.add()
@@ -301,62 +300,96 @@ class RpcApi:
 
         return request
 
+    def _needsPtr8(self, requests):
+        if len(requests) == 0:
+            return False
+        randval = random.uniform(0, 1)
+        rtype, _ = requests[0]
+        # GetMapObjects or GetPlayer: 50%
+        # Encounter: 10%
+        # Others: 3%        
+        if ((rtype in (2, 106) and randval > 0.5)
+                or (rtype == 102 and randval > 0.9)
+                or randval > 0.97):
+            return True
+        return False
+        
     def _build_sub_requests(self, mainrequest, subrequest_list):
         self.log.debug('Generating sub RPC requests...')
 
-        for entry in subrequest_list:
-            if isinstance(entry, dict):
-
-                entry_id = list(entry.items())[0][0]
-                entry_content = entry[entry_id]
-
+        for entry_id, params in subrequest_list:
+            if params:
                 entry_name = RequestType.Name(entry_id)
-
                 proto_name = entry_name.lower() + '_message'
-                proto_classname = 'pogoprotos.networking.requests.messages.' + proto_name + '_pb2.' + proto_name
-                subrequest_extension = self.get_class(proto_classname)()
-
-                self.log.debug("Subrequest class: %s", proto_classname)
-
-                for key, value in entry_content.items():
-                    if isinstance(value, list):
-                        self.log.debug("Found list: %s - trying as repeated", key)
-                        for i in value:
-                            try:
-                                self.log.debug("%s -> %s", key, i)
-                                r = getattr(subrequest_extension, key)
-                                r.append(i)
-                            except Exception as e:
-                                self.log.warning('Argument %s with value %s unknown inside %s (Exception: %s)', key, i, proto_name, e)
-                    elif isinstance(value, dict):
-                        for k in value.keys():
-                            try:
-                                r = getattr(subrequest_extension, key)
-                                setattr(r, k, value[k])
-                            except Exception as e:
-                                self.log.warning('Argument %s with value %s unknown inside %s (Exception: %s)', key, str(value), proto_name, e)
-                    else:
-                        try:
-                            setattr(subrequest_extension, key, value)
-                        except Exception as e:
-                            try:
-                                self.log.debug("%s -> %s", key, value)
-                                r = getattr(subrequest_extension, key)
-                                r.append(value)
-                            except Exception as e:
-                                self.log.warning('Argument %s with value %s unknown inside %s (Exception: %s)', key, value, proto_name, e)
+                bytes = self._get_proto_bytes('pogoprotos.networking.requests.messages.', proto_name, params)
 
                 subrequest = mainrequest.requests.add()
                 subrequest.request_type = entry_id
-                subrequest.request_message = subrequest_extension.SerializeToString()
+                subrequest.request_message = bytes
 
-            elif isinstance(entry, int):
-                subrequest = mainrequest.requests.add()
-                subrequest.request_type = entry
             else:
-                raise Exception('Unknown value in request list')
+                subrequest = mainrequest.requests.add()
+                subrequest.request_type = entry_id
 
         return mainrequest
+
+    def _build_platform_requests(self, mainrequest, platform_list):
+        self.log.debug('Generating platform RPC requests...')
+
+        for entry_id, params in platform_list:
+            if params:
+                entry_name = PlatformRequestType.Name(entry_id)
+                if entry_name == 'UNKNOWN_PTR_8':
+                    entry_name = 'UNKNOWN_PTR8'
+                proto_name = entry_name.lower() + '_request'
+                bytes = self._get_proto_bytes('pogoprotos.networking.platform.requests.', proto_name, params)
+
+                platform = mainrequest.platform_requests.add()
+                platform.type = entry_id
+                platform.request_message = bytes
+
+            else:
+                platform = mainrequest.platform_requests.add()
+                platform.type = entry_id
+
+        return mainrequest
+        
+
+    def _get_proto_bytes(self, path, name, entry_content):
+        proto_classname = path + name + '_pb2.' + name
+        proto = self.get_class(proto_classname)()
+
+        self.log.debug("Subrequest class: %s", proto_classname)
+
+        for key, value in entry_content.items():
+            if isinstance(value, list):
+                self.log.debug("Found list: %s - trying as repeated", key)
+                for i in value:
+                    try:
+                        self.log.debug("%s -> %s", key, i)
+                        r = getattr(proto, key)
+                        r.append(i)
+                    except Exception as e:
+                        self.log.warning('Argument %s with value %s unknown inside %s (Exception: %s)', key, i, proto_name, e)
+            elif isinstance(value, dict):
+                for k in value.keys():
+                    try:
+                        r = getattr(proto, key)
+                        setattr(r, k, value[k])
+                    except Exception as e:
+                        self.log.warning('Argument %s with value %s unknown inside %s (Exception: %s)', key, str(value), proto_name, e)
+            else:
+                try:
+                    setattr(proto, key, value)
+                except Exception as e:
+                    try:
+                        self.log.debug("%s -> %s", key, value)
+                        r = getattr(proto, key)
+                        r.append(value)
+                    except Exception as e:
+                        self.log.warning('Argument %s with value %s unknown inside %s (Exception: %s)', key, value, proto_name, e)
+
+        return proto.SerializeToString()
 
     def _parse_main_response(self, response_raw, subrequests, use_dict = True):
         self.log.debug('Parsing main RPC response...')
@@ -417,15 +450,9 @@ class RpcApi:
             exception.set_redirected_endpoint(response_proto.api_url)
             raise exception
 
-        list_len = len(subrequests_list) - 1
         i = 0
         for subresponse in response_proto.returns:
-            request_entry = subrequests_list[i]
-            if isinstance(request_entry, int):
-                entry_id = request_entry
-            else:
-                entry_id = list(request_entry.items())[0][0]
-
+            entry_id, _ = subrequests_list[i]
             entry_name = RequestType.Name(entry_id)
             proto_name = entry_name.lower() + '_response'
             proto_classname = 'pogoprotos.networking.responses.' + proto_name + '_pb2.' + proto_name
