@@ -162,7 +162,7 @@ class PGoApi:
         time.sleep(1.5)
 
         request = self.create_request()
-        request.download_remote_config_version(platform=1, app_version=6301)
+        request.download_remote_config_version(platform=1, app_version=6304)
         request.check_challenge()
         request.get_hatched_eggs()
         request.get_inventory()
@@ -226,7 +226,7 @@ class PGoApiRequest:
         self._req_method_list = []
         self.device_info = device_info
 
-    def call(self):
+    def call(self, use_dict = True):
         if (self._position_lat is None) or (self._position_lng is None):
             raise NoPlayerPositionSetException
 
@@ -248,7 +248,7 @@ class PGoApiRequest:
             execute = False
 
             try:
-                response = request.request(self._api_endpoint, self._req_method_list, self.get_position())
+                response = request.request(self._api_endpoint, self._req_method_list, self.get_position(), use_dict)
             except AuthTokenExpiredException as e:
                 """
                 This exception only occures if the OAUTH service provider (google/ptc) didn't send any expiration date

@@ -50,7 +50,7 @@ class AuthPtc(Auth):
         self._auth_provider = 'ptc'
 
         self._session = requests.session()
-        self._session.headers = {'User-Agent': user_agent or 'pokemongo/0 CFNetwork/758.5.3 Darwin/15.6.0'}
+        self._session.headers = {'User-Agent': user_agent or 'pokemongo/1 CFNetwork/811.4.18 Darwin/16.5.0'}
         self._username = username
         self._password = password
         self.timeout = timeout or 15
