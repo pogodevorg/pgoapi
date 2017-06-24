@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/settings/master/item/food_attributes.proto',
   package='pogoprotos.settings.master.item',
   syntax='proto3',
-  serialized_pb=_b('\n5pogoprotos/settings/master/item/food_attributes.proto\x12\x1fpogoprotos.settings.master.item\x1a\"pogoprotos/enums/item_effect.proto\"x\n\x0e\x46oodAttributes\x12\x31\n\x0bitem_effect\x18\x01 \x03(\x0e\x32\x1c.pogoprotos.enums.ItemEffect\x12\x1b\n\x13item_effect_percent\x18\x02 \x03(\x02\x12\x16\n\x0egrowth_percent\x18\x03 \x01(\x02\x62\x06proto3')
+  serialized_pb=_b('\n5pogoprotos/settings/master/item/food_attributes.proto\x12\x1fpogoprotos.settings.master.item\x1a\"pogoprotos/enums/item_effect.proto\"\x92\x01\n\x0e\x46oodAttributes\x12\x31\n\x0bitem_effect\x18\x01 \x03(\x0e\x32\x1c.pogoprotos.enums.ItemEffect\x12\x1b\n\x13item_effect_percent\x18\x02 \x03(\x02\x12\x16\n\x0egrowth_percent\x18\x03 \x01(\x02\x12\x18\n\x10\x62\x65rry_multiplier\x18\x04 \x01(\x02\x62\x06proto3')
   ,
   dependencies=[pogoprotos_dot_enums_dot_item__effect__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -56,6 +56,13 @@ _FOODATTRIBUTES = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='berry_multiplier', full_name='pogoprotos.settings.master.item.FoodAttributes.berry_multiplier', index=3,
+      number=4, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -68,8 +75,8 @@ _FOODATTRIBUTES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=126,
-  serialized_end=246,
+  serialized_start=127,
+  serialized_end=273,
 )
 
 _FOODATTRIBUTES.fields_by_name['item_effect'].enum_type = pogoprotos_dot_enums_dot_item__effect__pb2._ITEMEFFECT

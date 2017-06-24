@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/settings/master/camera_settings.proto',
   package='pogoprotos.settings.master',
   syntax='proto3',
-  serialized_pb=_b('\n0pogoprotos/settings/master/camera_settings.proto\x12\x1apogoprotos.settings.master\x1a$pogoprotos/enums/camera_target.proto\x1a+pogoprotos/enums/camera_interpolation.proto\"\xd7\x03\n\x0e\x43\x61meraSettings\x12\x13\n\x0bnext_camera\x18\x01 \x01(\t\x12<\n\rinterpolation\x18\x02 \x03(\x0e\x32%.pogoprotos.enums.CameraInterpolation\x12\x33\n\x0btarget_type\x18\x03 \x03(\x0e\x32\x1e.pogoprotos.enums.CameraTarget\x12\x15\n\rease_in_speed\x18\x04 \x03(\x02\x12\x16\n\x0e\x65\x61st_out_speed\x18\x05 \x03(\x02\x12\x18\n\x10\x64uration_seconds\x18\x06 \x03(\x02\x12\x14\n\x0cwait_seconds\x18\x07 \x03(\x02\x12\x1a\n\x12transition_seconds\x18\x08 \x03(\x02\x12\x14\n\x0c\x61ngle_degree\x18\t \x03(\x02\x12\x1b\n\x13\x61ngle_offset_degree\x18\n \x03(\x02\x12\x14\n\x0cpitch_degree\x18\x0b \x03(\x02\x12\x1b\n\x13pitch_offset_degree\x18\x0c \x03(\x02\x12\x13\n\x0broll_degree\x18\r \x03(\x02\x12\x17\n\x0f\x64istance_meters\x18\x0e \x03(\x02\x12\x16\n\x0eheight_percent\x18\x0f \x03(\x02\x12\x16\n\x0evert_ctr_ratio\x18\x10 \x03(\x02\x62\x06proto3')
+  serialized_pb=_b('\n0pogoprotos/settings/master/camera_settings.proto\x12\x1apogoprotos.settings.master\x1a$pogoprotos/enums/camera_target.proto\x1a+pogoprotos/enums/camera_interpolation.proto\"\xd7\x03\n\x0e\x43\x61meraSettings\x12\x13\n\x0bnext_camera\x18\x01 \x01(\t\x12<\n\rinterpolation\x18\x02 \x03(\x0e\x32%.pogoprotos.enums.CameraInterpolation\x12\x33\n\x0btarget_type\x18\x03 \x03(\x0e\x32\x1e.pogoprotos.enums.CameraTarget\x12\x15\n\rease_in_speed\x18\x04 \x03(\x02\x12\x16\n\x0e\x65\x61se_out_speed\x18\x05 \x03(\x02\x12\x18\n\x10\x64uration_seconds\x18\x06 \x03(\x02\x12\x14\n\x0cwait_seconds\x18\x07 \x03(\x02\x12\x1a\n\x12transition_seconds\x18\x08 \x03(\x02\x12\x14\n\x0c\x61ngle_degree\x18\t \x03(\x02\x12\x1b\n\x13\x61ngle_offset_degree\x18\n \x03(\x02\x12\x14\n\x0cpitch_degree\x18\x0b \x03(\x02\x12\x1b\n\x13pitch_offset_degree\x18\x0c \x03(\x02\x12\x13\n\x0broll_degree\x18\r \x03(\x02\x12\x17\n\x0f\x64istance_meters\x18\x0e \x03(\x02\x12\x16\n\x0eheight_percent\x18\x0f \x03(\x02\x12\x16\n\x0evert_ctr_ratio\x18\x10 \x03(\x02\x62\x06proto3')
   ,
   dependencies=[pogoprotos_dot_enums_dot_camera__target__pb2.DESCRIPTOR,pogoprotos_dot_enums_dot_camera__interpolation__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -65,7 +65,7 @@ _CAMERASETTINGS = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='east_out_speed', full_name='pogoprotos.settings.master.CameraSettings.east_out_speed', index=4,
+      name='ease_out_speed', full_name='pogoprotos.settings.master.CameraSettings.ease_out_speed', index=4,
       number=5, type=2, cpp_type=6, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,

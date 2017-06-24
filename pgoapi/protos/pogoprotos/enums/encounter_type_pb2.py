@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/enums/encounter_type.proto',
   package='pogoprotos.enums',
   syntax='proto3',
-  serialized_pb=_b('\n%pogoprotos/enums/encounter_type.proto\x12\x10pogoprotos.enums*7\n\rEncounterType\x12\x0f\n\x0bSPAWN_POINT\x10\x00\x12\x0b\n\x07INCENSE\x10\x01\x12\x08\n\x04\x44ISK\x10\x02\x62\x06proto3')
+  serialized_pb=_b('\n%pogoprotos/enums/encounter_type.proto\x12\x10pogoprotos.enums*F\n\rEncounterType\x12\x0f\n\x0bSPAWN_POINT\x10\x00\x12\x0b\n\x07INCENSE\x10\x01\x12\x08\n\x04\x44ISK\x10\x02\x12\r\n\tPOST_RAID\x10\x03\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -42,11 +42,15 @@ _ENCOUNTERTYPE = _descriptor.EnumDescriptor(
       name='DISK', index=2, number=2,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='POST_RAID', index=3, number=3,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=59,
-  serialized_end=114,
+  serialized_end=129,
 )
 _sym_db.RegisterEnumDescriptor(_ENCOUNTERTYPE)
 
@@ -54,6 +58,7 @@ EncounterType = enum_type_wrapper.EnumTypeWrapper(_ENCOUNTERTYPE)
 SPAWN_POINT = 0
 INCENSE = 1
 DISK = 2
+POST_RAID = 3
 
 
 DESCRIPTOR.enum_types_by_name['EncounterType'] = _ENCOUNTERTYPE

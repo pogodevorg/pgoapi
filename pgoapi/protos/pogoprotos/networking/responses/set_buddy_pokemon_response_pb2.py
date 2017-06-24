@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/networking/responses/set_buddy_pokemon_response.proto',
   package='pogoprotos.networking.responses',
   syntax='proto3',
-  serialized_pb=_b('\n@pogoprotos/networking/responses/set_buddy_pokemon_response.proto\x12\x1fpogoprotos.networking.responses\x1a#pogoprotos/data/buddy_pokemon.proto\"\x95\x02\n\x17SetBuddyPokemonResponse\x12O\n\x06result\x18\x01 \x01(\x0e\x32?.pogoprotos.networking.responses.SetBuddyPokemonResponse.Result\x12\x34\n\rupdated_buddy\x18\x02 \x01(\x0b\x32\x1d.pogoprotos.data.BuddyPokemon\"s\n\x06Result\x12\t\n\x05UNEST\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x12\x1a\n\x16\x45RROR_POKEMON_DEPLOYED\x10\x02\x12\x1b\n\x17\x45RROR_POKEMON_NOT_OWNED\x10\x03\x12\x18\n\x14\x45RROR_POKEMON_IS_EGG\x10\x04\x62\x06proto3')
+  serialized_pb=_b('\n@pogoprotos/networking/responses/set_buddy_pokemon_response.proto\x12\x1fpogoprotos.networking.responses\x1a#pogoprotos/data/buddy_pokemon.proto\"\xb1\x02\n\x17SetBuddyPokemonResponse\x12O\n\x06result\x18\x01 \x01(\x0e\x32?.pogoprotos.networking.responses.SetBuddyPokemonResponse.Result\x12\x34\n\rupdated_buddy\x18\x02 \x01(\x0b\x32\x1d.pogoprotos.data.BuddyPokemon\"\x8e\x01\n\x06Result\x12\t\n\x05UNEST\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x12\x1a\n\x16\x45RROR_POKEMON_DEPLOYED\x10\x02\x12\x1b\n\x17\x45RROR_POKEMON_NOT_OWNED\x10\x03\x12\x18\n\x14\x45RROR_POKEMON_IS_EGG\x10\x04\x12\x19\n\x15\x45RROR_INVALID_POKEMON\x10\x05\x62\x06proto3')
   ,
   dependencies=[pogoprotos_dot_data_dot_buddy__pokemon__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -53,11 +53,15 @@ _SETBUDDYPOKEMONRESPONSE_RESULT = _descriptor.EnumDescriptor(
       name='ERROR_POKEMON_IS_EGG', index=4, number=4,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ERROR_INVALID_POKEMON', index=5, number=5,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=301,
-  serialized_end=416,
+  serialized_start=302,
+  serialized_end=444,
 )
 _sym_db.RegisterEnumDescriptor(_SETBUDDYPOKEMONRESPONSE_RESULT)
 
@@ -97,7 +101,7 @@ _SETBUDDYPOKEMONRESPONSE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=139,
-  serialized_end=416,
+  serialized_end=444,
 )
 
 _SETBUDDYPOKEMONRESPONSE.fields_by_name['result'].enum_type = _SETBUDDYPOKEMONRESPONSE_RESULT
