@@ -15,15 +15,16 @@ _sym_db = _symbol_database.Default()
 
 from pogoprotos.data.player import player_avatar_pb2 as pogoprotos_dot_data_dot_player_dot_player__avatar__pb2
 from pogoprotos.enums import team_color_pb2 as pogoprotos_dot_enums_dot_team__color__pb2
+from pogoprotos.enums import gym_badge_type_pb2 as pogoprotos_dot_enums_dot_gym__badge__type__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/data/player/player_public_profile.proto',
   package='pogoprotos.data.player',
   syntax='proto3',
-  serialized_pb=_b('\n2pogoprotos/data/player/player_public_profile.proto\x12\x16pogoprotos.data.player\x1a*pogoprotos/data/player/player_avatar.proto\x1a!pogoprotos/enums/team_color.proto\"\x99\x01\n\x13PlayerPublicProfile\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05level\x18\x02 \x01(\x05\x12\x34\n\x06\x61vatar\x18\x03 \x01(\x0b\x32$.pogoprotos.data.player.PlayerAvatar\x12/\n\nteam_color\x18\x04 \x01(\x0e\x32\x1b.pogoprotos.enums.TeamColorb\x06proto3')
+  serialized_pb=_b('\n2pogoprotos/data/player/player_public_profile.proto\x12\x16pogoprotos.data.player\x1a*pogoprotos/data/player/player_avatar.proto\x1a!pogoprotos/enums/team_color.proto\x1a%pogoprotos/enums/gym_badge_type.proto\"\x91\x02\n\x13PlayerPublicProfile\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05level\x18\x02 \x01(\x05\x12\x34\n\x06\x61vatar\x18\x03 \x01(\x0b\x32$.pogoprotos.data.player.PlayerAvatar\x12/\n\nteam_color\x18\x04 \x01(\x0e\x32\x1b.pogoprotos.enums.TeamColor\x12\x13\n\x0b\x62\x61ttles_won\x18\x05 \x01(\x05\x12\x11\n\tkm_walked\x18\x06 \x01(\x02\x12\x16\n\x0e\x63\x61ught_pokemon\x18\x07 \x01(\x05\x12\x36\n\x0egym_badge_type\x18\x08 \x01(\x0e\x32\x1e.pogoprotos.enums.GymBadgeTypeb\x06proto3')
   ,
-  dependencies=[pogoprotos_dot_data_dot_player_dot_player__avatar__pb2.DESCRIPTOR,pogoprotos_dot_enums_dot_team__color__pb2.DESCRIPTOR,])
+  dependencies=[pogoprotos_dot_data_dot_player_dot_player__avatar__pb2.DESCRIPTOR,pogoprotos_dot_enums_dot_team__color__pb2.DESCRIPTOR,pogoprotos_dot_enums_dot_gym__badge__type__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
@@ -64,6 +65,34 @@ _PLAYERPUBLICPROFILE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='battles_won', full_name='pogoprotos.data.player.PlayerPublicProfile.battles_won', index=4,
+      number=5, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='km_walked', full_name='pogoprotos.data.player.PlayerPublicProfile.km_walked', index=5,
+      number=6, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='caught_pokemon', full_name='pogoprotos.data.player.PlayerPublicProfile.caught_pokemon', index=6,
+      number=7, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='gym_badge_type', full_name='pogoprotos.data.player.PlayerPublicProfile.gym_badge_type', index=7,
+      number=8, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -76,12 +105,13 @@ _PLAYERPUBLICPROFILE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=158,
-  serialized_end=311,
+  serialized_start=197,
+  serialized_end=470,
 )
 
 _PLAYERPUBLICPROFILE.fields_by_name['avatar'].message_type = pogoprotos_dot_data_dot_player_dot_player__avatar__pb2._PLAYERAVATAR
 _PLAYERPUBLICPROFILE.fields_by_name['team_color'].enum_type = pogoprotos_dot_enums_dot_team__color__pb2._TEAMCOLOR
+_PLAYERPUBLICPROFILE.fields_by_name['gym_badge_type'].enum_type = pogoprotos_dot_enums_dot_gym__badge__type__pb2._GYMBADGETYPE
 DESCRIPTOR.message_types_by_name['PlayerPublicProfile'] = _PLAYERPUBLICPROFILE
 
 PlayerPublicProfile = _reflection.GeneratedProtocolMessageType('PlayerPublicProfile', (_message.Message,), dict(

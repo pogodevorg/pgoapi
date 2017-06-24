@@ -15,15 +15,16 @@ _sym_db = _symbol_database.Default()
 
 from pogoprotos.data.battle import battle_log_pb2 as pogoprotos_dot_data_dot_battle_dot_battle__log__pb2
 from pogoprotos.data.battle import battle_pokemon_info_pb2 as pogoprotos_dot_data_dot_battle_dot_battle__pokemon__info__pb2
+from pogoprotos.data.battle import battle_update_pb2 as pogoprotos_dot_data_dot_battle_dot_battle__update__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/networking/responses/attack_gym_response.proto',
   package='pogoprotos.networking.responses',
   syntax='proto3',
-  serialized_pb=_b('\n9pogoprotos/networking/responses/attack_gym_response.proto\x12\x1fpogoprotos.networking.responses\x1a\'pogoprotos/data/battle/battle_log.proto\x1a\x30pogoprotos/data/battle/battle_pokemon_info.proto\"\x8c\x03\n\x11\x41ttackGymResponse\x12I\n\x06result\x18\x01 \x01(\x0e\x32\x39.pogoprotos.networking.responses.AttackGymResponse.Result\x12\x35\n\nbattle_log\x18\x02 \x01(\x0b\x32!.pogoprotos.data.battle.BattleLog\x12\x11\n\tbattle_id\x18\x03 \x01(\t\x12\x42\n\x0f\x61\x63tive_defender\x18\x04 \x01(\x0b\x32).pogoprotos.data.battle.BattlePokemonInfo\x12\x42\n\x0f\x61\x63tive_attacker\x18\x05 \x01(\x0b\x32).pogoprotos.data.battle.BattlePokemonInfo\"Z\n\x06Result\x12\t\n\x05UNSET\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x12 \n\x1c\x45RROR_INVALID_ATTACK_ACTIONS\x10\x02\x12\x16\n\x12\x45RROR_NOT_IN_RANGE\x10\x03\x62\x06proto3')
+  serialized_pb=_b('\n9pogoprotos/networking/responses/attack_gym_response.proto\x12\x1fpogoprotos.networking.responses\x1a\'pogoprotos/data/battle/battle_log.proto\x1a\x30pogoprotos/data/battle/battle_pokemon_info.proto\x1a*pogoprotos/data/battle/battle_update.proto\"\xc9\x03\n\x11\x41ttackGymResponse\x12I\n\x06result\x18\x01 \x01(\x0e\x32\x39.pogoprotos.networking.responses.AttackGymResponse.Result\x12\x35\n\nbattle_log\x18\x02 \x01(\x0b\x32!.pogoprotos.data.battle.BattleLog\x12\x11\n\tbattle_id\x18\x03 \x01(\t\x12\x42\n\x0f\x61\x63tive_defender\x18\x04 \x01(\x0b\x32).pogoprotos.data.battle.BattlePokemonInfo\x12\x42\n\x0f\x61\x63tive_attacker\x18\x05 \x01(\x0b\x32).pogoprotos.data.battle.BattlePokemonInfo\x12;\n\rbattle_update\x18\x06 \x01(\x0b\x32$.pogoprotos.data.battle.BattleUpdate\"Z\n\x06Result\x12\t\n\x05UNSET\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x12 \n\x1c\x45RROR_INVALID_ATTACK_ACTIONS\x10\x02\x12\x16\n\x12\x45RROR_NOT_IN_RANGE\x10\x03\x62\x06proto3')
   ,
-  dependencies=[pogoprotos_dot_data_dot_battle_dot_battle__log__pb2.DESCRIPTOR,pogoprotos_dot_data_dot_battle_dot_battle__pokemon__info__pb2.DESCRIPTOR,])
+  dependencies=[pogoprotos_dot_data_dot_battle_dot_battle__log__pb2.DESCRIPTOR,pogoprotos_dot_data_dot_battle_dot_battle__pokemon__info__pb2.DESCRIPTOR,pogoprotos_dot_data_dot_battle_dot_battle__update__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
@@ -53,8 +54,8 @@ _ATTACKGYMRESPONSE_RESULT = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=492,
-  serialized_end=582,
+  serialized_start=597,
+  serialized_end=687,
 )
 _sym_db.RegisterEnumDescriptor(_ATTACKGYMRESPONSE_RESULT)
 
@@ -101,6 +102,13 @@ _ATTACKGYMRESPONSE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='battle_update', full_name='pogoprotos.networking.responses.AttackGymResponse.battle_update', index=5,
+      number=6, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -114,14 +122,15 @@ _ATTACKGYMRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=186,
-  serialized_end=582,
+  serialized_start=230,
+  serialized_end=687,
 )
 
 _ATTACKGYMRESPONSE.fields_by_name['result'].enum_type = _ATTACKGYMRESPONSE_RESULT
 _ATTACKGYMRESPONSE.fields_by_name['battle_log'].message_type = pogoprotos_dot_data_dot_battle_dot_battle__log__pb2._BATTLELOG
 _ATTACKGYMRESPONSE.fields_by_name['active_defender'].message_type = pogoprotos_dot_data_dot_battle_dot_battle__pokemon__info__pb2._BATTLEPOKEMONINFO
 _ATTACKGYMRESPONSE.fields_by_name['active_attacker'].message_type = pogoprotos_dot_data_dot_battle_dot_battle__pokemon__info__pb2._BATTLEPOKEMONINFO
+_ATTACKGYMRESPONSE.fields_by_name['battle_update'].message_type = pogoprotos_dot_data_dot_battle_dot_battle__update__pb2._BATTLEUPDATE
 _ATTACKGYMRESPONSE_RESULT.containing_type = _ATTACKGYMRESPONSE
 DESCRIPTOR.message_types_by_name['AttackGymResponse'] = _ATTACKGYMRESPONSE
 

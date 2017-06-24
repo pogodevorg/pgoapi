@@ -15,15 +15,17 @@ _sym_db = _symbol_database.Default()
 
 from pogoprotos.data import pokemon_data_pb2 as pogoprotos_dot_data_dot_pokemon__data__pb2
 from pogoprotos.inventory.item import item_award_pb2 as pogoprotos_dot_inventory_dot_item_dot_item__award__pb2
+from pogoprotos.inventory import loot_pb2 as pogoprotos_dot_inventory_dot_loot__pb2
+from pogoprotos.data.badge import awarded_gym_badge_pb2 as pogoprotos_dot_data_dot_badge_dot_awarded__gym__badge__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/networking/responses/fort_search_response.proto',
   package='pogoprotos.networking.responses',
   syntax='proto3',
-  serialized_pb=_b('\n:pogoprotos/networking/responses/fort_search_response.proto\x12\x1fpogoprotos.networking.responses\x1a\"pogoprotos/data/pokemon_data.proto\x1a*pogoprotos/inventory/item/item_award.proto\"\xec\x03\n\x12\x46ortSearchResponse\x12J\n\x06result\x18\x01 \x01(\x0e\x32:.pogoprotos.networking.responses.FortSearchResponse.Result\x12;\n\ritems_awarded\x18\x02 \x03(\x0b\x32$.pogoprotos.inventory.item.ItemAward\x12\x14\n\x0cgems_awarded\x18\x03 \x01(\x05\x12\x36\n\x10pokemon_data_egg\x18\x04 \x01(\x0b\x32\x1c.pogoprotos.data.PokemonData\x12\x1a\n\x12\x65xperience_awarded\x18\x05 \x01(\x05\x12&\n\x1e\x63ooldown_complete_timestamp_ms\x18\x06 \x01(\x03\x12\"\n\x1a\x63hain_hack_sequence_number\x18\x07 \x01(\x05\"\x96\x01\n\x06Result\x12\x11\n\rNO_RESULT_SET\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x12\x10\n\x0cOUT_OF_RANGE\x10\x02\x12\x16\n\x12IN_COOLDOWN_PERIOD\x10\x03\x12\x12\n\x0eINVENTORY_FULL\x10\x04\x12\x18\n\x14\x45XCEEDED_DAILY_LIMIT\x10\x05\x12\x14\n\x10POI_INACCESSIBLE\x10\x06\x62\x06proto3')
+  serialized_pb=_b('\n:pogoprotos/networking/responses/fort_search_response.proto\x12\x1fpogoprotos.networking.responses\x1a\"pogoprotos/data/pokemon_data.proto\x1a*pogoprotos/inventory/item/item_award.proto\x1a\x1fpogoprotos/inventory/loot.proto\x1a-pogoprotos/data/badge/awarded_gym_badge.proto\"\xd4\x05\n\x12\x46ortSearchResponse\x12J\n\x06result\x18\x01 \x01(\x0e\x32:.pogoprotos.networking.responses.FortSearchResponse.Result\x12;\n\ritems_awarded\x18\x02 \x03(\x0b\x32$.pogoprotos.inventory.item.ItemAward\x12\x14\n\x0cgems_awarded\x18\x03 \x01(\x05\x12\x36\n\x10pokemon_data_egg\x18\x04 \x01(\x0b\x32\x1c.pogoprotos.data.PokemonData\x12\x1a\n\x12\x65xperience_awarded\x18\x05 \x01(\x05\x12&\n\x1e\x63ooldown_complete_timestamp_ms\x18\x06 \x01(\x03\x12\"\n\x1a\x63hain_hack_sequence_number\x18\x07 \x01(\x05\x12\x41\n\x11\x61warded_gym_badge\x18\x08 \x01(\x0b\x32&.pogoprotos.data.badge.AwardedGymBadge\x12(\n\x04loot\x18\t \x01(\x0b\x32\x1a.pogoprotos.inventory.Loot\x12.\n\nbonus_loot\x18\n \x01(\x0b\x32\x1a.pogoprotos.inventory.Loot\x12\x14\n\x0craid_tickets\x18\x0b \x01(\x05\x12\x33\n\x0fteam_bonus_loot\x18\x0c \x01(\x0b\x32\x1a.pogoprotos.inventory.Loot\"\x96\x01\n\x06Result\x12\x11\n\rNO_RESULT_SET\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x12\x10\n\x0cOUT_OF_RANGE\x10\x02\x12\x16\n\x12IN_COOLDOWN_PERIOD\x10\x03\x12\x12\n\x0eINVENTORY_FULL\x10\x04\x12\x18\n\x14\x45XCEEDED_DAILY_LIMIT\x10\x05\x12\x14\n\x10POI_INACCESSIBLE\x10\x06\x62\x06proto3')
   ,
-  dependencies=[pogoprotos_dot_data_dot_pokemon__data__pb2.DESCRIPTOR,pogoprotos_dot_inventory_dot_item_dot_item__award__pb2.DESCRIPTOR,])
+  dependencies=[pogoprotos_dot_data_dot_pokemon__data__pb2.DESCRIPTOR,pogoprotos_dot_inventory_dot_item_dot_item__award__pb2.DESCRIPTOR,pogoprotos_dot_inventory_dot_loot__pb2.DESCRIPTOR,pogoprotos_dot_data_dot_badge_dot_awarded__gym__badge__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
@@ -65,8 +67,8 @@ _FORTSEARCHRESPONSE_RESULT = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=518,
-  serialized_end=668,
+  serialized_start=830,
+  serialized_end=980,
 )
 _sym_db.RegisterEnumDescriptor(_FORTSEARCHRESPONSE_RESULT)
 
@@ -127,6 +129,41 @@ _FORTSEARCHRESPONSE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='awarded_gym_badge', full_name='pogoprotos.networking.responses.FortSearchResponse.awarded_gym_badge', index=7,
+      number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='loot', full_name='pogoprotos.networking.responses.FortSearchResponse.loot', index=8,
+      number=9, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='bonus_loot', full_name='pogoprotos.networking.responses.FortSearchResponse.bonus_loot', index=9,
+      number=10, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='raid_tickets', full_name='pogoprotos.networking.responses.FortSearchResponse.raid_tickets', index=10,
+      number=11, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='team_bonus_loot', full_name='pogoprotos.networking.responses.FortSearchResponse.team_bonus_loot', index=11,
+      number=12, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -140,13 +177,17 @@ _FORTSEARCHRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=176,
-  serialized_end=668,
+  serialized_start=256,
+  serialized_end=980,
 )
 
 _FORTSEARCHRESPONSE.fields_by_name['result'].enum_type = _FORTSEARCHRESPONSE_RESULT
 _FORTSEARCHRESPONSE.fields_by_name['items_awarded'].message_type = pogoprotos_dot_inventory_dot_item_dot_item__award__pb2._ITEMAWARD
 _FORTSEARCHRESPONSE.fields_by_name['pokemon_data_egg'].message_type = pogoprotos_dot_data_dot_pokemon__data__pb2._POKEMONDATA
+_FORTSEARCHRESPONSE.fields_by_name['awarded_gym_badge'].message_type = pogoprotos_dot_data_dot_badge_dot_awarded__gym__badge__pb2._AWARDEDGYMBADGE
+_FORTSEARCHRESPONSE.fields_by_name['loot'].message_type = pogoprotos_dot_inventory_dot_loot__pb2._LOOT
+_FORTSEARCHRESPONSE.fields_by_name['bonus_loot'].message_type = pogoprotos_dot_inventory_dot_loot__pb2._LOOT
+_FORTSEARCHRESPONSE.fields_by_name['team_bonus_loot'].message_type = pogoprotos_dot_inventory_dot_loot__pb2._LOOT
 _FORTSEARCHRESPONSE_RESULT.containing_type = _FORTSEARCHRESPONSE
 DESCRIPTOR.message_types_by_name['FortSearchResponse'] = _FORTSEARCHRESPONSE
 
