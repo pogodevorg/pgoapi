@@ -50,7 +50,6 @@ from pogoprotos.networking.envelopes.signature_pb2 import Signature
 from pogoprotos.networking.platform.requests.send_encrypted_signature_request_pb2 import SendEncryptedSignatureRequest
 from pogoprotos.networking.platform.requests.unknown_ptr8_request_pb2 import UnknownPtr8Request
 
-
 class RpcApi:
 
     RPC_ID = 0
@@ -124,7 +123,7 @@ class RpcApi:
 
         return http_response
 
-    def request(self, endpoint, subrequests, player_position):
+    def request(self, endpoint, subrequests, player_position, use_dict = True):
 
         if not self._auth_provider or self._auth_provider.is_login() is False:
             raise NotLoggedInException()
@@ -132,13 +131,21 @@ class RpcApi:
         self.request_proto = self.request_proto or self._build_main_request(subrequests, player_position)
         response = self._make_rpc(endpoint, self.request_proto)
 
-        response_dict = self._parse_main_response(response, subrequests)
-
-        self.check_authentication(response_dict)
+        response_dict = self._parse_main_response(response, subrequests, use_dict)
 
         # some response validations
         if isinstance(response_dict, dict):
-            status_code = response_dict.get('status_code')
+            if use_dict:
+                status_code = response_dict.get('status_code')
+                if ('auth_ticket' in response_dict) and ('expire_timestamp_ms' in response_dict['auth_ticket']):
+                    ticket = response_dict['auth_ticket']
+                    self.check_authentication(ticket['expire_timestamp_ms'], ticket['start'], ticket['end'])
+            else:
+                status_code = response_dict['envelope'].status_code
+                ticket = response_dict['envelope'].auth_ticket
+                if ticket:
+                    self.check_authentication(ticket.expire_timestamp_ms, ticket.start, ticket.end)
+                                
             if status_code == 102:
                 raise AuthTokenExpiredException
             elif status_code == 52:
@@ -154,24 +161,19 @@ class RpcApi:
 
         return response_dict
 
-    def check_authentication(self, response_dict):
-        if isinstance(response_dict, dict) and ('auth_ticket' in response_dict) and \
-           ('expire_timestamp_ms' in response_dict['auth_ticket']) and \
-           (self._auth_provider.is_new_ticket(response_dict['auth_ticket']['expire_timestamp_ms'])):
+    def check_authentication(self, expire_timestamp_ms, start, end):
+        if self._auth_provider.is_new_ticket(expire_timestamp_ms):
 
             had_ticket = self._auth_provider.has_ticket()
-
-            auth_ticket = response_dict['auth_ticket']
-            self._auth_provider.set_ticket(
-                [auth_ticket['expire_timestamp_ms'], auth_ticket['start'], auth_ticket['end']])
+            self._auth_provider.set_ticket([expire_timestamp_ms, start, end])
 
             now_ms = get_time(ms=True)
-            h, m, s = get_format_time_diff(now_ms, auth_ticket['expire_timestamp_ms'], True)
+            h, m, s = get_format_time_diff(now_ms, expire_timestamp_ms, True)
 
             if had_ticket:
-                self.log.debug('Replacing old Session Ticket with new one valid for %02d:%02d:%02d hours (%s < %s)', h, m, s, now_ms, auth_ticket['expire_timestamp_ms'])
+                self.log.debug('Replacing old Session Ticket with new one valid for %02d:%02d:%02d hours (%s < %s)', h, m, s, now_ms, expire_timestamp_ms)
             else:
-                self.log.debug('Received Session Ticket valid for %02d:%02d:%02d hours (%s < %s)', h, m, s, now_ms, auth_ticket['expire_timestamp_ms'])
+                self.log.debug('Received Session Ticket valid for %02d:%02d:%02d hours (%s < %s)', h, m, s, now_ms, expire_timestamp_ms)
 
     def _build_main_request(self, subrequests, player_position=None):
         self.log.debug('Generating main RPC request...')
@@ -356,7 +358,7 @@ class RpcApi:
 
         return mainrequest
 
-    def _parse_main_response(self, response_raw, subrequests):
+    def _parse_main_response(self, response_raw, subrequests, use_dict = True):
         self.log.debug('Parsing main RPC response...')
 
         if response_raw.status_code == 400:
@@ -388,25 +390,32 @@ class RpcApi:
         except Exception:
             self.log.debug('Error during protoc parsing - ignored.')
 
-        response_proto_dict = protobuf_to_dict(response_proto)
-        response_proto_dict = self._parse_sub_responses(response_proto, subrequests, response_proto_dict)
+        if use_dict:
+            response_proto_dict = protobuf_to_dict(response_proto)
+            if 'returns' in response_proto_dict:
+                del response_proto_dict['returns']
+        else:
+            response_proto_dict = {'envelope': response_proto}
 
         if not response_proto_dict:
             raise MalformedNianticResponseException('Could not convert protobuf to dict.')
+            
+        response_proto_dict = self._parse_sub_responses(response_proto, subrequests, response_proto_dict, use_dict)
+        
+        #It can't be done before
+        if not use_dict:
+            del response_proto_dict['envelope'].returns[:]
 
         return response_proto_dict
 
-    def _parse_sub_responses(self, response_proto, subrequests_list, response_proto_dict):
+    def _parse_sub_responses(self, response_proto, subrequests_list, response_proto_dict, use_dict = True):
         self.log.debug('Parsing sub RPC responses...')
         response_proto_dict['responses'] = {}
 
-        if response_proto_dict.get('status_code', 1) == 53:
+        if response_proto.status_code == 53:
             exception = ServerApiEndpointRedirectException()
-            exception.set_redirected_endpoint(response_proto_dict['api_url'])
+            exception.set_redirected_endpoint(response_proto.api_url)
             raise exception
-
-        if 'returns' in response_proto_dict:
-            del response_proto_dict['returns']
 
         list_len = len(subrequests_list) - 1
         i = 0
@@ -435,7 +444,11 @@ class RpcApi:
             if subresponse_extension:
                 try:
                     subresponse_extension.ParseFromString(subresponse)
-                    subresponse_return = protobuf_to_dict(subresponse_extension)
+                    if use_dict:
+
+                        subresponse_return = protobuf_to_dict(subresponse_extension)
+                    else:
+                        subresponse_return = subresponse_extension
                 except Exception:
                     error = "Protobuf definition for {} seems not to match".format(proto_classname)
                     subresponse_return = error
