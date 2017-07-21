@@ -57,7 +57,7 @@ class AuthGoogle(Auth):
 
         user_login = perform_master_login(username, password, self.GOOGLE_LOGIN_ANDROID_ID, proxy=self._proxy)
 
-        if user_login and 'Error' in user_login and user_login['Error'] == 'NeedsBrowser':
+        if user_login and user_login.get('Error', None) == 'NeedsBrowser':
             raise AuthGoogleTwoFactorRequiredException(user_login['Url'], user_login['ErrorDetail'])
 
         try:
