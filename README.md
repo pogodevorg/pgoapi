@@ -82,7 +82,9 @@ Once you have cloned the repository, switch to the `develop` branch. To merge yo
 
 ### Node JS
 [pogosandbox/pogobuf](https://github.com/pogosandbox/pogobuf)
+
 [Pokemon GO node api](https://github.com/Armax/Pokemon-GO-node-api) by Arm4x **deprecated**
+
 [cyraxx/pogobuf](https://github.com/cyraxx/pogobuf) by cyraxx **deprecated**
 
 [![Analytics](https://ga-beacon.appspot.com/UA-1911411-4/pgoapi.git/README.md?pixel&useReferer)](https://github.com/igrigorik/ga-beacon)
