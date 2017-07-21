@@ -1,6 +1,6 @@
 [![POGODEV](https://github.com/pogodevorg/assets/blob/master/public/img/logo-github.png?raw=true)](https://pogodev.org)
 
-# pgoapi - a pokemon go api lib in python [![Build Status](https://travis-ci.org/tejado/pgoapi.svg?branch=master)](https://travis-ci.org/tejado/pgoapi)
+# pgoapi - a pokemon go api lib in python [![Build Status](https://travis-ci.org/pogodevorg/pgoapi.svg?branch=develop)](https://travis-ci.org/pogodevorg/pgoapi)
 
 pgoapi is a client/api/demo for Pokemon Go by https://github.com/tejado & https://github.com/pogodevorg.
 It allows automatic parsing of requests/responses by finding the correct protobuf objects over a naming convention and will return the response in a parsed python dictionary format.   
@@ -21,7 +21,7 @@ It allows automatic parsing of requests/responses by finding the correct protobu
  * Thread-safety
  * Advanced logging/debugging
  * Uses [POGOProtos](https://github.com/AeonLucid/POGOProtos)
- * MostRPC calls are available (see [API reference](https://docs.pogodev.org) on the wiki)
+ * Most RPC calls are available (see [API reference](https://docs.pogodev.org) on the wiki)
 
 ## Documentation
 Documentation is available at the github [pgoapi wiki](https://wiki.pogodev.org).
@@ -42,6 +42,10 @@ git+https://github.com/pogodevorg/pgoapi.git@develop#egg=pgoapi
 
 If you are not using setuptools/pip, follow the instructions in the Contributing section below to clone this repository and then install pgoapi using the appropriate method for your project.
 
+### Hashing
+
+The API utilises the [API Hashing service](https://hashing.pogodev.org) provided by Bossland. Calls require a valid hash key to work on newer API Versions.
+
 ## Contributing
 Contributions are highly welcome. Please use github or [Discord](https://discord.pogodev.org) for it!
 
@@ -59,7 +63,9 @@ Once you have cloned the repository, switch to the `develop` branch. To merge yo
 ## Core Maintainers
 
 [![Noctem](https://github.com/Noctem.png?size=36) - Noctem](https://github.com/Noctem)
+
 [![ZeChrales](https://github.com/ZeChrales.png?size=36) - ZeChrales](https://github.com/ZeChrales)
+
 [![Ephemerality](https://github.com/Ephemerality.png?size=36) - Ephemerality](https://github.com/Ephemerality)
 
 
