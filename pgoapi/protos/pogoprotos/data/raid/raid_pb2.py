@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/data/raid/raid.proto',
   package='pogoprotos.data.raid',
   syntax='proto3',
-  serialized_pb=_b('\n\x1fpogoprotos/data/raid/raid.proto\x12\x14pogoprotos.data.raid\x1a!pogoprotos/enums/pokemon_id.proto\"\xce\x01\n\x04Raid\x12\x11\n\traid_seed\x18\x01 \x01(\x03\x12\x12\n\nstarted_ms\x18\x02 \x01(\x03\x12\x14\n\x0c\x63ompleted_ms\x18\x03 \x01(\x03\x12\x39\n\x14\x65ncounter_pokemon_id\x18\x04 \x01(\x0e\x32\x1b.pogoprotos.enums.PokemonId\x12\x18\n\x10\x63ompleted_battle\x18\x05 \x01(\x08\x12\x18\n\x10received_rewards\x18\x06 \x01(\x08\x12\x1a\n\x12\x66inished_encounter\x18\x07 \x01(\x08\x62\x06proto3')
+  serialized_pb=_b('\n\x1fpogoprotos/data/raid/raid.proto\x12\x14pogoprotos.data.raid\x1a!pogoprotos/enums/pokemon_id.proto\"\xf0\x01\n\x04Raid\x12\x11\n\traid_seed\x18\x01 \x01(\x03\x12\x12\n\nstarted_ms\x18\x02 \x01(\x03\x12\x14\n\x0c\x63ompleted_ms\x18\x03 \x01(\x03\x12\x39\n\x14\x65ncounter_pokemon_id\x18\x04 \x01(\x0e\x32\x1b.pogoprotos.enums.PokemonId\x12\x18\n\x10\x63ompleted_battle\x18\x05 \x01(\x08\x12\x18\n\x10received_rewards\x18\x06 \x01(\x08\x12\x1a\n\x12\x66inished_encounter\x18\x07 \x01(\x08\x12 \n\x18received_default_rewards\x18\x08 \x01(\x08\x62\x06proto3')
   ,
   dependencies=[pogoprotos_dot_enums_dot_pokemon__id__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -84,6 +84,13 @@ _RAID = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='received_default_rewards', full_name='pogoprotos.data.raid.Raid.received_default_rewards', index=7,
+      number=8, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -97,7 +104,7 @@ _RAID = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=93,
-  serialized_end=299,
+  serialized_end=333,
 )
 
 _RAID.fields_by_name['encounter_pokemon_id'].enum_type = pogoprotos_dot_enums_dot_pokemon__id__pb2._POKEMONID

@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/settings/master/badge_settings.proto',
   package='pogoprotos.settings.master',
   syntax='proto3',
-  serialized_pb=_b('\n/pogoprotos/settings/master/badge_settings.proto\x12\x1apogoprotos.settings.master\x1a!pogoprotos/enums/badge_type.proto\x1a\x30pogoprotos/data/badge/badge_capture_reward.proto\"\xa8\x01\n\rBadgeSettings\x12/\n\nbadge_type\x18\x01 \x01(\x0e\x32\x1b.pogoprotos.enums.BadgeType\x12\x12\n\nbadge_rank\x18\x02 \x01(\x05\x12\x0f\n\x07targets\x18\x03 \x03(\x05\x12\x41\n\x0e\x63\x61pture_reward\x18\x04 \x03(\x0b\x32).pogoprotos.data.badge.BadgeCaptureRewardb\x06proto3')
+  serialized_pb=_b('\n/pogoprotos/settings/master/badge_settings.proto\x12\x1apogoprotos.settings.master\x1a!pogoprotos/enums/badge_type.proto\x1a\x30pogoprotos/data/badge/badge_capture_reward.proto\"\xbd\x01\n\rBadgeSettings\x12/\n\nbadge_type\x18\x01 \x01(\x0e\x32\x1b.pogoprotos.enums.BadgeType\x12\x12\n\nbadge_rank\x18\x02 \x01(\x05\x12\x0f\n\x07targets\x18\x03 \x03(\x05\x12\x41\n\x0e\x63\x61pture_reward\x18\x04 \x03(\x0b\x32).pogoprotos.data.badge.BadgeCaptureReward\x12\x13\n\x0b\x65vent_badge\x18\x05 \x01(\x08\x62\x06proto3')
   ,
   dependencies=[pogoprotos_dot_enums_dot_badge__type__pb2.DESCRIPTOR,pogoprotos_dot_data_dot_badge_dot_badge__capture__reward__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -64,6 +64,13 @@ _BADGESETTINGS = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='event_badge', full_name='pogoprotos.settings.master.BadgeSettings.event_badge', index=4,
+      number=5, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -77,7 +84,7 @@ _BADGESETTINGS = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=165,
-  serialized_end=333,
+  serialized_end=354,
 )
 
 _BADGESETTINGS.fields_by_name['badge_type'].enum_type = pogoprotos_dot_enums_dot_badge__type__pb2._BADGETYPE

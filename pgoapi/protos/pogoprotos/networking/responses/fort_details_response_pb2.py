@@ -14,6 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 from pogoprotos.data import pokemon_data_pb2 as pogoprotos_dot_data_dot_pokemon__data__pb2
+from pogoprotos.data.raid import event_info_pb2 as pogoprotos_dot_data_dot_raid_dot_event__info__pb2
 from pogoprotos.enums import team_color_pb2 as pogoprotos_dot_enums_dot_team__color__pb2
 from pogoprotos.map.fort import fort_type_pb2 as pogoprotos_dot_map_dot_fort_dot_fort__type__pb2
 from pogoprotos.map.fort import fort_modifier_pb2 as pogoprotos_dot_map_dot_fort_dot_fort__modifier__pb2
@@ -23,9 +24,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/networking/responses/fort_details_response.proto',
   package='pogoprotos.networking.responses',
   syntax='proto3',
-  serialized_pb=_b('\n;pogoprotos/networking/responses/fort_details_response.proto\x12\x1fpogoprotos.networking.responses\x1a\"pogoprotos/data/pokemon_data.proto\x1a!pogoprotos/enums/team_color.proto\x1a#pogoprotos/map/fort/fort_type.proto\x1a\'pogoprotos/map/fort/fort_modifier.proto\"\xab\x03\n\x13\x46ortDetailsResponse\x12\x0f\n\x07\x66ort_id\x18\x01 \x01(\t\x12/\n\nteam_color\x18\x02 \x01(\x0e\x32\x1b.pogoprotos.enums.TeamColor\x12\x32\n\x0cpokemon_data\x18\x03 \x01(\x0b\x32\x1c.pogoprotos.data.PokemonData\x12\x0c\n\x04name\x18\x04 \x01(\t\x12\x12\n\nimage_urls\x18\x05 \x03(\t\x12\n\n\x02\x66p\x18\x06 \x01(\x05\x12\x0f\n\x07stamina\x18\x07 \x01(\x05\x12\x13\n\x0bmax_stamina\x18\x08 \x01(\x05\x12+\n\x04type\x18\t \x01(\x0e\x32\x1d.pogoprotos.map.fort.FortType\x12\x10\n\x08latitude\x18\n \x01(\x01\x12\x11\n\tlongitude\x18\x0b \x01(\x01\x12\x13\n\x0b\x64\x65scription\x18\x0c \x01(\t\x12\x34\n\tmodifiers\x18\r \x03(\x0b\x32!.pogoprotos.map.fort.FortModifier\x12\x12\n\nclose_soon\x18\x0e \x01(\x08\x12\x19\n\x11\x63heckin_image_url\x18\x0f \x01(\tb\x06proto3')
+  serialized_pb=_b('\n;pogoprotos/networking/responses/fort_details_response.proto\x12\x1fpogoprotos.networking.responses\x1a\"pogoprotos/data/pokemon_data.proto\x1a%pogoprotos/data/raid/event_info.proto\x1a!pogoprotos/enums/team_color.proto\x1a#pogoprotos/map/fort/fort_type.proto\x1a\'pogoprotos/map/fort/fort_modifier.proto\"\xe0\x03\n\x13\x46ortDetailsResponse\x12\x0f\n\x07\x66ort_id\x18\x01 \x01(\t\x12/\n\nteam_color\x18\x02 \x01(\x0e\x32\x1b.pogoprotos.enums.TeamColor\x12\x32\n\x0cpokemon_data\x18\x03 \x01(\x0b\x32\x1c.pogoprotos.data.PokemonData\x12\x0c\n\x04name\x18\x04 \x01(\t\x12\x12\n\nimage_urls\x18\x05 \x03(\t\x12\n\n\x02\x66p\x18\x06 \x01(\x05\x12\x0f\n\x07stamina\x18\x07 \x01(\x05\x12\x13\n\x0bmax_stamina\x18\x08 \x01(\x05\x12+\n\x04type\x18\t \x01(\x0e\x32\x1d.pogoprotos.map.fort.FortType\x12\x10\n\x08latitude\x18\n \x01(\x01\x12\x11\n\tlongitude\x18\x0b \x01(\x01\x12\x13\n\x0b\x64\x65scription\x18\x0c \x01(\t\x12\x34\n\tmodifiers\x18\r \x03(\x0b\x32!.pogoprotos.map.fort.FortModifier\x12\x12\n\nclose_soon\x18\x0e \x01(\x08\x12\x19\n\x11\x63heckin_image_url\x18\x0f \x01(\t\x12\x33\n\nevent_info\x18\x10 \x01(\x0b\x32\x1f.pogoprotos.data.raid.EventInfob\x06proto3')
   ,
-  dependencies=[pogoprotos_dot_data_dot_pokemon__data__pb2.DESCRIPTOR,pogoprotos_dot_enums_dot_team__color__pb2.DESCRIPTOR,pogoprotos_dot_map_dot_fort_dot_fort__type__pb2.DESCRIPTOR,pogoprotos_dot_map_dot_fort_dot_fort__modifier__pb2.DESCRIPTOR,])
+  dependencies=[pogoprotos_dot_data_dot_pokemon__data__pb2.DESCRIPTOR,pogoprotos_dot_data_dot_raid_dot_event__info__pb2.DESCRIPTOR,pogoprotos_dot_enums_dot_team__color__pb2.DESCRIPTOR,pogoprotos_dot_map_dot_fort_dot_fort__type__pb2.DESCRIPTOR,pogoprotos_dot_map_dot_fort_dot_fort__modifier__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
@@ -143,6 +144,13 @@ _FORTDETAILSRESPONSE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='event_info', full_name='pogoprotos.networking.responses.FortDetailsResponse.event_info', index=15,
+      number=16, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -155,14 +163,15 @@ _FORTDETAILSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=246,
-  serialized_end=673,
+  serialized_start=285,
+  serialized_end=765,
 )
 
 _FORTDETAILSRESPONSE.fields_by_name['team_color'].enum_type = pogoprotos_dot_enums_dot_team__color__pb2._TEAMCOLOR
 _FORTDETAILSRESPONSE.fields_by_name['pokemon_data'].message_type = pogoprotos_dot_data_dot_pokemon__data__pb2._POKEMONDATA
 _FORTDETAILSRESPONSE.fields_by_name['type'].enum_type = pogoprotos_dot_map_dot_fort_dot_fort__type__pb2._FORTTYPE
 _FORTDETAILSRESPONSE.fields_by_name['modifiers'].message_type = pogoprotos_dot_map_dot_fort_dot_fort__modifier__pb2._FORTMODIFIER
+_FORTDETAILSRESPONSE.fields_by_name['event_info'].message_type = pogoprotos_dot_data_dot_raid_dot_event__info__pb2._EVENTINFO
 DESCRIPTOR.message_types_by_name['FortDetailsResponse'] = _FORTDETAILSRESPONSE
 
 FortDetailsResponse = _reflection.GeneratedProtocolMessageType('FortDetailsResponse', (_message.Message,), dict(

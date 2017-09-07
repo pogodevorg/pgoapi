@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/enums/pokemon_family_id.proto',
   package='pogoprotos.enums',
   syntax='proto3',
-  serialized_pb=_b('\n(pogoprotos/enums/pokemon_family_id.proto\x12\x10pogoprotos.enums*\xc2\x15\n\x0fPokemonFamilyId\x12\x10\n\x0c\x46\x41MILY_UNSET\x10\x00\x12\x14\n\x10\x46\x41MILY_BULBASAUR\x10\x01\x12\x15\n\x11\x46\x41MILY_CHARMANDER\x10\x04\x12\x13\n\x0f\x46\x41MILY_SQUIRTLE\x10\x07\x12\x13\n\x0f\x46\x41MILY_CATERPIE\x10\n\x12\x11\n\rFAMILY_WEEDLE\x10\r\x12\x11\n\rFAMILY_PIDGEY\x10\x10\x12\x12\n\x0e\x46\x41MILY_RATTATA\x10\x13\x12\x12\n\x0e\x46\x41MILY_SPEAROW\x10\x15\x12\x10\n\x0c\x46\x41MILY_EKANS\x10\x17\x12\x12\n\x0e\x46\x41MILY_PIKACHU\x10\x19\x12\x14\n\x10\x46\x41MILY_SANDSHREW\x10\x1b\x12\x19\n\x15\x46\x41MILY_NIDORAN_FEMALE\x10\x1d\x12\x17\n\x13\x46\x41MILY_NIDORAN_MALE\x10 \x12\x13\n\x0f\x46\x41MILY_CLEFAIRY\x10#\x12\x11\n\rFAMILY_VULPIX\x10%\x12\x15\n\x11\x46\x41MILY_JIGGLYPUFF\x10\'\x12\x10\n\x0c\x46\x41MILY_ZUBAT\x10)\x12\x11\n\rFAMILY_ODDISH\x10+\x12\x10\n\x0c\x46\x41MILY_PARAS\x10.\x12\x12\n\x0e\x46\x41MILY_VENONAT\x10\x30\x12\x12\n\x0e\x46\x41MILY_DIGLETT\x10\x32\x12\x11\n\rFAMILY_MEOWTH\x10\x34\x12\x12\n\x0e\x46\x41MILY_PSYDUCK\x10\x36\x12\x11\n\rFAMILY_MANKEY\x10\x38\x12\x14\n\x10\x46\x41MILY_GROWLITHE\x10:\x12\x12\n\x0e\x46\x41MILY_POLIWAG\x10<\x12\x0f\n\x0b\x46\x41MILY_ABRA\x10?\x12\x11\n\rFAMILY_MACHOP\x10\x42\x12\x15\n\x11\x46\x41MILY_BELLSPROUT\x10\x45\x12\x14\n\x10\x46\x41MILY_TENTACOOL\x10H\x12\x12\n\x0e\x46\x41MILY_GEODUDE\x10J\x12\x11\n\rFAMILY_PONYTA\x10M\x12\x13\n\x0f\x46\x41MILY_SLOWPOKE\x10O\x12\x14\n\x10\x46\x41MILY_MAGNEMITE\x10Q\x12\x14\n\x10\x46\x41MILY_FARFETCHD\x10S\x12\x10\n\x0c\x46\x41MILY_DODUO\x10T\x12\x0f\n\x0b\x46\x41MILY_SEEL\x10V\x12\x11\n\rFAMILY_GRIMER\x10X\x12\x13\n\x0f\x46\x41MILY_SHELLDER\x10Z\x12\x11\n\rFAMILY_GASTLY\x10\\\x12\x0f\n\x0b\x46\x41MILY_ONIX\x10_\x12\x12\n\x0e\x46\x41MILY_DROWZEE\x10`\x12\x10\n\x0c\x46\x41MILY_HYPNO\x10\x61\x12\x11\n\rFAMILY_KRABBY\x10\x62\x12\x12\n\x0e\x46\x41MILY_VOLTORB\x10\x64\x12\x14\n\x10\x46\x41MILY_EXEGGCUTE\x10\x66\x12\x11\n\rFAMILY_CUBONE\x10h\x12\x14\n\x10\x46\x41MILY_HITMONLEE\x10j\x12\x15\n\x11\x46\x41MILY_HITMONCHAN\x10k\x12\x14\n\x10\x46\x41MILY_LICKITUNG\x10l\x12\x12\n\x0e\x46\x41MILY_KOFFING\x10m\x12\x12\n\x0e\x46\x41MILY_RHYHORN\x10o\x12\x12\n\x0e\x46\x41MILY_CHANSEY\x10q\x12\x12\n\x0e\x46\x41MILY_TANGELA\x10r\x12\x15\n\x11\x46\x41MILY_KANGASKHAN\x10s\x12\x11\n\rFAMILY_HORSEA\x10t\x12\x12\n\x0e\x46\x41MILY_GOLDEEN\x10v\x12\x11\n\rFAMILY_STARYU\x10x\x12\x12\n\x0e\x46\x41MILY_MR_MIME\x10z\x12\x12\n\x0e\x46\x41MILY_SCYTHER\x10{\x12\x0f\n\x0b\x46\x41MILY_JYNX\x10|\x12\x15\n\x11\x46\x41MILY_ELECTABUZZ\x10}\x12\x11\n\rFAMILY_MAGMAR\x10~\x12\x11\n\rFAMILY_PINSIR\x10\x7f\x12\x12\n\rFAMILY_TAUROS\x10\x80\x01\x12\x14\n\x0f\x46\x41MILY_MAGIKARP\x10\x81\x01\x12\x12\n\rFAMILY_LAPRAS\x10\x83\x01\x12\x11\n\x0c\x46\x41MILY_DITTO\x10\x84\x01\x12\x11\n\x0c\x46\x41MILY_EEVEE\x10\x85\x01\x12\x13\n\x0e\x46\x41MILY_PORYGON\x10\x89\x01\x12\x13\n\x0e\x46\x41MILY_OMANYTE\x10\x8a\x01\x12\x12\n\rFAMILY_KABUTO\x10\x8c\x01\x12\x16\n\x11\x46\x41MILY_AERODACTYL\x10\x8e\x01\x12\x13\n\x0e\x46\x41MILY_SNORLAX\x10\x8f\x01\x12\x14\n\x0f\x46\x41MILY_ARTICUNO\x10\x90\x01\x12\x12\n\rFAMILY_ZAPDOS\x10\x91\x01\x12\x13\n\x0e\x46\x41MILY_MOLTRES\x10\x92\x01\x12\x13\n\x0e\x46\x41MILY_DRATINI\x10\x93\x01\x12\x12\n\rFAMILY_MEWTWO\x10\x96\x01\x12\x0f\n\nFAMILY_MEW\x10\x97\x01\x12\x15\n\x10\x46\x41MILY_CHIKORITA\x10\x98\x01\x12\x15\n\x10\x46\x41MILY_CYNDAQUIL\x10\x9b\x01\x12\x14\n\x0f\x46\x41MILY_TOTODILE\x10\x9e\x01\x12\x13\n\x0e\x46\x41MILY_SENTRET\x10\xa1\x01\x12\x14\n\x0f\x46\x41MILY_HOOTHOOT\x10\xa3\x01\x12\x12\n\rFAMILY_LEDYBA\x10\xa5\x01\x12\x14\n\x0f\x46\x41MILY_SPINARAK\x10\xa7\x01\x12\x14\n\x0f\x46\x41MILY_CHINCHOU\x10\xaa\x01\x12\x12\n\rFAMILY_TOGEPI\x10\xaf\x01\x12\x10\n\x0b\x46\x41MILY_NATU\x10\xb1\x01\x12\x12\n\rFAMILY_MAREEP\x10\xb3\x01\x12\x12\n\rFAMILY_MARILL\x10\xb7\x01\x12\x15\n\x10\x46\x41MILY_SUDOWOODO\x10\xb9\x01\x12\x12\n\rFAMILY_HOPPIP\x10\xbb\x01\x12\x11\n\x0c\x46\x41MILY_AIPOM\x10\xbe\x01\x12\x13\n\x0e\x46\x41MILY_SUNKERN\x10\xbf\x01\x12\x11\n\x0c\x46\x41MILY_YANMA\x10\xc1\x01\x12\x12\n\rFAMILY_WOOPER\x10\xc2\x01\x12\x13\n\x0e\x46\x41MILY_MURKROW\x10\xc6\x01\x12\x16\n\x11\x46\x41MILY_MISDREAVUS\x10\xc8\x01\x12\x11\n\x0c\x46\x41MILY_UNOWN\x10\xc9\x01\x12\x15\n\x10\x46\x41MILY_WOBBUFFET\x10\xca\x01\x12\x15\n\x10\x46\x41MILY_GIRAFARIG\x10\xcb\x01\x12\x12\n\rFAMILY_PINECO\x10\xcc\x01\x12\x15\n\x10\x46\x41MILY_DUNSPARCE\x10\xce\x01\x12\x12\n\rFAMILY_GLIGAR\x10\xcf\x01\x12\x14\n\x0f\x46\x41MILY_SNUBBULL\x10\xd1\x01\x12\x14\n\x0f\x46\x41MILY_QWILFISH\x10\xd3\x01\x12\x13\n\x0e\x46\x41MILY_SHUCKLE\x10\xd5\x01\x12\x15\n\x10\x46\x41MILY_HERACROSS\x10\xd6\x01\x12\x13\n\x0e\x46\x41MILY_SNEASEL\x10\xd7\x01\x12\x15\n\x10\x46\x41MILY_TEDDIURSA\x10\xd8\x01\x12\x12\n\rFAMILY_SLUGMA\x10\xda\x01\x12\x12\n\rFAMILY_SWINUB\x10\xdc\x01\x12\x13\n\x0e\x46\x41MILY_CORSOLA\x10\xde\x01\x12\x14\n\x0f\x46\x41MILY_REMORAID\x10\xdf\x01\x12\x14\n\x0f\x46\x41MILY_DELIBIRD\x10\xe1\x01\x12\x13\n\x0e\x46\x41MILY_MANTINE\x10\xe2\x01\x12\x14\n\x0f\x46\x41MILY_SKARMORY\x10\xe3\x01\x12\x14\n\x0f\x46\x41MILY_HOUNDOUR\x10\xe4\x01\x12\x12\n\rFAMILY_PHANPY\x10\xe7\x01\x12\x14\n\x0f\x46\x41MILY_STANTLER\x10\xea\x01\x12\x14\n\x0f\x46\x41MILY_SMEARGLE\x10\xeb\x01\x12\x13\n\x0e\x46\x41MILY_TYROGUE\x10\xec\x01\x12\x13\n\x0e\x46\x41MILY_MILTANK\x10\xf1\x01\x12\x12\n\rFAMILY_RAIKOU\x10\xf3\x01\x12\x11\n\x0c\x46\x41MILY_ENTEI\x10\xf4\x01\x12\x13\n\x0e\x46\x41MILY_SUICUNE\x10\xf5\x01\x12\x14\n\x0f\x46\x41MILY_LARVITAR\x10\xf6\x01\x12\x11\n\x0c\x46\x41MILY_LUGIA\x10\xf9\x01\x12\x11\n\x0c\x46\x41MILY_HO_OH\x10\xfa\x01\x12\x12\n\rFAMILY_CELEBI\x10\xfb\x01\x62\x06proto3')
+  serialized_pb=_b('\n(pogoprotos/enums/pokemon_family_id.proto\x12\x10pogoprotos.enums*\xb7!\n\x0fPokemonFamilyId\x12\x10\n\x0c\x46\x41MILY_UNSET\x10\x00\x12\x14\n\x10\x46\x41MILY_BULBASAUR\x10\x01\x12\x15\n\x11\x46\x41MILY_CHARMANDER\x10\x04\x12\x13\n\x0f\x46\x41MILY_SQUIRTLE\x10\x07\x12\x13\n\x0f\x46\x41MILY_CATERPIE\x10\n\x12\x11\n\rFAMILY_WEEDLE\x10\r\x12\x11\n\rFAMILY_PIDGEY\x10\x10\x12\x12\n\x0e\x46\x41MILY_RATTATA\x10\x13\x12\x12\n\x0e\x46\x41MILY_SPEAROW\x10\x15\x12\x10\n\x0c\x46\x41MILY_EKANS\x10\x17\x12\x12\n\x0e\x46\x41MILY_PIKACHU\x10\x19\x12\x14\n\x10\x46\x41MILY_SANDSHREW\x10\x1b\x12\x19\n\x15\x46\x41MILY_NIDORAN_FEMALE\x10\x1d\x12\x17\n\x13\x46\x41MILY_NIDORAN_MALE\x10 \x12\x13\n\x0f\x46\x41MILY_CLEFAIRY\x10#\x12\x11\n\rFAMILY_VULPIX\x10%\x12\x15\n\x11\x46\x41MILY_JIGGLYPUFF\x10\'\x12\x10\n\x0c\x46\x41MILY_ZUBAT\x10)\x12\x11\n\rFAMILY_ODDISH\x10+\x12\x10\n\x0c\x46\x41MILY_PARAS\x10.\x12\x12\n\x0e\x46\x41MILY_VENONAT\x10\x30\x12\x12\n\x0e\x46\x41MILY_DIGLETT\x10\x32\x12\x11\n\rFAMILY_MEOWTH\x10\x34\x12\x12\n\x0e\x46\x41MILY_PSYDUCK\x10\x36\x12\x11\n\rFAMILY_MANKEY\x10\x38\x12\x14\n\x10\x46\x41MILY_GROWLITHE\x10:\x12\x12\n\x0e\x46\x41MILY_POLIWAG\x10<\x12\x0f\n\x0b\x46\x41MILY_ABRA\x10?\x12\x11\n\rFAMILY_MACHOP\x10\x42\x12\x15\n\x11\x46\x41MILY_BELLSPROUT\x10\x45\x12\x14\n\x10\x46\x41MILY_TENTACOOL\x10H\x12\x12\n\x0e\x46\x41MILY_GEODUDE\x10J\x12\x11\n\rFAMILY_PONYTA\x10M\x12\x13\n\x0f\x46\x41MILY_SLOWPOKE\x10O\x12\x14\n\x10\x46\x41MILY_MAGNEMITE\x10Q\x12\x14\n\x10\x46\x41MILY_FARFETCHD\x10S\x12\x10\n\x0c\x46\x41MILY_DODUO\x10T\x12\x0f\n\x0b\x46\x41MILY_SEEL\x10V\x12\x11\n\rFAMILY_GRIMER\x10X\x12\x13\n\x0f\x46\x41MILY_SHELLDER\x10Z\x12\x11\n\rFAMILY_GASTLY\x10\\\x12\x0f\n\x0b\x46\x41MILY_ONIX\x10_\x12\x12\n\x0e\x46\x41MILY_DROWZEE\x10`\x12\x10\n\x0c\x46\x41MILY_HYPNO\x10\x61\x12\x11\n\rFAMILY_KRABBY\x10\x62\x12\x12\n\x0e\x46\x41MILY_VOLTORB\x10\x64\x12\x14\n\x10\x46\x41MILY_EXEGGCUTE\x10\x66\x12\x11\n\rFAMILY_CUBONE\x10h\x12\x14\n\x10\x46\x41MILY_HITMONLEE\x10j\x12\x15\n\x11\x46\x41MILY_HITMONCHAN\x10k\x12\x14\n\x10\x46\x41MILY_LICKITUNG\x10l\x12\x12\n\x0e\x46\x41MILY_KOFFING\x10m\x12\x12\n\x0e\x46\x41MILY_RHYHORN\x10o\x12\x12\n\x0e\x46\x41MILY_CHANSEY\x10q\x12\x12\n\x0e\x46\x41MILY_TANGELA\x10r\x12\x15\n\x11\x46\x41MILY_KANGASKHAN\x10s\x12\x11\n\rFAMILY_HORSEA\x10t\x12\x12\n\x0e\x46\x41MILY_GOLDEEN\x10v\x12\x11\n\rFAMILY_STARYU\x10x\x12\x12\n\x0e\x46\x41MILY_MR_MIME\x10z\x12\x12\n\x0e\x46\x41MILY_SCYTHER\x10{\x12\x0f\n\x0b\x46\x41MILY_JYNX\x10|\x12\x15\n\x11\x46\x41MILY_ELECTABUZZ\x10}\x12\x11\n\rFAMILY_MAGMAR\x10~\x12\x11\n\rFAMILY_PINSIR\x10\x7f\x12\x12\n\rFAMILY_TAUROS\x10\x80\x01\x12\x14\n\x0f\x46\x41MILY_MAGIKARP\x10\x81\x01\x12\x12\n\rFAMILY_LAPRAS\x10\x83\x01\x12\x11\n\x0c\x46\x41MILY_DITTO\x10\x84\x01\x12\x11\n\x0c\x46\x41MILY_EEVEE\x10\x85\x01\x12\x13\n\x0e\x46\x41MILY_PORYGON\x10\x89\x01\x12\x13\n\x0e\x46\x41MILY_OMANYTE\x10\x8a\x01\x12\x12\n\rFAMILY_KABUTO\x10\x8c\x01\x12\x16\n\x11\x46\x41MILY_AERODACTYL\x10\x8e\x01\x12\x13\n\x0e\x46\x41MILY_SNORLAX\x10\x8f\x01\x12\x14\n\x0f\x46\x41MILY_ARTICUNO\x10\x90\x01\x12\x12\n\rFAMILY_ZAPDOS\x10\x91\x01\x12\x13\n\x0e\x46\x41MILY_MOLTRES\x10\x92\x01\x12\x13\n\x0e\x46\x41MILY_DRATINI\x10\x93\x01\x12\x12\n\rFAMILY_MEWTWO\x10\x96\x01\x12\x0f\n\nFAMILY_MEW\x10\x97\x01\x12\x15\n\x10\x46\x41MILY_CHIKORITA\x10\x98\x01\x12\x15\n\x10\x46\x41MILY_CYNDAQUIL\x10\x9b\x01\x12\x14\n\x0f\x46\x41MILY_TOTODILE\x10\x9e\x01\x12\x13\n\x0e\x46\x41MILY_SENTRET\x10\xa1\x01\x12\x14\n\x0f\x46\x41MILY_HOOTHOOT\x10\xa3\x01\x12\x12\n\rFAMILY_LEDYBA\x10\xa5\x01\x12\x14\n\x0f\x46\x41MILY_SPINARAK\x10\xa7\x01\x12\x14\n\x0f\x46\x41MILY_CHINCHOU\x10\xaa\x01\x12\x12\n\rFAMILY_TOGEPI\x10\xaf\x01\x12\x10\n\x0b\x46\x41MILY_NATU\x10\xb1\x01\x12\x12\n\rFAMILY_MAREEP\x10\xb3\x01\x12\x12\n\rFAMILY_MARILL\x10\xb7\x01\x12\x15\n\x10\x46\x41MILY_SUDOWOODO\x10\xb9\x01\x12\x12\n\rFAMILY_HOPPIP\x10\xbb\x01\x12\x11\n\x0c\x46\x41MILY_AIPOM\x10\xbe\x01\x12\x13\n\x0e\x46\x41MILY_SUNKERN\x10\xbf\x01\x12\x11\n\x0c\x46\x41MILY_YANMA\x10\xc1\x01\x12\x12\n\rFAMILY_WOOPER\x10\xc2\x01\x12\x13\n\x0e\x46\x41MILY_MURKROW\x10\xc6\x01\x12\x16\n\x11\x46\x41MILY_MISDREAVUS\x10\xc8\x01\x12\x11\n\x0c\x46\x41MILY_UNOWN\x10\xc9\x01\x12\x15\n\x10\x46\x41MILY_WOBBUFFET\x10\xca\x01\x12\x15\n\x10\x46\x41MILY_GIRAFARIG\x10\xcb\x01\x12\x12\n\rFAMILY_PINECO\x10\xcc\x01\x12\x15\n\x10\x46\x41MILY_DUNSPARCE\x10\xce\x01\x12\x12\n\rFAMILY_GLIGAR\x10\xcf\x01\x12\x14\n\x0f\x46\x41MILY_SNUBBULL\x10\xd1\x01\x12\x14\n\x0f\x46\x41MILY_QWILFISH\x10\xd3\x01\x12\x13\n\x0e\x46\x41MILY_SHUCKLE\x10\xd5\x01\x12\x15\n\x10\x46\x41MILY_HERACROSS\x10\xd6\x01\x12\x13\n\x0e\x46\x41MILY_SNEASEL\x10\xd7\x01\x12\x15\n\x10\x46\x41MILY_TEDDIURSA\x10\xd8\x01\x12\x12\n\rFAMILY_SLUGMA\x10\xda\x01\x12\x12\n\rFAMILY_SWINUB\x10\xdc\x01\x12\x13\n\x0e\x46\x41MILY_CORSOLA\x10\xde\x01\x12\x14\n\x0f\x46\x41MILY_REMORAID\x10\xdf\x01\x12\x14\n\x0f\x46\x41MILY_DELIBIRD\x10\xe1\x01\x12\x13\n\x0e\x46\x41MILY_MANTINE\x10\xe2\x01\x12\x14\n\x0f\x46\x41MILY_SKARMORY\x10\xe3\x01\x12\x14\n\x0f\x46\x41MILY_HOUNDOUR\x10\xe4\x01\x12\x12\n\rFAMILY_PHANPY\x10\xe7\x01\x12\x14\n\x0f\x46\x41MILY_STANTLER\x10\xea\x01\x12\x14\n\x0f\x46\x41MILY_SMEARGLE\x10\xeb\x01\x12\x13\n\x0e\x46\x41MILY_TYROGUE\x10\xec\x01\x12\x13\n\x0e\x46\x41MILY_MILTANK\x10\xf1\x01\x12\x12\n\rFAMILY_RAIKOU\x10\xf3\x01\x12\x11\n\x0c\x46\x41MILY_ENTEI\x10\xf4\x01\x12\x13\n\x0e\x46\x41MILY_SUICUNE\x10\xf5\x01\x12\x14\n\x0f\x46\x41MILY_LARVITAR\x10\xf6\x01\x12\x11\n\x0c\x46\x41MILY_LUGIA\x10\xf9\x01\x12\x11\n\x0c\x46\x41MILY_HO_OH\x10\xfa\x01\x12\x12\n\rFAMILY_CELEBI\x10\xfb\x01\x12\x13\n\x0e\x46\x41MILY_TREECKO\x10\xfc\x01\x12\x13\n\x0e\x46\x41MILY_TORCHIC\x10\xff\x01\x12\x12\n\rFAMILY_MUDKIP\x10\x82\x02\x12\x15\n\x10\x46\x41MILY_POOCHYENA\x10\x85\x02\x12\x15\n\x10\x46\x41MILY_ZIGZAGOON\x10\x87\x02\x12\x13\n\x0e\x46\x41MILY_WURMPLE\x10\x89\x02\x12\x11\n\x0c\x46\x41MILY_LOTAD\x10\x8e\x02\x12\x12\n\rFAMILY_SEEDOT\x10\x91\x02\x12\x13\n\x0e\x46\x41MILY_TAILLOW\x10\x94\x02\x12\x13\n\x0e\x46\x41MILY_WINGULL\x10\x96\x02\x12\x11\n\x0c\x46\x41MILY_RALTS\x10\x98\x02\x12\x13\n\x0e\x46\x41MILY_SURSKIT\x10\x9b\x02\x12\x15\n\x10\x46\x41MILY_SHROOMISH\x10\x9d\x02\x12\x13\n\x0e\x46\x41MILY_SLAKOTH\x10\x9f\x02\x12\x13\n\x0e\x46\x41MILY_NINCADA\x10\xa2\x02\x12\x13\n\x0e\x46\x41MILY_WHISMUR\x10\xa5\x02\x12\x14\n\x0f\x46\x41MILY_MAKUHITA\x10\xa8\x02\x12\x14\n\x0f\x46\x41MILY_NOSEPASS\x10\xab\x02\x12\x12\n\rFAMILY_SKITTY\x10\xac\x02\x12\x13\n\x0e\x46\x41MILY_SABLEYE\x10\xae\x02\x12\x12\n\rFAMILY_MAWILE\x10\xaf\x02\x12\x10\n\x0b\x46\x41MILY_ARON\x10\xb0\x02\x12\x14\n\x0f\x46\x41MILY_MEDITITE\x10\xb3\x02\x12\x15\n\x10\x46\x41MILY_ELECTRIKE\x10\xb5\x02\x12\x12\n\rFAMILY_PLUSLE\x10\xb7\x02\x12\x11\n\x0c\x46\x41MILY_MINUN\x10\xb8\x02\x12\x13\n\x0e\x46\x41MILY_VOLBEAT\x10\xb9\x02\x12\x14\n\x0f\x46\x41MILY_ILLUMISE\x10\xba\x02\x12\x13\n\x0e\x46\x41MILY_ROSELIA\x10\xbb\x02\x12\x12\n\rFAMILY_GULPIN\x10\xbc\x02\x12\x14\n\x0f\x46\x41MILY_CARVANHA\x10\xbe\x02\x12\x13\n\x0e\x46\x41MILY_WAILMER\x10\xc0\x02\x12\x11\n\x0c\x46\x41MILY_NUMEL\x10\xc2\x02\x12\x13\n\x0e\x46\x41MILY_TORKOAL\x10\xc4\x02\x12\x12\n\rFAMILY_SPOINK\x10\xc5\x02\x12\x12\n\rFAMILY_SPINDA\x10\xc7\x02\x12\x14\n\x0f\x46\x41MILY_TRAPINCH\x10\xc8\x02\x12\x12\n\rFAMILY_CACNEA\x10\xcb\x02\x12\x12\n\rFAMILY_SWABLU\x10\xcd\x02\x12\x14\n\x0f\x46\x41MILY_ZANGOOSE\x10\xcf\x02\x12\x13\n\x0e\x46\x41MILY_SEVIPER\x10\xd0\x02\x12\x14\n\x0f\x46\x41MILY_LUNATONE\x10\xd1\x02\x12\x13\n\x0e\x46\x41MILY_SOLROCK\x10\xd2\x02\x12\x14\n\x0f\x46\x41MILY_BARBOACH\x10\xd3\x02\x12\x14\n\x0f\x46\x41MILY_CORPHISH\x10\xd5\x02\x12\x12\n\rFAMILY_BALTOY\x10\xd7\x02\x12\x12\n\rFAMILY_LILEEP\x10\xd9\x02\x12\x13\n\x0e\x46\x41MILY_ANORITH\x10\xdb\x02\x12\x12\n\rFAMILY_FEEBAS\x10\xdd\x02\x12\x14\n\x0f\x46\x41MILY_CASTFORM\x10\xdf\x02\x12\x13\n\x0e\x46\x41MILY_KECLEON\x10\xe0\x02\x12\x13\n\x0e\x46\x41MILY_SHUPPET\x10\xe1\x02\x12\x13\n\x0e\x46\x41MILY_DUSKULL\x10\xe3\x02\x12\x13\n\x0e\x46\x41MILY_TROPIUS\x10\xe5\x02\x12\x14\n\x0f\x46\x41MILY_CHIMECHO\x10\xe6\x02\x12\x11\n\x0c\x46\x41MILY_ABSOL\x10\xe7\x02\x12\x13\n\x0e\x46\x41MILY_SNORUNT\x10\xe9\x02\x12\x12\n\rFAMILY_SPHEAL\x10\xeb\x02\x12\x14\n\x0f\x46\x41MILY_CLAMPERL\x10\xee\x02\x12\x15\n\x10\x46\x41MILY_RELICANTH\x10\xf1\x02\x12\x13\n\x0e\x46\x41MILY_LUVDISC\x10\xf2\x02\x12\x11\n\x0c\x46\x41MILY_BAGON\x10\xf3\x02\x12\x12\n\rFAMILY_BELDUM\x10\xf6\x02\x12\x14\n\x0f\x46\x41MILY_REGIROCK\x10\xf9\x02\x12\x12\n\rFAMILY_REGICE\x10\xfa\x02\x12\x15\n\x10\x46\x41MILY_REGISTEEL\x10\xfb\x02\x12\x12\n\rFAMILY_LATIAS\x10\xfc\x02\x12\x12\n\rFAMILY_LATIOS\x10\xfd\x02\x12\x12\n\rFAMILY_KYOGRE\x10\xfe\x02\x12\x13\n\x0e\x46\x41MILY_GROUDON\x10\xff\x02\x12\x14\n\x0f\x46\x41MILY_RAYQUAZA\x10\x80\x03\x12\x13\n\x0e\x46\x41MILY_JIRACHI\x10\x81\x03\x12\x12\n\rFAMILY_DEOXYS\x10\x82\x03\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -562,11 +562,303 @@ _POKEMONFAMILYID = _descriptor.EnumDescriptor(
       name='FAMILY_CELEBI', index=132, number=251,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_TREECKO', index=133, number=252,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_TORCHIC', index=134, number=255,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_MUDKIP', index=135, number=258,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_POOCHYENA', index=136, number=261,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_ZIGZAGOON', index=137, number=263,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_WURMPLE', index=138, number=265,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_LOTAD', index=139, number=270,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_SEEDOT', index=140, number=273,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_TAILLOW', index=141, number=276,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_WINGULL', index=142, number=278,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_RALTS', index=143, number=280,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_SURSKIT', index=144, number=283,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_SHROOMISH', index=145, number=285,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_SLAKOTH', index=146, number=287,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_NINCADA', index=147, number=290,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_WHISMUR', index=148, number=293,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_MAKUHITA', index=149, number=296,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_NOSEPASS', index=150, number=299,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_SKITTY', index=151, number=300,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_SABLEYE', index=152, number=302,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_MAWILE', index=153, number=303,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_ARON', index=154, number=304,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_MEDITITE', index=155, number=307,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_ELECTRIKE', index=156, number=309,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_PLUSLE', index=157, number=311,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_MINUN', index=158, number=312,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_VOLBEAT', index=159, number=313,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_ILLUMISE', index=160, number=314,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_ROSELIA', index=161, number=315,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_GULPIN', index=162, number=316,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_CARVANHA', index=163, number=318,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_WAILMER', index=164, number=320,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_NUMEL', index=165, number=322,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_TORKOAL', index=166, number=324,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_SPOINK', index=167, number=325,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_SPINDA', index=168, number=327,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_TRAPINCH', index=169, number=328,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_CACNEA', index=170, number=331,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_SWABLU', index=171, number=333,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_ZANGOOSE', index=172, number=335,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_SEVIPER', index=173, number=336,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_LUNATONE', index=174, number=337,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_SOLROCK', index=175, number=338,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_BARBOACH', index=176, number=339,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_CORPHISH', index=177, number=341,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_BALTOY', index=178, number=343,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_LILEEP', index=179, number=345,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_ANORITH', index=180, number=347,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_FEEBAS', index=181, number=349,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_CASTFORM', index=182, number=351,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_KECLEON', index=183, number=352,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_SHUPPET', index=184, number=353,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_DUSKULL', index=185, number=355,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_TROPIUS', index=186, number=357,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_CHIMECHO', index=187, number=358,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_ABSOL', index=188, number=359,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_SNORUNT', index=189, number=361,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_SPHEAL', index=190, number=363,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_CLAMPERL', index=191, number=366,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_RELICANTH', index=192, number=369,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_LUVDISC', index=193, number=370,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_BAGON', index=194, number=371,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_BELDUM', index=195, number=374,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_REGIROCK', index=196, number=377,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_REGICE', index=197, number=378,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_REGISTEEL', index=198, number=379,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_LATIAS', index=199, number=380,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_LATIOS', index=200, number=381,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_KYOGRE', index=201, number=382,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_GROUDON', index=202, number=383,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_RAYQUAZA', index=203, number=384,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_JIRACHI', index=204, number=385,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAMILY_DEOXYS', index=205, number=386,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=63,
-  serialized_end=2817,
+  serialized_end=4342,
 )
 _sym_db.RegisterEnumDescriptor(_POKEMONFAMILYID)
 
@@ -704,6 +996,79 @@ FAMILY_LARVITAR = 246
 FAMILY_LUGIA = 249
 FAMILY_HO_OH = 250
 FAMILY_CELEBI = 251
+FAMILY_TREECKO = 252
+FAMILY_TORCHIC = 255
+FAMILY_MUDKIP = 258
+FAMILY_POOCHYENA = 261
+FAMILY_ZIGZAGOON = 263
+FAMILY_WURMPLE = 265
+FAMILY_LOTAD = 270
+FAMILY_SEEDOT = 273
+FAMILY_TAILLOW = 276
+FAMILY_WINGULL = 278
+FAMILY_RALTS = 280
+FAMILY_SURSKIT = 283
+FAMILY_SHROOMISH = 285
+FAMILY_SLAKOTH = 287
+FAMILY_NINCADA = 290
+FAMILY_WHISMUR = 293
+FAMILY_MAKUHITA = 296
+FAMILY_NOSEPASS = 299
+FAMILY_SKITTY = 300
+FAMILY_SABLEYE = 302
+FAMILY_MAWILE = 303
+FAMILY_ARON = 304
+FAMILY_MEDITITE = 307
+FAMILY_ELECTRIKE = 309
+FAMILY_PLUSLE = 311
+FAMILY_MINUN = 312
+FAMILY_VOLBEAT = 313
+FAMILY_ILLUMISE = 314
+FAMILY_ROSELIA = 315
+FAMILY_GULPIN = 316
+FAMILY_CARVANHA = 318
+FAMILY_WAILMER = 320
+FAMILY_NUMEL = 322
+FAMILY_TORKOAL = 324
+FAMILY_SPOINK = 325
+FAMILY_SPINDA = 327
+FAMILY_TRAPINCH = 328
+FAMILY_CACNEA = 331
+FAMILY_SWABLU = 333
+FAMILY_ZANGOOSE = 335
+FAMILY_SEVIPER = 336
+FAMILY_LUNATONE = 337
+FAMILY_SOLROCK = 338
+FAMILY_BARBOACH = 339
+FAMILY_CORPHISH = 341
+FAMILY_BALTOY = 343
+FAMILY_LILEEP = 345
+FAMILY_ANORITH = 347
+FAMILY_FEEBAS = 349
+FAMILY_CASTFORM = 351
+FAMILY_KECLEON = 352
+FAMILY_SHUPPET = 353
+FAMILY_DUSKULL = 355
+FAMILY_TROPIUS = 357
+FAMILY_CHIMECHO = 358
+FAMILY_ABSOL = 359
+FAMILY_SNORUNT = 361
+FAMILY_SPHEAL = 363
+FAMILY_CLAMPERL = 366
+FAMILY_RELICANTH = 369
+FAMILY_LUVDISC = 370
+FAMILY_BAGON = 371
+FAMILY_BELDUM = 374
+FAMILY_REGIROCK = 377
+FAMILY_REGICE = 378
+FAMILY_REGISTEEL = 379
+FAMILY_LATIAS = 380
+FAMILY_LATIOS = 381
+FAMILY_KYOGRE = 382
+FAMILY_GROUDON = 383
+FAMILY_RAYQUAZA = 384
+FAMILY_JIRACHI = 385
+FAMILY_DEOXYS = 386
 
 
 DESCRIPTOR.enum_types_by_name['PokemonFamilyId'] = _POKEMONFAMILYID
