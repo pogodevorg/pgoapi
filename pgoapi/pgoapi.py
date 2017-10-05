@@ -75,7 +75,7 @@ class PGoApi:
 
     @staticmethod
     def get_api_version():
-        return 7500
+        return 7501
 
     def set_authentication(self, provider=None, oauth2_refresh_token=None, username=None, password=None, proxy_config=None, user_agent=None, timeout=None):
         if provider == 'ptc':
