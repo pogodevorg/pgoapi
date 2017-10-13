@@ -269,7 +269,7 @@ class RpcApi:
         sen.gravity_z = random.triangular(-1, .7, -0.8)
         sen.status = 3
 
-        sig.unknown25 = -960786418476827155
+        sig.unknown25 = -6553495230586135539
 
         if self.device_info:
             for key in self.device_info:
