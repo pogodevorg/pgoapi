@@ -1,9 +1,9 @@
-geopy==1.11.0
+geopy>=1.11.0
 protobuf>=3.0.0
-requests==2.10.0
-s2sphere==0.2.4
-gpsoauth==0.4.0
+requests[socks]>=2.10.0
+s2sphere>=0.2.4
+gpsoauth>=0.4.0
+protobuf3-to-dict>=0.1.4
 future
 six
-xxhash
-requests[socks]
+pycrypt>=0.7.1

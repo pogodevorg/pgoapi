@@ -25,12 +25,12 @@ Author: tjado <https://github.com/tejado>
 
 from __future__ import absolute_import
 
-import six
 import logging
 
 from pgoapi.auth import Auth
-from pgoapi.exceptions import AuthException
+from pgoapi.exceptions import AuthException, InvalidCredentialsException, AuthGoogleTwoFactorRequiredException
 from gpsoauth import perform_master_login, perform_oauth
+from six import string_types
 
 class AuthGoogle(Auth):
 
@@ -52,10 +52,13 @@ class AuthGoogle(Auth):
     def user_login(self, username, password):
         self.log.info('Google User Login for: {}'.format(username))
 
-        if not isinstance(username, six.string_types) or not isinstance(password, six.string_types):
-            raise AuthException("Username/password not correctly specified")
+        if not isinstance(username, string_types) or not isinstance(password, string_types):
+            raise InvalidCredentialsException("Username/password not correctly specified")
 
         user_login = perform_master_login(username, password, self.GOOGLE_LOGIN_ANDROID_ID, proxy=self._proxy)
+
+        if user_login and user_login.get('Error', None) == 'NeedsBrowser':
+            raise AuthGoogleTwoFactorRequiredException(user_login['Url'], user_login['ErrorDetail'])
 
         try:
             refresh_token = user_login.get('Token', None)

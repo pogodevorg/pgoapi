@@ -87,12 +87,6 @@ Temporary Items
 *.la
 *.lo
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
 # Executables
 *.exe
 *.out
@@ -121,8 +115,6 @@ dkms.conf
 __pycache__/
 *.py[cod]
 *$py.class
-
-# C extensions
 
 # Distribution / packaging
 .Python
@@ -223,8 +215,6 @@ ENV/
 # Compiled Static libraries
 *.lai
 
-# Executables
-
 
 ### SublimeText ###
 # cache files for sublime text
@@ -272,3 +262,4 @@ pip-selfcheck.json
 
 ### Node ###
 node_modules
+test.py
