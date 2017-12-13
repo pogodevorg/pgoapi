@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/enums/item_category.proto',
   package='pogoprotos.enums',
   syntax='proto3',
-  serialized_pb=_b('\n$pogoprotos/enums/item_category.proto\x12\x10pogoprotos.enums*\xd6\x03\n\x0cItemCategory\x12\x16\n\x12ITEM_CATEGORY_NONE\x10\x00\x12\x1a\n\x16ITEM_CATEGORY_POKEBALL\x10\x01\x12\x16\n\x12ITEM_CATEGORY_FOOD\x10\x02\x12\x1a\n\x16ITEM_CATEGORY_MEDICINE\x10\x03\x12\x17\n\x13ITEM_CATEGORY_BOOST\x10\x04\x12\x1a\n\x16ITEM_CATEGORY_UTILITES\x10\x05\x12\x18\n\x14ITEM_CATEGORY_CAMERA\x10\x06\x12\x16\n\x12ITEM_CATEGORY_DISK\x10\x07\x12\x1b\n\x17ITEM_CATEGORY_INCUBATOR\x10\x08\x12\x19\n\x15ITEM_CATEGORY_INCENSE\x10\t\x12\x1a\n\x16ITEM_CATEGORY_XP_BOOST\x10\n\x12#\n\x1fITEM_CATEGORY_INVENTORY_UPGRADE\x10\x0b\x12\'\n#ITEM_CATEGORY_EVOLUTION_REQUIREMENT\x10\x0c\x12\x1d\n\x19ITEM_CATEGORY_MOVE_REROLL\x10\r\x12\x17\n\x13ITEM_CATEGORY_CANDY\x10\x0e\x12\x1d\n\x19ITEM_CATEGORY_RAID_TICKET\x10\x0f\x62\x06proto3')
+  serialized_pb=_b('\n$pogoprotos/enums/item_category.proto\x12\x10pogoprotos.enums*\xf8\x03\n\x0cItemCategory\x12\x16\n\x12ITEM_CATEGORY_NONE\x10\x00\x12\x1a\n\x16ITEM_CATEGORY_POKEBALL\x10\x01\x12\x16\n\x12ITEM_CATEGORY_FOOD\x10\x02\x12\x1a\n\x16ITEM_CATEGORY_MEDICINE\x10\x03\x12\x17\n\x13ITEM_CATEGORY_BOOST\x10\x04\x12\x1a\n\x16ITEM_CATEGORY_UTILITES\x10\x05\x12\x18\n\x14ITEM_CATEGORY_CAMERA\x10\x06\x12\x16\n\x12ITEM_CATEGORY_DISK\x10\x07\x12\x1b\n\x17ITEM_CATEGORY_INCUBATOR\x10\x08\x12\x19\n\x15ITEM_CATEGORY_INCENSE\x10\t\x12\x1a\n\x16ITEM_CATEGORY_XP_BOOST\x10\n\x12#\n\x1fITEM_CATEGORY_INVENTORY_UPGRADE\x10\x0b\x12\'\n#ITEM_CATEGORY_EVOLUTION_REQUIREMENT\x10\x0c\x12\x1d\n\x19ITEM_CATEGORY_MOVE_REROLL\x10\r\x12\x17\n\x13ITEM_CATEGORY_CANDY\x10\x0e\x12\x1d\n\x19ITEM_CATEGORY_RAID_TICKET\x10\x0f\x12 \n\x1cITEM_CATEGORY_STARDUST_BOOST\x10\x10\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -94,11 +94,15 @@ _ITEMCATEGORY = _descriptor.EnumDescriptor(
       name='ITEM_CATEGORY_RAID_TICKET', index=15, number=15,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ITEM_CATEGORY_STARDUST_BOOST', index=16, number=16,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=59,
-  serialized_end=529,
+  serialized_end=563,
 )
 _sym_db.RegisterEnumDescriptor(_ITEMCATEGORY)
 
@@ -119,6 +123,7 @@ ITEM_CATEGORY_EVOLUTION_REQUIREMENT = 12
 ITEM_CATEGORY_MOVE_REROLL = 13
 ITEM_CATEGORY_CANDY = 14
 ITEM_CATEGORY_RAID_TICKET = 15
+ITEM_CATEGORY_STARDUST_BOOST = 16
 
 
 DESCRIPTOR.enum_types_by_name['ItemCategory'] = _ITEMCATEGORY

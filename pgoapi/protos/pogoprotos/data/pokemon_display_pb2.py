@@ -16,15 +16,16 @@ _sym_db = _symbol_database.Default()
 from pogoprotos.enums import costume_pb2 as pogoprotos_dot_enums_dot_costume__pb2
 from pogoprotos.enums import form_pb2 as pogoprotos_dot_enums_dot_form__pb2
 from pogoprotos.enums import gender_pb2 as pogoprotos_dot_enums_dot_gender__pb2
+from pogoprotos.enums import weather_condition_pb2 as pogoprotos_dot_enums_dot_weather__condition__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/data/pokemon_display.proto',
   package='pogoprotos.data',
   syntax='proto3',
-  serialized_pb=_b('\n%pogoprotos/data/pokemon_display.proto\x12\x0fpogoprotos.data\x1a\x1epogoprotos/enums/costume.proto\x1a\x1bpogoprotos/enums/form.proto\x1a\x1dpogoprotos/enums/gender.proto\"\x9b\x01\n\x0ePokemonDisplay\x12*\n\x07\x63ostume\x18\x01 \x01(\x0e\x32\x19.pogoprotos.enums.Costume\x12(\n\x06gender\x18\x02 \x01(\x0e\x32\x18.pogoprotos.enums.Gender\x12\r\n\x05shiny\x18\x03 \x01(\x08\x12$\n\x04\x66orm\x18\x04 \x01(\x0e\x32\x16.pogoprotos.enums.Formb\x06proto3')
+  serialized_pb=_b('\n%pogoprotos/data/pokemon_display.proto\x12\x0fpogoprotos.data\x1a\x1epogoprotos/enums/costume.proto\x1a\x1bpogoprotos/enums/form.proto\x1a\x1dpogoprotos/enums/gender.proto\x1a(pogoprotos/enums/weather_condition.proto\"\xe2\x01\n\x0ePokemonDisplay\x12*\n\x07\x63ostume\x18\x01 \x01(\x0e\x32\x19.pogoprotos.enums.Costume\x12(\n\x06gender\x18\x02 \x01(\x0e\x32\x18.pogoprotos.enums.Gender\x12\r\n\x05shiny\x18\x03 \x01(\x08\x12$\n\x04\x66orm\x18\x04 \x01(\x0e\x32\x16.pogoprotos.enums.Form\x12\x45\n\x19weather_boosted_condition\x18\x05 \x01(\x0e\x32\".pogoprotos.enums.WeatherConditionb\x06proto3')
   ,
-  dependencies=[pogoprotos_dot_enums_dot_costume__pb2.DESCRIPTOR,pogoprotos_dot_enums_dot_form__pb2.DESCRIPTOR,pogoprotos_dot_enums_dot_gender__pb2.DESCRIPTOR,])
+  dependencies=[pogoprotos_dot_enums_dot_costume__pb2.DESCRIPTOR,pogoprotos_dot_enums_dot_form__pb2.DESCRIPTOR,pogoprotos_dot_enums_dot_gender__pb2.DESCRIPTOR,pogoprotos_dot_enums_dot_weather__condition__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
@@ -65,6 +66,13 @@ _POKEMONDISPLAY = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='weather_boosted_condition', full_name='pogoprotos.data.PokemonDisplay.weather_boosted_condition', index=4,
+      number=5, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -77,13 +85,14 @@ _POKEMONDISPLAY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=151,
-  serialized_end=306,
+  serialized_start=193,
+  serialized_end=419,
 )
 
 _POKEMONDISPLAY.fields_by_name['costume'].enum_type = pogoprotos_dot_enums_dot_costume__pb2._COSTUME
 _POKEMONDISPLAY.fields_by_name['gender'].enum_type = pogoprotos_dot_enums_dot_gender__pb2._GENDER
 _POKEMONDISPLAY.fields_by_name['form'].enum_type = pogoprotos_dot_enums_dot_form__pb2._FORM
+_POKEMONDISPLAY.fields_by_name['weather_boosted_condition'].enum_type = pogoprotos_dot_enums_dot_weather__condition__pb2._WEATHERCONDITION
 DESCRIPTOR.message_types_by_name['PokemonDisplay'] = _POKEMONDISPLAY
 
 PokemonDisplay = _reflection.GeneratedProtocolMessageType('PokemonDisplay', (_message.Message,), dict(

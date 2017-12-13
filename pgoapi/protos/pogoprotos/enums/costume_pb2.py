@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/enums/costume.proto',
   package='pogoprotos.enums',
   syntax='proto3',
-  serialized_pb=_b('\n\x1epogoprotos/enums/costume.proto\x12\x10pogoprotos.enums*Y\n\x07\x43ostume\x12\x11\n\rCOSTUME_UNSET\x10\x00\x12\x10\n\x0cHOLIDAY_2016\x10\x01\x12\x0f\n\x0b\x41NNIVERSARY\x10\x02\x12\x18\n\x14ONE_YEAR_ANNIVERSARY\x10\x03\x62\x06proto3')
+  serialized_pb=_b('\n\x1epogoprotos/enums/costume.proto\x12\x10pogoprotos.enums*m\n\x07\x43ostume\x12\x11\n\rCOSTUME_UNSET\x10\x00\x12\x10\n\x0cHOLIDAY_2016\x10\x01\x12\x0f\n\x0b\x41NNIVERSARY\x10\x02\x12\x18\n\x14ONE_YEAR_ANNIVERSARY\x10\x03\x12\x12\n\x0eHALLOWEEN_2017\x10\x04\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -46,11 +46,15 @@ _COSTUME = _descriptor.EnumDescriptor(
       name='ONE_YEAR_ANNIVERSARY', index=3, number=3,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='HALLOWEEN_2017', index=4, number=4,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=52,
-  serialized_end=141,
+  serialized_end=161,
 )
 _sym_db.RegisterEnumDescriptor(_COSTUME)
 
@@ -59,6 +63,7 @@ COSTUME_UNSET = 0
 HOLIDAY_2016 = 1
 ANNIVERSARY = 2
 ONE_YEAR_ANNIVERSARY = 3
+HALLOWEEN_2017 = 4
 
 
 DESCRIPTOR.enum_types_by_name['Costume'] = _COSTUME

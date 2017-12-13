@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/settings/master/pokemon/evolution_branch.proto',
   package='pogoprotos.settings.master.pokemon',
   syntax='proto3',
-  serialized_pb=_b('\n9pogoprotos/settings/master/pokemon/evolution_branch.proto\x12\"pogoprotos.settings.master.pokemon\x1a!pogoprotos/enums/pokemon_id.proto\x1a\'pogoprotos/inventory/item/item_id.proto\"\x9c\x01\n\x0f\x45volutionBranch\x12.\n\tevolution\x18\x01 \x01(\x0e\x32\x1b.pogoprotos.enums.PokemonId\x12\x45\n\x1a\x65volution_item_requirement\x18\x02 \x01(\x0e\x32!.pogoprotos.inventory.item.ItemId\x12\x12\n\ncandy_cost\x18\x03 \x01(\x05\x62\x06proto3')
+  serialized_pb=_b('\n9pogoprotos/settings/master/pokemon/evolution_branch.proto\x12\"pogoprotos.settings.master.pokemon\x1a!pogoprotos/enums/pokemon_id.proto\x1a\'pogoprotos/inventory/item/item_id.proto\"\xc3\x01\n\x0f\x45volutionBranch\x12.\n\tevolution\x18\x01 \x01(\x0e\x32\x1b.pogoprotos.enums.PokemonId\x12\x45\n\x1a\x65volution_item_requirement\x18\x02 \x01(\x0e\x32!.pogoprotos.inventory.item.ItemId\x12\x12\n\ncandy_cost\x18\x03 \x01(\x05\x12%\n\x1dkm_buddy_distance_requirement\x18\x04 \x01(\x02\x62\x06proto3')
   ,
   dependencies=[pogoprotos_dot_enums_dot_pokemon__id__pb2.DESCRIPTOR,pogoprotos_dot_inventory_dot_item_dot_item__id__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -57,6 +57,13 @@ _EVOLUTIONBRANCH = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='km_buddy_distance_requirement', full_name='pogoprotos.settings.master.pokemon.EvolutionBranch.km_buddy_distance_requirement', index=3,
+      number=4, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -70,7 +77,7 @@ _EVOLUTIONBRANCH = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=174,
-  serialized_end=330,
+  serialized_end=369,
 )
 
 _EVOLUTIONBRANCH.fields_by_name['evolution'].enum_type = pogoprotos_dot_enums_dot_pokemon__id__pb2._POKEMONID

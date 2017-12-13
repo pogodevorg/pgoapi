@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/enums/form.proto',
   package='pogoprotos.enums',
   syntax='proto3',
-  serialized_pb=_b('\n\x1bpogoprotos/enums/form.proto\x12\x10pogoprotos.enums*\x9e\x03\n\x04\x46orm\x12\x0e\n\nFORM_UNSET\x10\x00\x12\x0b\n\x07UNOWN_A\x10\x01\x12\x0b\n\x07UNOWN_B\x10\x02\x12\x0b\n\x07UNOWN_C\x10\x03\x12\x0b\n\x07UNOWN_D\x10\x04\x12\x0b\n\x07UNOWN_E\x10\x05\x12\x0b\n\x07UNOWN_F\x10\x06\x12\x0b\n\x07UNOWN_G\x10\x07\x12\x0b\n\x07UNOWN_H\x10\x08\x12\x0b\n\x07UNOWN_I\x10\t\x12\x0b\n\x07UNOWN_J\x10\n\x12\x0b\n\x07UNOWN_K\x10\x0b\x12\x0b\n\x07UNOWN_L\x10\x0c\x12\x0b\n\x07UNOWN_M\x10\r\x12\x0b\n\x07UNOWN_N\x10\x0e\x12\x0b\n\x07UNOWN_O\x10\x0f\x12\x0b\n\x07UNOWN_P\x10\x10\x12\x0b\n\x07UNOWN_Q\x10\x11\x12\x0b\n\x07UNOWN_R\x10\x12\x12\x0b\n\x07UNOWN_S\x10\x13\x12\x0b\n\x07UNOWN_T\x10\x14\x12\x0b\n\x07UNOWN_U\x10\x15\x12\x0b\n\x07UNOWN_V\x10\x16\x12\x0b\n\x07UNOWN_W\x10\x17\x12\x0b\n\x07UNOWN_X\x10\x18\x12\x0b\n\x07UNOWN_Y\x10\x19\x12\x0b\n\x07UNOWN_Z\x10\x1a\x12\x1b\n\x17UNOWN_EXCLAMATION_POINT\x10\x1b\x12\x17\n\x13UNOWN_QUESTION_MARK\x10\x1c\x62\x06proto3')
+  serialized_pb=_b('\n\x1bpogoprotos/enums/form.proto\x12\x10pogoprotos.enums*\xbb\x04\n\x04\x46orm\x12\x0e\n\nFORM_UNSET\x10\x00\x12\x0b\n\x07UNOWN_A\x10\x01\x12\x0b\n\x07UNOWN_B\x10\x02\x12\x0b\n\x07UNOWN_C\x10\x03\x12\x0b\n\x07UNOWN_D\x10\x04\x12\x0b\n\x07UNOWN_E\x10\x05\x12\x0b\n\x07UNOWN_F\x10\x06\x12\x0b\n\x07UNOWN_G\x10\x07\x12\x0b\n\x07UNOWN_H\x10\x08\x12\x0b\n\x07UNOWN_I\x10\t\x12\x0b\n\x07UNOWN_J\x10\n\x12\x0b\n\x07UNOWN_K\x10\x0b\x12\x0b\n\x07UNOWN_L\x10\x0c\x12\x0b\n\x07UNOWN_M\x10\r\x12\x0b\n\x07UNOWN_N\x10\x0e\x12\x0b\n\x07UNOWN_O\x10\x0f\x12\x0b\n\x07UNOWN_P\x10\x10\x12\x0b\n\x07UNOWN_Q\x10\x11\x12\x0b\n\x07UNOWN_R\x10\x12\x12\x0b\n\x07UNOWN_S\x10\x13\x12\x0b\n\x07UNOWN_T\x10\x14\x12\x0b\n\x07UNOWN_U\x10\x15\x12\x0b\n\x07UNOWN_V\x10\x16\x12\x0b\n\x07UNOWN_W\x10\x17\x12\x0b\n\x07UNOWN_X\x10\x18\x12\x0b\n\x07UNOWN_Y\x10\x19\x12\x0b\n\x07UNOWN_Z\x10\x1a\x12\x1b\n\x17UNOWN_EXCLAMATION_POINT\x10\x1b\x12\x17\n\x13UNOWN_QUESTION_MARK\x10\x1c\x12\x13\n\x0f\x43\x41STFORM_NORMAL\x10\x1d\x12\x12\n\x0e\x43\x41STFORM_SUNNY\x10\x1e\x12\x12\n\x0e\x43\x41STFORM_RAINY\x10\x1f\x12\x12\n\x0e\x43\x41STFORM_SNOWY\x10 \x12\x11\n\rDEOXYS_NORMAL\x10!\x12\x11\n\rDEOXYS_ATTACK\x10\"\x12\x12\n\x0e\x44\x45OXYS_DEFENSE\x10#\x12\x10\n\x0c\x44\x45OXYS_SPEED\x10$b\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -146,11 +146,43 @@ _FORM = _descriptor.EnumDescriptor(
       name='UNOWN_QUESTION_MARK', index=28, number=28,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='CASTFORM_NORMAL', index=29, number=29,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='CASTFORM_SUNNY', index=30, number=30,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='CASTFORM_RAINY', index=31, number=31,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='CASTFORM_SNOWY', index=32, number=32,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='DEOXYS_NORMAL', index=33, number=33,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='DEOXYS_ATTACK', index=34, number=34,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='DEOXYS_DEFENSE', index=35, number=35,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='DEOXYS_SPEED', index=36, number=36,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=50,
-  serialized_end=464,
+  serialized_end=621,
 )
 _sym_db.RegisterEnumDescriptor(_FORM)
 
@@ -184,6 +216,14 @@ UNOWN_Y = 25
 UNOWN_Z = 26
 UNOWN_EXCLAMATION_POINT = 27
 UNOWN_QUESTION_MARK = 28
+CASTFORM_NORMAL = 29
+CASTFORM_SUNNY = 30
+CASTFORM_RAINY = 31
+CASTFORM_SNOWY = 32
+DEOXYS_NORMAL = 33
+DEOXYS_ATTACK = 34
+DEOXYS_DEFENSE = 35
+DEOXYS_SPEED = 36
 
 
 DESCRIPTOR.enum_types_by_name['Form'] = _FORM

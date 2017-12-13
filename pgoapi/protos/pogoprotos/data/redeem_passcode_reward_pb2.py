@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 _sym_db = _symbol_database.Default()
 
 
-from pogoprotos.enums import gym_badge_type_pb2 as pogoprotos_dot_enums_dot_gym__badge__type__pb2
+from pogoprotos.enums import badge_type_pb2 as pogoprotos_dot_enums_dot_badge__type__pb2
 from pogoprotos.data import pokemon_data_pb2 as pogoprotos_dot_data_dot_pokemon__data__pb2
 from pogoprotos.data.redeem import poke_candy_pb2 as pogoprotos_dot_data_dot_redeem_dot_poke__candy__pb2
 from pogoprotos.data.redeem import redeemed_avatar_item_pb2 as pogoprotos_dot_data_dot_redeem_dot_redeemed__avatar__item__pb2
@@ -24,9 +24,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/data/redeem_passcode_reward.proto',
   package='pogoprotos.data',
   syntax='proto3',
-  serialized_pb=_b('\n,pogoprotos/data/redeem_passcode_reward.proto\x12\x0fpogoprotos.data\x1a%pogoprotos/enums/gym_badge_type.proto\x1a\"pogoprotos/data/pokemon_data.proto\x1a\'pogoprotos/data/redeem/poke_candy.proto\x1a\x31pogoprotos/data/redeem/redeemed_avatar_item.proto\x1a*pogoprotos/data/redeem/redeemed_item.proto\"\xfb\x02\n\x14RedeemPasscodeReward\x12\x33\n\x05items\x18\x01 \x03(\x0b\x32$.pogoprotos.data.redeem.RedeemedItem\x12@\n\x0c\x61vatar_items\x18\x02 \x03(\x0b\x32*.pogoprotos.data.redeem.RedeemedAvatarItem\x12\x31\n\x0b\x65gg_pokemon\x18\x03 \x03(\x0b\x32\x1c.pogoprotos.data.PokemonData\x12-\n\x07pokemon\x18\x04 \x03(\x0b\x32\x1c.pogoprotos.data.PokemonData\x12\x35\n\npoke_candy\x18\x05 \x03(\x0b\x32!.pogoprotos.data.redeem.PokeCandy\x12\x10\n\x08stardust\x18\x06 \x01(\x05\x12\x11\n\tpokecoins\x18\x07 \x01(\x05\x12.\n\x06\x62\x61\x64ges\x18\x08 \x03(\x0e\x32\x1e.pogoprotos.enums.GymBadgeTypeb\x06proto3')
+  serialized_pb=_b('\n,pogoprotos/data/redeem_passcode_reward.proto\x12\x0fpogoprotos.data\x1a!pogoprotos/enums/badge_type.proto\x1a\"pogoprotos/data/pokemon_data.proto\x1a\'pogoprotos/data/redeem/poke_candy.proto\x1a\x31pogoprotos/data/redeem/redeemed_avatar_item.proto\x1a*pogoprotos/data/redeem/redeemed_item.proto\"\xf8\x02\n\x14RedeemPasscodeReward\x12\x33\n\x05items\x18\x01 \x03(\x0b\x32$.pogoprotos.data.redeem.RedeemedItem\x12@\n\x0c\x61vatar_items\x18\x02 \x03(\x0b\x32*.pogoprotos.data.redeem.RedeemedAvatarItem\x12\x31\n\x0b\x65gg_pokemon\x18\x03 \x03(\x0b\x32\x1c.pogoprotos.data.PokemonData\x12-\n\x07pokemon\x18\x04 \x03(\x0b\x32\x1c.pogoprotos.data.PokemonData\x12\x35\n\npoke_candy\x18\x05 \x03(\x0b\x32!.pogoprotos.data.redeem.PokeCandy\x12\x10\n\x08stardust\x18\x06 \x01(\x05\x12\x11\n\tpokecoins\x18\x07 \x01(\x05\x12+\n\x06\x62\x61\x64ges\x18\x08 \x03(\x0e\x32\x1b.pogoprotos.enums.BadgeTypeb\x06proto3')
   ,
-  dependencies=[pogoprotos_dot_enums_dot_gym__badge__type__pb2.DESCRIPTOR,pogoprotos_dot_data_dot_pokemon__data__pb2.DESCRIPTOR,pogoprotos_dot_data_dot_redeem_dot_poke__candy__pb2.DESCRIPTOR,pogoprotos_dot_data_dot_redeem_dot_redeemed__avatar__item__pb2.DESCRIPTOR,pogoprotos_dot_data_dot_redeem_dot_redeemed__item__pb2.DESCRIPTOR,])
+  dependencies=[pogoprotos_dot_enums_dot_badge__type__pb2.DESCRIPTOR,pogoprotos_dot_data_dot_pokemon__data__pb2.DESCRIPTOR,pogoprotos_dot_data_dot_redeem_dot_poke__candy__pb2.DESCRIPTOR,pogoprotos_dot_data_dot_redeem_dot_redeemed__avatar__item__pb2.DESCRIPTOR,pogoprotos_dot_data_dot_redeem_dot_redeemed__item__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
@@ -107,8 +107,8 @@ _REDEEMPASSCODEREWARD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=277,
-  serialized_end=656,
+  serialized_start=273,
+  serialized_end=649,
 )
 
 _REDEEMPASSCODEREWARD.fields_by_name['items'].message_type = pogoprotos_dot_data_dot_redeem_dot_redeemed__item__pb2._REDEEMEDITEM
@@ -116,7 +116,7 @@ _REDEEMPASSCODEREWARD.fields_by_name['avatar_items'].message_type = pogoprotos_d
 _REDEEMPASSCODEREWARD.fields_by_name['egg_pokemon'].message_type = pogoprotos_dot_data_dot_pokemon__data__pb2._POKEMONDATA
 _REDEEMPASSCODEREWARD.fields_by_name['pokemon'].message_type = pogoprotos_dot_data_dot_pokemon__data__pb2._POKEMONDATA
 _REDEEMPASSCODEREWARD.fields_by_name['poke_candy'].message_type = pogoprotos_dot_data_dot_redeem_dot_poke__candy__pb2._POKECANDY
-_REDEEMPASSCODEREWARD.fields_by_name['badges'].enum_type = pogoprotos_dot_enums_dot_gym__badge__type__pb2._GYMBADGETYPE
+_REDEEMPASSCODEREWARD.fields_by_name['badges'].enum_type = pogoprotos_dot_enums_dot_badge__type__pb2._BADGETYPE
 DESCRIPTOR.message_types_by_name['RedeemPasscodeReward'] = _REDEEMPASSCODEREWARD
 
 RedeemPasscodeReward = _reflection.GeneratedProtocolMessageType('RedeemPasscodeReward', (_message.Message,), dict(
