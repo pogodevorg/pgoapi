@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/inventory/inventory_key.proto',
   package='pogoprotos.inventory',
   syntax='proto3',
-  serialized_pb=_b('\n(pogoprotos/inventory/inventory_key.proto\x12\x14pogoprotos.inventory\x1a!pogoprotos/enums/quest_type.proto\x1a(pogoprotos/enums/pokemon_family_id.proto\x1a\'pogoprotos/inventory/item/item_id.proto\"\x9f\x03\n\x0cInventoryKey\x12\x12\n\npokemon_id\x18\x01 \x01(\x06\x12/\n\x04item\x18\x02 \x01(\x0e\x32!.pogoprotos.inventory.item.ItemId\x12\x18\n\x10pokedex_entry_id\x18\x03 \x01(\x05\x12\x14\n\x0cplayer_stats\x18\x04 \x01(\x08\x12\x17\n\x0fplayer_currency\x18\x05 \x01(\x08\x12\x15\n\rplayer_camera\x18\x06 \x01(\x08\x12\x1a\n\x12inventory_upgrades\x18\x07 \x01(\x08\x12\x15\n\rapplied_items\x18\x08 \x01(\x08\x12\x16\n\x0e\x65gg_incubators\x18\t \x01(\x08\x12<\n\x11pokemon_family_id\x18\n \x01(\x0e\x32!.pogoprotos.enums.PokemonFamilyId\x12/\n\nquest_type\x18\x0b \x01(\x0e\x32\x1b.pogoprotos.enums.QuestType\x12\x1a\n\x12\x61vatar_template_id\x18\x0c \x01(\t\x12\x14\n\x0craid_tickets\x18\r \x01(\x08\x62\x06proto3')
+  serialized_pb=_b('\n(pogoprotos/inventory/inventory_key.proto\x12\x14pogoprotos.inventory\x1a!pogoprotos/enums/quest_type.proto\x1a(pogoprotos/enums/pokemon_family_id.proto\x1a\'pogoprotos/inventory/item/item_id.proto\"\xb1\x03\n\x0cInventoryKey\x12\x12\n\npokemon_id\x18\x01 \x01(\x06\x12/\n\x04item\x18\x02 \x01(\x0e\x32!.pogoprotos.inventory.item.ItemId\x12\x18\n\x10pokedex_entry_id\x18\x03 \x01(\x05\x12\x14\n\x0cplayer_stats\x18\x04 \x01(\x08\x12\x17\n\x0fplayer_currency\x18\x05 \x01(\x08\x12\x15\n\rplayer_camera\x18\x06 \x01(\x08\x12\x1a\n\x12inventory_upgrades\x18\x07 \x01(\x08\x12\x15\n\rapplied_items\x18\x08 \x01(\x08\x12\x16\n\x0e\x65gg_incubators\x18\t \x01(\x08\x12<\n\x11pokemon_family_id\x18\n \x01(\x0e\x32!.pogoprotos.enums.PokemonFamilyId\x12/\n\nquest_type\x18\x0b \x01(\x0e\x32\x1b.pogoprotos.enums.QuestType\x12\x1a\n\x12\x61vatar_template_id\x18\x0c \x01(\t\x12\x14\n\x0craid_tickets\x18\r \x01(\x08\x12\x10\n\x08quest_id\x18\x0e \x01(\tb\x06proto3')
   ,
   dependencies=[pogoprotos_dot_enums_dot_quest__type__pb2.DESCRIPTOR,pogoprotos_dot_enums_dot_pokemon__family__id__pb2.DESCRIPTOR,pogoprotos_dot_inventory_dot_item_dot_item__id__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -128,6 +128,13 @@ _INVENTORYKEY = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='quest_id', full_name='pogoprotos.inventory.InventoryKey.quest_id', index=13,
+      number=14, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -141,7 +148,7 @@ _INVENTORYKEY = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=185,
-  serialized_end=600,
+  serialized_end=618,
 )
 
 _INVENTORYKEY.fields_by_name['item'].enum_type = pogoprotos_dot_inventory_dot_item_dot_item__id__pb2._ITEMID

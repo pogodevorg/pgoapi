@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/enums/quest_type.proto',
   package='pogoprotos.enums',
   syntax='proto3',
-  serialized_pb=_b('\n!pogoprotos/enums/quest_type.proto\x12\x10pogoprotos.enums*j\n\tQuestType\x12\x16\n\x12QUEST_UNKNOWN_TYPE\x10\x00\x12 \n\x1cQUEST_FIRST_CATCH_OF_THE_DAY\x10\x01\x12#\n\x1fQUEST_FIRST_POKESTOP_OF_THE_DAY\x10\x02\x62\x06proto3')
+  serialized_pb=_b('\n!pogoprotos/enums/quest_type.proto\x12\x10pogoprotos.enums*\xc8\x02\n\tQuestType\x12\x16\n\x12QUEST_UNKNOWN_TYPE\x10\x00\x12 \n\x1cQUEST_FIRST_CATCH_OF_THE_DAY\x10\x01\x12#\n\x1fQUEST_FIRST_POKESTOP_OF_THE_DAY\x10\x02\x12\x14\n\x10QUEST_MULTI_PART\x10\x03\x12\x17\n\x13QUEST_CATCH_POKEMON\x10\x04\x12\x17\n\x13QUEST_SPIN_POKESTOP\x10\x05\x12\x13\n\x0fQUEST_HATCH_EGG\x10\x06\x12\x14\n\x10QUEST_WALK_BUDDY\x10\x07\x12\x16\n\x12QUEST_FEED_POKEMON\x10\x08\x12\x18\n\x14QUEST_WIN_GYM_BATTLE\x10\t\x12\x1e\n\x1aQUEST_COMPLETE_RAID_BATTLE\x10\n\x12\x17\n\x13QUEST_LEVELUP_BADGE\x10\x0b\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -42,11 +42,47 @@ _QUESTTYPE = _descriptor.EnumDescriptor(
       name='QUEST_FIRST_POKESTOP_OF_THE_DAY', index=2, number=2,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='QUEST_MULTI_PART', index=3, number=3,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='QUEST_CATCH_POKEMON', index=4, number=4,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='QUEST_SPIN_POKESTOP', index=5, number=5,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='QUEST_HATCH_EGG', index=6, number=6,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='QUEST_WALK_BUDDY', index=7, number=7,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='QUEST_FEED_POKEMON', index=8, number=8,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='QUEST_WIN_GYM_BATTLE', index=9, number=9,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='QUEST_COMPLETE_RAID_BATTLE', index=10, number=10,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='QUEST_LEVELUP_BADGE', index=11, number=11,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=55,
-  serialized_end=161,
+  serialized_start=56,
+  serialized_end=384,
 )
 _sym_db.RegisterEnumDescriptor(_QUESTTYPE)
 
@@ -54,6 +90,15 @@ QuestType = enum_type_wrapper.EnumTypeWrapper(_QUESTTYPE)
 QUEST_UNKNOWN_TYPE = 0
 QUEST_FIRST_CATCH_OF_THE_DAY = 1
 QUEST_FIRST_POKESTOP_OF_THE_DAY = 2
+QUEST_MULTI_PART = 3
+QUEST_CATCH_POKEMON = 4
+QUEST_SPIN_POKESTOP = 5
+QUEST_HATCH_EGG = 6
+QUEST_WALK_BUDDY = 7
+QUEST_FEED_POKEMON = 8
+QUEST_WIN_GYM_BATTLE = 9
+QUEST_COMPLETE_RAID_BATTLE = 10
+QUEST_LEVELUP_BADGE = 11
 
 
 DESCRIPTOR.enum_types_by_name['QuestType'] = _QUESTTYPE

@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/networking/requests/messages/get_player_message.proto',
   package='pogoprotos.networking.requests.messages',
   syntax='proto3',
-  serialized_pb=_b('\n@pogoprotos/networking/requests/messages/get_player_message.proto\x12\'pogoprotos.networking.requests.messages\"\xb6\x01\n\x10GetPlayerMessage\x12]\n\rplayer_locale\x18\x01 \x01(\x0b\x32\x46.pogoprotos.networking.requests.messages.GetPlayerMessage.PlayerLocale\x1a\x43\n\x0cPlayerLocale\x12\x0f\n\x07\x63ountry\x18\x01 \x01(\t\x12\x10\n\x08language\x18\x02 \x01(\t\x12\x10\n\x08timezone\x18\x03 \x01(\tb\x06proto3')
+  serialized_pb=_b('\n@pogoprotos/networking/requests/messages/get_player_message.proto\x12\'pogoprotos.networking.requests.messages\"\xd0\x01\n\x10GetPlayerMessage\x12]\n\rplayer_locale\x18\x01 \x01(\x0b\x32\x46.pogoprotos.networking.requests.messages.GetPlayerMessage.PlayerLocale\x12\x18\n\x10prevent_creation\x18\x02 \x01(\x08\x1a\x43\n\x0cPlayerLocale\x12\x0f\n\x07\x63ountry\x18\x01 \x01(\t\x12\x10\n\x08language\x18\x02 \x01(\t\x12\x10\n\x08timezone\x18\x03 \x01(\tb\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -66,8 +66,8 @@ _GETPLAYERMESSAGE_PLAYERLOCALE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=225,
-  serialized_end=292,
+  serialized_start=251,
+  serialized_end=318,
 )
 
 _GETPLAYERMESSAGE = _descriptor.Descriptor(
@@ -84,6 +84,13 @@ _GETPLAYERMESSAGE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='prevent_creation', full_name='pogoprotos.networking.requests.messages.GetPlayerMessage.prevent_creation', index=1,
+      number=2, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -97,7 +104,7 @@ _GETPLAYERMESSAGE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=110,
-  serialized_end=292,
+  serialized_end=318,
 )
 
 _GETPLAYERMESSAGE_PLAYERLOCALE.containing_type = _GETPLAYERMESSAGE
