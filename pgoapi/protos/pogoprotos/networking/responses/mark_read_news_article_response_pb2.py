@@ -19,15 +19,15 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pogoprotos/networking/responses/mark_read_news_article_response.proto',
   package='pogoprotos.networking.responses',
   syntax='proto3',
-  serialized_pb=_b('\nEpogoprotos/networking/responses/mark_read_news_article_response.proto\x12\x1fpogoprotos.networking.responses\"\xa9\x01\n\x1cMarkTutorialCompleteResponse\x12T\n\x06result\x18\x01 \x01(\x0e\x32\x44.pogoprotos.networking.responses.MarkTutorialCompleteResponse.Result\"3\n\x06Result\x12\t\n\x05UNSET\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x12\x11\n\rNO_NEWS_FOUND\x10\x02\x62\x06proto3')
+  serialized_pb=_b('\nEpogoprotos/networking/responses/mark_read_news_article_response.proto\x12\x1fpogoprotos.networking.responses\"\xa7\x01\n\x1bMarkReadNewsArticleResponse\x12S\n\x06result\x18\x01 \x01(\x0e\x32\x43.pogoprotos.networking.responses.MarkReadNewsArticleResponse.Result\"3\n\x06Result\x12\t\n\x05UNSET\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x12\x11\n\rNO_NEWS_FOUND\x10\x02\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
 
-_MARKTUTORIALCOMPLETERESPONSE_RESULT = _descriptor.EnumDescriptor(
+_MARKREADNEWSARTICLERESPONSE_RESULT = _descriptor.EnumDescriptor(
   name='Result',
-  full_name='pogoprotos.networking.responses.MarkTutorialCompleteResponse.Result',
+  full_name='pogoprotos.networking.responses.MarkReadNewsArticleResponse.Result',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -46,21 +46,21 @@ _MARKTUTORIALCOMPLETERESPONSE_RESULT = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=225,
-  serialized_end=276,
+  serialized_start=223,
+  serialized_end=274,
 )
-_sym_db.RegisterEnumDescriptor(_MARKTUTORIALCOMPLETERESPONSE_RESULT)
+_sym_db.RegisterEnumDescriptor(_MARKREADNEWSARTICLERESPONSE_RESULT)
 
 
-_MARKTUTORIALCOMPLETERESPONSE = _descriptor.Descriptor(
-  name='MarkTutorialCompleteResponse',
-  full_name='pogoprotos.networking.responses.MarkTutorialCompleteResponse',
+_MARKREADNEWSARTICLERESPONSE = _descriptor.Descriptor(
+  name='MarkReadNewsArticleResponse',
+  full_name='pogoprotos.networking.responses.MarkReadNewsArticleResponse',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='result', full_name='pogoprotos.networking.responses.MarkTutorialCompleteResponse.result', index=0,
+      name='result', full_name='pogoprotos.networking.responses.MarkReadNewsArticleResponse.result', index=0,
       number=1, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -71,7 +71,7 @@ _MARKTUTORIALCOMPLETERESPONSE = _descriptor.Descriptor(
   ],
   nested_types=[],
   enum_types=[
-    _MARKTUTORIALCOMPLETERESPONSE_RESULT,
+    _MARKREADNEWSARTICLERESPONSE_RESULT,
   ],
   options=None,
   is_extendable=False,
@@ -80,19 +80,19 @@ _MARKTUTORIALCOMPLETERESPONSE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=107,
-  serialized_end=276,
+  serialized_end=274,
 )
 
-_MARKTUTORIALCOMPLETERESPONSE.fields_by_name['result'].enum_type = _MARKTUTORIALCOMPLETERESPONSE_RESULT
-_MARKTUTORIALCOMPLETERESPONSE_RESULT.containing_type = _MARKTUTORIALCOMPLETERESPONSE
-DESCRIPTOR.message_types_by_name['MarkTutorialCompleteResponse'] = _MARKTUTORIALCOMPLETERESPONSE
+_MARKREADNEWSARTICLERESPONSE.fields_by_name['result'].enum_type = _MARKREADNEWSARTICLERESPONSE_RESULT
+_MARKREADNEWSARTICLERESPONSE_RESULT.containing_type = _MARKREADNEWSARTICLERESPONSE
+DESCRIPTOR.message_types_by_name['MarkReadNewsArticleResponse'] = _MARKREADNEWSARTICLERESPONSE
 
-MarkTutorialCompleteResponse = _reflection.GeneratedProtocolMessageType('MarkTutorialCompleteResponse', (_message.Message,), dict(
-  DESCRIPTOR = _MARKTUTORIALCOMPLETERESPONSE,
+MarkReadNewsArticleResponse = _reflection.GeneratedProtocolMessageType('MarkReadNewsArticleResponse', (_message.Message,), dict(
+  DESCRIPTOR = _MARKREADNEWSARTICLERESPONSE,
   __module__ = 'pogoprotos.networking.responses.mark_read_news_article_response_pb2'
-  # @@protoc_insertion_point(class_scope:pogoprotos.networking.responses.MarkTutorialCompleteResponse)
+  # @@protoc_insertion_point(class_scope:pogoprotos.networking.responses.MarkReadNewsArticleResponse)
   ))
-_sym_db.RegisterMessage(MarkTutorialCompleteResponse)
+_sym_db.RegisterMessage(MarkReadNewsArticleResponse)
 
 
 # @@protoc_insertion_point(module_scope)
